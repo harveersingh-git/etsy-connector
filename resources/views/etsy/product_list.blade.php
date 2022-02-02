@@ -70,7 +70,7 @@
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
                                                         <td>{{substr($value->title,0,50)}}...</td>
-                                                        <td class="text-center">{{$value->price}}</td>
+                                                        <td class="text-center">{{$value->price}} {{$value->currency_code}}</td>
                                                         <td>{{substr($value->materials,0,50)}}..</td>
                                                     </tr>
                                                     @endforeach
