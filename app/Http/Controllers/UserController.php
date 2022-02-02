@@ -168,9 +168,13 @@ class UserController extends Controller
                 'last_name' => 'required',
             ]);
             if (isset($request->profile_image)) {
-                $imageName = time().'.'.$request->profile_image->extension();
+                $request->validate([
+                    'profile_image' => 'required|image|mimes:jpeg,png,jpg|max:1000',
+                ]);
+
+                $imageName = time() . '.' . $request->profile_image->extension();
                 $request->profile_image->move(public_path('profile_images'), $imageName);
-          
+
                 $array = [
                     'name' => $input['name'],
                     'email' => $input['email'],
@@ -186,7 +190,7 @@ class UserController extends Controller
                     'last_name' => $input['last_name'],
                 ];
             }
-       
+
             $user->update($array);
 
 

@@ -47,7 +47,7 @@
 
                                     @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong style="color: red;">{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -57,7 +57,7 @@
 
                                     @if ($errors->has('last_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                        <strong style="color: red;">{{ $errors->first('last_name') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -69,7 +69,7 @@
 
                                     @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong style="color: red;">{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -79,7 +79,7 @@
 
                                     @if ($errors->has('mobile'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('mobile') }}</strong>
+                                        <strong style="color: red;">{{ $errors->first('mobile') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -91,11 +91,11 @@
 
                                     @if ($errors->has('profile_image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('profile_image') }}</strong>
+                                        <strong style="color: red;">{{ $errors->first('profile_image') }}</strong>
                                     </span>
                                     @endif
                                 </div>
-                               
+
                             </div>
 
 
