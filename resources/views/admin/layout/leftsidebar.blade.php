@@ -32,7 +32,7 @@
                 <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-home"></i><span>Edit Profile</span></a></li>
                 <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-home"></i><span>Change Password</span></a></li>
 
-                <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}">
+                <li class="{{ (Request::segment(1) === 'etsy-config') || (Request::segment(1) === 'etsy-list-data')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>
                     <ul>
                         <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">Etsy Config</a></li>
