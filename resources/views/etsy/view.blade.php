@@ -202,7 +202,7 @@
             </div>
             <div>
 
-                <p style="color: red; margin-left: 43px;"> Click the bewlo link and provide the access code.<a href="#" target="_blank" id="url">Click Here...</a></p>
+                <p style="color: red; margin-left: 43px;"> Click the below link and provide the access code.<a href="#" target="_blank" id="url">Click Here...</a></p>
 
             </div>
             <div class="modal-body">
