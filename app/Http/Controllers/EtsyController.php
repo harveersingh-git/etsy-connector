@@ -290,7 +290,7 @@ class EtsyController extends Controller
                         EtsyProduct::create($product_data);
                     }
 
-                    return redirect()->back()->with("success", "Record Sync successfully!");
+                    return redirect()->back()->with("success", "Product Sync successfully!");
                 }
             } else {
                 return redirect()->back()->with("success", "Please check ETSY configration!");

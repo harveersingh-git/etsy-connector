@@ -34,4 +34,3 @@ Route::any('/etsy-list-data', [App\Http\Controllers\EtsyController::class, 'etsy
 Route::any('/get_access_code_url', [App\Http\Controllers\EtsyController::class, 'etsyAuth'])->name('get_access_code_url');
 Route::post('/verify_access_code', [App\Http\Controllers\EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');
 Route::any('/generate-csv', [App\Http\Controllers\EtsyController::class, 'genrateCsv'])->name('generate-csv');
-Route::any('/image', [App\Http\Controllers\EtsyController::class, 'productListImage'])->name('image');
