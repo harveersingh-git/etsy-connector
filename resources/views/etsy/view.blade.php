@@ -124,10 +124,10 @@
                                     <label>Country</label>
                                     <select name="country_id" id="country" class="form-control">
                                         <option value="">--select--</option>
-                                        <option value="1" {{($user->country_id) == '1' ? 'selected' : ''}}>Afghanistan</option>
-                                        <option value="2" {{($user->country_id)== '2' ? 'selected' : ''}}>Albania</option>
-                                        <option value="3" {{($user->country_id)== '3' ? 'selected' : ''}}>Algeria</option>
-                                        <option value="4" {{($user->country_id)== '4' ? 'selected' : ''}}>Australia</option>
+                                        <option value="1" {{isset($user->country_id) && ($user->country_id) == '1' ? 'selected' : ''}}>Afghanistan</option>
+                                        <option value="2" {{isset($user->country_id) && ($user->country_id)== '2' ? 'selected' : ''}}>Albania</option>
+                                        <option value="3" {{isset($user->country_id) && ($user->country_id)== '3' ? 'selected' : ''}}>Algeria</option>
+                                        <option value="4" {{isset($user->country_id) && ($user->country_id)== '4' ? 'selected' : ''}}>Australia</option>
 
                                     </select>
                                     @error('country')
