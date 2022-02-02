@@ -271,7 +271,7 @@
                         $('#url_model').modal('toggle');
                         $("#url").attr('href', '#')
                         toastr.success("Record insert successfully");
-                        // window.location.reload();
+                        window.location.reload();
                     } else {
                         toastr.error("please check Key String and Shared Secret");
                         // alert('please check Key String and Shared Secret');
