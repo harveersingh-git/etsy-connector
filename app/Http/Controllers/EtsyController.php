@@ -40,8 +40,7 @@ class EtsyController extends Controller
      */
     public function etsyConfig(Request $request)
     {
-        echo phpinfo();
-        die;
+        
         $input = $request->all();
 
         $id = Auth::user()->id;
