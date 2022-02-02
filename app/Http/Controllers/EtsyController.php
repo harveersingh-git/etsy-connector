@@ -40,7 +40,7 @@ class EtsyController extends Controller
      */
     public function etsyConfig(Request $request)
     {
-        
+
         $input = $request->all();
 
         $id = Auth::user()->id;
@@ -334,7 +334,7 @@ class EtsyController extends Controller
                 foreach ($tasks as $data) {
 
                     $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
-                    $row['title']  = isset($data->title) ? $data->title : 'N/A';
+                    $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
                     $row['description']  = isset($data->description) ? $data->description : 'N/A';
                     $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
                     $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
