@@ -401,7 +401,7 @@ class EtsyController extends Controller
             if (isset($imageResponse->results[0]->url_fullxfull)) {
                 $image =  $imageResponse->results[0]->url_fullxfull;
             } else {
-                $image = $imageResponse->results[0]->url_fullxfull;
+                $image = 'N/A';
             }
             return $image;
         }
