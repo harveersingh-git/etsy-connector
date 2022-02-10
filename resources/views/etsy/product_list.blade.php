@@ -107,7 +107,7 @@
 <script>
     $(document).ready(function() {
         var oTable = $('#product_table').DataTable({
-            "pageLength": 10,
+            "pageLength": 100,
             responsive: true,
             "lengthChange": false,
             searching: false

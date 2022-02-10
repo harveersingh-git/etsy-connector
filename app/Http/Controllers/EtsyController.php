@@ -219,8 +219,11 @@ class EtsyController extends Controller
             $result = EtsyConfig::where('user_id', $id)->first();
             if ($result) {
 
+                EtsyProduct::truncate();
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
+
+                ////
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -243,55 +246,87 @@ class EtsyController extends Controller
                 $response = curl_exec($curl);
 
                 curl_close($curl);
-                $response =  json_decode($response);
+                $totalProduct =  json_decode($response);
 
-                if (count($response->results) > 0) {
-                    $product_data = array();
-                    EtsyProduct::truncate();
+                $limit = 100;
+                $total_page = intval(round($totalProduct->count / $limit));
 
-                    foreach ($response->results as $key => $value) {
-                        if ($value->quantity > 0) {
-                            $product_data["availability"] = 'in stock';
-                        } else {
-                            $product_data["availability"] = 'out of stock';
+
+                ////
+                for ($i = 1; $i <= $total_page; $i++) {
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://openapi.etsy.com/v2/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'GET',
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/x-www-form-urlencoded',
+                            'x-api-key:' . $key_string,
+                            'Authorization: Bearer ' . $api_access_token,
+                            'Cookie: fve=1643640618.0; uaid=JYYRIuVpd8k7JhiFS1kUcXLRgoxjZACCxO_ftWB0tVJpYmaKkpWSU4VlREBwmXOBj19QsXNFgW9gvnliYURAQHlagFItAwA.; user_prefs=CFmwDxv3XIPcLuHsJleib85a6epjZACCxO_ftWB0tJKnX5CSTl5pTo6OUmqerruTkg5QCCpiBKFwEbEMAA..'
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+                    $response =  json_decode($response);
+                   
+                    if (count($response->results) > 0) {
+                        $product_data = array();
+
+
+                        foreach ($response->results as $key => $value) {
+                            if ($value->quantity > 0) {
+                                $product_data["availability"] = 'in stock';
+                            } else {
+                                $product_data["availability"] = 'out of stock';
+                            }
+                            $product_data["brand"] = url('/');
+                            $product_data["condition"] = 'new';
+
+                            if (isset($value->listing_id)) {
+                                $product_data["image_url"] =   $this->productListImage($value->listing_id);
+                            }
+
+
+                            $product_data["quantity"] =  isset($value->quantity) ? $value->quantity : '0';
+                            $product_data["title"] = isset($value->title) ? $value->title : '';
+                            $product_data["description"] = isset($value->description) ? $value->description : '';
+                            $product_data["price"] = isset($value->price) ? $value->price : '';
+                            $product_data["currency_code"] = isset($value->currency_code) ? $value->currency_code : '';
+                            $product_data["materials"] = isset($value->materials) ? implode(',', $value->materials) : '';
+                            $product_data["shipping_template_id"] = isset($value->shipping_template_id) ? $value->shipping_template_id : '';
+                            $product_data["taxonomy_id"] = isset($value->taxonomy_id) ? $value->taxonomy_id : '';
+                            $product_data["shop_section_id"] = isset($value->shop_section_id) ? $value->shop_section_id : '';
+                            $product_data["image_ids"] = isset($value->image_ids) ? implode(',', $value->image_ids) : '';
+                            $product_data["is_customizable"] = isset($value->is_customizable) ? $value->is_customizable : '';
+                            $product_data["non_taxable"] = isset($value->non_taxable) ? $value->non_taxable : '';
+                            $product_data["image"] = isset($value->image) ? $value->image : '';
+                            $product_data["state"] = isset($value->state) ? $value->state : '';
+                            $product_data["processing_min"] = isset($value->processing_min) ? $value->processing_min : '';
+                            $product_data["processing_max"] = isset($value->processing_max) ? $value->processing_max : '';
+                            $product_data["tags"] = isset($value->tags) ? implode(',', $value->tags) : '';
+                            $product_data["who_made"] = isset($value->who_made) ? $value->who_made : '';
+                            $product_data["is_supply"] = isset($value->is_supply) ? $value->is_supply : '';
+                            $product_data["when_made"] = isset($value->when_made) ? $value->when_made : '';
+                            $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
+                            $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
+                            $product_data["url"] = isset($value->url) ? $value->url : '';
+
+                            EtsyProduct::create($product_data);
                         }
-                        $product_data["brand"] = url('/');
-                        $product_data["condition"] = 'new';
 
-                        if (isset($value->listing_id)) {
-                            $product_data["image_url"] =   $this->productListImage($value->listing_id);
-                        }
-
-
-                        $product_data["quantity"] =  isset($value->quantity) ? $value->quantity : '0';
-                        $product_data["title"] = isset($value->title) ? $value->title : '';
-                        $product_data["description"] = isset($value->description) ? $value->description : '';
-                        $product_data["price"] = isset($value->price) ? $value->price : '';
-                        $product_data["currency_code"] = isset($value->currency_code) ? $value->currency_code : '';
-                        $product_data["materials"] = isset($value->materials) ? implode(',', $value->materials) : '';
-                        $product_data["shipping_template_id"] = isset($value->shipping_template_id) ? $value->shipping_template_id : '';
-                        $product_data["taxonomy_id"] = isset($value->taxonomy_id) ? $value->taxonomy_id : '';
-                        $product_data["shop_section_id"] = isset($value->shop_section_id) ? $value->shop_section_id : '';
-                        $product_data["image_ids"] = isset($value->image_ids) ? implode(',', $value->image_ids) : '';
-                        $product_data["is_customizable"] = isset($value->is_customizable) ? $value->is_customizable : '';
-                        $product_data["non_taxable"] = isset($value->non_taxable) ? $value->non_taxable : '';
-                        $product_data["image"] = isset($value->image) ? $value->image : '';
-                        $product_data["state"] = isset($value->state) ? $value->state : '';
-                        $product_data["processing_min"] = isset($value->processing_min) ? $value->processing_min : '';
-                        $product_data["processing_max"] = isset($value->processing_max) ? $value->processing_max : '';
-                        $product_data["tags"] = isset($value->tags) ? implode(',', $value->tags) : '';
-                        $product_data["who_made"] = isset($value->who_made) ? $value->who_made : '';
-                        $product_data["is_supply"] = isset($value->is_supply) ? $value->is_supply : '';
-                        $product_data["when_made"] = isset($value->when_made) ? $value->when_made : '';
-                        $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
-                        $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
-                        $product_data["url"] = isset($value->url) ? $value->url : '';
-
-                        EtsyProduct::create($product_data);
+                    
                     }
-
-                    return redirect()->back()->with("success", "Product Sync successfully!");
                 }
+                return redirect()->back()->with("success", "Product Sync successfully!");
             } else {
                 return redirect()->back()->with("success", "Please check ETSY configration!");
             }
