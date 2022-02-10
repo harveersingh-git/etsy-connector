@@ -110,7 +110,7 @@
             "pageLength": 100,
             responsive: true,
             "lengthChange": false,
-            searching: false
+            // searching: false
 
         });
 
