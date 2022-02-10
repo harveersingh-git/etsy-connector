@@ -213,13 +213,16 @@ class EtsyController extends Controller
     public function etsyListData(Request $request)
     {
         $url = '';
+        $page = 1;
+        $limit = 100;
+
         $data =  EtsyProduct::get();
         if ($request->isMethod('post')) {
             $id = Auth::user()->id;
             $result = EtsyConfig::where('user_id', $id)->first();
             if ($result) {
 
-                EtsyProduct::truncate();
+                // EtsyProduct::truncate();
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
 
@@ -277,7 +280,7 @@ class EtsyController extends Controller
 
                     curl_close($curl);
                     $response =  json_decode($response);
-                   
+
                     if (count($response->results) > 0) {
                         $product_data = array();
 
@@ -320,10 +323,8 @@ class EtsyController extends Controller
                             $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
                             $product_data["url"] = isset($value->url) ? $value->url : '';
 
-                            EtsyProduct::create($product_data);
+                            EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
                         }
-
-                    
                     }
                 }
                 return redirect()->back()->with("success", "Product Sync successfully!");
@@ -332,7 +333,7 @@ class EtsyController extends Controller
             }
         }
 
-        return view('etsy.product_list', compact('url', 'data'));
+        return view('etsy.product_list', compact('url', 'data', 'page', 'limit'));
     }
 
 
