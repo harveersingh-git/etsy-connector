@@ -23,7 +23,7 @@ class CreateEtsyProductsTable extends Migration
             $table->string('availability')->nullable();
             $table->string('brand')->nullable();
             $table->string('condition')->nullable();
-            $table->string('materials')->nullable();
+            $table->text('materials')->nullable();
             $table->text('url')->nullable();
             $table->text('image_url')->nullable();
             $table->string('shipping_template_id')->nullable();;

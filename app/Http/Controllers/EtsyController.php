@@ -283,7 +283,7 @@ class EtsyController extends Controller
 
 
                         foreach ($response->results as $key => $value) {
-                            if ($value->quantity > 0) {
+                            if (isset($value->quantity) && $value->quantity > 0) {
                                 $product_data["availability"] = 'in stock';
                             } else {
                                 $product_data["availability"] = 'out of stock';
