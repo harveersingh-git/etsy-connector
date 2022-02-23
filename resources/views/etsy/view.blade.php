@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <label>Shop Name<span style="color: red;">*</span></label>
+                                    <label>Shop Id<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):''}}" required>
 
                                     @if ($errors->has('shop_name'))
