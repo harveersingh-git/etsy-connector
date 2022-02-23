@@ -336,7 +336,7 @@ class EtsyController extends Controller
                     }
                     return redirect()->back()->with("success", "Product Sync successfully!");
                 }
-                return redirect()->back()->with("success", "No product found!");
+                return redirect()->back()->with("success", "No product found for the given shop !");
             } else {
                 return redirect()->back()->with("success", "Please check ETSY configration!");
             }
