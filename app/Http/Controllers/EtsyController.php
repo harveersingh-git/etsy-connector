@@ -254,7 +254,12 @@ class EtsyController extends Controller
 
                 if ($totalProduct) {
                     $limit = 100;
-                    $total_page = intval(round($totalProduct->count / $limit));
+                    if ($totalProduct->count > 100) {
+                        $total_page = intval(round($totalProduct->count / $limit));
+                    } else {
+                        $total_page = $totalProduct->count;
+                    }
+
 
 
                     ////
