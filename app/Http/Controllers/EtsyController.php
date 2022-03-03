@@ -267,7 +267,7 @@ class EtsyController extends Controller
                         $curl = curl_init();
 
                         curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://openapi.etsy.com/v2/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
+                            CURLOPT_URL => 'https://openapi.etsy.com/v2/shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
                             CURLOPT_RETURNTRANSFER => true,
                             CURLOPT_ENCODING => '',
                             CURLOPT_MAXREDIRS => 10,
