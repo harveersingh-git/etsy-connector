@@ -278,7 +278,10 @@
                     }
 
 
-                }
+                },
+                error: function(xhr, status, error) {
+                    alert("Error!" + xhr.status);
+                },
             })
         }
     });
