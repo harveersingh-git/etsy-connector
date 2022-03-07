@@ -100,11 +100,12 @@ class EtsyController extends Controller
         if ($result) {
             $keystring = $result['key_string'];
             $shared_secret = $result['shared_secret'];
-            $api_url = "http://openapi.etsy.com/v2/";
+            // $api_url = "http://openapi.etsy.com/v2/";
+            $appurl = $result['app_url'];
             $calback_url = "https://www.example.com/some/location";
             $oauth = new \OAuth($keystring, $shared_secret);
             $oauth->disableSSLChecks();
-            $req_token = $oauth->getRequestToken("https://openapi.etsy.com/v2/oauth/request_token?scope=email_r%20listings_r", 'oob', "GET");
+            $req_token = $oauth->getRequestToken($appurl . "oauth/request_token?scope=email_r%20listings_r", 'oob', "GET");
 
             if (!empty($req_token)) {
                 $auth_url = $req_token['login_url'];
@@ -151,8 +152,8 @@ class EtsyController extends Controller
                 $oauth = new \OAuth($keystring, $shared_secret);
                 $oauth->disableSSLChecks();
                 $oauth->setToken($oauth_token, $oauth_token_secret);
-
-                $acc_token = $oauth->getAccessToken("https://openapi.etsy.com/v2/oauth/access_token", null, $verifier, "GET");
+                $appurl = $result['app_url'];
+                $acc_token = $oauth->getAccessToken($appurl . "oauth/access_token", null, $verifier, "GET");
 
                 if ($acc_token) {
                     $cedetsy_access_token_secret = $acc_token['oauth_token_secret'];
@@ -226,12 +227,12 @@ class EtsyController extends Controller
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
                 $shop_id = $result['shop_name'];
-
+                $appurl = $result['app_url'];
                 ////
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://openapi.etsy.com/v2/shops/' . $shop_id . '/listings/active?api_key=' . $key_string,
+                    CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string,
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => '',
                     CURLOPT_MAXREDIRS => 10,
@@ -248,7 +249,7 @@ class EtsyController extends Controller
                 ));
 
                 $response = curl_exec($curl);
-                
+
                 curl_close($curl);
                 $totalProduct =  json_decode($response);
 
@@ -267,7 +268,7 @@ class EtsyController extends Controller
                         $curl = curl_init();
 
                         curl_setopt_array($curl, array(
-                            CURLOPT_URL => 'https://openapi.etsy.com/v2/shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
+                            CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
                             CURLOPT_RETURNTRANSFER => true,
                             CURLOPT_ENCODING => '',
                             CURLOPT_MAXREDIRS => 10,
@@ -417,7 +418,7 @@ class EtsyController extends Controller
         $id = Auth::user()->id;
         $result = EtsyConfig::where('user_id', $id)->first();
         if ($result) {
-
+            $appurl = $result['app_url'];
             $key_string = $result['key_string'];
             $api_access_token = $result['api_access_token'];
 
@@ -425,7 +426,7 @@ class EtsyController extends Controller
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://openapi.etsy.com/v2/listings/' . $list_id . '/images?api_key=' . $key_string,
+                CURLOPT_URL => $appurl . 'listings/' . $list_id . '/images?api_key=' . $key_string,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => '',
                 CURLOPT_MAXREDIRS => 10,
