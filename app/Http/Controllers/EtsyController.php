@@ -288,7 +288,7 @@ class EtsyController extends Controller
 
                         curl_close($curl);
                         $response =  json_decode($response);
-
+                        dd($response);
                         if (count($response->results) > 0) {
                             $product_data = array();
 
@@ -329,7 +329,7 @@ class EtsyController extends Controller
                                 $product_data["when_made"] = isset($value->when_made) ? $value->when_made : '';
                                 $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
                                 $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
-                                $product_data["url"] = isset($value->url) ? $value->url : '';
+                                $product_data["url"] = isset($value->url) ? str_replace('etsy.com', 'rlovelyshop.etsy.com', $value->url) : '';
 
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
                             }
