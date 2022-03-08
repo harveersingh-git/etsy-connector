@@ -329,7 +329,7 @@ class EtsyController extends Controller
                                 $product_data["when_made"] = isset($value->when_made) ? $value->when_made : '';
                                 $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
                                 $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
-                                $product_data["url"] = isset($value->url) ? str_replace('etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
+                                $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
 
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
                             }
