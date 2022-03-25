@@ -223,7 +223,7 @@ class EtsyController extends Controller
             $result = EtsyConfig::where('user_id', $id)->first();
             if ($result) {
 
-                // EtsyProduct::truncate();
+                EtsyProduct::truncate();
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
                 $shop_id = $result['shop_name'];
