@@ -217,7 +217,7 @@ class EtsyController extends Controller
         $page = 1;
         $limit = 100;
 
-        $data =  EtsyProduct::get();
+        $data =  EtsyProduct::where('user_id',auth()->user()->id)->get();
         if ($request->isMethod('post')) {
             $id = Auth::user()->id;
             $result = EtsyConfig::where('user_id', $id)->first();
@@ -330,7 +330,7 @@ class EtsyController extends Controller
                                 $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
                                 $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
                                 $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
-
+                                $product_data["user_id"] =auth()->user()->id;
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
                             }
                         }

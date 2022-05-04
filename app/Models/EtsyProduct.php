@@ -38,7 +38,8 @@ class EtsyProduct extends Model
         'availability',
         'brand',
         'condition',
-        'image_url'
+        'image_url',
+        'user_id'
 
     ];
 }
