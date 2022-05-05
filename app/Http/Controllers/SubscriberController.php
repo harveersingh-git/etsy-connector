@@ -189,8 +189,8 @@ class SubscriberController extends Controller
 
         if (!empty($input['password'])) {
             $request->validate([
-                'password' => 'required',
-                'password_confirmation' => 'required|string|min:8|password',
+                'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+                'password_confirmation' => 'min:6',
             ]);
             $input['password'] = Hash::make($input['password']);
         } else {
@@ -286,8 +286,8 @@ class SubscriberController extends Controller
 
             if (!empty($input['password'])) {
                 $request->validate([
-                    'password' => 'required',
-                    'password_confirmation' => 'required|string|min:8|password',
+                    'password' => 'min:8|required_with:password_confirmation|same:password_confirmation',
+                    'password_confirmation' => 'min:8',
                 ]);
                 $input['password'] = Hash::make($input['password']);
             }
