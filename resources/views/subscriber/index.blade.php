@@ -69,7 +69,9 @@
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Mobile</th>
+                                        @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">Status</th>
+                                        @endif
                                         <th>Action</th>
                                 </thead>
                                 <tfoot>
@@ -78,7 +80,9 @@
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
                                         <th class="text-center">Mobile</th>
+                                        @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">Status</th>
+                                        @endif
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -90,6 +94,7 @@
                                         <td class="text-center">{{$value->name}} {{$value->last_name}}</td>
                                         <td class="text-center">{{$value->email}} </td>
                                         <td class="text-center">{{$value->mobile}}</td>
+                                        @if(Request::segment(1)!='subscriber-trash')
                                         <td class="text-center">
                                             @if($value->active=='0')
                                             <i class="fa fa-eye-slash" id="{{$value->id}}"></i>
@@ -97,6 +102,7 @@
                                             <i class="fa fa-eye" id="{{$value->id}}"></i>
                                             @endif
                                         </td>
+                                        @endif
                                         <td>
                                             @if(Request::segment(1)=='subscriber-trash')
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Activate User">
