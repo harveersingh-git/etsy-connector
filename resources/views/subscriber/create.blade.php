@@ -154,8 +154,11 @@
 
 
 
-                        <div class="row" style="margin-top: 10px;">
+                        <div class="row" style="margin-top: 10px;" >
                             <div class="col-lg-6">
+                                <a href="{{url('/subscriber')}}" class="btn btn-light">
+                                    Back
+                                </a>
                                 <button type="submit" class="btn btn-primary">
                                     Save
                                 </button>
