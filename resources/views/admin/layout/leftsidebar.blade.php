@@ -45,6 +45,15 @@
                     </ul>
                 </li>
 
+                <li class="{{ (Request::segment(1) === 'country') || (Request::segment(1) === 'country')  ? 'active' : null }}">
+                    <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>Master</span></a>
+                    <ul>
+                        <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">Country</a></li>
+
+
+                    </ul>
+                </li>
+
 
             </ul>
         </nav>

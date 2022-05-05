@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -38,14 +39,19 @@ class EtsyController extends Controller
      *
      * @return void
      */
-    public function etsyConfig(Request $request)
+    public function etsyConfig(Request $request, $id = null)
     {
 
         $input = $request->all();
 
-        $id = Auth::user()->id;
-        $user = EtsyConfig::where('user_id', $id)->first();
+        if (isset($id) || isset($input['id'])) {
+            $id = isset($input['id']) ? $input['id'] : $id;
+        } else {
+            $id = Auth::user()->id;
+        }
 
+        $user = EtsyConfig::where('user_id', $id)->first();
+        $country = Country::orderBy('name','ASC')->get();
 
         if ($request->isMethod('post')) {
 
@@ -67,12 +73,14 @@ class EtsyController extends Controller
                 'shop_name' => isset($input['shop_name']) ? ($input['shop_name']) : '',
                 'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
                 'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',
-                'store_id' => isset($input['store_id']) ? ($input['store_id']) : '',
+                'store_id' => isset($input['store']) ? ($input['store']) : '',
             ];
 
             if ($user) {
+
                 $user->update($array);
             } else {
+
                 EtsyConfig::create($array);
             }
 
@@ -82,7 +90,7 @@ class EtsyController extends Controller
 
             return redirect()->back()->with("success", "Record successfully changed!");
         }
-        return view('etsy.view', compact('id', 'user'));
+        return view('etsy.view', compact('id', 'user','country'));
     }
 
 
@@ -217,7 +225,7 @@ class EtsyController extends Controller
         $page = 1;
         $limit = 100;
 
-        $data =  EtsyProduct::where('user_id',auth()->user()->id)->get();
+        $data =  EtsyProduct::where('user_id', auth()->user()->id)->get();
         if ($request->isMethod('post')) {
             $id = Auth::user()->id;
             $result = EtsyConfig::where('user_id', $id)->first();
@@ -330,7 +338,7 @@ class EtsyController extends Controller
                                 $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
                                 $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
                                 $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
-                                $product_data["user_id"] =auth()->user()->id;
+                                $product_data["user_id"] = auth()->user()->id;
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
                             }
                         }

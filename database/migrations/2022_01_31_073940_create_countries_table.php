@@ -15,14 +15,14 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('country_id');
-            $table->string('iso_country_code');
-            $table->string('world_bank_country_code');
+            // $table->unsignedBigInteger('country_id');
+            // $table->string('iso_country_code');
+            // $table->string('world_bank_country_code');
             $table->string('name');
-            $table->string('lat');
-            $table->string('lon');
-            $table->string('slug');
-
+            $table->string('code');
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
+         
             $table->timestamps();
         });
     }

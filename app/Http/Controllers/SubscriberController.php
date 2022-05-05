@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use App\Models\User;
+use App\Models\Country;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 
@@ -34,8 +35,8 @@ class SubscriberController extends Controller
     {
         $data = User::with('subscribe_details')->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
-        })->orderBy('id', 'DESC')->get();
-       
+        })->where('active', '1')->orderBy('id', 'DESC')->get();
+
 
         $trash_user = User::with('subscribe_details')->onlyTrashed()->whereHas('roles', function ($query) use ($request) {
             $query->where('name', 'Subscriber');
@@ -45,6 +46,34 @@ class SubscriberController extends Controller
         // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+
+    public function subscriberInActive(Request $request)
+    {
+        $data = User::with('subscribe_details')->whereHas('roles', function ($query) {
+            $query->where('name', 'Subscriber');
+        })->where('active', '0')->orderBy('id', 'DESC')->get();
+
+
+
+
+        return view('subscriber.index', compact('data'));
+        // ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+
+    public function subscriberTrash(Request $request)
+    {
+
+
+        $data = User::with('subscribe_details')->onlyTrashed()->whereHas('roles', function ($query) use ($request) {
+            $query->where('name', 'Subscriber');
+        })->latest()->get();
+        // dd(    $trashUser->toArray());
+        return view('subscriber.index', compact('data'));
+        // ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,8 +81,9 @@ class SubscriberController extends Controller
      */
     public function create()
     {
-        $roles = '';
-        return view('subscriber.create', compact('roles'));
+
+        $country = Country::orderBy('name', 'ASC')->get();
+        return view('subscriber.create', compact('country'));
     }
 
     /**
@@ -76,12 +106,15 @@ class SubscriberController extends Controller
             'state' => 'required',
             'city' => 'required',
             'zip' => 'required',
-            // 'roles' => 'required'
+            'country' => 'required',
+            'code' => 'required'
         ]);
 
 
         $input['password'] = Hash::make($input['password']);
         $input['name'] = $input['first_name'];
+        $input['country_code'] = isset($input['code']) ? $input['code'] : '';
+
         $user = User::create($input);
         // $role =  Role::where('name', 'Subscriber')->first();
         $user->assignRole('Subscriber');
@@ -92,6 +125,7 @@ class SubscriberController extends Controller
                 'state' =>   isset($input['state']) ? $input['state'] : '',
                 'zip' => isset($input['zip']) ? $input['zip'] : '',
                 'auto_email_update' => isset($input['auto_email_update']) ? '1' : '0',
+                'country_id' => isset($input['country']) ? $input['country'] : '',
             ];
             subscriber::create($fields);
         }
@@ -120,13 +154,14 @@ class SubscriberController extends Controller
      */
     public function edit($id)
     {
-        // dd('sdf');
+
         $user = User::with('subscribe_details')->find($id);
         // dd( $user->toArray());
+        $country = Country::orderBy('name', 'ASC')->get();
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('subscriber.edit', compact('user', 'roles', 'userRole'));
+        return view('subscriber.edit', compact('user', 'roles', 'userRole', 'country'));
     }
 
     /**
@@ -147,6 +182,8 @@ class SubscriberController extends Controller
             'state' => 'required',
             'city' => 'required',
             'zip' => 'required',
+            'country' => 'required',
+            'code' => 'required',
         ]);
 
 
@@ -159,6 +196,7 @@ class SubscriberController extends Controller
         } else {
             $input = Arr::except($input, array('password'));
         }
+        $input['country_code'] = isset($input['code']) ? $input['code'] : '';
 
         $user = User::find($id);
         $user->update($input);
@@ -169,6 +207,8 @@ class SubscriberController extends Controller
             'state' =>   isset($input['state']) ? $input['state'] : '',
             'zip' => isset($input['zip']) ? $input['zip'] : '',
             'auto_email_update' => isset($input['auto_email_update']) ? '1' : '0',
+            'country_id' => isset($input['country']) ? $input['country'] : '',
+
         ];
         subscriber::create($fields);
 
@@ -220,5 +260,43 @@ class SubscriberController extends Controller
             // $data->forceDelete();
             return response()->json(['status' => 'success']);
         }
+    }
+
+
+    public function subscriberStatusUpdate(Request $request)
+    {
+
+        $id = $request['id'];
+
+        $data = User::find($id);
+        if ($data) {
+            $status = ($data->active == '0' ? '1' : '0');
+            $data->update(['active' => $status]);
+
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function changePassword(Request $request, $id = null)
+    {
+        $input = $request->all();
+
+        if ($request->isMethod('post')) {
+            $id = $input['id'];
+
+            if (!empty($input['password'])) {
+                $request->validate([
+                    'password' => 'required',
+                    'password_confirmation' => 'required|string|min:8|password',
+                ]);
+                $input['password'] = Hash::make($input['password']);
+            }
+
+            $user = User::find($id);
+
+            $user->update($input);
+            return redirect()->route('subscriber.index')->with("success", "Password update successfully.");
+        }
+        return view('subscriber.change_password', compact('id'));
     }
 }

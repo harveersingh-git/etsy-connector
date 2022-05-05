@@ -13,8 +13,12 @@
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/>
- 
+    <link rel="stylesheet" href="{{asset('/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/vendor/jquery-datatable/fixedeader/dataTables.fixedheader.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/sweetalert/sweetalert.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.css"/> -->
+
 
 
     <link rel="stylesheet" href="{{asset('assets/vendor/charts-c3/plugin.css')}}" />
@@ -28,6 +32,11 @@
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>
+        span.help-block {
+            color: red;
+        }
+    </style>
 </head>
 
 <body class="theme-orange">
@@ -61,18 +70,25 @@
     <!-- Javascript -->
     <script src="{{asset('assets/bundles/libscripts.bundle.js')}}"></script>
     <script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script>
+    <script src="{{asset('assets/bundles/datatablescripts.bundle.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
 
     <script src="{{asset('assets/bundles/c3.bundle.js')}}"></script>
     <script src="{{asset('assets/bundles/chartist.bundle.js')}}"></script>
     <script src="{{asset('assets/vendor/toastr/toastr.js')}}"></script>
-
-    <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+    <script src="{{asset('assets/vendor/sweetalert/sweetalert.min.js')}}"></script>
+    <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"> </script>
+    <script src="{{asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
     <script src="{{asset('assets/js/index.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.4/datatables.min.js"></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-    var base_url = {!! json_encode(url('/')) !!}
+        var base_url = {!! json_encode(url('/')) !!}
     </script>
     @yield('script')
 </body>
