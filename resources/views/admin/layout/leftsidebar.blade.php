@@ -40,8 +40,9 @@
                     <ul>
                         <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">Etsy Config</a></li>
                         <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">Etsy Product</a></li>
+                        @hasanyrole('Admin')
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">Country</a></li>
-
+                        @endhasanyrole
 
                     </ul>
                 </li>
