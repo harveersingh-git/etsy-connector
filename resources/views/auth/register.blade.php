@@ -65,7 +65,7 @@ $country = \GetCountry::getCountryCode();
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="name" class="control-label sr-only">{{ __('Name') }}</label>
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="first name" autocomplete="name" autofocus>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="first name" autocomplete="some-unrecognised-value" autofocus>
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@ $country = \GetCountry::getCountryCode();
                             
                                             <div class="form-group"> -->
                                         <label for="last_name" class="control-label sr-only">{{ __('Last Name') }}</label>
-                                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required placeholder="last name" autocomplete="last_name" autofocus>
+                                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required placeholder="last name" autocomplete="off" autofocus>
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -90,7 +90,7 @@ $country = \GetCountry::getCountryCode();
                             </div>
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">{{ __('Email Address') }}</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="email" autofocus>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="some-unrecognised-value" placeholder="email" autofocus>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -121,7 +121,7 @@ $country = \GetCountry::getCountryCode();
                                     </div>
                                     <div class="col">
                                         <label for="mobile" class="control-label sr-only">{{ __('Mobile') }}</label>
-                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" placeholder="mobile" autofocus>
+                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -135,7 +135,7 @@ $country = \GetCountry::getCountryCode();
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="city" class="control-label sr-only">{{ __('City') }}</label>
-                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required placeholder="city" autocomplete="city" autofocus>
+                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required placeholder="city" autocomplete="some-unrecognised-value" autofocus>
 
                                         @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -148,7 +148,7 @@ $country = \GetCountry::getCountryCode();
                             
                                             <div class="form-group"> -->
                                         <label for="state" class="control-label sr-only">{{ __('state') }}</label>
-                                        <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" required placeholder="state" autocomplete="state" autofocus>
+                                        <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" required placeholder="state" autocomplete="some-unrecognised-value" autofocus>
 
                                         @error('state')
                                         <span class="invalid-feedback" role="alert">
@@ -162,7 +162,7 @@ $country = \GetCountry::getCountryCode();
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="zip" class="control-label sr-only">{{ __('Postal Code') }}</label>
-                                        <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" value="{{ old('zip') }}" required autocomplete="mobile" placeholder="postal code" autofocus>
+                                        <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" value="{{ old('zip') }}" required autocomplete="some-unrecognised-value" placeholder="postal code" autofocus>
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">

@@ -49,7 +49,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="first_name" class="control-label">First Name<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="first_name" placeholder="Ex:Jone" value="{{old('first_name')}}" required>
+                                    <input type="text" class="form-control" name="first_name" placeholder="Ex:Jone" value="{{old('first_name')}}" autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('first_name'))
                                     <span class="help-block">
@@ -62,7 +62,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">Last Name<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="last_name" placeholder="Ex:Smith" value="{{old('last_name')}}" required>
+                                    <input type="text" class="form-control" name="last_name" placeholder="Ex:Smith" value="{{old('last_name')}}"  autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('last_name'))
                                     <span class="help-block">
@@ -75,7 +75,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Email<span style="color: red;">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Ex:jons@yopmail.com" value="{{old('email')}}" required>
+                                    <input type="email" class="form-control" name="email" placeholder="Ex:jons@yopmail.com" value="{{old('email')}}"  autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('email'))
                                     <span class="help-block">
@@ -109,8 +109,8 @@
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">mobile<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="mobile" placeholder="Ex:9985740000" value="{{old('mobile')}}">
+                                    <label for="mobile" class="control-label">mobile<span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" name="mobile" placeholder="Ex:9985740000" value="{{old('mobile')}}"  autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('mobile'))
                                     <span class="help-block">
@@ -122,8 +122,8 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">City<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="city" placeholder="Ex:Melbourne" value="{{old('city')}}" required>
+                                    <label for="city" class="control-label">City<span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" name="city" placeholder="Ex:Melbourne" value="{{old('city')}}"  autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('city'))
                                     <span class="help-block">
@@ -135,7 +135,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">State<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="state" placeholder="Ex:Florida" value="{{old('state')}}">
+                                    <input type="text" class="form-control" name="state" placeholder="Ex:Florida" value="{{old('state')}}"  autocomplete="some-unrecognised-value" required >
 
                                     @if ($errors->has('state'))
                                     <span class="help-block">
@@ -148,7 +148,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">Postal Code<span style="color: red;">*</span></label>
-                                    <input type="number" min="1" class="form-control" name="zip" placeholder="Ex:32934" value="{{old('zip')}}" autocomplete="off" required>
+                                    <input type="number" min="1" class="form-control" name="zip" placeholder="Ex:32934" value="{{old('zip')}}"  autocomplete="some-unrecognised-value" required>
 
                                     @if ($errors->has('zip'))
                                     <span class="help-block">

@@ -57,7 +57,7 @@ Login
                             @csrf
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">{{ __('Email Address') }}</label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="email" autofocus>
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="off" placeholder="email" autofocus>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
