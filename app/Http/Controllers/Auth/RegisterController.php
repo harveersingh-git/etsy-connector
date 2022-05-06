@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Spatie\Permission\Models\Role;
+use App\Models\subscriber;
 
 
 class RegisterController extends Controller
@@ -64,6 +65,10 @@ class RegisterController extends Controller
             // 'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
             'country_code' => ['required'],
             'mobile' => ['required', 'string', 'max:25', 'unique:users'],
+            'state' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'country' => 'required',
 
 
         ]);
@@ -84,8 +89,21 @@ class RegisterController extends Controller
             'country_code' => $data['country_code'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+            // 'country_id' => isset($data['country']) ? $data['country'] : '',
         ]);
         $user->assignRole('Subscriber');
+        if ($user) {
+            $array = [
+                'user_id' =>  $user->id,
+                'city' => isset($data['city']) ? $data['city'] : '',
+                'state' =>   isset($data['state']) ? $data['state'] : '',
+                'zip' => isset($data['zip']) ? $data['zip'] : '',
+                'auto_email_update' => isset($data['auto_email_update']) ? '1' : '0',
+                'country_id' => isset($data['country']) ? $data['country'] : '',
+            ];
+            subscriber::create($array);
+        }
+
         $res = [
             'subject' => 'Account Register Successfully',
             'email' => $data['email'],

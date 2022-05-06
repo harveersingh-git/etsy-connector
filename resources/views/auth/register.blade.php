@@ -103,7 +103,7 @@ $country = \GetCountry::getCountryCode();
                                     <div class="col">
                                         <label for="signin-email" class="control-label sr-only">{{ __('Contry Code') }}</label>
                                         <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country_code" value="" id="code">
-                                            <option value="">--Please Select--</option>
+                                            <option value="">-country code-</option>
 
                                             @forelse($country as $nation)
 
@@ -129,6 +129,67 @@ $country = \GetCountry::getCountryCode();
                                         </span>
                                         @enderror
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="city" class="control-label sr-only">{{ __('City') }}</label>
+                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required placeholder="city" autocomplete="city" autofocus>
+
+                                        @error('city')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col">
+                                        <!-- </div>
+                            
+                                            <div class="form-group"> -->
+                                        <label for="state" class="control-label sr-only">{{ __('state') }}</label>
+                                        <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" required placeholder="state" autocomplete="state" autofocus>
+
+                                        @error('state')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="zip" class="control-label sr-only">{{ __('Postal Code') }}</label>
+                                        <input type="number" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" value="{{ old('zip') }}" required autocomplete="mobile" placeholder="postal code" autofocus>
+
+                                        @error('mobile')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="col">
+                                        <label for="signin-email" class="control-label sr-only">{{ __('Contry') }}</label>
+                                        <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country" value="" id="country">
+                                            <option value="">--country--</option>
+
+                                            @forelse($country as $nation)
+
+                                            <option value="{{$nation->id}}" {{(old('country')==$nation->id)?'selected':''}}>{{$nation->name}}</option>
+                                            @empty
+                                            <option value="">No country found</option>
+                                            @endforelse
+
+                                        </select>
+                                        @if ($errors->has('country'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('country') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="form-group">
