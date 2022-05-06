@@ -34,10 +34,10 @@
                         <ul class="header-dropdown dropdown dropdown-animated scale-left">
                             <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
                             <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-primary js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}">Active</a>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-success js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}">Active</a>
                             </li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-primary js-sweetalert text-white" id="" title="Active" href="{{url('subscriber-in-active')}}">In-Active</a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-primary js-sweetalert text-white" id="" title="Active" href="{{url('subscriber-trash')}}">Trash</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}">In-Active</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}">Trash</a></li>
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -93,7 +93,7 @@
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->name}} {{$value->last_name}}</td>
                                         <td class="text-center">{{$value->email}} </td>
-                                        <td class="text-center">{{$value->mobile}}</td>
+                                        <td class="text-center">{{$value->country_code}}-{{$value->mobile}}</td>
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <td class="text-center">
                                             @if($value->active=='0')
@@ -105,8 +105,13 @@
                                         @endif
                                         <td>
                                             @if(Request::segment(1)=='subscriber-trash')
-                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Activate User">
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
                                                 <i class="fa fa-undo" aria-hidden="true"></i>
+
+
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as In-Activate User" data-val="in-active">
+                                                <i class="fa fa-undo red-color" aria-hidden="true"></i>
 
 
                                             </a>
@@ -114,9 +119,14 @@
 
                                             @else
                                             <a type="button" href="{{ route('subscriber.edit',$value->id) }}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
+
                                             <a type="button" href="{{ route('etsy-config',$value->id) }}" class="btn btn-warning" title="Etsy config" style="color: #fff;"><i class="fa fa-cogs"></i></a>
                                             <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary" title="Change password" style="color: #fff;"><i class="fa fa-lock"></i></a>
+                                            <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification" id="{{$value->id}}" title="Send Email Verification Link"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                            </button>
+
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
+
                                             @endif
                                         </td>
 
@@ -148,6 +158,39 @@
 
 
 <script>
+    $(document).on('click', '.email_verification', function() {
+        id = $(this).attr('id');
+        // alert(id);
+        swal({
+            title: "Are you sure?",
+            text: "You want to resend the email verificatin link to the subscriber ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('send_email_verification_link')}}",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        id: id
+                    },
+                    beforeSend: function() {
+
+                    },
+                    success: function(data) {
+                        toastr.success("Resend the email for verification account");
+                        // window.location.reload();
+                    }
+                });
+
+            } else {
+                swal("Your Record safe now!");
+            }
+        });
+
+    });
     $(document).on('click', '.delete', function() {
         id = $(this).attr('id');
         // alert(id);
@@ -219,7 +262,8 @@
 
     $(document).on('click', '.restore', function() {
         id = $(this).attr('id');
-
+        var status = $(this).attr('data-val');
+        // alert(status);
         swal({
             title: "Are you sure?",
             text: "You want to recover this record.",
@@ -233,7 +277,8 @@
                     url: "{{url('subscriber-restore')}}",
                     data: {
                         _token: '{{csrf_token()}}',
-                        id: id
+                        id: id,
+                        status: status
                     },
                     beforeSend: function() {
 

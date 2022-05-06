@@ -52,7 +52,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">Country code<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="code" placeholder="Ex:+91(IN)" value="{{old('code')}}" required>
+                                    <input type="text" class="form-control" name="code" placeholder="Ex:+91" value="{{old('code')}}" required>
 
                                     @if ($errors->has('code'))
                                     <span class="help-block">

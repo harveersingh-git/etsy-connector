@@ -13,7 +13,7 @@ Login
                         <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Documentation</a></li>
                         <!-- <li class="nav-item"><a class="nav-link" href="page-register.html">Sign Up</a></li> -->
                     </ul>
-                </nav>                    
+                </nav>
             </div>
             <div class="col-lg-8">
                 <div class="auth_detail">
@@ -43,36 +43,46 @@ Login
                         <p class="lead">Login to your account</p>
                     </div>
                     <div class="body">
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <form class="form-auth-small" action="{{ route('login') }}" method="POST">
-                                             @csrf
+                            @csrf
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">{{ __('Email Address') }}</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="email" autofocus>
-                            
+
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="signin-password" class="control-label sr-only">{{ __('Password') }}</label>
                                 <input type="password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="password" required autocomplete="current-password">
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group clearfix">
                                 <label class="fancy-checkbox element-left">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <span> {{ __('Remember Me') }}</span>
-                                </label>								
+                                </label>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">   {{ __('Login') }}</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
                             <div class="bottom">
-                                <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}">  {{ __('Forgot Your Password') }}</a></span>
+                                <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
                                 <!-- <span>Don't have an account? <a href="page-register.html">Register</a></span> -->
                             </div>
                         </form>

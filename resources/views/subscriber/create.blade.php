@@ -93,7 +93,7 @@
 
                                         @forelse($country as $nation)
 
-                                        <option value="{{$nation->code}}">{{$nation->code}}</option>
+                                        <option value="{{$nation->code}}">{{$nation->code}}({{$nation->name}})</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse

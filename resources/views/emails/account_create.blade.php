@@ -1,0 +1,1 @@
+<h1>Your account has been register successfully</h1>

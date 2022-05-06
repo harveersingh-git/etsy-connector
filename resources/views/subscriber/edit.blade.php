@@ -85,7 +85,7 @@
 
                                         @forelse($country as $nation)
 
-                                        <option value="{{$nation->code}}" {{($nation->code==$user->country_code)?'selected':''}}>{{$nation->code}}</option>
+                                        <option value="{{$nation->code}}" {{($nation->code==$user->country_code)?'selected':''}}>{{$nation->code}}({{$nation->name}})</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse
@@ -114,7 +114,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">City<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="city" placeholder="" value="{{isset($user->subscribe_details['city'])?$user->subscribe_details['city']:''}}" required>
+                                    <input type="text" class="form-control" name="city" placeholder="" value="{{isset($user->subscribe_details['city'])?$user->subscribe_details['city']:old('city')}}" required>
                                     @if ($errors->has('city'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('city') }}</strong>
@@ -125,7 +125,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">State<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="state" placeholder="" value="{{isset($user->subscribe_details['state'])?$user->subscribe_details['state']:''}}">
+                                    <input type="text" class="form-control" name="state" placeholder="" value="{{isset($user->subscribe_details['state'])?$user->subscribe_details['state']:old('state')}}">
                                     @if ($errors->has('state'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('state') }}</strong>
@@ -137,7 +137,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">Postal Code<span style="color: red;">*</span></label>
-                                    <input type="number" min="1" class="form-control" name="zip" placeholder="" value="{{isset($user->subscribe_details['zip'])?$user->subscribe_details['zip']:''}}" autocomplete="off" required>
+                                    <input type="number" min="1" class="form-control" name="zip" placeholder="" value="{{isset($user->subscribe_details['zip'])?$user->subscribe_details['zip']:old('zip')}}" autocomplete="off" required>
                                     @if ($errors->has('zip'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('zip') }}</strong>

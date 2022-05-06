@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\Country;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
+use Mail;
+use Illuminate\Auth\Events\Registered;
+
 
 
 class SubscriberController extends Controller
@@ -41,9 +44,8 @@ class SubscriberController extends Controller
         $trash_user = User::with('subscribe_details')->onlyTrashed()->whereHas('roles', function ($query) use ($request) {
             $query->where('name', 'Subscriber');
         })->latest()->get();
-        // dd(    $trashUser->toArray());
+
         return view('subscriber.index', compact('data', 'trash_user'));
-        // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
 
@@ -51,23 +53,17 @@ class SubscriberController extends Controller
     {
         $data = User::with('subscribe_details')->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
-        })->where('active', '0')->orderBy('id', 'DESC')->get();
-
-
-
-
+        })->where('active', '0')->orderBy('updated_at', 'DESC')->get();
         return view('subscriber.index', compact('data'));
-        // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
 
     public function subscriberTrash(Request $request)
     {
 
-
         $data = User::with('subscribe_details')->onlyTrashed()->whereHas('roles', function ($query) use ($request) {
             $query->where('name', 'Subscriber');
-        })->latest()->get();
+        })->orderBy('updated_at', 'DESC')->get();
         // dd(    $trashUser->toArray());
         return view('subscriber.index', compact('data'));
         // ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -100,8 +96,8 @@ class SubscriberController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-            'password_confirmation' => 'required|string|min:8|password',
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
             'mobile' => 'required|digits_between:5,13|unique:users',
             'state' => 'required',
             'city' => 'required',
@@ -116,6 +112,7 @@ class SubscriberController extends Controller
         $input['country_code'] = isset($input['code']) ? $input['code'] : '';
 
         $user = User::create($input);
+
         // $role =  Role::where('name', 'Subscriber')->first();
         $user->assignRole('Subscriber');
         if ($user) {
@@ -129,6 +126,19 @@ class SubscriberController extends Controller
             ];
             subscriber::create($fields);
         }
+        event(new Registered($user));
+
+
+        $data = [
+            'subject' => 'Account Register Successfully',
+            'email' => $input['email'],
+            // 'content' => 'test'
+        ];
+        $success =  Mail::send('emails.account_create', $data, function ($message) use ($data) {
+            $message->to($data['email'])
+                ->subject($data['subject']);
+        });
+
 
         // subscriber::where('user_id', $id)->delete();
         return redirect()->route('subscriber.index')
@@ -239,11 +249,24 @@ class SubscriberController extends Controller
     }
 
 
+    public function sendVerificationLink(Request $request)
+    {
+        $id = $request['id'];
+
+        $user = User::find($id)->sendEmailVerificationNotification();;
+        // dd( $user  );
+        // event(new Registered($user));
+        return response()->json(['status' => 'success']);
+    }
+
     public function userRestore(Request $request)
     {
 
         $id = $request['id'];
+        $status = ($request['status'] == 'active' ? '1' : '0');
         $user = User::withTrashed()->find($id)->restore();
+        $data = User::find($id);
+        $data->update(['active' => $status]);
         if ($user) {
             subscriber::withTrashed()->where('user_id', $id)->restore();
             return response()->json(['status' => 'success']);
