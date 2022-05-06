@@ -87,13 +87,13 @@
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Country Code<span style="color: red;">*</span></label>
+                                    <label for="code" class="control-label">Country Code<span style="color: red;">*</span></label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="code" value="" id="code">
                                         <option value="">--Please Select--</option>
 
                                         @forelse($country as $nation)
 
-                                        <option value="{{$nation->code}}">{{$nation->code}}({{$nation->name}})</option>
+                                        <option value="{{$nation->code}}" {{($nation->code==old('code')?'selected':'')}}>{{$nation->code}}({{$nation->name}})</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse
@@ -166,7 +166,7 @@
 
                                         @forelse($country as $nation)
 
-                                        <option value="{{$nation->id}}">{{$nation->name}}</option>
+                                        <option value="{{$nation->id}}" {{($nation->id==old('country'))?'selected':''}}>{{$nation->name}}</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse
