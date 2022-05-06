@@ -41,7 +41,11 @@ class EtsyController extends Controller
      */
     public function etsyConfig(Request $request, $id = null)
     {
-
+        $role =  Auth::user()->roles->pluck('name')[0];
+        if ($role != 'Admin' && isset($id)) {
+            return redirect()->back()->with("error", "You are not autherized user to acces this url. !");
+        }
+      
         $input = $request->all();
 
         if (isset($id) || isset($input['id'])) {
@@ -51,7 +55,7 @@ class EtsyController extends Controller
         }
 
         $user = EtsyConfig::where('user_id', $id)->first();
-        $country = Country::orderBy('name','ASC')->get();
+        $country = Country::orderBy('name', 'ASC')->get();
 
         if ($request->isMethod('post')) {
 
@@ -90,7 +94,7 @@ class EtsyController extends Controller
 
             return redirect()->back()->with("success", "Record successfully changed!");
         }
-        return view('etsy.view', compact('id', 'user','country'));
+        return view('etsy.view', compact('id', 'user', 'country'));
     }
 
 
