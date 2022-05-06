@@ -8,6 +8,10 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Events\Registered;
+use Spatie\Permission\Models\Role;
+
 
 class RegisterController extends Controller
 {
@@ -49,10 +53,19 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'min:6',
+            // 'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
+            'country_code' => ['required'],
+            'mobile' => ['required', 'string', 'max:25', 'unique:users'],
+
+
         ]);
     }
 
@@ -64,10 +77,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'country_code' => $data['country_code'],
+            'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole('Subscriber');
+        $res = [
+            'subject' => 'Account Register Successfully',
+            'email' => $data['email'],
+
+        ];
+        Mail::send('emails.account_create', $res, function ($message) use ($res) {
+            $message->to($res['email'])
+                ->subject($res['subject']);
+        });
+        return $user;
     }
 }

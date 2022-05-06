@@ -11,7 +11,7 @@ Login
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{ asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Documentation</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="page-register.html">Sign Up</a></li> -->
+                        <li class="nav-item"><a class="nav-link" href="{{url('register')}}">Sign Up</a></li>
                     </ul>
                 </nav>
             </div>
@@ -83,7 +83,7 @@ Login
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
-                                <!-- <span>Don't have an account? <a href="page-register.html">Register</a></span> -->
+                                <span>Don't have an account? <a href="{{url('register')}}">Register</a></span>
                             </div>
                         </form>
                     </div>

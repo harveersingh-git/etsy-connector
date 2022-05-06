@@ -8,6 +8,9 @@ use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\EtsyController;
 use App\Http\Controllers\CountryController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\VerifyEmailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +30,12 @@ Route::any('/', function () {
     return redirect('/login');
 });
 
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
 
 Auth::routes();
+
 Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
