@@ -45,16 +45,19 @@ class EtsyController extends Controller
         if ($role != 'Admin' && isset($id)) {
             return redirect()->back()->with("error", "You are not autherized user to acces this url. !");
         }
-      
+
         $input = $request->all();
 
         if (isset($id) || isset($input['id'])) {
             $id = isset($input['id']) ? $input['id'] : $id;
+
+            $user = EtsyConfig::where('id', $id)->first();
         } else {
             $id = Auth::user()->id;
+
+            $user = EtsyConfig::where('user_id', $id)->first();
         }
 
-        $user = EtsyConfig::where('user_id', $id)->first();
         $country = Country::orderBy('name', 'ASC')->get();
 
         if ($request->isMethod('post')) {

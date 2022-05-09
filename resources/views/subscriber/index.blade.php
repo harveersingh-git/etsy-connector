@@ -6,14 +6,14 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Subscriber List</h2>
+                <h2>{{__('messages.subscriber')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active">Subscriber List</li>
+                    <li class="breadcrumb-item active">{{__('messages.subscriber')}}</li>
                 </ul>
-                <a href="{{ route('subscriber.create') }}" class="btn btn-sm btn-primary" title="">Create New</a>
+                <a href="{{ route('subscriber.create') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -25,19 +25,19 @@
                 <div class="card">
                     <div class="header">
                         @if(Request::segment(1)=='subscriber-trash')
-                        <h2>Trash Subscriber List</h2>
+                        <h2>{{__('messages.trash_subscriber_list')}}</h2>
                         @elseif(Request::segment(1)=='subscriber-in-active')
-                        <h2>In-Active Subscriber List</h2>
+                        <h2>{{__('messages.inactive_subscriber_list')}}</h2>
                         @else
-                        <h2>Active Subscriber List</h2>
+                        <h2>{{__('messages.active_subscriber_list')}}</h2>
                         @endif
                         <ul class="header-dropdown dropdown dropdown-animated scale-left">
                             <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
                             <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-success js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}">Active</a>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-success js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}">{{__('messages.active')}}</a>
                             </li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}">In-Active</a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}">Trash</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}">{{__('messages.in_active')}}</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}">{{__('messages.trash')}}</a></li>
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -65,25 +65,25 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Sr. No.</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Mobile</th>
+                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th class="text-center">{{__('messages.mobile')}}</th>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
-                                        <th>Action</th>
+                                        <th>{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th class="text-center">Sr. No.</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Mobile</th>
+                                    <th class="text-center">{{__('messages.sr_no')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th class="text-center">{{__('messages.mobile')}}</th>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
-                                        <th>Action</th>
+                                        <th>{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -120,7 +120,7 @@
                                             @else
                                             <a type="button" href="{{ route('subscriber.edit',$value->id) }}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
 
-                                            <a type="button" href="{{ route('etsy-config',$value->id) }}" class="btn btn-warning" title="Etsy config" style="color: #fff;"><i class="fa fa-cogs"></i></a>
+                                            <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning" title="Etsy config" style="color: #fff;"><i class="fa fa-cogs"></i></a>
                                             <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary" title="Change password" style="color: #fff;"><i class="fa fa-lock"></i></a>
                                             <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification" id="{{$value->id}}" title="Send Email Verification Link"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>

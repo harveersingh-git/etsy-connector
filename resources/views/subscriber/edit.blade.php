@@ -9,13 +9,13 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Edit Subscriber</h2>
+                <h2>{{__('messages.edit_subscriber')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">Subscriber List</a></li>
-                    <li class="breadcrumb-item active">Edit Subscriber</li>
+                    <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">{{__('messages.subscriber_list')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('messages.edit_subscriber')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Edit Subscriber</h2>
+                        <h2>{{__('messages.edit_subscriber')}}</h2>
                     </div>
                     <div class="body">
                         {!! Form::model($user, ['method' => 'PATCH','route' => ['subscriber.update', $user->id]]) !!}
@@ -39,7 +39,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="first_name" class="control-label">First Name<span style="color: red;">*</span></label>
+                                    <label for="first_name" class="control-label">{{__('messages.first_name')}}<span style="color: red;">*</span></label>
 
                                     {!! Form::text('name', null, array('placeholder' => 'first name','class' => 'form-control')) !!}
 
@@ -53,7 +53,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Last Name<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.last_name')}}<span style="color: red;">*</span></label>
                                     {!! Form::text('last_name', null, array('placeholder' => 'last name','class' => 'form-control')) !!}
 
                                     @if ($errors->has('last_name'))
@@ -66,7 +66,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label>Email<span style="color: red;">*</span></label>
+                                    <label>{{__('messages.email')}}<span style="color: red;">*</span></label>
                                     {!! Form::text('email', null, array('placeholder' => 'email','class' => 'form-control')) !!}
 
                                     @if ($errors->has('email'))
@@ -79,7 +79,7 @@
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Country Code<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.country_code')}}<span style="color: red;">*</span></label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="code" value="" id="code">
                                         <option value="">--Please Select--</option>
 
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-6">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">mobile<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.mobile')}}<span style="color: red;">*</span></label>
                                     {!! Form::text('mobile', null, array('placeholder' => 'mobile','class' => 'form-control')) !!}
 
                                     @if ($errors->has('mobile'))
@@ -113,7 +113,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">City<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.city')}}<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" name="city" placeholder="" value="{{isset($user->subscribe_details['city'])?$user->subscribe_details['city']:old('city')}}" required>
                                     @if ($errors->has('city'))
                                     <span class="help-block">
@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">State<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.state')}}<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" name="state" placeholder="" value="{{isset($user->subscribe_details['state'])?$user->subscribe_details['state']:old('state')}}">
                                     @if ($errors->has('state'))
                                     <span class="help-block">
@@ -136,7 +136,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Postal Code<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.postal_code')}}<span style="color: red;">*</span></label>
                                     <input type="number" min="1" class="form-control" name="zip" placeholder="" value="{{isset($user->subscribe_details['zip'])?$user->subscribe_details['zip']:old('zip')}}" autocomplete="off" required>
                                     @if ($errors->has('zip'))
                                     <span class="help-block">
@@ -147,7 +147,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Country<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.country')}}<span style="color: red;">*</span></label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country" value="" id="country">
                                         <option value="">--Please Select--</option>
 
@@ -170,7 +170,8 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label class="fancy-checkbox ">
-                                        <input class="form-check-input" type="checkbox" name="auto_email_update" id="auto_email_update" {{ isset($user->subscribe_details['auto_email_update']) &&  ($user->subscribe_details['auto_email_update']=='1') ? 'checked':''}}> <span> Are you wants latest update by mail?</span>
+                                        <input class="form-check-input" type="checkbox" name="auto_email_update" id="auto_email_update" {{ isset($user->subscribe_details['auto_email_update']) &&  ($user->subscribe_details['auto_email_update']=='1') ? 'checked':''}}>
+                                         <span> {{__('messages.want_latest_update')}}</span>
                                     </label>
                                 </div>
                             </div>
@@ -178,10 +179,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group pull-right">
                                     <a href="{{url('/subscriber')}}" class="btn btn-light">
-                                        Back
+                                        {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        Update
+                                    {{__('messages.update')}}
                                     </button>
                                 </div>
                             </div>

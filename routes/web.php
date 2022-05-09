@@ -10,7 +10,7 @@ use App\Http\Controllers\CountryController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\VerifyEmailController;
-
+use App\Http\Controllers\ShopListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +56,13 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('subscriber', SubscriberController::class);
+    // Route::resource('shoplist', ShopListController::class);
+    Route::any('/shoplist/{id}', [ShopListController::class, 'index'])->name('shoplist');
+    Route::any('/add-shoplist/{id}', [ShopListController::class, 'create'])->name('add-shoplist');
+    Route::any('/delete_shoplist', [ShopListController::class, 'destroy'])->name('delete_shoplist');
+    Route::any('/shoplist/edit/{id}', [ShopListController::class, 'show']);
+    Route::post('/update-shop', [ShopListController::class, 'update'])->name('updateshop');
+
     Route::resource('country', CountryController::class);
     Route::post('delete_country', [CountryController::class, 'destroy'])->name('delete_country');
     Route::post('delete_subscriber', [SubscriberController::class, 'destroy'])->name('delete_subscriber');

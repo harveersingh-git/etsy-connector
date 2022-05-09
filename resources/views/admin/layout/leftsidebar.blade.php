@@ -28,20 +28,20 @@
         </div>
         <nav id="left-sidebar-nav" class="sidebar-nav">
             <ul id="main-menu" class="metismenu">
-                <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('/') }}"><i class="icon-home"></i><span>Dashboard</span></a></li>
+                <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('/') }}"><i class="icon-home"></i><span>{{__('messages.dashboard')}}</span></a></li>
                 @hasanyrole('Admin')
-                <li class="{{ Request::segment(1) === 'subscriber' ? 'active' : null }}"><a href="{{ url('/subscriber') }}"><i class="icon-users"></i><span>Subscriber</span></a></li>
+                <li class="{{ Request::segment(1) === 'subscriber' ? 'active' : null }}"><a href="{{ url('/subscriber') }}"><i class="icon-users"></i><span>{{__('messages.subscriber')}}</span></a></li>
                 @endhasanyrole
-                <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-user"></i><span>Edit Profile</span></a></li>
-                <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-lock"></i><span>Change Password</span></a></li>
+                <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-user"></i><span>{{__('messages.edit_profile')}}</span></a></li>
+                <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-lock"></i><span>{{__('messages.change_password')}}</span></a></li>
 
                 <li class="{{ (Request::segment(1) === 'etsy-config') || (Request::segment(1) === 'etsy-list-data') || (Request::segment(1) === 'country')  ? 'active' : null }}">
-                    <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>
+                    <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
-                        <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">Etsy Config</a></li>
-                        <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">Etsy Product</a></li>
+                        <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">{{__('messages.etsy_config')}}</a></li>
+                        <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">{{__('messages.etsy_product')}}</a></li>
                         @hasanyrole('Admin')
-                        <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">Country</a></li>
+                        <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
                         @endhasanyrole
 
                     </ul>
