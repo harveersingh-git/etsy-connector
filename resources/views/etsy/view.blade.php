@@ -184,9 +184,9 @@
                                         <a href="{{ url()->previous() }}" class="btn btn-light">
                                             Back
                                         </a>
-                                        <!-- <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary">
                                             Update
-                                        </button> -->
+                                        </button>
                                     </div>
                                 </div>
 
