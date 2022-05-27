@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
 
     Route::any('/country-list', [EtsyController::class, 'countryList'])->name('country-list');
     Route::any('/etsy-list-data', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
+    Route::any('/etsy-download-history', [EtsyController::class, 'downloadHistory'])->name('etsy-download-history');
 
     Route::any('/get_access_code_url', [EtsyController::class, 'etsyAuth'])->name('get_access_code_url');
     Route::post('/verify_access_code', [EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');

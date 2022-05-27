@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EtsyConfig;
 use App\Models\EtsyProduct;
+use App\Models\DownloadHistory;
+use App\Models\ProductHistory;
 use Validator;
 use Http;
 use Client;
@@ -347,6 +349,9 @@ class EtsyController extends Controller
                                 $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
                                 $product_data["user_id"] = auth()->user()->id;
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
+
+                                $product_data["date"] = Carbon::now()->toDateString();;
+                                ProductHistory::create($product_data);
                             }
                         }
                     }
@@ -372,13 +377,17 @@ class EtsyController extends Controller
 
     public function genrateCsv()
     {
+
+
         $date = Carbon::now()->toDateString();
         $click =  EtsyProduct::get();
 
         if (count($click) > 0) {
 
             $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
-            $fileName = $date . 'productlist.csv';
+            $fileName = $date . '-' . auth()->user()->id . '-' . 'productlist.csv';
+            // $filepath = public_path('uploads/');
+
             $tasks = $click;
             $headers = array(
                 "Content-type"        => "text/csv",
@@ -388,10 +397,13 @@ class EtsyController extends Controller
                 "Expires"             => "0"
             );
 
-            $callback = function () use ($tasks, $columns) {
-                $file = fopen('php://output', 'w');
-                fputcsv($file, $columns);
+            // fclose($file);
+            // move_uploaded_file($fileName, $filepath.$fileName);
 
+            $callback = function () use ($tasks, $columns, $fileName) {
+                $file = fopen("public/uploads/" . $fileName, 'w');
+
+                fputcsv($file, $columns);
                 foreach ($tasks as $data) {
 
                     $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
@@ -408,9 +420,21 @@ class EtsyController extends Controller
                     fputcsv($file, $row);
                 }
 
-
+                // file_put_contents("public/", $fileName);
                 fclose($file);
             };
+            if ($callback) {
+                DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
+
+                $array = [
+                    'user_id' => auth()->user()->id,
+                    'file_name' => $fileName,
+                    'date' =>  $date,
+
+                ];
+                DownloadHistory::create($array);
+            }
+
 
             return response()->stream($callback, 200, $headers);
         }
@@ -466,5 +490,12 @@ class EtsyController extends Controller
             }
             return $image;
         }
+    }
+
+
+    public function downloadHistory()
+    {
+        $data = DownloadHistory::where('user_id', auth()->user()->id)->get();
+        return view('etsy.downloadhistory', compact('data'));
     }
 }

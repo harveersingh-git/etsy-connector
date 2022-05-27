@@ -40,6 +40,7 @@
                     <ul>
                         <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">{{__('messages.etsy_config')}}</a></li>
                         <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">{{__('messages.etsy_product')}}</a></li>
+                        <li class="{{ Request::segment(1) === 'etsy-download-history' ? 'active' : null }}"><a href="{{ url('etsy-download-history') }}">{{__('messages.etsy_download_history')}}</a></li>
                         @hasanyrole('Admin')
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
                         @endhasanyrole

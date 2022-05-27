@@ -51,6 +51,7 @@ return [
     'store'=>'Store',
     'edit_shop_list'=>'Edit Shop List',
     'add_shop'=>'Add Shop',
-    'edit_shop'=>'Edit Shop'
+    'edit_shop'=>'Edit Shop',
+    'etsy_download_history'=>'Download History'
 
 ];
