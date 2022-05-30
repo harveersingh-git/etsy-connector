@@ -274,7 +274,8 @@
 
         if (access_token) {
             var data = {
-                verify_token: access_token
+                verify_token: access_token,
+                id: $('#id').val()
             };
             $.ajax({
                 type: 'POST',

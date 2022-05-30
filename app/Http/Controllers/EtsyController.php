@@ -43,6 +43,7 @@ class EtsyController extends Controller
      */
     public function etsyConfig(Request $request, $id = null)
     {
+        return redirect()->back();
         $role =  Auth::user()->roles->pluck('name')[0];
         if ($role != 'Admin' && isset($id)) {
             return redirect()->back()->with("error", "You are not autherized user to acces this url. !");
@@ -110,10 +111,15 @@ class EtsyController extends Controller
      * @return void
      */
 
-    public function etsyAuth()
+    public function etsyAuth(Request $request)
     {
-        $id = Auth::user()->id;
-        $result = EtsyConfig::where('user_id', $id)->first();
+        // dd($request->all());
+        // $id = Auth::user()->id;
+        $id = $request['id'];
+
+        $result = EtsyConfig::where('id', $id)->first();
+
+        // $result = EtsyConfig::where('user_id', $id)->first();
         if ($result) {
             $keystring = $result['key_string'];
             $shared_secret = $result['shared_secret'];
@@ -158,8 +164,9 @@ class EtsyController extends Controller
 
 
         if ($verifier) {
-            $id = Auth::user()->id;
-            $result = EtsyConfig::where('user_id', $id)->first();
+            // $id = Auth::user()->id;
+            $id = $request['id'];
+            $result = EtsyConfig::where('id', $id)->first();
 
             $keystring =  $result['key_string'];
             $shared_secret = $result['shared_secret'];
@@ -256,9 +263,9 @@ class EtsyController extends Controller
             $result = EtsyConfig::where('id', $request['shop'])->first();
 
             if ($result) {
-  
+
                 EtsyProduct::where('shop_id', $request['shop'])->delete();
-               
+
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
                 $shop_id = $result['shop_name'];
@@ -514,7 +521,7 @@ class EtsyController extends Controller
 
     public function downloadHistory()
     {
-       
+
         $roles = Auth::user()->getRoleNames();
         if ($roles[0] == 'Admin') {
             $data = DownloadHistory::get();
@@ -597,7 +604,7 @@ class EtsyController extends Controller
 
 
                 return response()->stream($callback, 200, $headers);
-            }else{
+            } else {
                 return redirect()->back()->with("success", "No product found for the given shop !");
             }
         }

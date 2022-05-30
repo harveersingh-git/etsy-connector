@@ -158,7 +158,7 @@ class MyShopController extends Controller
         $data = EtsyConfig::updateOrCreate(['id' =>     $input['id']], $array);
 
 
-        return redirect('my-shop')->with('success', 'Shop added Successfully');
+        return redirect('my-shop')->with('success', 'Shop updated Successfully');
     }
 
     /**

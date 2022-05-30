@@ -152,7 +152,7 @@ class ShopListController extends Controller
         $data = EtsyConfig::updateOrCreate(['id' =>     $input['id']], $array);
 
 
-        return redirect('shoplist/' . $data['user_id'])->with('success', 'Shop added Successfully');
+        return redirect('shoplist/' . $data['user_id'])->with('success', 'Shop updated Successfully');
     }
 
     /**
