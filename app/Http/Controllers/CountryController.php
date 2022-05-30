@@ -117,8 +117,8 @@ class CountryController extends Controller
         $id = $request['id'];
 
         $user = Country::find($id)->delete();
-
-        return redirect()->route('subscriber.index')
-            ->with('success', 'Record delete successfully');
+        return response()->json(['status' => 'success']);
+        // return redirect()->route('subscriber.index')
+        //     ->with('success', 'Record delete successfully');
     }
 }

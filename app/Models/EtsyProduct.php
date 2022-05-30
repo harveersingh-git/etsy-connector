@@ -39,7 +39,13 @@ class EtsyProduct extends Model
         'brand',
         'condition',
         'image_url',
-        'user_id'
+        'user_id',
+        'shop_id'
 
     ];
+
+    public function shops()
+    {
+        return $this->hasOne(EtsyConfig::class, 'id','shop_id');
+    }
 }

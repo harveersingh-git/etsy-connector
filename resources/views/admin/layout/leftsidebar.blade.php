@@ -32,6 +32,9 @@
                 @hasanyrole('Admin')
                 <li class="{{ Request::segment(1) === 'subscriber' ? 'active' : null }}"><a href="{{ url('/subscriber') }}"><i class="icon-users"></i><span>{{__('messages.subscriber')}}</span></a></li>
                 @endhasanyrole
+                @hasanyrole('Subscriber')
+                <li class="{{ Request::segment(1) === 'my-shop' ? 'active' : null }}"><a href="{{ url('/my-shop') }}"><i class="fa fa-shopping-cart"></i><span>{{__('messages.myshop')}}</span></a></li>
+                @endhasanyrole
                 <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-user"></i><span>{{__('messages.edit_profile')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-lock"></i><span>{{__('messages.change_password')}}</span></a></li>
 

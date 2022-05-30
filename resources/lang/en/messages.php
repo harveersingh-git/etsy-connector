@@ -52,6 +52,9 @@ return [
     'edit_shop_list'=>'Edit Shop List',
     'add_shop'=>'Add Shop',
     'edit_shop'=>'Edit Shop',
-    'etsy_download_history'=>'Download History'
+    'etsy_download_history'=>'Download History',
+    'myshop'=>'My Shop',
+    'download_csv'=>'Download csv',
+    'product_list'=>'Product List'
 
 ];

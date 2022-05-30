@@ -234,13 +234,31 @@ class EtsyController extends Controller
         $page = 1;
         $limit = 100;
 
-        $data =  EtsyProduct::where('user_id', auth()->user()->id)->get();
-        if ($request->isMethod('post')) {
-            $id = Auth::user()->id;
-            $result = EtsyConfig::where('user_id', $id)->first();
-            if ($result) {
+        $roles = Auth::user()->getRoleNames();
 
-                EtsyProduct::truncate();
+        if ($roles[0] == 'Admin') {
+            $shops = EtsyConfig::get();
+            $data =  EtsyProduct::get();
+        } else {
+
+            $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
+            $shops_ids = $shops->pluck('id');
+            $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
+        }
+
+
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'shop' => 'required',
+            ]);
+
+            $result = EtsyConfig::where('id', $request['shop'])->first();
+
+            if ($result) {
+  
+                EtsyProduct::where('shop_id', $request['shop'])->delete();
+               
                 $key_string = $result['key_string'];
                 $api_access_token = $result['api_access_token'];
                 $shop_id = $result['shop_name'];
@@ -348,6 +366,7 @@ class EtsyController extends Controller
                                 $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
                                 $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
                                 $product_data["user_id"] = auth()->user()->id;
+                                $product_data["shop_id"] = $request['shop'];
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
 
                                 $product_data["date"] = Carbon::now()->toDateString();;
@@ -363,7 +382,7 @@ class EtsyController extends Controller
             }
         }
 
-        return view('etsy.product_list', compact('url', 'data', 'page', 'limit'));
+        return view('etsy.product_list', compact('url', 'data', 'page', 'limit', 'shops'));
     }
 
 
@@ -375,7 +394,7 @@ class EtsyController extends Controller
      * @return void
      */
 
-    public function genrateCsv()
+    public function genrateCsv_old()
     {
 
 
@@ -495,7 +514,91 @@ class EtsyController extends Controller
 
     public function downloadHistory()
     {
-        $data = DownloadHistory::where('user_id', auth()->user()->id)->get();
+       
+        $roles = Auth::user()->getRoleNames();
+        if ($roles[0] == 'Admin') {
+            $data = DownloadHistory::get();
+        } else {
+            $data = DownloadHistory::where('user_id', auth()->user()->id)->get();
+        }
         return view('etsy.downloadhistory', compact('data'));
+    }
+    public function exportCsv(Request $request)
+    {
+
+        $url = '';
+        $roles = Auth::user()->getRoleNames();
+        if ($roles[0] == 'Admin') {
+            $shops = EtsyConfig::get();
+        } else {
+            $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
+        }
+        if ($request->isMethod('post')) {
+
+            $date = Carbon::now()->toDateString();
+            $click =  EtsyProduct::where('shop_id', $request['shop_name'])->get();
+
+            if (count($click) > 0) {
+
+                $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
+
+                $fileName = $date . '-' . auth()->user()->id . '-' . $request['shop_name'] . '-' . 'productlist.csv';
+                // $filepath = public_path('uploads/');
+
+                $tasks = $click;
+                $headers = array(
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$fileName",
+                    "Pragma"              => "no-cache",
+                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                    "Expires"             => "0"
+                );
+
+                // fclose($file);
+                // move_uploaded_file($fileName, $filepath.$fileName);
+
+                $callback = function () use ($tasks, $columns, $fileName) {
+                    $file_current = fopen('php://output', 'w');
+                    $file = fopen("public/uploads/" . $fileName, 'w');
+
+                    fputcsv($file_current, $columns);
+                    fputcsv($file, $columns);
+                    foreach ($tasks as $data) {
+
+                        $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
+                        $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
+                        $row['description']  = isset($data->description) ? $data->description : 'N/A';
+                        $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
+                        $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
+                        $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
+                        $row['brand']  = isset($data->brand) ? $data->brand : 'N/A';
+                        $row['link']  = isset($data->url) ? $data->url : 'N/A';
+                        $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
+
+                        fputcsv($file_current, $row);
+                        fputcsv($file, $row);
+                    }
+
+                    // file_put_contents("public/", $fileName);
+                    fclose($file_current);
+                    fclose($file);
+                };
+                if ($callback) {
+                    DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
+
+                    $array = [
+                        'user_id' => auth()->user()->id,
+                        'file_name' => $fileName,
+                        'date' =>  $date,
+
+                    ];
+                    DownloadHistory::create($array);
+                }
+
+
+                return response()->stream($callback, 200, $headers);
+            }
+        }
+        return view('etsy.csv', compact('url', 'shops'));
     }
 }

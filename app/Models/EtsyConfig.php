@@ -23,4 +23,6 @@ class EtsyConfig extends Model
         'api_access_token',
         'api_access_secret'
     ];
+
+  
 }

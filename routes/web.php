@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ShopListController;
+use App\Http\Controllers\MyShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
 
     Route::any('/get_access_code_url', [EtsyController::class, 'etsyAuth'])->name('get_access_code_url');
     Route::post('/verify_access_code', [EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');
+    Route::any('/export-csv', [EtsyController::class, 'exportCsv'])->name('export-csv');
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');
 
 
@@ -63,6 +65,13 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::any('/delete_shoplist', [ShopListController::class, 'destroy'])->name('delete_shoplist');
     Route::any('/shoplist/edit/{id}', [ShopListController::class, 'show']);
     Route::post('/update-shop', [ShopListController::class, 'update'])->name('updateshop');
+
+    Route::any('/my-shop', [MyShopController::class, 'index'])->name('my-shop');
+    Route::any('/add-my-shop', [MyShopController::class, 'create'])->name('add-my-shop');
+    Route::any('/my-shop/edit/{id}', [MyShopController::class, 'show']);
+    Route::post('/update-my-shop', [MyShopController::class, 'update'])->name('update-my-shop');
+    Route::any('/delete_myshoplist', [MyShopController::class, 'destroy'])->name('delete_myshoplist');
+
 
     Route::resource('country', CountryController::class);
     Route::post('delete_country', [CountryController::class, 'destroy'])->name('delete_country');

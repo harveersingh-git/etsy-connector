@@ -39,7 +39,8 @@ class ProductHistory extends Model
         'condition',
         'image_url',
         'user_id',
-        'date'
+        'date',
+        'shop_id'
 
     ];
 }

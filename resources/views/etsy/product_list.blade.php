@@ -17,7 +17,7 @@
                     <li class="breadcrumb-item active">Product List</li>
                 </ul>
 
-                <a href="{{url('generate-csv')}}" class="btn btn-sm btn-primary" title="" target="blanck">Download CSV</a>
+                <a href="{{url('export-csv')}}" class="btn btn-sm btn-primary" title="" >Download CSV</a>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
         </div>
@@ -45,10 +45,28 @@
                                 <div class="">
                                     <div class="header">
                                         <h2>Product List </h2>
-                                        <div class="pull-right">
-                                            <form role="form" action="{{$url}}" method="post">
+                                        <div class="pull-right" style="margin-bottom:10px">
+
+                                            <form role="form" action="{{$url}}" method="post" class="form-inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-primary" title="">Sync Product</button>
+                                                <div class="form-group">
+                                                    <div>
+                                                    <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
+                                                        <option value="">--Select shop--</option>
+                                                        @forelse($shops as $shop)
+                                                        <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
+                                                        @empty
+                                                        <p>No shop</p>
+                                                        @endforelse
+                                                    </select> </div>&nbsp&nbsp
+                                                    @if ($errors->has('shop'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('shop') }}</strong>
+                                                    </span>
+                                                    @endif
+
+                                                    <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
+
                                             </form>
                                         </div>
                                     </div>
@@ -58,6 +76,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">Sr. No.</th>
+                                                        <th class="text-center">Shop Name</th>
                                                         <th class="text-center">Title</th>
                                                         <th class="text-center">Price</th>
                                                         <th class="text-center">materials</th>
@@ -69,6 +88,7 @@
                                                     @foreach($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
+                                                        <td>{{$value['shops']->shop_name}}</td>
                                                         <td>{{substr($value->title,0,50)}}...</td>
                                                         <td class="text-center">{{$value->price}} {{$value->currency_code}}</td>
                                                         <td>{{substr($value->materials,0,50)}}..</td>
@@ -113,7 +133,10 @@
             // searching: false
 
         });
-
+        $("#shop").select2({
+            placeholder: "Select a shop",
+            allowClear: true
+        });
     });
 </script>
 @endsection
