@@ -597,6 +597,8 @@ class EtsyController extends Controller
 
 
                 return response()->stream($callback, 200, $headers);
+            }else{
+                return redirect()->back()->with("success", "No product found for the given shop !");
             }
         }
         return view('etsy.csv', compact('url', 'shops'));
