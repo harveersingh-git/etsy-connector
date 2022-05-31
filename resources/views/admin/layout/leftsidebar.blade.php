@@ -47,18 +47,18 @@
 
                     </ul>
                 </li>
-
+                @hasanyrole('Admin')
                 <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
                         <!-- <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">{{__('messages.etsy_config')}}</a></li> -->
-                        @hasanyrole('Admin')
+                      
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
-                        @endhasanyrole
+               
 
                     </ul>
                 </li>
-
+                @endhasanyrole
              
 
 
