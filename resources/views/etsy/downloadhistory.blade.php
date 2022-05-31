@@ -45,7 +45,7 @@
                                 <div class="">
                                     <div class="header">
                                         <h2>Download History List </h2>
-                                    
+
                                     </div>
                                     <div class="body">
                                         <div class="table-responsive">
@@ -56,7 +56,7 @@
                                                         <th class="text-center">File Name</th>
                                                         <th class="text-center">Date</th>
                                                         <th class="text-center">Action</th>
-                                                      
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -66,9 +66,11 @@
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
                                                         <td>{{substr($value->file_name,0,50)}}</td>
-                                                   
+
                                                         <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
-                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}">Download </a></td>
+                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}">Download </a> | <a href="#" class="copy"  id="{{url('public/uploads/'.$value->file_name)}}">Copy </a></td>
+                                                        
+
                                                     </tr>
                                                     @endforeach
                                                     @else
@@ -112,6 +114,25 @@
         });
 
     });
+
+    function copyToClipboard(text) {
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text; //save main text in it
+        sampleTextarea.select(); //select textarea contenrs
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+    }
+    $(document).on("click",".copy",function() {
+        var copyText = $(this).attr('id');
+       
+    
+        copyToClipboard(copyText);
+        $(this).text('Copied');
+});
+    // function myFunction(val) {
+     
+    // }
 </script>
 @endsection
 @endsection

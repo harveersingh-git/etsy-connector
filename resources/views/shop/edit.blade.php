@@ -51,7 +51,7 @@
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.app_url')}}</label>
+                                        <label for="first_name" class="control-label">{{__('messages.app_url')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="app_url" placeholder="" value="{{isset($data->app_url)?($data->app_url):''}}">
 
                                         @if ($errors->has('app_url'))

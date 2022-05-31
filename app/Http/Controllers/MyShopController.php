@@ -46,6 +46,7 @@ class MyShopController extends Controller
                 'shared_secret' => 'required',
                 'shop_name' => 'required',
                 'user_name' => 'required',
+                'app_url' => 'required|url',
 
             ]);
 
@@ -138,6 +139,7 @@ class MyShopController extends Controller
             'shared_secret' => 'required',
             'shop_name' => 'required',
             'user_name' => 'required',
+            'app_url' => 'required|url',
 
         ]);
 

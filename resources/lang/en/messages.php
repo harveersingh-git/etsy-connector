@@ -38,7 +38,7 @@ return [
     'change_password' => 'Change Password',
     'settings' => 'Settings',
     'etsy_config' => 'Etsy config',
-    'etsy_product' => 'Etsy Product',
+
     'shop_list' => 'Shop List',
     'shop_name' => 'Shop Name',
     'app_url' => 'App Url',
@@ -55,6 +55,8 @@ return [
     'etsy_download_history'=>'Download History',
     'myshop'=>'My Shop',
     'download_csv'=>'Download csv',
-    'product_list'=>'Product List'
+    'product_list'=>'Product List',
+    'etsy_products' => 'Etsy Products',
+
 
 ];

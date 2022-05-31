@@ -259,7 +259,7 @@ class EtsyController extends Controller
             $request->validate([
                 'shop' => 'required',
             ]);
-
+            $input_shop_id = $request['shop'];
             $result = EtsyConfig::where('id', $request['shop'])->first();
 
             if ($result) {
@@ -381,6 +381,9 @@ class EtsyController extends Controller
                             }
                         }
                     }
+
+                    $this->exportCsv($input_shop_id);
+
                     return redirect()->back()->with("success", "Product Sync successfully!");
                 }
                 return redirect()->back()->with("success", "No product found for the given shop !");
@@ -530,84 +533,86 @@ class EtsyController extends Controller
         }
         return view('etsy.downloadhistory', compact('data'));
     }
-    public function exportCsv(Request $request)
+    public function exportCsv($shop_name = null)
     {
 
         $url = '';
-        $roles = Auth::user()->getRoleNames();
-        if ($roles[0] == 'Admin') {
-            $shops = EtsyConfig::get();
-        } else {
-            $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
-        }
-        if ($request->isMethod('post')) {
+        // $roles = Auth::user()->getRoleNames();
+        // if ($roles[0] == 'Admin') {
+        //     $shops = EtsyConfig::get();
+        // } else {
+        //     $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
+        // }
+        // if ($request->isMethod('post')) {
+        $shop_name = $shop_name;
 
-            $date = Carbon::now()->toDateString();
-            $click =  EtsyProduct::where('shop_id', $request['shop_name'])->get();
+        $date = Carbon::now()->toDateString();
+        $click =  EtsyProduct::where('shop_id', $shop_name)->get();
 
-            if (count($click) > 0) {
+        if (count($click) > 0) {
 
-                $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
+            $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
-                $fileName = $date . '-' . auth()->user()->id . '-' . $request['shop_name'] . '-' . 'productlist.csv';
-                // $filepath = public_path('uploads/');
+            $fileName = $date . '-' . auth()->user()->id . '-' . $shop_name . '-' . 'productlist.csv';
+            // $filepath = public_path('uploads/');
 
-                $tasks = $click;
-                $headers = array(
-                    "Content-type"        => "text/csv",
-                    "Content-Disposition" => "attachment; filename=$fileName",
-                    "Pragma"              => "no-cache",
-                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-                    "Expires"             => "0"
-                );
+            $tasks = $click;
+            $headers = array(
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=$fileName",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            );
 
-                // fclose($file);
-                // move_uploaded_file($fileName, $filepath.$fileName);
 
-                $callback = function () use ($tasks, $columns, $fileName) {
-                    $file_current = fopen('php://output', 'w');
-                    $file = fopen("public/uploads/" . $fileName, 'w');
+            // move_uploaded_file($fileName, $filepath.$fileName);
 
-                    fputcsv($file_current, $columns);
-                    fputcsv($file, $columns);
-                    foreach ($tasks as $data) {
+            // $callback = function () use ($tasks, $columns, $fileName) {
+                // $file_current = fopen('php://output', 'w');
+                $file = fopen("public/uploads/" . $fileName, 'w');
 
-                        $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
-                        $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
-                        $row['description']  = isset($data->description) ? $data->description : 'N/A';
-                        $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
-                        $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
-                        $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
-                        $row['brand']  = isset($data->brand) ? $data->brand : 'N/A';
-                        $row['link']  = isset($data->url) ? $data->url : 'N/A';
-                        $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
+                // fputcsv($file_current, $columns);
+                fputcsv($file, $columns);
+                foreach ($tasks as $data) {
 
-                        fputcsv($file_current, $row);
-                        fputcsv($file, $row);
-                    }
+                    $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
+                    $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
+                    $row['description']  = isset($data->description) ? $data->description : 'N/A';
+                    $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
+                    $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
+                    $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
+                    $row['brand']  = isset($data->brand) ? $data->brand : 'N/A';
+                    $row['link']  = isset($data->url) ? $data->url : 'N/A';
+                    $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
 
-                    // file_put_contents("public/", $fileName);
-                    fclose($file_current);
-                    fclose($file);
-                };
-                if ($callback) {
-                    DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
-
-                    $array = [
-                        'user_id' => auth()->user()->id,
-                        'file_name' => $fileName,
-                        'date' =>  $date,
-
-                    ];
-                    DownloadHistory::create($array);
+                    // fputcsv($file_current, $row);
+                    fputcsv($file, $row);
                 }
 
+          
+                // fclose($file_current);
+            
+                // fclose($file_current);
+                fclose($file);
+            // };
+            // if ($callback) {
+                DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
+                $array = [
+                    'user_id' => auth()->user()->id,
+                    'file_name' => $fileName,
+                    'date' =>  $date,
 
-                return response()->stream($callback, 200, $headers);
-            } else {
-                return redirect()->back()->with("success", "No product found for the given shop !");
-            }
+                ];
+                DownloadHistory::create($array);
+            // }
+            // return ob_get_clean();
+            // return response()->stream($callback, 200, $headers);
+            return true;
+        } else {
+            return redirect()->back()->with("success", "No product found for the given shop !");
         }
-        return view('etsy.csv', compact('url', 'shops'));
+        // }
+        // return view('etsy.csv', compact('url', 'shops'));
     }
 }

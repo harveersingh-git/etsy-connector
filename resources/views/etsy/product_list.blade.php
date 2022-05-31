@@ -3,7 +3,12 @@
 @section('content')
 
 
-
+<style>
+    .dt-buttons {
+        z-index: 1;
+        position: absolute;
+    }
+</style>
 
 <div id="main-content">
     <div class="block-header">
@@ -17,7 +22,7 @@
                     <li class="breadcrumb-item active">Product List</li>
                 </ul>
 
-                <a href="{{url('export-csv')}}" class="btn btn-sm btn-primary" title="" >Download CSV</a>
+                <!-- <a href="{{url('export-csv')}}" class="btn btn-sm btn-primary" title="">Download CSV</a> -->
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
         </div>
@@ -45,33 +50,41 @@
                                 <div class="">
                                     <div class="header">
                                         <h2>Product List </h2>
-                                        <div class="pull-right" style="margin-bottom:10px">
 
-                                            <form role="form" action="{{$url}}" method="post" class="form-inline">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <div>
-                                                    <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
-                                                        <option value="">--Select shop--</option>
-                                                        @forelse($shops as $shop)
-                                                        <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
-                                                        @empty
-                                                        <p>No shop</p>
-                                                        @endforelse
-                                                    </select> </div>&nbsp&nbsp
-                                                    @if ($errors->has('shop'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('shop') }}</strong>
-                                                    </span>
-                                                    @endif
-
-                                                    <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
-
-                                            </form>
-                                        </div>
                                     </div>
                                     <div class="body">
+                                        <div class="" id="one">
+                                            <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                <div class="dt-buttons">
+                                                    <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
+                                                        @csrf
+                                                        <div class="form-group">
+
+                                                            <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
+                                                                <option value="">--Select shop--</option>
+                                                                @forelse($shops as $shop)
+                                                                <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
+                                                                @empty
+                                                                <p>No shop</p>
+                                                                @endforelse
+                                                            </select>
+                                                            @if ($errors->has('shop'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('shop') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                            &nbsp&nbsp
+
+
+
+                                                            <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="table-responsive">
+                                            @if(count($data)>0)
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
@@ -89,9 +102,9 @@
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
                                                         <td>{{$value['shops']->shop_name}}</td>
-                                                        <td>{{substr($value->title,0,50)}}...</td>
+                                                        <td>{{substr($value->title,0,20)}}...</td>
                                                         <td class="text-center">{{$value->price}} {{$value->currency_code}}</td>
-                                                        <td>{{substr($value->materials,0,50)}}..</td>
+                                                        <td class="text-center">{{substr($value->materials,0,50)}}..</td>
                                                     </tr>
                                                     @endforeach
                                                     @else
@@ -101,6 +114,10 @@
                                                     @endif
                                                 </tbody>
                                             </table>
+                                            @else
+                                            <p class="" style="margin-top:4%;">No Product found. Please sync the product.</p>
+
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

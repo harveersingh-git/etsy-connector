@@ -37,13 +37,21 @@
                 @endhasanyrole
                 <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-user"></i><span>{{__('messages.edit_profile')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-lock"></i><span>{{__('messages.change_password')}}</span></a></li>
+                <li class="{{ (Request::segment(1) === 'etsy-config') || (Request::segment(1) === 'etsy-list-data') || (Request::segment(1) === 'etsy-download-history')  ? 'active' : null }}">
+                    <a href="#uiElements" class="has-arrow"><i class="icon-list"></i><span>{{__('messages.etsy_products')}}</span></a>
+                    <ul>
+                        <!-- <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">{{__('messages.etsy_config')}}</a></li> -->
+                        <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">{{__('messages.etsy_products')}}</a></li>
+                        <li class="{{ Request::segment(1) === 'etsy-download-history' ? 'active' : null }}"><a href="{{ url('etsy-download-history') }}">{{__('messages.etsy_download_history')}}</a></li>
+                     
 
-                <li class="{{ (Request::segment(1) === 'etsy-config') || (Request::segment(1) === 'etsy-list-data') || (Request::segment(1) === 'country')  ? 'active' : null }}">
+                    </ul>
+                </li>
+
+                <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
                         <!-- <li class="{{ Request::segment(1) === 'etsy-config' ? 'active' : null }}"><a href="{{ url('etsy-config') }}">{{__('messages.etsy_config')}}</a></li> -->
-                        <li class="{{ Request::segment(1) === 'etsy-list-data' ? 'active' : null }}"><a href="{{ url('etsy-list-data') }}">{{__('messages.etsy_product')}}</a></li>
-                        <li class="{{ Request::segment(1) === 'etsy-download-history' ? 'active' : null }}"><a href="{{ url('etsy-download-history') }}">{{__('messages.etsy_download_history')}}</a></li>
                         @hasanyrole('Admin')
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
                         @endhasanyrole
