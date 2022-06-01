@@ -259,7 +259,9 @@ class EtsyController extends Controller
             $request->validate([
                 'shop' => 'required',
             ]);
+
             $input_shop_id = $request['shop'];
+            $language = isset($request['language']) ? $request['language'] : 'en';
             $result = EtsyConfig::where('id', $request['shop'])->first();
 
             if ($result) {
@@ -310,7 +312,7 @@ class EtsyController extends Controller
                         $curl = curl_init();
 
                         curl_setopt_array($curl, array(
-                            CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&page=' . $i . '&limit=' . $limit,
+                            CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&language=' . $language . '&page=' . $i . '&limit=' . $limit,
                             CURLOPT_RETURNTRANSFER => true,
                             CURLOPT_ENCODING => '',
                             CURLOPT_MAXREDIRS => 10,
@@ -569,42 +571,42 @@ class EtsyController extends Controller
             // move_uploaded_file($fileName, $filepath.$fileName);
 
             // $callback = function () use ($tasks, $columns, $fileName) {
-                // $file_current = fopen('php://output', 'w');
-                $file = fopen("public/uploads/" . $fileName, 'w');
+            // $file_current = fopen('php://output', 'w');
+            $file = fopen("public/uploads/" . $fileName, 'w');
 
-                // fputcsv($file_current, $columns);
-                fputcsv($file, $columns);
-                foreach ($tasks as $data) {
+            // fputcsv($file_current, $columns);
+            fputcsv($file, $columns);
+            foreach ($tasks as $data) {
 
-                    $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
-                    $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
-                    $row['description']  = isset($data->description) ? $data->description : 'N/A';
-                    $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
-                    $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
-                    $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
-                    $row['brand']  = isset($data->brand) ? $data->brand : 'N/A';
-                    $row['link']  = isset($data->url) ? $data->url : 'N/A';
-                    $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
+                $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
+                $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
+                $row['description']  = isset($data->description) ? $data->description : 'N/A';
+                $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
+                $row['condition']  = isset($data->condition) ? $data->condition : 'N/A';
+                $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
+                $row['brand']  = isset($data->brand) ? $data->brand : 'N/A';
+                $row['link']  = isset($data->url) ? $data->url : 'N/A';
+                $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
 
-                    // fputcsv($file_current, $row);
-                    fputcsv($file, $row);
-                }
+                // fputcsv($file_current, $row);
+                fputcsv($file, $row);
+            }
 
-          
-                // fclose($file_current);
-            
-                // fclose($file_current);
-                fclose($file);
+
+            // fclose($file_current);
+
+            // fclose($file_current);
+            fclose($file);
             // };
             // if ($callback) {
-                DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
-                $array = [
-                    'user_id' => auth()->user()->id,
-                    'file_name' => $fileName,
-                    'date' =>  $date,
+            DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
+            $array = [
+                'user_id' => auth()->user()->id,
+                'file_name' => $fileName,
+                'date' =>  $date,
 
-                ];
-                DownloadHistory::create($array);
+            ];
+            DownloadHistory::create($array);
             // }
             // return ob_get_clean();
             // return response()->stream($callback, 200, $headers);

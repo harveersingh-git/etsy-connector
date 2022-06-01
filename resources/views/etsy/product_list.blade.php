@@ -60,6 +60,24 @@
                                                         @csrf
                                                         <div class="form-group">
 
+                                                            <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language">
+
+                                                                <option value="en">English</option>
+                                                                <option value="de">German</option>
+                                                                <option value="es">Spanish</option>
+                                                                <option value="fr">French</option>
+                                                                <option value="it">Italian</option>
+                                                                <option value="ja">Japanese</option>
+                                                                <option value="nl">Dutch</option>
+                                                                <option value="pl">Polish</option>
+                                                                <option value="pt">Portuguese</option>
+                                                                <option value="ru">Russian</option>
+                                                            </select>
+                                                          
+                                                            &nbsp&nbsp
+                                                        </div>
+                                                        <div class="form-group">
+
                                                             <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
                                                                 <option value="">--Select shop--</option>
                                                                 @forelse($shops as $shop)
@@ -74,10 +92,11 @@
                                                             </span>
                                                             @endif
                                                             &nbsp&nbsp
+                                                        </div>
 
 
 
-                                                            <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
+                                                        <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
 
                                                     </form>
                                                 </div>
@@ -154,6 +173,11 @@
             placeholder: "Select a shop",
             allowClear: true
         });
+        $("#language").select2({
+            placeholder: "Select a language",
+            allowClear: true
+        })
+
     });
 </script>
 @endsection

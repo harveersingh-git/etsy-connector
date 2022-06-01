@@ -127,8 +127,6 @@ class SubscriberController extends Controller
             subscriber::create($fields);
         }
         event(new Registered($user));
-
-
         $data = [
             'subject' => 'Account Register Successfully',
             'email' => $input['email'],
@@ -138,9 +136,6 @@ class SubscriberController extends Controller
             $message->to($data['email'])
                 ->subject($data['subject']);
         });
-
-
-        // subscriber::where('user_id', $id)->delete();
         return redirect()->route('subscriber.index')
             ->with('success', 'Subscriber created successfully');
     }
