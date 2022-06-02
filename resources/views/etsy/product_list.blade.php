@@ -49,7 +49,7 @@
                             <div class="col-lg-12">
                                 <div class="">
                                     <div class="header">
-                                        <h2>Product List </h2>
+                                        <h2>{{__('messages.product_list')}}</h2>
 
                                     </div>
                                     <div class="body">
