@@ -58,6 +58,10 @@
 
                                         @endphp
                                         <h2>{{__('messages.product_of')}} {{$records['shops']->shop_name}} {{ $current_language}}</h2>
+
+                                        <a href="{{url('/etsy-list-data')}}" class="ml-2">
+                                            {{__('messages.back')}}
+                                        </a>
                                         @endif
 
                                     </div>
