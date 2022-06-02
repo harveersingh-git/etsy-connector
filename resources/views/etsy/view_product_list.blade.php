@@ -48,7 +48,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <div class="header from-inline">
+                                    <div class="header form-inline">
                                         @if(count($data)>0)
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
@@ -57,7 +57,7 @@
                                         $current_language = $language[ $lan];
 
                                         @endphp
-                                        <h2>{{__('messages.product_of')}} {{$records['shops']->shop_name}} {{ $current_language}}</h2>
+                                        <h2>{{__('messages.product_of')}} {{$records['shops']->shop_name}} ({{ $current_language}})</h2>
 
                                         <a href="{{url('/etsy-list-data')}}" class="ml-2">
                                             {{__('messages.back')}}
