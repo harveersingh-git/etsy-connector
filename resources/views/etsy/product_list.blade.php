@@ -212,6 +212,7 @@
 
     $(document).on('click', '.delete', function() {
         id = $(this).attr('id');
+        var current = $(this);
         // alert(id);
         swal({
             title: "Are you sure?",
@@ -233,7 +234,8 @@
                     },
                     success: function(data) {
                         toastr.success("Record deleted successfully");
-                        window.location.reload();
+                        $(current).closest('tr').remove();
+                        // window.location.reload();
                     }
                 });
 
