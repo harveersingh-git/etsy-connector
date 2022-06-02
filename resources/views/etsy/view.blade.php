@@ -175,17 +175,17 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="access_code_url">
-                                            Generate Token And Authorize
+                                            {{__('messages.generate_token_and_authorize')}}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url()->previous() }}" class="btn btn-light">
-                                            Back
+                                            {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            Update
+                                            {{__('messages.save')}}
                                         </button>
                                     </div>
                                 </div>

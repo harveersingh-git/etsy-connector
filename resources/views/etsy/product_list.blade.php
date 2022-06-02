@@ -14,12 +14,12 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Product List</h2>
+                <h2>{{__('messages.product_list')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active">Product List</li>
+                    <li class="breadcrumb-item active"> {{__('messages.product_list')}}</li>
                 </ul>
 
                 <!-- <a href="{{url('export-csv')}}" class="btn btn-sm btn-primary" title="">Download CSV</a> -->
@@ -73,7 +73,7 @@
                                                                 <option value="pt">Portuguese</option>
                                                                 <option value="ru">Russian</option>
                                                             </select>
-                                                          
+
                                                             &nbsp&nbsp
                                                         </div>
                                                         <div class="form-group">
@@ -108,10 +108,12 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">Sr. No.</th>
+                                                        <th class="text-center">File Name</th>
+                                                        <th class="text-center">Date</th>
                                                         <th class="text-center">Shop Name</th>
-                                                        <th class="text-center">Title</th>
-                                                        <th class="text-center">Price</th>
-                                                        <th class="text-center">materials</th>
+                                                        <th class="text-center">Language</th>
+                                                        <th class="text-center">Action</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -120,10 +122,21 @@
                                                     @foreach($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
-                                                        <td>{{$value['shops']->shop_name}}</td>
-                                                        <td>{{substr($value->title,0,20)}}...</td>
-                                                        <td class="text-center">{{$value->price}} {{$value->currency_code}}</td>
-                                                        <td class="text-center">{{substr($value->materials,0,50)}}..</td>
+                                                        <td>{{substr($value->file_name,0,50)}}</td>
+
+                                                        <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
+                                                        <td>{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+                                                        @php
+                                                        $lan = isset($value->language)?$value->language:'en';
+                                                        $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
+                                                        'pt'=>'Portuguese','ru'=>'Russian'];
+                                                        $current_language = $language[ $lan];
+
+                                                        @endphp
+                                                        <td>{{ $current_language }}</td>
+                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a> <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}"><i class="fa fa-copy" style="color: #fff;"></i> </a> <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a></td>
+
+
                                                     </tr>
                                                     @endforeach
                                                     @else
@@ -133,6 +146,7 @@
                                                     @endif
                                                 </tbody>
                                             </table>
+
                                             @else
                                             <p class="" style="margin-top:4%;">No Product found. Please sync the product.</p>
 
@@ -177,6 +191,56 @@
             placeholder: "Select a language",
             allowClear: true
         })
+
+    });
+
+    function copyToClipboard(text) {
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text; //save main text in it
+        sampleTextarea.select(); //select textarea contenrs
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+    }
+    $(document).on("click", ".copy", function() {
+        var copyText = $(this).attr('id');
+
+
+        copyToClipboard(copyText);
+        $(this).text('Copied');
+    });
+
+    $(document).on('click', '.delete', function() {
+        id = $(this).attr('id');
+        // alert(id);
+        swal({
+            title: "Are you sure?",
+            text: "Once you confirm, you will not be able to recover !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('delete_download_history')}}",
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        id: id
+                    },
+                    beforeSend: function() {
+
+                    },
+                    success: function(data) {
+                        toastr.success("Record deleted successfully");
+                        window.location.reload();
+                    }
+                });
+
+            } else {
+                swal("Your Record safe now!");
+            }
+        });
 
     });
 </script>

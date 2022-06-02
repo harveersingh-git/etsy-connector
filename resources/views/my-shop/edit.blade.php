@@ -51,7 +51,7 @@
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.app_url')}}</label>
+                                        <label for="app_url" class="control-label">{{__('messages.app_url')}}</label>
                                         <input type="text" class="form-control" name="app_url" placeholder="" value="{{isset($data->app_url)?($data->app_url):''}}">
 
                                         @if ($errors->has('app_url'))
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.key_string')}}<span style="color: red;">*</span></label>
+                                        <label for="key_string" class="control-label">{{__('messages.key_string')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="key_string" placeholder="" value="{{isset($data->key_string)?($data->key_string):''}}" required>
 
                                         @if ($errors->has('key_string'))
@@ -77,7 +77,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.shared_secret')}}<span style="color: red;">*</span></label>
+                                        <label for="shared_secret" class="control-label">{{__('messages.shared_secret')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="shared_secret" placeholder="" value="{{isset($data->shared_secret)?($data->shared_secret):''}}" required>
 
                                         @if ($errors->has('shared_secret'))
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.access_token_secret')}}</label>
+                                        <label for="access_token_secret" class="control-label">{{__('messages.access_token_secret')}}</label>
                                         <input type="text" class="form-control" name="access_token_secret" placeholder="" value="{{isset($data->access_token_secret)?($data->access_token_secret):''}}">
 
                                         @if ($errors->has('access_token_secret'))
@@ -102,7 +102,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.access_token')}}</label>
+                                        <label for="access_token" class="control-label">{{__('messages.access_token')}}</label>
                                         <input type="text" class="form-control" name="access_token" value="{{isset($data->access_token)?($data->access_token):''}}">
 
                                         @if ($errors->has('access_token'))
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
+                                        <label for="shop_id" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="shop_name" value="{{isset($data->shop_name)?($data->shop_name):''}}" required>
 
                                         @if ($errors->has('shop_name'))
@@ -127,7 +127,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.user_name')}}<span style="color: red;">*</span></label>
+                                        <label for="user_name" class="control-label">{{__('messages.user_name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="user_name" placeholder="" value="{{isset($data->user_name)?($data->user_name):''}}" required>
 
                                         @if ($errors->has('user_name'))
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.country')}}</label>
+                                        <label for="country" class="control-label">{{__('messages.country')}}</label>
                                         <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country_id" value="" id="country">
                                             <option value="">--Please Select--</option>
 
@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">{{__('messages.store')}}</label>
+                                        <label for="store" class="control-label">{{__('messages.store')}}</label>
                                         <input type="text" class="form-control" name="store" placeholder="" value="{{isset($data->store_id)?($data->store_id):''}}">
 
                                         @if ($errors->has('store'))
@@ -172,22 +172,34 @@
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="status" class="control-label">{{__('messages.status')}}</label>
+                                        <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="status" value="" id="status">
+                                            <option value="1" {{ ( $data->status == '1') ? 'selected' : '' }}>Enable</option>
+                                            <option value="0" {{ ( $data->status == '0') ? 'selected' : '' }}>Disable </option>
+                                        </select>
+                                        @if ($errors->has('country'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('country') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="access_code_url">
-                                            Generate Token And Authorize
+                                            {{__('messages.generate_token_and_authorize')}}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url('my-shop') }}" class="btn btn-light">
-                                            Back
+                                            {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            Update
+                                            {{__('messages.save')}}
                                         </button>
                                     </div>
                                 </div>

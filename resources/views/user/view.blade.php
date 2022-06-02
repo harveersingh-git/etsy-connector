@@ -9,12 +9,12 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Edit Profile</h2>
+                <h2>{{__('messages.edit_profile')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active">Edit Profile</li>
+                    <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item active">{{__('messages.edit_profile')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
@@ -26,94 +26,116 @@
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
-                    @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
+                    <div class="header form-inline">
+                        <h2>{{__('messages.edit_profile')}}</h2>
+                        <a href="{{url('/')}}" class="ml-2">
+                            {{__('messages.back')}}
+                        </a>
                     </div>
-                    @endif
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                    @endif
-
-                    <form class="form-horizontal" method="POST" action="{{ route('editProfile') }}" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div class="body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label>First Name<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="name" placeholder="abc" value="{{$user->name}}" required>
-
-                                    @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong style="color: red;">{{ $errors->first('name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Last Name<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="last_name" placeholder="xyx" value="{{$user->last_name}}" required>
-
-                                    @if ($errors->has('last_name'))
-                                    <span class="help-block">
-                                        <strong style="color: red;">{{ $errors->first('last_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label>Email<span style="color: red;">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="abc@gmail.com" value="{{$user->email}}" required>
-
-                                    @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong style="color: red;">{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6">
-                                    <label>Mobile<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="mobile" placeholder="997487548" value="{{$user->mobile}}" required>
-
-                                    @if ($errors->has('mobile'))
-                                    <span class="help-block">
-                                        <strong style="color: red;">{{ $errors->first('mobile') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label>Profile Image</label>
-                                    <input type="file" class="form-control" name="profile_image" value="">
-
-                                    @if ($errors->has('profile_image'))
-                                    <span class="help-block">
-                                        <strong style="color: red;">{{ $errors->first('profile_image') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-
-                            </div>
-
-
-
-
-                            <div class="row" style="margin-top: 10px;">
-                                <div class="col-lg-6">
-                                    <button type="submit" class="btn btn-primary">
-                                        Update
-                                    </button>
-                                </div>
-                            </div>
-
-
-
-
+                    <div class="body">
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
-                    </form>
+                        @endif
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        <form class="form-horizontal" method="POST" action="{{ route('editProfile') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="row clearfix">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>First Name<span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="name" placeholder="abc" value="{{$user->name}}" required>
+
+                                        @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong style="color: red;">{{ $errors->first('name') }}</strong>
+                                        </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Last Name<span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="last_name" placeholder="xyx" value="{{$user->last_name}}" required>
+
+                                        @if ($errors->has('last_name'))
+                                        <span class="help-block">
+                                            <strong style="color: red;">{{ $errors->first('last_name') }}</strong>
+                                        </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Email<span style="color: red;">*</span></label>
+                                        <input type="email" class="form-control" name="email" placeholder="abc@gmail.com" value="{{$user->email}}" required>
+
+                                        @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong style="color: red;">{{ $errors->first('email') }}</strong>
+                                        </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Mobile<span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control" name="mobile" placeholder="997487548" value="{{$user->mobile}}" required>
+
+                                        @if ($errors->has('mobile'))
+                                        <span class="help-block">
+                                            <strong style="color: red;">{{ $errors->first('mobile') }}</strong>
+                                        </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Profile Image</label>
+                                        <input type="file" class="form-control" name="profile_image" value="">
+
+                                        @if ($errors->has('profile_image'))
+                                        <span class="help-block">
+                                            <strong style="color: red;">{{ $errors->first('profile_image') }}</strong>
+                                        </span>
+                                        @endif
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 pull-right">
+                                    <div class="form-group ">
+                                        <a href="{{url('/')}}" class="btn btn-light mr-2">
+                                            {{__('messages.back')}}
+                                        </a>
+                                        <button type="submit" class="btn btn-primary">
+                                            {{__('messages.save')}}
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>

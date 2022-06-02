@@ -155,6 +155,7 @@ class MyShopController extends Controller
             'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
             'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',
             'store_id' => isset($input['store']) ? ($input['store']) : '',
+            'status' => isset($input['status']) ? ($input['status']) : '1',
         ];
 
         $data = EtsyConfig::updateOrCreate(['id' =>     $input['id']], $array);

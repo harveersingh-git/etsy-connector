@@ -29,8 +29,12 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>{{__('messages.edit_subscriber')}}</h2>
+                
+                    <div class="header form-inline">
+                        <h2 >{{__('messages.edit_subscriber')}}</h2>
+                          <a href="{{url('/subscriber')}}" class="ml-2" >
+                                        {{__('messages.back')}}
+                                    </a>
                     </div>
                     <div class="body">
                         {!! Form::model($user, ['method' => 'PATCH','route' => ['subscriber.update', $user->id]]) !!}

@@ -245,12 +245,18 @@ class EtsyController extends Controller
 
         if ($roles[0] == 'Admin') {
             $shops = EtsyConfig::get();
-            $data =  EtsyProduct::get();
+            // $data =  EtsyProduct::get();
         } else {
 
-            $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
+            $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
             $shops_ids = $shops->pluck('id');
-            $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
+
+            $data = DownloadHistory::with('shops')->where('user_id', auth()->user()->id)->get();
+
+
+            // $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
+
+
         }
 
 
@@ -378,13 +384,20 @@ class EtsyController extends Controller
                                 $product_data["shop_id"] = $request['shop'];
                                 EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
 
-                                $product_data["date"] = Carbon::now()->toDateString();;
-                                ProductHistory::create($product_data);
+                                $product_data["date"] = Carbon::now()->toDateString();
+                                $final_array[] = $product_data;
                             }
                         }
                     }
 
-                    $this->exportCsv($input_shop_id);
+                    $download_history_id =   $this->exportCsv($input_shop_id, $language);
+
+                    if (count($final_array) > 0) {
+                        foreach ($final_array as $value) {
+                            $value["download_histories_id"] = $download_history_id->id;
+                            ProductHistory::create($value);
+                        }
+                    }
 
                     return redirect()->back()->with("success", "Product Sync successfully!");
                 }
@@ -531,11 +544,12 @@ class EtsyController extends Controller
         if ($roles[0] == 'Admin') {
             $data = DownloadHistory::get();
         } else {
+
             $data = DownloadHistory::where('user_id', auth()->user()->id)->get();
         }
         return view('etsy.downloadhistory', compact('data'));
     }
-    public function exportCsv($shop_name = null)
+    public function exportCsv($shop_name = null,  $language)
     {
 
         $url = '';
@@ -546,16 +560,16 @@ class EtsyController extends Controller
         //     $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
         // }
         // if ($request->isMethod('post')) {
-        $shop_name = $shop_name;
 
         $date = Carbon::now()->toDateString();
+        $t = time();
         $click =  EtsyProduct::where('shop_id', $shop_name)->get();
 
         if (count($click) > 0) {
 
             $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
-            $fileName = $date . '-' . auth()->user()->id . '-' . $shop_name . '-' . 'productlist.csv';
+            $fileName = $date . '-' . $t . 'productlist.csv';
             // $filepath = public_path('uploads/');
 
             $tasks = $click;
@@ -599,22 +613,71 @@ class EtsyController extends Controller
             fclose($file);
             // };
             // if ($callback) {
-            DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
+            // DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
             $array = [
                 'user_id' => auth()->user()->id,
                 'file_name' => $fileName,
                 'date' =>  $date,
+                'shop_id' => $shop_name,
+                'language' =>  $language
 
             ];
-            DownloadHistory::create($array);
+            $data =   DownloadHistory::create($array);
             // }
             // return ob_get_clean();
             // return response()->stream($callback, 200, $headers);
-            return true;
+            return $data;
         } else {
             return redirect()->back()->with("success", "No product found for the given shop !");
         }
         // }
         // return view('etsy.csv', compact('url', 'shops'));
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $id = $request['id'];
+ 
+        $data =  DownloadHistory::find($id);
+        $success =       $data->delete();
+        if ($success) {
+            if (\File::exists(public_path('uploads/' . $data->file_name))) {
+                \File::delete(public_path('uploads/' . $data->file_name));
+            }
+        }
+
+        return response()->json(['status' => 'success']);
+        // return redirect()->route('subscriber.index')
+        //     ->with('success', 'Record delete successfully');
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function view(Request $reques, $id)
+    {
+
+        try {
+            $records = DownloadHistory::where('id', base64_decode($id))->first();
+            $data = ProductHistory::where('download_histories_id', base64_decode($id))->get();
+
+            if ($data) {
+                return view('etsy.view_product_list', compact('data', 'records'));
+            }
+            return redirect('etsy-list-data');
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
     }
 }

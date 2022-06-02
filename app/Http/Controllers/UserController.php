@@ -192,20 +192,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if ($request->isMethod('post')) {
-            // $validator = Validator::make($request->all(), [
-            //     'name' => 'required',
-            //     'email' => 'required'
-
-            // ]);
-
-            // if ($validator->fails()) {
-            //     return response()->json([
-            //         'status' =>
-            //         false, 'message' => $validator->errors()->first(),
-            //         'Data' => '',
-            //         'Status_code' => "401"
-            //     ]);
-            // }
+           
             $request->validate([
                 'name' => 'required',
                 'email' => 'required',

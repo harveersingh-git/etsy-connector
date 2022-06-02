@@ -31,9 +31,15 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
+
+                    <div class="header form-inline">
                         <h2>{{__('messages.add_shop')}}</h2>
+                        <a href="{{ url('shoplist') }}/{{$id}}" class="ml-2">
+                            {{__('messages.back')}}
+                        </a>
                     </div>
+
+
                     <div class="body">
                         @if (session('error'))
                         <div class="alert alert-danger">
@@ -184,10 +190,10 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url('shoplist') }}/{{$id}}" class="btn btn-light">
-                                            Back
+                                            {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            Update
+                                            {{__('messages.update')}}
                                         </button>
                                     </div>
                                 </div>

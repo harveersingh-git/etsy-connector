@@ -67,10 +67,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group pull-right">
                                     <a href="{{url('/country')}}" class="btn btn-light">
-                                        Back
+                                    {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        Save
+                                    {{__('messages.save')}}
                                     </button>
                                 </div>
                             </div>

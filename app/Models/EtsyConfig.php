@@ -21,7 +21,8 @@ class EtsyConfig extends Model
         'country_id',
         'store_id',
         'api_access_token',
-        'api_access_secret'
+        'api_access_secret',
+        'status'
     ];
 
   

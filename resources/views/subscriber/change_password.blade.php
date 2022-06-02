@@ -29,8 +29,14 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
+                    <!-- <div class="header">
                         <h2>Update Password</h2>
+                    </div> -->
+                    <div class="header form-inline">
+                        <h2 >{{__('messages.update_password')}}</h2>
+                          <a href="{{url('/subscriber')}}" class="ml-2" >
+                                        {{__('messages.back')}}
+                                    </a>
                     </div>
                     <div class="body">
                         @if (session('error'))

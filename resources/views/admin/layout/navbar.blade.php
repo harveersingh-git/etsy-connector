@@ -7,7 +7,7 @@
                     <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
                 </div>
                 <a href="javascript:void(0);" class="icon-menu btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a>
-                <ul class="nav navbar-nav">
+                <!-- <ul class="nav navbar-nav">
                     <li class="dropdown dropdown-animated scale-right">
                         <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown"><i class="icon-grid"></i></a>
                         <ul class="dropdown-menu menu-icon app_menu">
@@ -37,16 +37,16 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- <li><a href="app-calendar.html" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a></li>
-                    <li><a href="app-chat.html" class="icon-menu d-none d-sm-block"><i class="icon-bubbles"></i></a></li>                     -->
-                </ul>
+                    <li><a href="app-calendar.html" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a></li>
+                    <li><a href="app-chat.html" class="icon-menu d-none d-sm-block"><i class="icon-bubbles"></i></a></li>                    
+                </ul> -->
             </div>
             
             <div class="navbar-right">
-                <form id="navbar-search" class="navbar-form search-form">
+                <!-- <form id="navbar-search" class="navbar-form search-form">
                     <input value="" class="form-control" placeholder="Search here..." type="text">
                     <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
-                </form>                
+                </form>                 -->
 
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav">

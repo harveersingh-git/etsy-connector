@@ -53,7 +53,8 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::post('/verify_access_code', [EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');
     Route::any('/export-csv', [EtsyController::class, 'exportCsv'])->name('export-csv');
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');
-
+    Route::any('/delete_download_history', [EtsyController::class, 'destroy'])->name('delete_download_history');
+    Route::any('/etsy-product-list/{id}', [EtsyController::class, 'view'])->name('etsy-product-list');
 
 
     Route::resource('roles', RoleController::class);

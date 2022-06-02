@@ -40,7 +40,12 @@ class ProductHistory extends Model
         'image_url',
         'user_id',
         'date',
-        'shop_id'
+        'shop_id',
+        'download_histories_id'
 
     ];
+    public function shops()
+    {
+        return $this->hasOne(EtsyConfig::class, 'id', 'shop_id');
+    }
 }

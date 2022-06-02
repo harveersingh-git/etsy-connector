@@ -31,8 +31,14 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
+                    <!-- <div class="header">
                         <h2>Etsy Config</h2>
+                    </div> -->
+                    <div class="header form-inline">
+                        <h2>{{__('messages.edit_shop')}}</h2>
+                        <a href="{{ url('shoplist') }}/{{$data['user_id']}}" class="ml-2">
+                            {{__('messages.back')}}
+                        </a>
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -177,17 +183,18 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="access_code_url">
-                                            Generate Token And Authorize
+                                          
+                                            {{__('messages.generate_token_and_authorize')}}
                                         </button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">
-                                        <a href="{{ url('subscriber') }}" class="btn btn-light">
-                                            Back
+                                        <a href="{{ url('shoplist') }}/{{$data['user_id']}}" class="btn btn-light">
+                                     
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            Update
+                                        {{__('messages.update')}}
                                         </button>
                                     </div>
                                 </div>

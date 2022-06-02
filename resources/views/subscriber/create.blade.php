@@ -8,8 +8,8 @@
 <div id="main-content">
     <div class="block-header">
         <div class="row clearfix">
-            <div class="col-md-6 col-sm-12">
-                <h2>{{__('messages.add_subscriber')}}</h2>
+            <div class="col-md-6 col-sm-12 ">
+                <h2  >{{__('messages.add_subscriber')}}</h2> 
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
@@ -29,8 +29,11 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>{{__('messages.add_subscriber')}}</h2>
+                    <div class="header form-inline">
+                        <h2 >{{__('messages.add_subscriber')}}</h2>
+                          <a href="{{url('/subscriber')}}" class="ml-2" >
+                                        {{__('messages.back')}}
+                                    </a>
                     </div>
                     <div class="body">
                         @if (session('error'))
