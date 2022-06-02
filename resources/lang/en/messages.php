@@ -55,7 +55,7 @@ return [
     'etsy_download_history' => 'Download History',
     'myshop' => 'My Shops',
     'download_csv' => 'Download csv',
-    'product_list' => 'Product List',
+    'product_list' => 'Products List',
     'etsy_products' => 'Etsy Products',
     'update_password' => 'Update Password',
     'generate_token_and_authorize' => 'Generate Token And Authorize',
