@@ -48,7 +48,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <div class="header">
+                                    <div class="header from-inline">
                                         @if(count($data)>0)
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
