@@ -54,9 +54,11 @@
                                         &nbsp
                                         <h2> of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}</h2>
                                         @endhasanyrole
+                                        @hasanyrole('Admin')
                                         <a href="{{url()->previous() }}" class="ml-2">
                                             {{__('messages.back')}}
                                         </a>
+                                        @endhasanyrole
                                     </div>
                                     <div class="body">
                                         <div class="" id="one">
