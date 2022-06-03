@@ -24,8 +24,11 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="header">
+                    <div class="header form-inline">
                         <h2> {{__('messages.myshop')}}</h2>
+                        <a href="{{url()->previous() }}" class="ml-2">
+                                            {{__('messages.back')}}
+                                        </a>
                     </div>
                     <div class="body tab-content">
                         @if (session('error'))
