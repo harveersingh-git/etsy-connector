@@ -1,6 +1,5 @@
 $(function() {
     "use strict";
-    MorrisArea();
 
     // progress bars
     $('.progress .progress-bar').progressbar({
@@ -43,7 +42,7 @@ $(function() {
                     appendToBody: true
                 }),
                 Chartist.plugins.legend({
-                    legendNames: ['Mobile', 'Laptop', 'Computer']
+                    legendNames: ['Bitcoin', 'NEO', 'ETH']
                 })
             ]
     }).on('draw', function(data) {
@@ -59,59 +58,114 @@ $(function() {
     toastr.options.closeButton = true;
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.options.showDuration = 1000;
-    toastr['info']('Hello, welcome to Etsy Connector, a unique admin Template.');
+    // toastr['info']('Hello, welcome to HexaBit, a unique admin Template.');
+    var token = $('input[name="_token"]').attr('value');
+    $.ajax({
+        type: 'GET',
+        url: base_url + '/overview',
+        contentType: 'application/json',
+        dataType: 'json',
+        // data: data,
+        headers: {
+            'X-CSRF-Token': token
+        },
+        success: function(data) {
+     console.log(data.data.users);
+     var chart = c3.generate({    
 
-});
-
-// Customer Overview
-function MorrisArea() {
-    Morris.Area({
-        element: 'Sales_Overview',
-        data: [{
-                period: '2012',
-                SiteA: 0,
-                SiteB: 10,
-
-            }, {
-                period: '2013',
-                SiteA: 106,
-                SiteB: 71,
-
-            }, {
-                period: '2014',
-                SiteA: 68,
-                SiteB: 41,
-
-            }, {
-                period: '2015',
-                SiteA: 89,
-                SiteB: 285,
-
-            }, {
-                period: '2016',
-                SiteA: 185,
-                SiteB: 104,
-
-            }, {
-                period: '2017',
-                SiteA: 146,
-                SiteB: 102  ,
-
+        bindto: '#yearly', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+                data.data.users,
+                data.data.shops
+                // ['data3', 14.2, 10.3, 11.9, 15.2, 17.0, 16.6, 6.6, 4.8, 3.9, 4.2],
+            ],
+    
+            labels: true,
+            type: 'line', // default type of chart
+            colors: {
+                'data1': hexabit.colors["orange"],
+                'data2': hexabit.colors["green"],
+                // 'data3': hexabit.colors["gray-light"]
+            },
+            names: {
+                // name of each serie
+                'data1': 'Users',
+                'data2': 'Shops',
+                // 'data3': 'ETH'
             }
-        ],
-        xkey: 'period',
-        ykeys: ['SiteA', 'SiteB'],
-        labels: ['Site A', 'Site B'],
-        pointSize: 2,
-        fillOpacity: 0.9,
-        pointStrokeColors: ['#182973', '#29bd73'],
-        behaveLikeLine: true,
-        gridLineColor: '#e8e8e8',
-        lineWidth: 1,
-        smooth: true,
-        hideHover: 'auto',
-        lineColors: ['#182973', '#29bd73'],
-        resize: true
-
+        },
+        size: {
+            height: 290,
+            width: 650
+        },
+        axis: {
+            x: {
+                type: 'category',
+                // name of each category
+                categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July ', 'August', 'September', 'October', 'November', 'December']
+            },
+        },
+    
+        legend: {
+            show: true, //hide legend
+        },
+    
+        padding: {
+            bottom: 10,
+            top: 0
+        },
     });
-}
+
+    var chart = c3.generate({    
+
+        bindto: '#monthly', // id of chart wrapper
+        data: {
+            columns: [
+                // each columns data
+                data.data.days_users,
+                data.data.days_shops
+                // ['data3', 14.2, 10.3, 11.9, 15.2, 17.0, 16.6, 6.6, 4.8, 3.9, 4.2],
+            ],
+    
+            labels: true,
+            type: 'line', // default type of chart
+            colors: {
+                'data1': hexabit.colors["orange"],
+                'data2': hexabit.colors["green"],
+                // 'data3': hexabit.colors["gray-light"]
+            },
+            names: {
+                // name of each serie
+                'data1': 'Users',
+                'data2': 'Shops',
+                // 'data3': 'ETH'
+            }
+        },
+        size: {
+            height: 290,
+            width: 650
+        },
+        axis: {
+            x: {
+                type: 'category',
+                // name of each category
+                categories: data.data.current_month_days
+            },
+        },
+    
+        legend: {
+            show: true, //hide legend
+        },
+    
+        padding: {
+            bottom: 10,
+            top: 0
+        },
+    });
+        }
+    });
+
+ 
+});

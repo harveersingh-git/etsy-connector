@@ -235,17 +235,30 @@ class EtsyController extends Controller
      *
      * @return void
      */
-    public function etsyListData(Request $request)
+    public function etsyListData(Request $request, $id = null)
     {
         $url = '';
         $page = 1;
         $limit = 100;
+        $data = [];
+        $etsy_id = '';
+
 
         $roles = Auth::user()->getRoleNames();
 
         if ($roles[0] == 'Admin') {
-            $shops = EtsyConfig::get();
-            // $data =  EtsyProduct::get();
+
+            $etsy_id = base64_decode($id);
+    
+            if(empty($etsy_id)){
+          
+                return redirect()->back();
+            }
+       
+            $shops = EtsyConfig::where('id', $etsy_id)->get();
+            
+            $data = DownloadHistory::with('shops')->where('shop_id', $etsy_id)->get();
+
         } else {
 
             $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
@@ -407,7 +420,7 @@ class EtsyController extends Controller
             }
         }
 
-        return view('etsy.product_list', compact('url', 'data', 'page', 'limit', 'shops'));
+        return view('etsy.product_list', compact('url', 'data', 'page', 'limit', 'shops', 'etsy_id'));
     }
 
 
@@ -644,7 +657,7 @@ class EtsyController extends Controller
     public function destroy(Request $request)
     {
         $id = $request['id'];
- 
+
         $data =  DownloadHistory::find($id);
         $success =       $data->delete();
         if ($success) {

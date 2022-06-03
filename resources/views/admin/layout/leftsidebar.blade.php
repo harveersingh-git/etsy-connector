@@ -42,7 +42,7 @@
                 <!-- <li class="{{ Request::segment(1) === 'edit-profile' ? 'active' : null }}"><a href="{{ url('edit-profile') }}"><i class="icon-user"></i><span>{{__('messages.edit_profile')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'change-password' ? 'active' : null }}"><a href="{{ url('change-password') }}"><i class="icon-lock"></i><span>{{__('messages.change_password')}}</span></a></li> -->
               
-                @hasanyrole('Admin')
+                @hasanyrole('Adminn')
                 <li class="{{ (Request::segment(1) === 'etsy-config') || (Request::segment(1) === 'etsy-list-data') || (Request::segment(1) === 'etsy-download-history')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-list"></i><span>{{__('messages.etsy_products')}}</span></a>
                     <ul>
@@ -53,6 +53,8 @@
 
                     </ul>
                 </li>
+                @endhasanyrole
+                @hasanyrole('Admin')
                 <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>

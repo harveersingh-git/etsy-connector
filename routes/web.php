@@ -40,6 +40,8 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+    Route::get('/overview', [HomeController::class, 'overview'])->name('overview');
+
     Route::any('/change-password', [UserController::class, 'changePassword'])->name('changePassword');
     Route::any('/edit-profile', [UserController::class, 'editProfile'])->name('editProfile');
     Route::any('/etsy-config', [EtsyController::class, 'etsyConfig'])->name('etsyConfig');
@@ -47,6 +49,8 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
 
     Route::any('/country-list', [EtsyController::class, 'countryList'])->name('country-list');
     Route::any('/etsy-list-data', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
+    Route::any('/etsy-list-data/{id}', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
+    // Route::any('/shoplist-data/{id}', [EtsyController::class, 'show'])->name();
     Route::any('/etsy-download-history', [EtsyController::class, 'downloadHistory'])->name('etsy-download-history');
 
     Route::any('/get_access_code_url', [EtsyController::class, 'etsyAuth'])->name('get_access_code_url');

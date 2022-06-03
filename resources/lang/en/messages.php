@@ -65,7 +65,11 @@ return [
     'welcome'=>'Welcome',
     'logout'=>'Logout',
     'product_of'=>'Product of',
-    'products'=>'Products'
+    'products'=>'Products',
+    'total_users'=>'Total Users',
+    'active_users'=>'Active Users',
+    'total_shops'=>'Total Shops',
+    'total_active_shop'=>'Active Shops'
 
 
 

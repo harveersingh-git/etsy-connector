@@ -48,9 +48,12 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <div class="header">
-                                        <h2>{{__('messages.product_list')}}</h2>
-
+                                    <div class="header form-inline">
+                                        <h2>{{__('messages.product_list')}}</h2> 
+                                        @hasanyrole('Admin')
+                                        &nbsp
+                                        <h2> of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}</h2>
+                                        @endhasanyrole
                                     </div>
                                     <div class="body">
                                         <div class="" id="one">
@@ -81,7 +84,7 @@
                                                             <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
                                                                 <option value="">--Select shop--</option>
                                                                 @forelse($shops as $shop)
-                                                                <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
+                                                                <option value="{{$shop->id}}" {{($shop->id==$etsy_id)?'selected':''}}>{{$shop->shop_name}}</option>
                                                                 @empty
                                                                 <p>No shop</p>
                                                                 @endforelse
