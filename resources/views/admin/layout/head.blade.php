@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-  <style>
+    <style>
         span.help-block {
             color: red;
         }
@@ -90,6 +90,14 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
+        $("#select_language").select2({
+            placeholder: "Select a language",
+            allowClear: true
+        });
+
+        function changeLanguage(lang){
+        window.location='{{url("change-language")}}/'+lang;
+    }
         var base_url = {!! json_encode(url('/')) !!}
     </script>
     @yield('script')

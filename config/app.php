@@ -232,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'GetCountry' => App\Http\Helper\getCountry::class,
+        'Language' => App\Http\Helper\Language::class,
 
     ],
 

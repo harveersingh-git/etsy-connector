@@ -9,13 +9,13 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Etsy Config</h2>
+                <h2>{{__('messages.etsy_config')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
                     <!-- <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">Subscriber List</a></li> -->
-                    <li class="breadcrumb-item active">Etsy Config</li>
+                    <li class="breadcrumb-item active">{{__('messages.etsy_config')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Etsy Config</h2>
+                        <h2>{{__('messages.etsy_config')}}</h2>
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -49,7 +49,7 @@
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">App Url</label>
+                                        <label for="app_url" class="control-label">{{__('messages.app_url')}}</label>
                                         <input type="text" class="form-control" name="app_url" placeholder="" value="{{isset($user->app_url)?($user->app_url):''}}">
 
                                         @if ($errors->has('app_url'))
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Key String<span style="color: red;">*</span></label>
+                                        <label for="key_string" class="control-label">{{__('messages.key_string')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="key_string" placeholder="" value="{{isset($user->key_string)?($user->key_string):''}}" required>
 
                                         @if ($errors->has('key_string'))
@@ -75,7 +75,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Shared Secret<span style="color: red;">*</span></label>
+                                        <label for="shared_secret" class="control-label">{{__('messages.etsy_config')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="shared_secret" placeholder="" value="{{isset($user->shared_secret)?($user->shared_secret):''}}" required>
 
                                         @if ($errors->has('shared_secret'))
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Access Token Secret</label>
+                                        <label for="access_token_secret" class="control-label">{{__('messages.access_token_secret')}}</label>
                                         <input type="text" class="form-control" name="access_token_secret" placeholder="" value="{{isset($user->access_token_secret)?($user->access_token_secret):''}}">
 
                                         @if ($errors->has('access_token_secret'))
@@ -100,7 +100,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Access Token</label>
+                                        <label for="access_token" class="control-label">{{__('messages.access_token')}}</label>
                                         <input type="text" class="form-control" name="access_token" value="{{isset($user->access_token)?($user->access_token):''}}">
 
                                         @if ($errors->has('access_token'))
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Shop Id<span style="color: red;">*</span></label>
+                                        <label for="shop_name" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):''}}" required>
 
                                         @if ($errors->has('shop_name'))
@@ -125,7 +125,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">User Name<span style="color: red;">*</span></label>
+                                        <label for="first_name" class="control-label">{{__('messages.user_name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="user_name" placeholder="" value="{{isset($user->user_name)?($user->user_name):''}}" required>
 
                                         @if ($errors->has('user_name'))
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Country</label>
+                                        <label for="first_name" class="control-label">{{__('messages.country')}}</label>
                                         <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country_id" value="" id="country">
                                             <option value="">--Please Select--</option>
 
@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label">Store</label>
+                                        <label for="first_name" class="control-label">{{__('messages.store')}}</label>
                                         <input type="text" class="form-control" name="store" placeholder="" value="{{isset($user->store_id)?($user->store_id):''}}">
 
                                         @if ($errors->has('store'))
@@ -210,7 +210,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Access Url </h5>
+                <h5 class="modal-title" id="exampleModalLabel"> {{__('messages.Access Url')}} </h5>
 
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -219,20 +219,20 @@
             </div>
             <div>
 
-                <p style="color: red; margin-left: 43px;"> Click the below link and provide the access code.<a href="#" target="_blank" id="url">Click Here...</a></p>
+                <p style="color: red; margin-left: 43px;">  {{__('messages.Click the below link and provide the access code.')}} <a href="#" target="_blank" id="url"> {{__('messages.Click Here')}}...</a></p>
 
             </div>
             <div class="modal-body">
                 <div class="form-group">
 
-                    <label for="recipient-name" class="col-form-label">Access code:</label>
+                    <label for="recipient-name" class="col-form-label">{{__('messages.Access code')}} :</label>
                     <input type="text" class="form-control" id="access_code" required="" name="access_code" placeholder="fe0bd040">
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="verify_token">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('messages.close')}} </button>
+                <button type="button" class="btn btn-primary" id="verify_token">{{__('messages.update')}} </button>
             </div>
         </div>
     </div>

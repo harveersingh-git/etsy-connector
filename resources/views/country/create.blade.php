@@ -9,13 +9,13 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Add Country</h2>
+                <h2>{{__('messages.Add Country')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active"><a href="{{url('/country')}}">Country List</a></li>
-                    <li class="breadcrumb-item active">Add Country</li>
+                    <li class="breadcrumb-item active"><a href="{{url('/country')}}">{{__('messages.Country List')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('messages.Add Country')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
@@ -30,7 +30,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Add Country</h2>
+                        <h2>{{__('messages.Add Country')}}</h2>
                     </div>
                     <div class="body">
                         {!! Form::open(array('route' => 'country.store','method'=>'POST')) !!}
@@ -38,7 +38,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name" class="control-label">Country Name<span style="color: red;">*</span></label>
+                                    <label for="name" class="control-label">{{__('messages.Country Name')}}<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" name="name" placeholder="Ex:India" value="{{old('name')}}" required>
 
                                     @if ($errors->has('name'))
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Country code<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">{{__('messages.country_code')}}<span style="color: red;">*</span></label>
                                     <input type="text" class="form-control" name="code" placeholder="Ex:+91" value="{{old('code')}}" required>
 
                                     @if ($errors->has('code'))

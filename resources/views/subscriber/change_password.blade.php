@@ -9,13 +9,13 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Update Password</h2>
+                <h2>{{__('messages.update_password')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">Subscriber List</a></li>
-                    <li class="breadcrumb-item active">Update Password</li>
+                    <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">{{__('messages.subscriber_list')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('messages.update_password')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
@@ -84,10 +84,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group pull-right">
                                     <a href="{{url('/subscriber')}}" class="btn btn-light">
-                                        Back
+                                    {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        Update
+                                    {{__('messages.save')}}
                                     </button>
                                 </div>
                             </div>

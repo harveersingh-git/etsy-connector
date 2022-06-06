@@ -6,14 +6,14 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Country List</h2>
+                <h2>{{__('messages.Country List')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active">Country List</li>
+                    <li class="breadcrumb-item active">{{__('messages.Country List')}}</li>
                 </ul>
-                <a href="{{ route('country.create') }}" class="btn btn-sm btn-primary" title="">Create New</a>
+                <a href="{{ route('country.create') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Country List</h2>
+                        <h2>{{__('messages.Country List')}}</h2>
                         <ul class="header-dropdown dropdown dropdown-animated scale-left">
                             <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
                             <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
@@ -44,17 +44,17 @@
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Sr. No.</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Code</th>
+                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.code')}}</th>
 
                                         <th>Action</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th class="text-center">Sr. No.</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Code</th>
+                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.code')}}</th>
 
                                         <th>Action</th>
                                     </tr>
@@ -104,8 +104,8 @@
         id = $(this).attr('id');
         // alert(id);
         swal({
-            title: "Are you sure?",
-            text: "Once you confirm, the record will be delete.",
+            title: "{{__('messages.are_you_sure')}}",
+            text: "{{__('messages.Once you confirm, you will not be able to recover !')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -128,7 +128,7 @@
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 

@@ -78,11 +78,11 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Sr. No.</th>
-                                                        <th class="text-center">Shop Name</th>
-                                                        <th class="text-center">Title</th>
-                                                        <th class="text-center">Price</th>
-                                                        <th class="text-center">materials</th>
+                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                        <th class="text-center">{{__('messages.shop_name')}}</th>
+                                                        <th class="text-center">{{__('messages.title')}}</th>
+                                                        <th class="text-center">{{__('messages.price')}}</th>
+                                                        <th class="text-center">{{__('messages.materials')}}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

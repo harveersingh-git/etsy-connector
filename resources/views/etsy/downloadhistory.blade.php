@@ -9,12 +9,12 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>Download History List </h2>
+                <h2>{{__('messages.Download History List')}} </h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active">Download History List </li>
+                    <li class="breadcrumb-item active">{{__('messages.Download History List')}} </li>
                 </ul>
 
                 <!-- <a href="{{url('generate-csv')}}" class="btn btn-sm btn-primary" title="" target="blanck">Download CSV</a> -->
@@ -44,7 +44,7 @@
                             <div class="col-lg-12">
                                 <div class="">
                                     <div class="header">
-                                        <h2>Download History List </h2>
+                                        <h2>{{__('messages.Download History List')}} </h2>
 
                                     </div>
                                     <div class="body">
@@ -52,10 +52,10 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Sr. No.</th>
-                                                        <th class="text-center">File Name</th>
-                                                        <th class="text-center">Date</th>
-                                                        <th class="text-center">Action</th>
+                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                        <th class="text-center">{{__('messages.File Name')}}</th>
+                                                        <th class="text-center">{{__('messages.Date')}}</th>
+                                                        <th class="text-center">{{__('messages.action')}}</th>
 
                                                     </tr>
                                                 </thead>

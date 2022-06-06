@@ -191,7 +191,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url('shoplist') }}/{{$data['user_id']}}" class="btn btn-light">
-                                     
+                                        {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
                                         {{__('messages.update')}}

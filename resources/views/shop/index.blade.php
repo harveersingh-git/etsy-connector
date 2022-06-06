@@ -109,8 +109,8 @@
         id = $(this).attr('id');
         // alert(id);
         swal({
-            title: "Are you sure?",
-            text: "Once you confirm, you will not be able to recover !",
+            title: "{{__('messages.are_you_sure')}}",
+            text: "{{__('messages.Once you confirm, you will not be able to recover !')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,

@@ -6,15 +6,15 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>{{__('messages.myshop')}}</h2>
+                <h2>{{__('messages.localization')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
                     <!-- <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">{{__('messages.subscriber')}}</a></li> -->
-                    <li class="breadcrumb-item active">{{__('messages.myshop')}}</li>
+                    <li class="breadcrumb-item active">{{__('messages.localization')}}</li>
                 </ul>
-                <a href="{{ url('add-my-shop') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
+                <a href="{{ url('add-localization') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header form-inline">
-                        <h2> {{__('messages.myshop')}}</h2>
+                        <h2> {{__('messages.localization')}}</h2>
                         <a href="{{url()->previous() }}" class="ml-2">
                                             {{__('messages.back')}}
                                         </a>
@@ -41,20 +41,20 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <div class="table-responsive fade show active" id="one">
+                        <div class="table-responsive fade show active" id="">
                             <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.app_url')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.value')}}</th>
                                         <th>{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.app_url')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                        <th class="text-center">{{__('messages.value')}}</th>
                                         <th>{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
@@ -63,11 +63,11 @@
                                     @foreach($data as $key => $value)
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
-                                        <td class="text-center">{{$value->shop_name}}</td>
-                                        <td class="text-center">{{$value->app_url}} </td>
+                                        <td class="text-center">{{$value->name}}</td>
+                                        <td class="text-center">{{$value->value}} </td>
 
                                         <td>
-                                            <a type="button" href="{{url('/my-shop/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
+                                            <a type="button" href="{{url('/localization/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
@@ -108,7 +108,7 @@
         // alert(id);
         swal({
             title: "{{__('messages.are_you_sure')}}",
-            text: "{{__('messages.Once you confirm, you will not be able to recover !')}}",
+            text: "Once you confirm, you will not be able to recover !",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -116,7 +116,7 @@
             if (willDelete) {
                 $.ajax({
                     type: "POST",
-                    url: "{{url('delete_myshoplist')}}",
+                    url: "{{url('delete_localization')}}",
                     data: {
                         _token: '{{csrf_token()}}',
                         id: id

@@ -103,7 +103,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="card">
                     <div class="header bline">
-                        <h2> Overview</h2>
+                        <h2> {{__('messages.overview')}}</h2>
                         <ul class="header-dropdown dropdown dropdown-animated scale-left">
                             <li><a class="btn btn-outline-primary btn-sm overview" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Monthly" id="Monthly">Monthly</a></li>
                             <li><a class="btn btn-outline-primary btn-sm active overview" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Yearly" id="Yearly">Yearly</a></li>

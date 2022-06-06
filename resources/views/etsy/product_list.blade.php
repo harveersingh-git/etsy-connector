@@ -115,12 +115,12 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">Sr. No.</th>
-                                                        <th class="text-center">File Name</th>
-                                                        <th class="text-center">Date</th>
-                                                        <th class="text-center">Shop Name</th>
-                                                        <th class="text-center">Language</th>
-                                                        <th class="text-center">Action</th>
+                                                    <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                        <th class="text-center">{{__('messages.File Name')}}</th>
+                                                        <th class="text-center">{{__('messages.Date')}}</th>
+                                                        <th class="text-center">{{__('messages.shop_name')}}</th>
+                                                        <th class="text-center">{{__('messages.language')}}</th>
+                                                        <th class="text-center">{{__('messages.action')}}</th>
 
                                                     </tr>
                                                 </thead>
@@ -223,8 +223,8 @@
         var current = $(this);
         // alert(id);
         swal({
-            title: "Are you sure?",
-            text: "Once you confirm, you will not be able to recover !",
+            title: "{{__('messages.are_you_sure')}}",
+            text: "{{__('messages.Once you confirm, you will not be able to recover !')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -248,7 +248,7 @@
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 

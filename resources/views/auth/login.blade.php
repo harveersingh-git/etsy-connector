@@ -10,26 +10,26 @@ Login
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{ asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Documentation</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{url('register')}}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:void(0);"> {{__('messages.documentation')}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('register')}}">{{__('messages.sign_up')}}</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-8">
                 <div class="auth_detail">
                     <h2 class="text-monospace">
-                        Everything<br> you need for
+                    {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">your Admin</div>
-                                <div class="carousel-item">your Project</div>
-                                <div class="carousel-item">your Dashboard</div>
-                                <div class="carousel-item">your Application</div>
-                                <div class="carousel-item">your Client</div>
+                                <div class="carousel-item active">{{__('messages.you_admin')}}</div>
+                                <div class="carousel-item">{{__('messages.you_project')}}</div>
+                                <div class="carousel-item">{{__('messages.you_dashboard')}}</div>
+                                <div class="carousel-item">{{__('messages.you_application')}}</div>
+                                <div class="carousel-item">{{__('messages.you_client')}}</div>
                             </div>
                         </div>
                     </h2>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    <p>{{__('messages.it_is_a_long')}}</p>
                     <ul class="social-links list-unstyled">
                         <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
                         <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
@@ -40,7 +40,7 @@ Login
             <div class="col-lg-4">
                 <div class="card">
                     <div class="header">
-                        <p class="lead">Login to your account</p>
+                        <p class="lead">{{__('messages.login_to_your_account')}}</p>
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -83,7 +83,7 @@ Login
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
-                                <span>Don't have an account? <a href="{{url('register')}}">Register</a></span>
+                                <span>Don't have an account? <a href="{{url('register')}}">{{ __('Login') }}</a></span>
                             </div>
                         </form>
                     </div>

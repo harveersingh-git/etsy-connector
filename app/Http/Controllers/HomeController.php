@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\EtsyConfig;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
 {
@@ -142,5 +143,16 @@ class HomeController extends Controller
         } else {
             return response()->json(['status' => 'success']);
         }
+    }
+
+
+
+    function changeLang($langcode)
+    {
+
+  
+        App::setLocale($langcode);
+        session()->put("lang_code", $langcode);
+        return redirect()->back();
     }
 }

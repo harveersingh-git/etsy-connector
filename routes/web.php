@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ShopListController;
 use App\Http\Controllers\MyShopController;
-
+use App\Http\Controllers\LocalizationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +37,11 @@ Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
+Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function () {
+
+    Route::get('/change-language/{lang}', [HomeController::class, 'changeLang']);
+
+    // Route::get('/change-language/{lang}', [HomeController::class, 'changeLang'])->name('change-language');
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     Route::get('/overview', [HomeController::class, 'overview'])->name('overview');
@@ -90,4 +94,10 @@ Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
     Route::any('/subscriber-trash', [SubscriberController::class, 'subscriberTrash'])->name('subscriber-trash');
     Route::post('/update-password', [SubscriberController::class, 'changePassword'])->name('updatePassword');
     Route::any('/update-password/{id}', [SubscriberController::class, 'changePassword'])->name('update-password');
+
+    Route::any('/localization', [LocalizationController::class, 'index'])->name('localization');
+    Route::any('/add-localization', [LocalizationController::class, 'create'])->name('add-localization');
+    Route::any('/localization/edit/{id}', [LocalizationController::class, 'show']);
+    Route::post('/update-localization', [LocalizationController::class, 'update'])->name('update-localization');
+    Route::any('/delete_localization', [LocalizationController::class, 'destroy'])->name('delete_localization');
 });

@@ -76,7 +76,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                    <th class="text-center">{{__('messages.sr_no')}}</th>
+                                        <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.name')}}</th>
                                         <th class="text-center">{{__('messages.email')}}</th>
                                         <th class="text-center">{{__('messages.mobile')}}</th>
@@ -162,7 +162,7 @@
         id = $(this).attr('id');
         // alert(id);
         swal({
-            title: "Are you sure?",
+            title: "{{__('messages.are_you_sure')}}",
             text: "You want to resend the email verificatin link to the subscriber ",
             icon: "warning",
             buttons: true,
@@ -186,7 +186,7 @@
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 
@@ -195,7 +195,7 @@
         id = $(this).attr('id');
         // alert(id);
         swal({
-            title: "Are you sure?",
+            title: "{{__('messages.are_you_sure')}}",
             text: "Once you confirm, the User will we move to trash.",
             icon: "warning",
             buttons: true,
@@ -219,7 +219,7 @@
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 
@@ -229,7 +229,7 @@
     $(document).on('click', '.permanently_delete', function() {
         id = $(this).attr('id');
         swal({
-            title: "Are you sure?",
+            title: "{{__('messages.are_you_sure')}}",
             text: "Once deleted, you will not be able to recover !",
             icon: "warning",
             buttons: true,
@@ -253,7 +253,7 @@
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 
@@ -265,7 +265,7 @@
         var status = $(this).attr('data-val');
         // alert(status);
         swal({
-            title: "Are you sure?",
+            title: "{{__('messages.are_you_sure')}}",
             text: "You want to recover this record.",
             icon: "warning",
             buttons: true,
@@ -300,7 +300,7 @@
         var current = $(this);
 
         swal({
-            title: "Are you sure?",
+            title: "{{__('messages.are_you_sure')}}",
             text: "You want to update the status",
             icon: "warning",
             buttons: true,
