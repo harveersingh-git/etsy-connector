@@ -45,7 +45,7 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <form class="form-horizontal" method="POST" action="{{ route('update-localization')}}">
+                        <form class="form-horizontal" method="POST" action="{{ route('update-localization')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{$data['id']}}" name="id">
 

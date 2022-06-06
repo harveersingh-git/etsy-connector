@@ -123,23 +123,27 @@ class LocalizationController extends Controller
         ]);
         $input = $request->all();
 
-        if (isset($input->file)) {
+        if (isset($request->file)) {
+
+            $path = resource_path() . '/lang/' . $request['name'];
             $imageName = 'messages.php';
-            $input->file->move($path, $imageName);
+            $request->file->move($path, $imageName);
+            // $input->file->move($path, $imageName);
+        } else {
+
+            $input['file'] = '';
         }
         $result =   Localization::find($input['id']);
-        $path = resource_path() . '/lang/';
 
+        $path = resource_path() . '/lang/';
         $replace_folder = $path . $input['name'];
         $old_folder = $path . $result['name'];
-
-
         rename($old_folder,  $replace_folder);
         $array = [
             'user_id' => auth()->user()->id,
             'name' => isset($input['name']) ? ($input['name']) : '',
             'value' => isset($input['value']) ? ($input['value']) : '',
-            'file' => isset($input['file']) ? ($imageName) : '',
+            'file' => isset($request['file']) ? ($imageName) : '',
         ];
 
         $data = Localization::updateOrCreate(['id' =>     $input['id']], $array);
