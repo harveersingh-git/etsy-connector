@@ -66,7 +66,7 @@
                     </ul>
                 </li>
                 @endhasanyrole
-                @hasanyrole('Subscriber')
+                <!-- @hasanyrole('Subscriber')
                 <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
@@ -76,7 +76,7 @@
 
                     </ul>
                 </li>
-                @endhasanyrole
+                @endhasanyrole -->
 
 
 
