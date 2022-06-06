@@ -66,6 +66,17 @@
                     </ul>
                 </li>
                 @endhasanyrole
+                @hasanyrole('Subscriber')
+                <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
+                    <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
+                    <ul>
+                        <li class="{{ Request::segment(1) === 'localization' ? 'active' : null }}"><a href="{{ url('localization') }}">{{__('messages.localization')}}</a></li>
+
+
+
+                    </ul>
+                </li>
+                @endhasanyrole
 
 
 
