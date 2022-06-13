@@ -48,16 +48,20 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <div class="header form-inline">
-                                        <h2>{{__('messages.product_list')}}</h2> 
+                                    <div class="header" style=" display: flex; justify-content: space-between;">
+                                        <h2>
+                                            <span>
+                                                {{__('messages.product_list')}}
+                                                @hasanyrole('Admin')of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}
+                                                @endhasanyrole
+                                            </span>
+                                        </h2>
+
                                         @hasanyrole('Admin')
-                                        &nbsp
-                                        <h2> of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}</h2>
-                                        @endhasanyrole
-                                        @hasanyrole('Admin')
-                                        <a href="{{url()->previous() }}" class="ml-2">
-                                            {{__('messages.back')}}
-                                        </a>
+                                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                                {{__('messages.back')}}
+                                            </a></span>
+
                                         @endhasanyrole
                                     </div>
                                     <div class="body">
@@ -115,7 +119,7 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                    <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <th class="text-center">{{__('messages.Date')}}</th>
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>

@@ -31,8 +31,11 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
+                    <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2>Etsy Config</h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
                     </div>
                     <div class="body">
                         @if (session('error'))

@@ -98,7 +98,7 @@ $(function() {
         },
         size: {
             height: 290,
-            width: 650
+            width: 1000
         },
         axis: {
             x: {
@@ -145,7 +145,7 @@ $(function() {
         },
         size: {
             height: 290,
-            width: 650
+            width: 1000
         },
         axis: {
             x: {

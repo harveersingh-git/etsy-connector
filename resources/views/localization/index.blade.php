@@ -24,11 +24,9 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="header form-inline">
+
+                    <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2> {{__('messages.localization')}}</h2>
-                        <a href="{{url()->previous() }}" class="ml-2">
-                                            {{__('messages.back')}}
-                                        </a>
                     </div>
                     <div class="body tab-content">
                         @if (session('error'))
@@ -48,14 +46,14 @@
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.name')}}</th>
                                         <th class="text-center">{{__('messages.value')}}</th>
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.name')}}</th>
                                         <th class="text-center">{{__('messages.value')}}</th>
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -66,7 +64,7 @@
                                         <td class="text-center">{{$value->name}}</td>
                                         <td class="text-center">{{$value->value}} </td>
 
-                                        <td>
+                                        <td class="text-center">
                                             <a type="button" href="{{url('/localization/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 

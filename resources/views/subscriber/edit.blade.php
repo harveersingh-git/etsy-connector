@@ -29,13 +29,15 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                
-                    <div class="header form-inline">
-                        <h2 >{{__('messages.edit_subscriber')}}</h2>
-                          <a href="{{url('/subscriber')}}" class="ml-2" >
-                                        {{__('messages.back')}}
-                                    </a>
+
+                    <div class="header">
+
+                        <h2>{{__('messages.edit_subscriber')}}</h2>
+                        <a style="float: right;margin-top: -22px;" class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
+                            {{__('messages.back')}}
+                        </a>
                     </div>
+
                     <div class="body">
                         {!! Form::model($user, ['method' => 'PATCH','route' => ['subscriber.update', $user->id]]) !!}
 
@@ -175,7 +177,7 @@
                                 <div class="form-group">
                                     <label class="fancy-checkbox ">
                                         <input class="form-check-input" type="checkbox" name="auto_email_update" id="auto_email_update" {{ isset($user->subscribe_details['auto_email_update']) &&  ($user->subscribe_details['auto_email_update']=='1') ? 'checked':''}}>
-                                         <span> {{__('messages.want_latest_update')}}</span>
+                                        <span> {{__('messages.want_latest_update')}}</span>
                                     </label>
                                 </div>
                             </div>
@@ -186,7 +188,7 @@
                                         {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                    {{__('messages.update')}}
+                                        {{__('messages.update')}}
                                     </button>
                                 </div>
                             </div>

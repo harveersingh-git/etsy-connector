@@ -24,11 +24,10 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="header form-inline">
+                <div class="header" style=" display: flex; justify-content: space-between;">
+
                         <h2> {{__('messages.myshop')}}</h2>
-                        <a href="{{url()->previous() }}" class="ml-2">
-                                            {{__('messages.back')}}
-                                        </a>
+                  
                     </div>
                     <div class="body tab-content">
                         @if (session('error'))

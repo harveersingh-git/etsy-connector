@@ -24,12 +24,18 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="header form-inline">
+                    <div class="header">
                         <h2> {{__('messages.shop_list')}}</h2>
-                        <a href="{{url('/subscriber')}}" class="ml-2">
-                            {{__('messages.back')}}
-                        </a>
+                        <span style="float: right;
+    position: relative;
+    z-index: 9999;
+    top: -23px;"> <a class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
                     </div>
+
+
                     <div class="body tab-content">
                         @if (session('error'))
                         <div class="alert alert-danger">
@@ -71,7 +77,7 @@
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
-                                            <a type="button" href="{{url('/etsy-list-data')}}/{{base64_encode($value->id)}}" class="btn btn-success" title="Sync"><i class="fa fa-repeat" aria-hidden="true"></i></a>
+                                            <a type="button" href="{{url('/etsy-list-data')}}/{{base64_encode($value->id)}}" class="btn btn-success" title="Sync"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
 
 

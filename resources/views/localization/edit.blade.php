@@ -31,8 +31,16 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>{{__('messages.edit_localization')}}</h2></span>
+                    <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <span>
+                                {{__('messages.edit_localization')}}
+                            </span>
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -78,7 +86,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="file" class="control-label">{{__('messages.file')}}<span style="color: red;">*</span></label>
-                                        <input type="file" class="form-control" name="file" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->file)?($user->file):''}}" >
+                                        <input type="file" class="form-control" name="file" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->file)?($user->file):''}}">
 
                                         @if ($errors->has('key_string'))
                                         <span class="help-block">

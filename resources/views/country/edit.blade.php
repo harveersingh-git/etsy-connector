@@ -29,8 +29,16 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>{{__('messages.Edit Country')}}</h2>
+                    <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <span>
+                                {{__('messages.Edit Country')}}
+                            </span>
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
                     </div>
                     <div class="body">
                         {!! Form::model($user, ['method' => 'PATCH','route' => ['country.update', $user->id]]) !!}
@@ -71,10 +79,10 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group pull-right">
                                     <a href="{{url('/country')}}" class="btn btn-light">
-                                    {{__('messages.back')}}
+                                        {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                    {{__('messages.save')}}
+                                        {{__('messages.save')}}
                                     </button>
                                 </div>
                             </div>

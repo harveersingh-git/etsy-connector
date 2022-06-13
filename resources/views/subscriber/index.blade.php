@@ -72,7 +72,7 @@
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
@@ -83,7 +83,7 @@
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -103,7 +103,7 @@
                                             @endif
                                         </td>
                                         @endif
-                                        <td>
+                                        <td class="text-center">
                                             @if(Request::segment(1)=='subscriber-trash')
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
                                                 <i class="fa fa-undo" aria-hidden="true"></i>
@@ -120,7 +120,7 @@
                                             @else
                                             <a type="button" href="{{ route('subscriber.edit',$value->id) }}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
 
-                                            <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning" title="Etsy config" style="color: #fff;"><i class="fa fa-cogs"></i></a>
+                                            <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning" title="Etsy Shop" style="color: #fff;"><i class="fa fa-shopping-cart"></i></a>
                                             <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary" title="Change password" style="color: #fff;"><i class="fa fa-lock"></i></a>
                                             <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification" id="{{$value->id}}" title="Send Email Verification Link"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>

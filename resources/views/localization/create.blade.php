@@ -31,8 +31,17 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header">
-                        <h2>{{__('messages.add_localization')}}</h2><span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a></span>
+                    <div class="header" style=" display: flex; justify-content: space-between;">
+                        <span>
+                            <h2>
+                                {{__('messages.add_localization')}}
+                            </h2>
+                            <span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a>
+                            </span>
+                        </span>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                                {{__('messages.back')}}
+                                            </a></span>
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -47,7 +56,7 @@
                         @endif
                         <form class="form-horizontal" method="POST" action="{{ $url}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                         
+
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
@@ -93,10 +102,10 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 ">
                                     <div class="form-group pull-right">
                                         <a href="{{ url('localization') }}" class="btn btn-light">
-                                        {{__('messages.back')}}
+                                            {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                        {{__('messages.save')}}
+                                            {{__('messages.save')}}
                                         </button>
                                     </div>
                                 </div>

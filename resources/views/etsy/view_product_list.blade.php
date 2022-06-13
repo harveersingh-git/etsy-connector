@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#"><i class="icon-home"></i></a></li>
                     <li class="breadcrumb-item active">{{__('messages.products')}}</li>
                 </ul>
 
@@ -48,7 +48,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                    <div class="header form-inline">
+                                <div class="header" style=" display: flex; justify-content: space-between;">
                                         @if(count($data)>0)
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
@@ -57,11 +57,16 @@
                                         $current_language = $language[ $lan];
 
                                         @endphp
-                                        <h2>{{__('messages.product_of')}} {{$records['shops']->shop_name}} ({{ $current_language}})</h2>
+                                        <h2>
+                                            {{__('messages.product_of')}} {{$records['shops']->shop_name}}
+                                            ({{ $current_language}})
+                                        </h2>
 
-                                        <a href="{{url()->previous() }}" class="ml-2">
-                                            {{__('messages.back')}}
-                                        </a>
+                                        <span>
+                                            <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                                {{__('messages.back')}}
+                                            </a>
+                                        </span>
                                         @endif
 
                                     </div>
