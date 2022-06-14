@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/etsy-download-history', [EtsyController::class, 'downloadHistory'])->name('etsy-download-history');
 
     Route::any('/get_access_code_url', [EtsyController::class, 'etsyAuth'])->name('get_access_code_url');
+    Route::any('/get_shop_default_lang', [EtsyController::class, 'etsyShopLang'])->name('get_shop_default_lang');
+
+    
     Route::post('/verify_access_code', [EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');
     Route::any('/export-csv', [EtsyController::class, 'exportCsv'])->name('export-csv');
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');

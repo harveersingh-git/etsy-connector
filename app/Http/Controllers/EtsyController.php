@@ -152,6 +152,33 @@ class EtsyController extends Controller
 
     /**
      * 
+     * Create a etsy auth.
+     *
+     * @return void
+     */
+
+    public function etsyShopLang(Request $request)
+    {
+        // dd($request->all());
+        // $id = Auth::user()->id;
+        $id = $request['id'];
+
+        $result = EtsyConfig::where('id', $id)->first();
+        $language = [
+            'de' => 'German', 'en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'it' => 'Italian', 'ja' => 'Japanese', 'nl' => 'Dutch', 'pl' => 'Polish',
+            'pt' => 'Portuguese', 'ru' => 'Russian'
+        ];
+
+        // $result = EtsyConfig::where('user_id', $id)->first();
+        if ($result) {
+            return response()->json(['status' => 'success', 'data' =>  $result, 'language' => $language]);
+        } else {
+            return response()->json(['status' => 'error', 'data' => '']);
+        }
+    }
+
+    /**
+     * 
      * Create a verify access code
      *
      * @return void
@@ -249,16 +276,15 @@ class EtsyController extends Controller
         if ($roles[0] == 'Admin') {
 
             $etsy_id = base64_decode($id);
-    
-            if(empty($etsy_id)){
-          
+
+            if (empty($etsy_id)) {
+
                 return redirect()->back();
             }
-       
-            $shops = EtsyConfig::where('id', $etsy_id)->get();
-                // dd($shops);
-            $data = DownloadHistory::with('shops')->where('shop_id', $etsy_id)->get();
 
+            $shops = EtsyConfig::where('id', $etsy_id)->get();
+            // dd($shops);
+            $data = DownloadHistory::with('shops')->where('shop_id', $etsy_id)->get();
         } else {
 
             $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
@@ -682,11 +708,31 @@ class EtsyController extends Controller
     {
 
         try {
+            $url = '';
+            // dd($reques->all());
             $records = DownloadHistory::where('id', base64_decode($id))->first();
-            $data = ProductHistory::where('download_histories_id', base64_decode($id))->get();
+            $query = ProductHistory::with('lang');
+            if (!empty($reques['shop'])) {
+                $lang = $reques['language'];
+                $shop = $reques['shop'];
+
+                $query->whereHas('lang', function ($q) use ($lang,  $shop) {
+                    $q->where('language', '=', $lang);
+                    $q->where('shop_id', $shop);
+                });
+                // ->where('shop_id', $reques['shop'])
+            } else {
+                $query->where('download_histories_id', base64_decode($id));
+            }
+
+            $data  =    $query->get();
+            // dd($data->toArray());
+
+            $shops = EtsyConfig::where('id',  $records->shop_id)->get();
+
 
             if ($data) {
-                return view('etsy.view_product_list', compact('data', 'records'));
+                return view('etsy.view_product_list', compact('data', 'records', 'url', 'shops'));
             }
             return redirect('etsy-list-data');
         } catch (ModelNotFoundException $exception) {

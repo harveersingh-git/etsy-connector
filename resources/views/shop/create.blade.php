@@ -32,13 +32,19 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <div class="header form-inline">
-                        <h2>{{__('messages.add_shop')}}</h2>
-                        <a href="{{ url('shoplist') }}/{{$id}}" class="ml-2">
-                            {{__('messages.back')}}
-                        </a>
-                    </div>
 
+
+                    <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <span>
+                                <h2>{{__('messages.add_shop')}}</h2>
+                            </span>
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{ url('shoplist') }}/{{$id}}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
+                    </div>
 
                     <div class="body">
                         @if (session('error'))
@@ -178,6 +184,20 @@
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="first_name" class="control-label">{{__('messages.default_language')}}</label>
+                                    <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language">
+
+                                        <option value="en" {{ isset($data->language) && ( $data->language== 'en' ) ? 'selected' : '' }}>English</option>
+                                        <option value="de" {{ isset($data->language) && ( $data->language== 'de' ) ? 'selected' : '' }}>German</option>
+                                        <option value="es" {{ isset($data->language) && ( $data->language== 'es' ) ? 'selected' : '' }}>Spanish</option>
+                                        <option value="fr" {{ isset($data->language) && ( $data->language== 'fr' ) ? 'selected' : '' }}>French</option>
+                                        <option value="it" {{ isset($data->language) && ( $data->language== 'it' ) ? 'selected' : '' }}>Italian</option>
+                                        <option value="ja" {{ isset($data->language) && ( $data->language== 'ja' ) ? 'selected' : '' }}>Japanese</option>
+                                        <option value="nl" {{ isset($data->language) && ( $data->language== 'nl' ) ? 'selected' : '' }}>Dutch</option>
+                                        <option value="pl" {{ isset($data->language) && ( $data->language== 'pl' ) ? 'selected' : '' }}>Polish</option>
+                                        <option value="pt" {{ isset($data->language) && ( $data->language== 'pt' ) ? 'selected' : '' }}>Portuguese</option>
+                                        <option value="ru" {{ isset($data->language) && ( $data->language== 'ru' ) ? 'selected' : '' }}>Russian</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">

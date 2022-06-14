@@ -9,7 +9,7 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12 ">
-                <h2  >{{__('messages.add_subscriber')}}</h2> 
+                <h2>{{__('messages.add_subscriber')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
@@ -29,11 +29,16 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header form-inline">
-                        <h2 >{{__('messages.add_subscriber')}}</h2>
-                          <a href="{{url('/subscriber')}}" class="ml-2" >
-                                        {{__('messages.back')}}
-                                    </a>
+                    <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <span>
+                                <h2>{{__('messages.add_subscriber')}}</h2>
+                            </span>
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
                     </div>
                     <div class="body">
                         @if (session('error'))
@@ -222,7 +227,7 @@
                                         {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                    {{__('messages.save')}}
+                                        {{__('messages.save')}}
                                     </button>
                                 </div>
                             </div>

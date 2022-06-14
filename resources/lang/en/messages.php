@@ -110,7 +110,8 @@ return [
     'update'=>'Update',
     'title'=>'Title',
     'price'=>'Price',
-    'materials'=>'Materials'
+    'materials'=>'Materials',
+    'default_language'=>'Default Language'
 
 
 

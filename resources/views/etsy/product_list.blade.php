@@ -77,28 +77,11 @@
                                                         @csrf
                                                         <div class="form-group">
 
-                                                            <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language">
-
-                                                                <option value="en">English</option>
-                                                                <option value="de">German</option>
-                                                                <option value="es">Spanish</option>
-                                                                <option value="fr">French</option>
-                                                                <option value="it">Italian</option>
-                                                                <option value="ja">Japanese</option>
-                                                                <option value="nl">Dutch</option>
-                                                                <option value="pl">Polish</option>
-                                                                <option value="pt">Portuguese</option>
-                                                                <option value="ru">Russian</option>
-                                                            </select>
-
-                                                            &nbsp&nbsp
-                                                        </div>
-                                                        <div class="form-group">
-
                                                             <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
                                                                 <option value="">--Select shop--</option>
                                                                 @forelse($shops as $shop)
-                                                                <option value="{{$shop->id}}" {{($shop->id==$etsy_id)?'selected':''}}>{{$shop->shop_name}}</option>
+                                                                <!-- {{($shop->id==$etsy_id)?'selected':''}} -->
+                                                                <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
                                                                 @empty
                                                                 <p>No shop</p>
                                                                 @endforelse
@@ -110,6 +93,25 @@
                                                             @endif
                                                             &nbsp&nbsp
                                                         </div>
+                                                        <div class="form-group">
+
+                                                            <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="language">
+                                                                <option value="">Select a language</option>
+                                                                <!-- <option value="en">English</option>
+                                                                <option value="de">German</option>
+                                                                <option value="es">Spanish</option>
+                                                                <option value="fr">French</option>
+                                                                <option value="it">Italian</option>
+                                                                <option value="ja">Japanese</option>
+                                                                <option value="nl">Dutch</option>
+                                                                <option value="pl">Polish</option>
+                                                                <option value="pt">Portuguese</option>
+                                                                <option value="ru">Russian</option> -->
+                                                            </select>
+
+                                                            &nbsp&nbsp
+                                                        </div>
+
 
 
 
@@ -152,11 +154,12 @@
                                                         @endphp
                                                         <td>{{ $current_language }}</td>
                                                         <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info">
-                                                            <i class="fa fa-download" aria-hidden="true"></i> </a> 
+                                                                <i class="fa fa-download" aria-hidden="true"></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
-                                                             </a>
-                                                              <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a></td>
+                                                            </a>
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a>
+                                                        </td>
 
 
                                                     </tr>
@@ -197,6 +200,54 @@
 <!--end model-->
 @section('script')
 <script>
+    $('#shop').on('change', function() {
+
+
+
+        var token = $('input[name="_token"]').attr('value');
+        var data = {
+
+            id: this.value
+        };
+        $.ajax({
+            type: 'POST',
+            url: base_url + '/get_shop_default_lang',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            headers: {
+                'X-CSRF-Token': token
+            },
+
+            success: function(result) {
+                if (result.status == "success") {
+                    // console.log('result.language', result.language);
+                    var type = '';
+                    var lang = result.data.language
+
+                    $.each(result.language, function(key, value) {
+                        if (key == lang) {
+                            type += '<option value="' + key + '" selected>' + value + '</option>';
+                        } else {
+                            type += '<option value="' + key + '">' + value + '</option>';
+                        }
+
+                    });
+
+
+
+                    $('.language').html(type);
+                } else {
+
+                }
+
+
+            },
+            error: function(xhr, status, error) {
+                alert("Error!" + xhr.status);
+            },
+        })
+    });
     $(document).ready(function() {
         var oTable = $('#product_table').DataTable({
             "pageLength": 100,

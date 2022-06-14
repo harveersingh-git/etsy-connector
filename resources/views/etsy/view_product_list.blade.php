@@ -80,7 +80,51 @@
                                         <div class="" id="one">
                                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                                 <div class="dt-buttons">
+                                                    <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
+                                                        @csrf
+                                                        <div class="form-group">
 
+                                                            <select class="select2-selection select2-selection--single form-select form-control" name="shop" id="shop">
+                                                                <option value="">--Select shop--</option>
+                                                                @forelse($shops as $shop)
+
+                                                                <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
+                                                                @empty
+                                                                <p>No shop</p>
+                                                                @endforelse
+                                                            </select>
+                                                            @if ($errors->has('shop'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('shop') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                            &nbsp&nbsp
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="language">
+                                                                <option value="">Select a language</option>
+                                                                <!-- <option value="en">English</option>
+                                                                <option value="de">German</option>
+                                                                <option value="es">Spanish</option>
+                                                                <option value="fr">French</option>
+                                                                <option value="it">Italian</option>
+                                                                <option value="ja">Japanese</option>
+                                                                <option value="nl">Dutch</option>
+                                                                <option value="pl">Polish</option>
+                                                                <option value="pt">Portuguese</option>
+                                                                <option value="ru">Russian</option> -->
+                                                            </select>
+
+                                                            &nbsp&nbsp
+                                                        </div>
+
+
+
+
+                                                        <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Search</button>
+
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -98,8 +142,8 @@
                                                 </thead>
                                                 <tbody>
 
-                                                    @if(!empty($data) && $data->count())
-                                                    @foreach($data as $key => $value)
+                                              
+                                                    @forelse($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
                                                         <td>{{$value['shops']->shop_name}}</td>
@@ -107,12 +151,10 @@
                                                         <td class="text-center">{{$value->price}} {{$value->currency_code}}</td>
                                                         <td class="text-center">{{substr($value->materials,0,50)}}..</td>
                                                     </tr>
-                                                    @endforeach
-                                                    @else
-                                                    <tr>
-                                                        <td colspan="13">There are no data.</td>
-                                                    </tr>
-                                                    @endif
+                                                    @empty
+                                                    <tr>No record found</tr>
+                                                    @endforelse
+                                                 
                                                 </tbody>
                                             </table>
 
@@ -144,6 +186,54 @@
 <!--end model-->
 @section('script')
 <script>
+    $('#shop').on('change', function() {
+
+
+
+        var token = $('input[name="_token"]').attr('value');
+        var data = {
+
+            id: this.value
+        };
+        $.ajax({
+            type: 'POST',
+            url: base_url + '/get_shop_default_lang',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            headers: {
+                'X-CSRF-Token': token
+            },
+
+            success: function(result) {
+                if (result.status == "success") {
+                    // console.log('result.language', result.language);
+                    var type = '';
+                    var lang = result.data.language
+
+                    $.each(result.language, function(key, value) {
+                        if (key == lang) {
+                            type += '<option value="' + key + '" selected>' + value + '</option>';
+                        } else {
+                            type += '<option value="' + key + '">' + value + '</option>';
+                        }
+
+                    });
+
+
+
+                    $('.language').html(type);
+                } else {
+
+                }
+
+
+            },
+            error: function(xhr, status, error) {
+                alert("Error!" + xhr.status);
+            },
+        })
+    });
     $(document).ready(function() {
         var oTable = $('#product_table').DataTable({
             "pageLength": 100,

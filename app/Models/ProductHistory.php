@@ -48,4 +48,9 @@ class ProductHistory extends Model
     {
         return $this->hasOne(EtsyConfig::class, 'id', 'shop_id');
     }
+
+    public function lang()
+    {
+        return $this->belongsTo(DownloadHistory::class, 'download_histories_id', 'id');
+    }
 }

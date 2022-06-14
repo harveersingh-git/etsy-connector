@@ -64,6 +64,7 @@ class ShopListController extends Controller
                 'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
                 'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',
                 'store_id' => isset($input['store']) ? ($input['store']) : '',
+                'language' => isset($input['language']) ? ($input['language']) : ''
             ];
 
             $data = EtsyConfig::create($input);
@@ -133,6 +134,7 @@ class ShopListController extends Controller
             'shop_name' => 'required',
             'user_name' => 'required',
             'app_url' => 'required|url',
+            'language' => 'required'
 
         ]);
 
@@ -148,6 +150,7 @@ class ShopListController extends Controller
             'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
             'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',
             'store_id' => isset($input['store']) ? ($input['store']) : '',
+            'language' => isset($input['language']) ? ($input['language']) : '',
         ];
 
         $data = EtsyConfig::updateOrCreate(['id' =>     $input['id']], $array);
