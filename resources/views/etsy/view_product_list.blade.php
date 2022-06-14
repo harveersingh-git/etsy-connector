@@ -48,7 +48,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-12">
                                 <div class="">
-                                <div class="header" style=" display: flex; justify-content: space-between;">
+                                    <div class="header" style=" display: flex; justify-content: space-between;">
                                         @if(count($data)>0)
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
@@ -63,6 +63,12 @@
                                         </h2>
 
                                         <span>
+                                            <a href="{{url('public/uploads/'.$records->file_name)}}" download="{{$records->file_name}}" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$records->file_name)}}">
+                                                <i class="fa fa-copy" style="color: #fff;"></i>
+                                            </a>
+
                                             <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
                                                 {{__('messages.back')}}
                                             </a>
@@ -148,6 +154,22 @@
         });
 
 
+    });
+
+    function copyToClipboard(text) {
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text; //save main text in it
+        sampleTextarea.select(); //select textarea contenrs
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+    }
+    $(document).on("click", ".copy", function() {
+        var copyText = $(this).attr('id');
+
+
+        copyToClipboard(copyText);
+        $(this).text('Copied');
     });
 </script>
 @endsection

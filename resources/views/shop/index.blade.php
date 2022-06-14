@@ -77,7 +77,7 @@
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
-                                            <a type="button" href="{{url('/etsy-list-data')}}/{{base64_encode($value->id)}}" class="btn btn-success" title="Sync"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a type="button" href="{{url('/etsy-list-data')}}/{{base64_encode($value->id)}}" class="btn btn-success" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
 
 
 

@@ -256,7 +256,7 @@ class EtsyController extends Controller
             }
        
             $shops = EtsyConfig::where('id', $etsy_id)->get();
-            
+                // dd($shops);
             $data = DownloadHistory::with('shops')->where('shop_id', $etsy_id)->get();
 
         } else {

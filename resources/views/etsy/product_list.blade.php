@@ -57,10 +57,15 @@
                                             </span>
                                         </h2>
 
+
+
                                         @hasanyrole('Admin')
-                                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                                        <span>
+                                            <a class="btn btn-primary" type="reset" href="{{url('shoplist') }}/{{$shops[0]->user_id}}">
+                                                <i class="fa fa-arrow-left"></i>
                                                 {{__('messages.back')}}
-                                            </a></span>
+                                            </a>
+                                        </span>
 
                                         @endhasanyrole
                                     </div>
@@ -146,7 +151,12 @@
 
                                                         @endphp
                                                         <td>{{ $current_language }}</td>
-                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a> <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}"><i class="fa fa-copy" style="color: #fff;"></i> </a> <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a></td>
+                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info">
+                                                            <i class="fa fa-download" aria-hidden="true"></i> </a> 
+                                                            <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}">
+                                                                <i class="fa fa-copy" style="color: #fff;"></i>
+                                                             </a>
+                                                              <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a></td>
 
 
                                                     </tr>
