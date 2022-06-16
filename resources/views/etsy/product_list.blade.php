@@ -162,7 +162,8 @@
 
 
 
-                                                <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Search</button>
+                                                <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title="">Search</button>
+                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger ">Clear</a>
 
                                             </form>
                                         </div>
