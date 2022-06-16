@@ -271,34 +271,45 @@ class EtsyController extends Controller
         $etsy_id = '';
 
 
-        $roles = Auth::user()->getRoleNames();
+        if ($request->isMethod('Get')) {
+      
+            $roles = Auth::user()->getRoleNames();
 
-        if ($roles[0] == 'Admin') {
+            if ($roles[0] == 'Admin') {
 
-            $etsy_id = base64_decode($id);
+                $etsy_id = base64_decode($id);
 
-            if (empty($etsy_id)) {
+                if (empty($etsy_id)) {
 
-                return redirect()->back();
+                    return redirect()->back();
+                }
+
+                $shops = EtsyConfig::where('id', $etsy_id)->get();
+
+                $query = DownloadHistory::with('shops');
+                if (isset($request['language']) && $request['language'] != null) {
+
+                    $query->orWhere('language', $request['language']);
+                }
+                $data = $query->where('shop_id', $etsy_id)->get();
+            } else {
+
+                $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
+                $shops_ids = $shops->pluck('id');
+
+                $query =  DownloadHistory::with('shops');
+                if (isset($request['language']) && $request['language'] != null) {
+
+                    $query->where('language', $request['language']);
+                }
+                $data =   $query->where('user_id', auth()->user()->id)->get();
+
+
+                // $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
+
+
             }
-
-            $shops = EtsyConfig::where('id', $etsy_id)->get();
-            // dd($shops);
-            $data = DownloadHistory::with('shops')->where('shop_id', $etsy_id)->get();
-        } else {
-
-            $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
-            $shops_ids = $shops->pluck('id');
-
-            $data = DownloadHistory::with('shops')->where('user_id', auth()->user()->id)->get();
-
-
-            // $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
-
-
         }
-
-
 
         if ($request->isMethod('post')) {
             $request->validate([
