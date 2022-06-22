@@ -52,7 +52,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{$data['id']}}" name="id">
                             <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="app_url" class="control-label">{{__('messages.app_url')}}</label>
                                         <input type="text" class="form-control" name="app_url" placeholder="" value="{{isset($data->app_url)?($data->app_url):''}}">
@@ -62,7 +62,6 @@
                                             <strong>{{ $errors->first('app_url') }}</strong>
                                         </span>
                                         @endif
-                                        <!-- <span class="help-block">(999) 999-9999</span> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -114,10 +113,15 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="shop_id" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
+                                        <span class="tooltips">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank"> click Here..</a> </span>
+
+                                        </span>
                                         <input type="text" class="form-control" name="shop_name" value="{{isset($data->shop_name)?($data->shop_name):''}}" required>
 
                                         @if ($errors->has('shop_name'))
@@ -204,12 +208,18 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-primary" id="access_code_url">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <!-- <button type="button" class="btn btn-primary" id="access_code_url">
                                             {{__('messages.generate_token_and_authorize')}}
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">

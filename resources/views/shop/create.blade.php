@@ -61,7 +61,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{$id}}" name="id">
                             <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.app_url')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="app_url" placeholder="Ex:https://openapi.etsy.com/v2/" value="{{isset($user->app_url)?($user->app_url):''}}">
@@ -71,7 +71,6 @@
                                             <strong>{{ $errors->first('app_url') }}</strong>
                                         </span>
                                         @endif
-                                        <!-- <span class="help-block">(999) 999-9999</span> -->
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
@@ -110,9 +109,9 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.access_token')}}</label>
                                         <input type="text" class="form-control" placeholder="Ex:8039f62f335565ee1c17310000000" name="access_token" value="{{isset($user->access_token)?($user->access_token):''}}">
@@ -123,10 +122,15 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
+                                        <span class="tooltips">
+                                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                            <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank"> click Here..</a> </span>
+
+                                        </span>
                                         <input type="text" class="form-control" placeholder="Ex:spgp4n98ejs58585" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):''}}" required>
 
                                         @if ($errors->has('shop_name'))
@@ -201,11 +205,18 @@
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <!-- <div class="form-group">
-                                        <button type="button" class="btn btn-primary" id="access_code_url">
+                                     <div class="form-group">
+                                        <!-- <button type="button" class="btn btn-primary" id="access_code_url">
                                             Generate Token And Authorize
-                                        </button>
-                                    </div> -->
+                                        </button> -->
+                                    </div> 
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                     <div class="form-group">
+                                        <!-- <button type="button" class="btn btn-primary" id="access_code_url">
+                                            Generate Token And Authorize
+                                        </button> -->
+                                    </div> 
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group  pull-right">

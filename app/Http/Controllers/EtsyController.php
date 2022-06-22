@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\EtsyConfig;
 use App\Models\EtsyProduct;
 use App\Models\DownloadHistory;
+use App\Models\EtsySettings;
 use App\Models\ProductHistory;
 use Validator;
 use Http;
@@ -113,12 +114,12 @@ class EtsyController extends Controller
 
     public function etsyAuth(Request $request)
     {
-        // dd($request->all());
+
         // $id = Auth::user()->id;
         $id = $request['id'];
 
-        $result = EtsyConfig::where('id', $id)->first();
-
+        $result = EtsySettings::where('id', $id)->first();
+        // $result = EtsySettings::where('status', '1')->first();
         // $result = EtsyConfig::where('user_id', $id)->first();
         if ($result) {
             $keystring = $result['key_string'];
@@ -135,13 +136,13 @@ class EtsyController extends Controller
                 $oauth_token = trim($req_token['oauth_token']);
                 $oauth_token_secret = trim($req_token['oauth_token_secret']);
                 $id = Auth::user()->id;
-                $user = EtsyConfig::where('user_id', $id)->first();
+                // $user = EtsyConfig::where('user_id', $id)->first();
                 $array = [
                     'access_token_secret' => isset($oauth_token_secret) ? ($oauth_token_secret) : '',
                     'access_token' => isset($oauth_token) ? ($oauth_token) : '',
                 ];
 
-                $user->update($array);
+                $result->update($array);
 
                 return response()->json(['status' => 'success', 'data' =>  $auth_url]);
             }
@@ -159,10 +160,8 @@ class EtsyController extends Controller
 
     public function etsyShopLang(Request $request)
     {
-        // dd($request->all());
-        // $id = Auth::user()->id;
-        $id = $request['id'];
 
+        $id = $request['id'];
         $result = EtsyConfig::where('id', $id)->first();
         $language = [
             'de' => 'German', 'en' => 'English', 'es' => 'Spanish', 'fr' => 'French', 'it' => 'Italian', 'ja' => 'Japanese', 'nl' => 'Dutch', 'pl' => 'Polish',
@@ -193,7 +192,8 @@ class EtsyController extends Controller
         if ($verifier) {
             // $id = Auth::user()->id;
             $id = $request['id'];
-            $result = EtsyConfig::where('id', $id)->first();
+            // $result = EtsyConfig::where('id', $id)->first();
+            $result = EtsySettings::where('id', $id)->first();
 
             $keystring =  $result['key_string'];
             $shared_secret = $result['shared_secret'];
@@ -230,7 +230,8 @@ class EtsyController extends Controller
     public function getRequestAuthorization()
     {
         $id = Auth::user()->id;
-        $result = EtsyConfig::where('user_id', $id)->first();
+        // $result = EtsyConfig::where('user_id', $id)->first();
+        $result = EtsyConfig::first();
         $ced_etsy_keystring       =  $result['key_string'];
         $ced_etsy_shared_secret   =  $result['shared_secret'];
         $access_token             =  $result['api_access_token'];
@@ -258,7 +259,7 @@ class EtsyController extends Controller
 
     /**
      * 
-     * get the product list form the etsy
+     * get the product list form the etsy and sync the product
      *
      * @return void
      */
@@ -272,7 +273,7 @@ class EtsyController extends Controller
 
 
         if ($request->isMethod('Get')) {
-      
+
             $roles = Auth::user()->getRoleNames();
 
             if ($roles[0] == 'Admin') {
@@ -302,7 +303,7 @@ class EtsyController extends Controller
 
                     $query->where('language', $request['language']);
                 }
-                $data =   $query->where('user_id', auth()->user()->id)->get();
+                $data =   $query->whereIn('shop_id', $shops_ids)->get();
 
 
                 // $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
@@ -318,16 +319,17 @@ class EtsyController extends Controller
 
             $input_shop_id = $request['shop'];
             $language = isset($request['language']) ? $request['language'] : 'en';
+            $resultSetting = EtsySettings::where('id', $request['shop'])->first();
             $result = EtsyConfig::where('id', $request['shop'])->first();
-
+            // dd($resultSetting->toArray());
             if ($result) {
 
                 EtsyProduct::where('shop_id', $request['shop'])->delete();
 
-                $key_string = $result['key_string'];
-                $api_access_token = $result['api_access_token'];
+                $key_string = $resultSetting['key_string'];
+                $api_access_token = $resultSetting['api_access_token'];
                 $shop_id = $result['shop_name'];
-                $appurl = $result['app_url'];
+                $appurl = $resultSetting['app_url'];
                 ////
                 $curl = curl_init();
 
@@ -549,11 +551,12 @@ class EtsyController extends Controller
         $data =  EtsyProduct::get();
         // if ($request->isMethod('post')) {
         $id = Auth::user()->id;
+        $resultSetting =  EtsySettings::first();
         $result = EtsyConfig::where('user_id', $id)->first();
         if ($result) {
-            $appurl = $result['app_url'];
-            $key_string = $result['key_string'];
-            $api_access_token = $result['api_access_token'];
+            $appurl = $resultSetting['app_url'];
+            $key_string = $resultSetting['key_string'];
+            $api_access_token = $resultSetting['api_access_token'];
 
 
             $curl = curl_init();
@@ -599,6 +602,10 @@ class EtsyController extends Controller
         }
         return view('etsy.downloadhistory', compact('data'));
     }
+
+
+
+
     public function exportCsv($shop_name = null,  $language)
     {
 

@@ -37,6 +37,58 @@
         span.help-block {
             color: red;
         }
+
+        .tooltips {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltips .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -60px;
+            font-size: 12px;
+        }
+
+        .tooltips:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .tooltips .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+        .tooltiptext:after {
+            content: " ";
+            content: " ";
+            position: absolute;
+            right: 43px;
+            top: -9px;
+            border-top: none;
+            border-right: 8px solid transparent;
+            border-left: 8px solid transparent;
+            border-bottom: 8px solid #f1f1f1;
+        }
+
+        *::after {
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
@@ -90,15 +142,17 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
+          var base_url = {!!json_encode(url('/'))!!}
+
         $("#select_language").select2({
             placeholder: "Select a language",
             allowClear: true
         });
 
-        function changeLanguage(lang){
-        window.location='{{url("change-language")}}/'+lang;
-    }
-        var base_url = {!! json_encode(url('/')) !!}
+        function changeLanguage(lang) {
+            window.location = '{{url("change-language")}}/' + lang;
+        }
+      
     </script>
     @yield('script')
 </body>

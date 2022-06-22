@@ -18,7 +18,7 @@ Login
             <div class="col-lg-8">
                 <div class="auth_detail">
                     <h2 class="text-monospace">
-                    {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
+                        {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">{{__('messages.you_admin')}}</div>
@@ -49,7 +49,7 @@ Login
                         </div>
                         @endif
                         @if (session('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" >
                             {{ session('success') }}
                         </div>
                         @endif
@@ -80,6 +80,8 @@ Login
                                     <span> {{ __('Remember Me') }}</span>
                                 </label>
                             </div>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" id="resened_btn"> {{ __('Resend Link') }}</button>
+
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
@@ -92,4 +94,45 @@ Login
         </div>
     </div>
 </div>
+@section('script')
+<script>
+    $(window).on('load', function() {
+        var error = $('.invalid-feedback').find('strong').text();
+        if (error == "The selected email is invalid or the account has not been verified or enable.") {
+            $('#resened_btn').show();
+        } else {
+            $('#resened_btn').hide();
+        }
+    });
+    $(document).on('click', '#resened_btn', function() {
+        var current = $(this);
+        current.text('Please wait..');
+        current.prop('disabled', true);
+        var email = $('#email').val();
+        if (typeof email !== 'undefined') {
+            $.ajax({
+                type: "POST",
+                url: "{{url('resend')}}",
+                data: {
+                    _token: '{{csrf_token()}}',
+                    email: email
+                },
+                beforeSend: function() {
+
+                },
+                success: function(data) {
+                    current.text(' Resend Link');
+                    console.log('success', data);
+                    current.prop('disabled', false);
+                    toastr.success("Re-send the Email verification link on your email id please check.");
+                    // window.location.reload();
+                }
+            });
+        } else {
+            toastr.error("Please provide a email id");
+        }
+
+    })
+</script>
+@endsection
 @endsection

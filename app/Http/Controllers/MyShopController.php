@@ -42,21 +42,21 @@ class MyShopController extends Controller
         if ($request->isMethod('post')) {
             $input = $request->all();
             $request->validate([
-                'key_string' => 'required',
-                'shared_secret' => 'required',
+                // 'key_string' => 'required',
+                // 'shared_secret' => 'required',
                 'shop_name' => 'required',
                 'user_name' => 'required',
-                'app_url' => 'required|url',
+                // 'app_url' => 'required|url',
 
             ]);
 
             $input = [
                 'user_id' => isset($input['id']) ? ($input['id']) : '',
-                'app_url' => isset($input['app_url']) ? ($input['app_url']) : '',
-                'key_string' => isset($input['key_string']) ? ($input['key_string']) : '',
-                'shared_secret' => isset($input['shared_secret']) ? ($input['shared_secret']) : '',
-                'access_token_secret' => isset($input['access_token_secret']) ? ($input['access_token_secret']) : '',
-                'access_token' => isset($input['access_token']) ? ($input['access_token']) : '',
+                // 'app_url' => isset($input['app_url']) ? ($input['app_url']) : '',
+                // 'key_string' => isset($input['key_string']) ? ($input['key_string']) : '',
+                // 'shared_secret' => isset($input['shared_secret']) ? ($input['shared_secret']) : '',
+                // 'access_token_secret' => isset($input['access_token_secret']) ? ($input['access_token_secret']) : '',
+                // 'access_token' => isset($input['access_token']) ? ($input['access_token']) : '',
                 'shop_name' => isset($input['shop_name']) ? ($input['shop_name']) : '',
                 'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
                 'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',
@@ -65,7 +65,6 @@ class MyShopController extends Controller
             ];
 
             $data = EtsyConfig::create($input);
-
 
             return redirect('my-shop')->with('success', 'Shop added Successfully');
         }
@@ -136,22 +135,22 @@ class MyShopController extends Controller
         $input = $request->all();
 
         $request->validate([
-            'key_string' => 'required',
-            'shared_secret' => 'required',
+            // 'key_string' => 'required',
+            // 'shared_secret' => 'required',
             'shop_name' => 'required',
             'user_name' => 'required',
-            'app_url' => 'required|url',
+            // 'app_url' => 'required|url',
 
         ]);
 
         $array = [
             // 'id' => isset($input['current_id']) ? ($input['current_id']) : '',
             // 'user_id' => isset($input['id']) ? ($input['id']) : '',
-            'app_url' => isset($input['app_url']) ? ($input['app_url']) : '',
-            'key_string' => isset($input['key_string']) ? ($input['key_string']) : '',
-            'shared_secret' => isset($input['shared_secret']) ? ($input['shared_secret']) : '',
-            'access_token_secret' => isset($input['access_token_secret']) ? ($input['access_token_secret']) : '',
-            'access_token' => isset($input['access_token']) ? ($input['access_token']) : '',
+            // 'app_url' => isset($input['app_url']) ? ($input['app_url']) : '',
+            // 'key_string' => isset($input['key_string']) ? ($input['key_string']) : '',
+            // 'shared_secret' => isset($input['shared_secret']) ? ($input['shared_secret']) : '',
+            // 'access_token_secret' => isset($input['access_token_secret']) ? ($input['access_token_secret']) : '',
+            // 'access_token' => isset($input['access_token']) ? ($input['access_token']) : '',
             'shop_name' => isset($input['shop_name']) ? ($input['shop_name']) : '',
             'user_name' => isset($input['user_name']) ? ($input['user_name']) : '',
             'country_id' => isset($input['country_id']) ? ($input['country_id']) : '',

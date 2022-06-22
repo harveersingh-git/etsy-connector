@@ -13,6 +13,7 @@ use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\ShopListController;
 use App\Http\Controllers\MyShopController;
 use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\EtsySettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +35,7 @@ Route::any('/', function () {
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
-
+Route::post('resend', [VerifyEmailController::class, 'resend'])->name('resend');
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function () {
@@ -60,7 +61,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/get_access_code_url', [EtsyController::class, 'etsyAuth'])->name('get_access_code_url');
     Route::any('/get_shop_default_lang', [EtsyController::class, 'etsyShopLang'])->name('get_shop_default_lang');
 
-    
+
     Route::post('/verify_access_code', [EtsyController::class, 'verifyAccessCode'])->name('verify_access_code');
     Route::any('/export-csv', [EtsyController::class, 'exportCsv'])->name('export-csv');
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');
@@ -103,4 +104,9 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/localization/edit/{id}', [LocalizationController::class, 'show']);
     Route::post('/update-localization', [LocalizationController::class, 'update'])->name('update-localization');
     Route::any('/delete_localization', [LocalizationController::class, 'destroy'])->name('delete_localization');
+
+    // Route::any('/etsy-setting', [EtsySettingController::class, 'index'])->name('etsy-setting');
+
+    Route::resource('etsy-setting', EtsySettingController::class);
+    Route::post('delete_etsy_setting', [EtsySettingController::class, 'destroy'])->name('delete_etsy_setting');
 });

@@ -46,11 +46,11 @@ class ShopListController extends Controller
         if ($request->isMethod('post')) {
             $input = $request->all();
             $request->validate([
-                'key_string' => 'required',
-                'shared_secret' => 'required',
+                // 'key_string' => 'required',
+                // 'shared_secret' => 'required',
                 'shop_name' => 'required',
                 'user_name' => 'required',
-                'app_url' => 'required|url',
+                // 'app_url' => 'required|url',
             ]);
 
             $input = [
@@ -129,12 +129,12 @@ class ShopListController extends Controller
         $input = $request->all();
 
         $request->validate([
-            'key_string' => 'required',
-            'shared_secret' => 'required',
+            // 'key_string' => 'required',
+            // 'shared_secret' => 'required',
             'shop_name' => 'required',
             'user_name' => 'required',
-            'app_url' => 'required|url',
-            'language' => 'required'
+            // 'app_url' => 'required|url',
+            // 'language' => 'required'
 
         ]);
 

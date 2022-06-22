@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered;
 use Spatie\Permission\Models\Role;
@@ -103,16 +104,19 @@ class RegisterController extends Controller
             ];
             subscriber::create($array);
         }
+        try {
+            $res = [
+                'subject' => 'Account Register Successfully',
+                'email' => $data['email'],
 
-        $res = [
-            'subject' => 'Account Register Successfully',
-            'email' => $data['email'],
-
-        ];
-        Mail::send('emails.account_create', $res, function ($message) use ($res) {
-            $message->to($res['email'])
-                ->subject($res['subject']);
-        });
+            ];
+            Mail::send('emails.account_create', $res, function ($message) use ($res) {
+                $message->to($res['email'])
+                    ->subject($res['subject']);
+            });
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        }
         return $user;
     }
 }

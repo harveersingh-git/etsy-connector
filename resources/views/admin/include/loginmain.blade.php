@@ -17,6 +17,8 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/toastr/toastr.min.css')}}">
+
 </head>
 
 <body class="theme-orange">
@@ -28,6 +30,8 @@
     <script src="{{asset('assets/bundles/vendorscripts.bundle.js')}}"></script>
 
     <script src="{{asset('assets/bundles/mainscripts.bundle.js')}}"></script>
+    <script src="{{asset('assets/vendor/toastr/toastr.js')}}"></script>
+    @yield('script')
 </body>
 
 </html>

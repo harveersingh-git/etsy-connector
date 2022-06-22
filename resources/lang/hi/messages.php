@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
-    'subscriber_list' => 'Subscriber List',
-    'create_new' => 'Create New',
+   'dashboard' => 'डैशबोर्ड',
+    'subscriber_list' => 'सब्सक्राइबर लिस्ट',
+    'create_new' => 'नया बनाओ',
     'active_subscriber_list' => 'Active Subscriber List',
     'inactive_subscriber_list' => 'In-Active Subscriber List',
     'trash_subscriber_list' => 'Trash Subscriber List',
@@ -110,11 +110,7 @@ return [
     'update'=>'Update',
     'title'=>'Title',
     'price'=>'Price',
-    'materials'=>'Materials',
-    'default_language'=>'Default Language',
-    'etsy_setting'=>'Etsy Setting',
-    'add_etsy_setting'=>'Add Etsy Setting',
-    'edit_etsy_setting'=>'Edit Etsy Setting'
+    'materials'=>'Materials'
 
 
 

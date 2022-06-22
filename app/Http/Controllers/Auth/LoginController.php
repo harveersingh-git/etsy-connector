@@ -45,7 +45,7 @@ class LoginController extends Controller
             $this->username() => 'exists:users,' . $this->username() . ',active,1',
             'password' => 'required|string',
         ], [
-            $this->username() . '.exists' => 'The selected email is invalid or the account has been disabled.'
+            $this->username() . '.exists' => 'The selected email is invalid or the account has not been verified or enable.'
         ]);
     }
 }
