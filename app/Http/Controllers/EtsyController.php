@@ -319,7 +319,7 @@ class EtsyController extends Controller
 
             $input_shop_id = $request['shop'];
             $language = isset($request['language']) ? $request['language'] : 'en';
-            $resultSetting = EtsySettings::where('id', $request['shop'])->first();
+            $resultSetting = EtsySettings::first();
             $result = EtsyConfig::where('id', $request['shop'])->first();
             // dd($resultSetting->toArray());
             if ($result) {
