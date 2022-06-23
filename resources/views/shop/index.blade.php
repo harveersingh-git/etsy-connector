@@ -56,7 +56,7 @@
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                                       
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">>{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
@@ -74,7 +74,7 @@
                                         <td class="text-center">{{$value->shop_name}}</td>
                                      
 
-                                        <td>
+                                        <td class="text-center">>
                                             <a type="button" href="{{url('/shoplist/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
