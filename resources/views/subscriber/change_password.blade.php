@@ -29,15 +29,18 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <!-- <div class="header">
-                        <h2>Update Password</h2>
-                    </div> -->
-                    <div class="header form-inline">
-                        <h2 >{{__('messages.update_password')}}</h2>
-                          <a href="{{url('/subscriber')}}" class="ml-2" >
-                                        {{__('messages.back')}}
-                                    </a>
+                <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <!-- <span>
+                                <h2>{{__('messages.add_subscriber')}}</h2>
+                            </span> -->
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
+
                     </div>
+                   
                     <div class="body">
                         @if (session('error'))
                         <div class="alert alert-danger">

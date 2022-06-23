@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
+            'address' => 'required',
 
 
         ]);
@@ -90,11 +91,13 @@ class RegisterController extends Controller
             'country_code' => $data['country_code'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+
             // 'country_id' => isset($data['country']) ? $data['country'] : '',
         ]);
         $user->assignRole('Subscriber');
         if ($user) {
             $array = [
+                'address' => isset($data['address']) ? $data['address'] : '',
                 'user_id' =>  $user->id,
                 'city' => isset($data['city']) ? $data['city'] : '',
                 'state' =>   isset($data['state']) ? $data['state'] : '',

@@ -32,7 +32,7 @@
                     <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2>
                             <span>
-                                {{__('messages.Edit Country')}}
+                                <!-- {{__('messages.Edit Country')}} -->
                             </span>
                         </h2>
                         <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>

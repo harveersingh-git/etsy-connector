@@ -51,8 +51,8 @@
                                     <div class="header" style=" display: flex; justify-content: space-between;">
                                         <h2>
                                             <span>
-                                                {{__('messages.product_list')}}
-                                                @hasanyrole('Admin')of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}
+
+                                                @hasanyrole('Admin') {{__('messages.product_list')}} of {{isset($shops[0]->shop_name)?$shops[0]->shop_name:''}}
                                                 @endhasanyrole
                                             </span>
                                         </h2>
@@ -75,7 +75,7 @@
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
                                                 @csrf
-                                                <div class="form-group">
+                                                <div class="form-group" style="    position: relative;">
 
                                                     <select class="select2-selection select2-selection--single form-select form-control shop" name="shop" id="shop">
                                                         <option value="">--Select shop--</option>
@@ -87,7 +87,7 @@
                                                         @endforelse
                                                     </select>
                                                     @if ($errors->has('shop'))
-                                                    <span class="help-block">
+                                                    <span class="help-block" style="position: absolute;width: max-content;bottom: -25px;">
                                                         <strong>{{ $errors->first('shop') }}</strong>
                                                     </span>
                                                     @endif
@@ -122,7 +122,7 @@
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="Get" class="form-inline" id="">
                                                 @csrf
-                                                <div class="form-group">
+                                                <div class="form-group" style="    position: relative;">
 
                                                     <select class="select2-selection select2-selection--single form-select form-control shop_search" name="shop" id="shop">
                                                         <option value="">--Select shop--</option>
@@ -134,7 +134,7 @@
                                                         @endforelse
                                                     </select>
                                                     @if ($errors->has('shop'))
-                                                    <span class="help-block">
+                                                    <span class="help-block" style="position: absolute;width: max-content;bottom: -20px;">
                                                         <strong>{{ $errors->first('shop') }}</strong>
                                                     </span>
                                                     @endif

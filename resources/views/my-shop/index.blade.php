@@ -26,7 +26,7 @@
                 <div class="card">
                 <div class="header" style=" display: flex; justify-content: space-between;">
 
-                        <h2> {{__('messages.myshop')}}</h2>
+                        <!-- <h2> {{__('messages.myshop')}}</h2> -->
                   
                     </div>
                     <div class="body tab-content">

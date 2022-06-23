@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -47,5 +49,22 @@ class LoginController extends Controller
         ], [
             $this->username() . '.exists' => 'The selected email is invalid or the account has not been verified or enable.'
         ]);
+        $remember = ($request->get('remember')) ? true : false;
+
+        $auth = Auth::attempt(
+            [
+                'email'  => strtolower($request->get('email')),
+                'password'  => $request->get('password')
+            ],
+            $remember
+        );
+        if ($auth) {
+
+            return Redirect::to('home');
+        } else {
+
+            // validation not successful, send back to form 
+            return Redirect::to('/')->with('flash_notice', 'Your username/password combination was incorrect.');
+        }
     }
 }

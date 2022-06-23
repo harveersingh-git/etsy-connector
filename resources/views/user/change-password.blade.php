@@ -30,7 +30,7 @@
                     <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2>
                             <span>
-                                <h2>{{__('messages.current_password')}}</h2>
+                                <!-- <h2>{{__('messages.current_password')}}</h2> -->
                             </span>
                         </h2>
                         <span> <a class="btn btn-primary" type="reset" href="{{url('/')}}"><i class="fa fa-arrow-left"></i>

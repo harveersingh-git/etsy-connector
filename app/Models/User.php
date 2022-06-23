@@ -70,4 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //         // do the rest of the cleanup...
     //     });
     // }
+
+
+
 }

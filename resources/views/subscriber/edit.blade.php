@@ -1,7 +1,30 @@
 @extends('admin.layout.head')
 
 @section('content')
-
+<style>
+.select2-container--default .select2-selection--single{
+    border: 0px solid #aaa !important;
+}
+span#select2-code-container {
+    box-shadow: none;
+    background-color: #fff;
+    font-size: 14px;
+    height: auto;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    /* font-size: 1rem; */
+    font-weight: 400;
+    line-height: 1.5;
+    /* color: #495057; */
+    /* background-color: #fff; */
+    /* background-clip: padding-box; */
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+</style>
 
 
 
@@ -29,14 +52,24 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
+                <div class="header" style=" display: flex; justify-content: space-between;">
+                        <h2>
+                            <!-- <span>
+                                <h2>{{__('messages.add_subscriber')}}</h2>
+                            </span> -->
+                        </h2>
+                        <span> <a class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
+                                {{__('messages.back')}}
+                            </a></span>
 
-                    <div class="header">
+                    </div>
+                    <!-- <div class="header">
 
                         <h2>{{__('messages.edit_subscriber')}}</h2>
                         <a style="float: right;margin-top: -22px;" class="btn btn-primary" type="reset" href="{{url('/subscriber')}}"><i class="fa fa-arrow-left"></i>
                             {{__('messages.back')}}
                         </a>
-                    </div>
+                    </div> -->
 
                     <div class="body">
                         {!! Form::model($user, ['method' => 'PATCH','route' => ['subscriber.update', $user->id]]) !!}
@@ -84,14 +117,16 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
-                                <div class="form-group">
+                                <div class="form-group"> @php
+                                    $countrycode = json_decode(file_get_contents(public_path() . '/' . 'countryCode/CountryCodes.json'));
+                                    @endphp
                                     <label for="last_name" class="control-label">{{__('messages.country_code')}}<span style="color: red;">*</span></label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="code" value="" id="code">
                                         <option value="">--Please Select--</option>
 
-                                        @forelse($country as $nation)
+                                        @forelse($countrycode as $nation)
 
-                                        <option value="{{$nation->code}}" {{($nation->code==$user->country_code)?'selected':''}}>{{$nation->code}}({{$nation->name}})</option>
+                                        <option value="{{$nation->dial_code}}" {{($nation->dial_code==$user->country_code)?'selected':''}}>{{$nation->name}}({{$nation->dial_code}})</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse
@@ -116,7 +151,17 @@
                                     @endif
                                 </div>
                             </div>
-
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">{{__('messages.address')}}<span style="color: red;">*</span></label>
+                                    <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="" required autocomplete="some-unrecognised-value" placeholder="Address">{{isset($user->subscribe_details['address'])?$user->subscribe_details['address']:old('city')}}</textarea>
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="last_name" class="control-label">{{__('messages.city')}}<span style="color: red;">*</span></label>
@@ -211,7 +256,10 @@
 
 @section('script')
 <script>
-
+    $("#code").select2({
+        placeholder: "Select a country code",
+        allowClear: true
+    });
 </script>
 @endsection
 @endsection

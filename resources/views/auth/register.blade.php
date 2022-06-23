@@ -3,6 +3,31 @@
 Register
 @endsection
 @section('content')
+<style>
+    .select2-container--default .select2-selection--single {
+        border: 0px solid #aaa !important;
+    }
+
+    span#select2-code-container {
+        box-shadow: none;
+        background-color: #fff;
+        font-size: 14px;
+        height: auto;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        /* font-size: 1rem; */
+        font-weight: 400;
+        line-height: 1.5;
+        /* color: #495057; */
+        /* background-color: #fff; */
+        /* background-clip: padding-box; */
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+</style>
 @php
 
 $country = \GetCountry::getCountryCode();
@@ -101,13 +126,16 @@ $country = \GetCountry::getCountryCode();
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
+                                        @php
+                                        $countrycode = json_decode(file_get_contents(public_path() . '/' . 'countryCode/CountryCodes.json'));
+                                        @endphp
                                         <label for="signin-email" class="control-label sr-only">{{ __('Contry Code') }}</label>
-                                        <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country_code" value="" id="code">
+                                        <select class="select2-selection form-select form-control" data-placeholder="Please select" name="country_code" value="" id="code">
                                             <option value="">-country code-</option>
 
-                                            @forelse($country as $nation)
+                                            @forelse($countrycode as $nation)
 
-                                            <option value="{{$nation->code}}" {{(old('country_code')==$nation->code)?'selected':''}}>{{$nation->code}}({{$nation->name}})</option>
+                                            <option value="{{$nation->dial_code}}" {{(old('country_code')==$nation->dial_code)?'selected':''}}>{{$nation->name}}({{$nation->dial_code}})</option>
                                             @empty
                                             <option value="">No country found</option>
                                             @endforelse
@@ -130,6 +158,16 @@ $country = \GetCountry::getCountryCode();
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="control-label sr-only">{{ __('Address') }}</label>
+                                <!-- <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="some-unrecognised-value" placeholder="email" autofocus> -->
+                                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" required autocomplete="some-unrecognised-value" placeholder="Address"></textarea>
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
@@ -226,4 +264,12 @@ $country = \GetCountry::getCountryCode();
         </div>
     </div>
 </div>
+@section('script')
+<script>
+    $("#code").select2({
+        placeholder: "Select a country code",
+        allowClear: true
+    });
+</script>
+@endsection
 @endsection

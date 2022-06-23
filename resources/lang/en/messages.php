@@ -114,7 +114,8 @@ return [
     'default_language'=>'Default Language',
     'etsy_setting'=>'Etsy Setting',
     'add_etsy_setting'=>'Add Etsy Setting',
-    'edit_etsy_setting'=>'Edit Etsy Setting'
+    'edit_etsy_setting'=>'Edit Etsy Setting',
+    'address'=>'Address'
 
 
 

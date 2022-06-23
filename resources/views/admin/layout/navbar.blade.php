@@ -56,7 +56,7 @@ $language = \Language::getLanguage();
 
             <div id="navbar-menu">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown dropdown-animated scale-left">
+                    <!-- <li class="dropdown dropdown-animated scale-left">
                         <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                             <i class="icon-envelope"></i>
                             <span class="notification-dot"></span>
@@ -161,8 +161,8 @@ $language = \Language::getLanguage();
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-settings"></i></a></li>
+                    </li> -->
+                    <!-- <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-settings"></i></a></li> -->
                     <li>
                         <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language" onchange="changeLanguage(this.value)">
                             <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">English</option>

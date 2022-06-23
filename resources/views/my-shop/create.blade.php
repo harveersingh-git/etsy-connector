@@ -34,7 +34,7 @@
                     <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2>
                             <span>
-                                <h2>{{__('messages.add_shop')}}</h2>
+                                <!-- <h2>{{__('messages.add_shop')}}</h2> -->
                             </span>
                         </h2>
                         <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
@@ -65,9 +65,10 @@
                                         <label for="first_name" class="control-label mr-1">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
                                         <span class="tooltips">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                            <span class="tooltiptext"> Per Hour </span>
+                                            <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank"> click Here..</a> </span>
+
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Ex:spgp4n98ejs58585" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):''}}" required>
+                                        <input type="text" class="form-control" placeholder="Ex:spgp4n98ejs58585" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):old('shop_name')}}" required>
 
                                         @if ($errors->has('shop_name'))
                                         <span class="help-block">
@@ -80,7 +81,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.user_name')}}<span style="color: red;">*</span></label>
-                                        <input type="text" class="form-control" name="user_name" placeholder="Ex:abc@yopmail.com" value="{{isset($user->user_name)?($user->user_name):''}}" required>
+                                        <input type="text" class="form-control" name="user_name" placeholder="Ex:abc@yopmail.com" value="{{isset($user->user_name)?($user->user_name):old('user_name')}}" required>
 
                                         @if ($errors->has('user_name'))
                                         <span class="help-block">
@@ -113,7 +114,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.store')}}</label>
-                                        <input type="text" class="form-control" name="store" placeholder="Ex:abcshop" value="{{isset($user->store_id)?($user->store_id):''}}">
+                                        <input type="text" class="form-control" name="store" placeholder="Ex:abcshop" value="{{isset($user->store_id)?($user->store_id):old('store')}}">
 
                                         @if ($errors->has('store'))
                                         <span class="help-block">

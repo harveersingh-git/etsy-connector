@@ -608,7 +608,10 @@ class EtsyController extends Controller
 
     public function exportCsv($shop_name = null,  $language)
     {
-
+        $total_language = [
+            'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
+            'pt' => 'pt_XX', 'ru' => 'ru_RU'
+        ];
         $url = '';
         // $roles = Auth::user()->getRoleNames();
         // if ($roles[0] == 'Admin') {
@@ -624,7 +627,7 @@ class EtsyController extends Controller
 
         if (count($click) > 0) {
 
-            $columns = ['id', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
+            $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
             $fileName = $date . '-' . $t . 'productlist.csv';
             // $filepath = public_path('uploads/');
@@ -650,6 +653,7 @@ class EtsyController extends Controller
             foreach ($tasks as $data) {
 
                 $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
+                $row['override']  = $total_language[$language];
                 $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
                 $row['description']  = isset($data->description) ? $data->description : 'N/A';
                 $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';

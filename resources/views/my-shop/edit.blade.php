@@ -32,7 +32,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header" style=" display: flex; justify-content: space-between;">
-                        <h2>Etsy Config</h2>
+                        <h2>
+                            <!-- <span>
+                                <h2>{{__('messages.add_subscriber')}}</h2>
+                            </span> -->
+                        </h2>
                         <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
                                 {{__('messages.back')}}
                             </a></span>

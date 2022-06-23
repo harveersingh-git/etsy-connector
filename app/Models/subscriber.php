@@ -12,6 +12,6 @@ class subscriber extends Model
     use HasFactory,SoftDeletes;
     protected $table="subscribers";
     protected $fillable = [
-        'user_id', 'city','state','zip','auto_email_update','country_id'
+        'user_id', 'city','state','zip','auto_email_update','country_id','address'
     ];
 }

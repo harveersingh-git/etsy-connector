@@ -103,7 +103,8 @@ class SubscriberController extends Controller
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
-            'code' => 'required'
+            'code' => 'required',
+            'address' => 'required',
         ]);
 
 
@@ -123,6 +124,7 @@ class SubscriberController extends Controller
                 'zip' => isset($input['zip']) ? $input['zip'] : '',
                 'auto_email_update' => isset($input['auto_email_update']) ? '1' : '0',
                 'country_id' => isset($input['country']) ? $input['country'] : '',
+                'address' => isset($input['address']) ? $input['address'] : '',
             ];
             subscriber::create($fields);
         }
@@ -189,6 +191,7 @@ class SubscriberController extends Controller
             'zip' => 'required',
             'country' => 'required',
             'code' => 'required',
+            'address' => 'required'
         ]);
 
 
@@ -213,7 +216,7 @@ class SubscriberController extends Controller
             'zip' => isset($input['zip']) ? $input['zip'] : '',
             'auto_email_update' => isset($input['auto_email_update']) ? '1' : '0',
             'country_id' => isset($input['country']) ? $input['country'] : '',
-
+            'address' => isset($input['address']) ? $input['address'] : '',
         ];
         subscriber::create($fields);
 

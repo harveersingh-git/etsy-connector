@@ -34,7 +34,7 @@
                     <div class="header" style=" display: flex; justify-content: space-between;">
                         <span>
                             <h2>
-                                {{__('messages.add_localization')}}
+                                <!-- {{__('messages.add_localization')}} -->
                             </h2>
                             <span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a>
                             </span>

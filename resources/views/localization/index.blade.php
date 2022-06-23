@@ -25,9 +25,9 @@
             <div class="col-lg-12">
                 <div class="card">
 
-                    <div class="header" style=" display: flex; justify-content: space-between;">
+                    <!-- <div class="header" style=" display: flex; justify-content: space-between;">
                         <h2> {{__('messages.localization')}}</h2>
-                    </div>
+                    </div> -->
                     <div class="body tab-content">
                         @if (session('error'))
                         <div class="alert alert-danger">
