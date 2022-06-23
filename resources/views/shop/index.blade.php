@@ -72,7 +72,7 @@
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->shop_name}}</td>
-                                        <td class="text-center">{{$value->app_url}} </td>
+                                     
 
                                         <td>
                                             <a type="button" href="{{url('/shoplist/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
