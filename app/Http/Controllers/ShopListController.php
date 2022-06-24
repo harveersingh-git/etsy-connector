@@ -174,4 +174,11 @@ class ShopListController extends Controller
         return redirect()->route('subscriber.index')
             ->with('success', 'Record delete successfully');
     }
+
+    public function shopList()
+    {
+        $data = EtsyConfig::with('owner')->get();
+     
+        return view('shop.shop_list', compact('data'));
+    }
 }

@@ -106,8 +106,12 @@ class SubscriberController extends Controller
             'code' => 'required',
             'address' => 'required',
         ]);
-
-
+        if (isset($request['business'])) {
+            $this->validate($request, [
+                'tax_id' => 'required',
+            ]);
+        }
+        $account_type = (isset($request['business'])) ? '1' : '0';
         $input['password'] = Hash::make($input['password']);
         $input['name'] = $input['first_name'];
         $input['country_code'] = isset($input['code']) ? $input['code'] : '';
@@ -125,6 +129,8 @@ class SubscriberController extends Controller
                 'auto_email_update' => isset($input['auto_email_update']) ? '1' : '0',
                 'country_id' => isset($input['country']) ? $input['country'] : '',
                 'address' => isset($input['address']) ? $input['address'] : '',
+                'business_account' => $account_type,
+                'tax_id' => isset($input['tax_id']) ? $input['tax_id'] : '',
             ];
             subscriber::create($fields);
         }
@@ -181,6 +187,7 @@ class SubscriberController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
+
         $this->validate($request, [
             'name' => 'required',
             'last_name' => 'required',
@@ -194,7 +201,11 @@ class SubscriberController extends Controller
             'address' => 'required'
         ]);
 
-
+        if (isset($request['business'])) {
+            $this->validate($request, [
+                'tax_id' => 'required',
+            ]);
+        }
         if (!empty($input['password'])) {
             $request->validate([
                 'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
@@ -204,7 +215,11 @@ class SubscriberController extends Controller
         } else {
             $input = Arr::except($input, array('password'));
         }
+        $account_type = (isset($input['business'])) ? '1' : '0';
         $input['country_code'] = isset($input['code']) ? $input['code'] : '';
+        $input['business_account'] = $account_type;
+        $input['tax_id'] =  isset($input['tax_id']) ? $input['tax_id'] : '';
+
 
         $user = User::find($id);
         $user->update($input);

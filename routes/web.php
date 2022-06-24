@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::resource('users', UserController::class);
     Route::resource('subscriber', SubscriberController::class);
     // Route::resource('shoplist', ShopListController::class);
+ 
+    Route::any('/shop-list', [ShopListController::class, 'shopList'])->name('shop-list');
     Route::any('/shoplist/{id}', [ShopListController::class, 'index'])->name('shoplist');
     Route::any('/add-shoplist/{id}', [ShopListController::class, 'create'])->name('add-shoplist');
     Route::any('/delete_shoplist', [ShopListController::class, 'destroy'])->name('delete_shoplist');

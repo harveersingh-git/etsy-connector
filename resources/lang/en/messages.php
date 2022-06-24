@@ -115,7 +115,12 @@ return [
     'etsy_setting'=>'Etsy Setting',
     'add_etsy_setting'=>'Add Etsy Setting',
     'edit_etsy_setting'=>'Edit Etsy Setting',
-    'address'=>'Address'
+    'address'=>'Address',
+    'Business'=>'Business',
+    'Tax ID'=>'Tax ID',
+    'shop-list'=>'Shop List',
+    'contact'=>'Contact'
+
 
 
 

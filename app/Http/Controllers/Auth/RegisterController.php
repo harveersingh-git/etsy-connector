@@ -55,25 +55,47 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6',
-            // 'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
-            'country_code' => ['required'],
-            'mobile' => ['required', 'string', 'max:25', 'unique:users'],
-            'state' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'country' => 'required',
-            'address' => 'required',
+        if (isset($data['business'])) {
 
 
-        ]);
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+                'password_confirmation' => 'min:6',
+                // 'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
+                'country_code' => ['required'],
+                'mobile' => ['required', 'string', 'max:25', 'unique:users'],
+                'state' => 'required',
+                'city' => 'required',
+                'zip' => 'required',
+                'country' => 'required',
+                'address' => 'required',
+                'tax_id' => 'required',
+
+            ]);
+        } else {
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+                'password_confirmation' => 'min:6',
+                // 'password_confirmation' => ['required', 'string', 'min:8', 'confirmed'],
+                'country_code' => ['required'],
+                'mobile' => ['required', 'string', 'max:25', 'unique:users'],
+                'state' => 'required',
+                'city' => 'required',
+                'zip' => 'required',
+                'country' => 'required',
+                'address' => 'required',
+
+
+            ]);
+        }
     }
 
     /**
@@ -84,6 +106,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+
+        $account_type = (isset($data['business'])) ? '1' : '0';
         $user =  User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
@@ -91,7 +116,8 @@ class RegisterController extends Controller
             'country_code' => $data['country_code'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
-
+            'business_account' => $account_type,
+            'tax_id' => isset($data['tax_id']) ? $data['tax_id'] : '',
             // 'country_id' => isset($data['country']) ? $data['country'] : '',
         ]);
         $user->assignRole('Subscriber');

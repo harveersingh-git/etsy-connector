@@ -30,7 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'mobile',
         'profile_image',
         'active',
-        'country_code'
+        'country_code',
+        'business_account',
+        'tax_id'
     ];
 
     /**
