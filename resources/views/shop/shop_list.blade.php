@@ -58,7 +58,7 @@
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->shop_name}}</td>
-                                        <td class="text-center">{{$value->owner['email']}}</td>
+                                        <td class="text-center">{{isset($value->owner['email'])?$value->owner['email']:'N/A'}}</td>
                                         <td class="text-center">{{$value->owner['country_code']}}-{{$value->owner['mobile']}}</td>
                                      
                                     </tr>
