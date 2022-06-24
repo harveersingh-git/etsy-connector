@@ -61,7 +61,7 @@
                                 {{ csrf_field() }}
 
                                 <div class="row clearfix">
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label> {{__('messages.current_password')}}<span style="color: red;">*</span></label>
                                             <input id="current-password" type="password" class="form-control" name="current-password" placeholder="current-password" required>
@@ -74,7 +74,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label> {{__('messages.new_password')}}<span style="color: red;">*</span></label>
                                             <input id="new-password" type="password" class="form-control" name="new-password" placeholder="new password" required>
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label> {{__('messages.confirm_password')}}<span style="color: red;">*</span></label>
                                             <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" placeholder="confirm-password" required>
@@ -99,8 +99,8 @@
                                     <div class="col-lg-6 col-md-6 col-sm-12 pull-right">
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 col-sm-12 pull-right">
-                                        <div class="form-group ">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-group pull-right">
                                             <a href="{{url('/')}}" class="btn btn-light mr-2">
                                                 {{__('messages.back')}}
                                             </a>

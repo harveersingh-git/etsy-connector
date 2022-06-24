@@ -61,8 +61,8 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <div class="table-responsive fade show active" id="one">
-                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <div class="fade show active" id="one">
+                            <table class="table-responsive table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>

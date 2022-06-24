@@ -70,7 +70,7 @@
                                         @endhasanyrole
 
                                     </div>
-                                    <div class="header" style=" display: flex; justify-content: space-between;">
+                                    <div class="header product-list-new" style=" display: flex; justify-content: space-between;">
 
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
@@ -163,7 +163,7 @@
 
 
                                                 <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title="">Search</button>
-                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger ">Clear</a>
+                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr">Clear</a>
 
                                             </form>
                                         </div>
