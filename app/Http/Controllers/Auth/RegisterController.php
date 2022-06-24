@@ -118,6 +118,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'business_account' => $account_type,
             'tax_id' => isset($data['tax_id']) ? $data['tax_id'] : '',
+            'active' => '0',
             // 'country_id' => isset($data['country']) ? $data['country'] : '',
         ]);
         $user->assignRole('Subscriber');
