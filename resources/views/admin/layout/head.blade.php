@@ -31,6 +31,7 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/color_skins.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fonts/font-style.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <style>

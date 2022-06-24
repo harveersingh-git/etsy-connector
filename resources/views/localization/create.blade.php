@@ -31,15 +31,15 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="header" style=" display: flex; justify-content: space-between;">
-                        <span>
+                    <div class="header span-box-styles-header" style=" display: flex; justify-content: space-between;">
+                        <span class="span-box-styles">
                             <h2>
                                 <!-- {{__('messages.add_localization')}} -->
                             </h2>
-                            <span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> </a>
+                            <span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info download-btn-new"><i class="fa fa-download" aria-hidden="true"></i> </a>
                             </span>
                         </span>
-                        <span> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
+                        <span class="span-box-styles back-btn-style-new"> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
                                                 {{__('messages.back')}}
                                             </a></span>
                     </div>
@@ -58,7 +58,7 @@
                             {{ csrf_field() }}
 
                             <div class="row clearfix">
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="name" placeholder="Ex:en" value="{{old('name')}}">
@@ -71,7 +71,7 @@
                                         <!-- <span class="help-block">(999) 999-9999</span> -->
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.value')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="value" placeholder="Ex:english" value="{{old('value')}}" required>
@@ -83,7 +83,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="file" class="control-label">{{__('messages.file')}}<span style="color: red;">*</span></label>
                                         <input type="file" class="form-control" name="file" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->file)?($user->file):''}}" required>
@@ -95,11 +95,7 @@
                                         @endif
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-12 ">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 ">
                                     <div class="form-group pull-right">
                                         <a href="{{ url('localization') }}" class="btn btn-light">
                                             {{__('messages.back')}}
