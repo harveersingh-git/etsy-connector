@@ -10626,9 +10626,9 @@ span.span-box-styles.back-btn-style-new {
 .product-list-new .form-group {
     margin-bottom: 0;
 }
-.product-list-new button.btn.btn-sm.btn-primary.form-group {
+/* .product-list-new button.btn.btn-sm.btn-primary.form-group {
     margin-bottom: 17px;
-}
+} */
 
 @media screen and (max-width:767px) {
 	.product-list-new{

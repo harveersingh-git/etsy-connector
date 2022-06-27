@@ -75,7 +75,9 @@
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
                                                 @csrf
-                                                <div class="form-group" style="    position: relative;">
+                                                <div class="form-group" style="    position: relative;
+    height: 36px;
+    margin-right: 7px;">
 
                                                     <select class="select2-selection select2-selection--single form-select form-control shop" name="shop" id="shop">
                                                         <option value="">--Select shop--</option>
@@ -176,9 +178,9 @@
 
                                             </div>
                                         </div>
-                                        <div class="table-responsive">
+                                        <div class="">
                                             @if(count($data)>0)
-                                            <table class="table table-striped table-bordered table-hover" id="product_table">
+                                            <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">{{__('messages.sr_no')}}</th>
