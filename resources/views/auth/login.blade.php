@@ -85,7 +85,7 @@ Login
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
-                                <span>Don't have an account? <a href="{{url('register')}}">{{ __('Login') }}</a></span>
+                                <span>Don't have an account? <a href="{{url('register')}}">{{ __('Register') }}</a></span>
                             </div>
                         </form>
                     </div>
