@@ -3747,9 +3747,11 @@ html.fullscreen-bg #wrapper {
     -webkit-border-radius: 90px;
     -moz-border-radius: 90px;
     border-radius: 90px;
-    width: 90px;
+    width: 100px;
     vertical-align: top;
-    border: 2px solid
+    border: 2px solid;
+    height: 100px;
+    object-fit: cover;
 }
 
 .user-account .user-name {
@@ -10605,7 +10607,28 @@ span.span-box-styles.back-btn-style-new {
 .card .header {
     padding-bottom: 10px;
 }
-
+.product-list-new .select2-container .select2-selection--single {
+    height: 34px;
+}
+.product-list-new .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 31px;
+}
+.product-list-new .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 34px;
+}
+.product-list-new .select2-container--default .select2-selection--single {
+    border: 1px solid #ced4da;
+}
+.product-list-new .select2-container {
+    width: 100%!important;
+}
+.product-list-new .form-group {
+    margin-bottom: 0;
+}
+.product-list-new button.btn.btn-sm.btn-primary.form-group {
+    margin-bottom: 17px;
+}
 
 @media screen and (max-width:767px) {
 	.product-list-new{
