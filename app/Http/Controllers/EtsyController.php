@@ -450,8 +450,8 @@ class EtsyController extends Controller
                             ProductHistory::create($value);
                         }
                     }
-
-                    return redirect()->back()->with("success", "Product Sync successfully!");
+                    return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
+                    // return redirect()->back()->with("success", "Product Sync successfully!");
                 }
                 return redirect()->back()->with("success", "No product found for the given shop !");
             } else {

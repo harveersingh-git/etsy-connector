@@ -1,6 +1,7 @@
 @extends('admin.layout.head')
 
 @section('content')
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-progressbar/0.9.0/bootstrap-progressbar.min.js"></script>
 
 
 <style>
@@ -47,7 +48,9 @@
 
                         <div class="row clearfix">
                             <div class="col-lg-12">
+
                                 <div class="">
+
                                     <div class="header" style=" display: flex; justify-content: space-between;">
                                         <h2>
                                             <span>
@@ -70,19 +73,24 @@
                                         @endhasanyrole
 
                                     </div>
+
+
+                                    <div class="progress progress-striped active" style="display:none;" id="progress_div">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="25" id="progress_id"></div>
+                                        <input type="hidden" value="0" id="progress_input_hide">
+                                    </div>
+
+
                                     <div class="header product-list-new" style=" display: flex; justify-content: space-between;">
 
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
                                                 @csrf
-                                                <div class="form-group" style="    position: relative;
-    height: 36px;
-    margin-right: 7px;">
+                                                <div class="form-group" style="position: relative; height: 36px;margin-right: 7px;">
 
                                                     <select class="select2-selection select2-selection--single form-select form-control shop" name="shop" id="shop">
                                                         <option value="">--Select shop--</option>
                                                         @forelse($shops as $shop)
-                                                        <!-- {{($shop->id==$etsy_id)?'selected':''}} -->
                                                         <option value="{{$shop->id}}">{{$shop->shop_name}}</option>
                                                         @empty
                                                         <p>No shop</p>
@@ -97,18 +105,9 @@
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="language">
+                                                    <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="sync_language">
                                                         <option value="">Select a language</option>
-                                                        <!-- <option value="en">English</option>
-                                                                <option value="de">German</option>
-                                                                <option value="es">Spanish</option>
-                                                                <option value="fr">French</option>
-                                                                <option value="it">Italian</option>
-                                                                <option value="ja">Japanese</option>
-                                                                <option value="nl">Dutch</option>
-                                                                <option value="pl">Polish</option>
-                                                                <option value="pt">Portuguese</option>
-                                                                <option value="ru">Russian</option> -->
+
                                                     </select>
 
                                                     &nbsp&nbsp
@@ -117,7 +116,7 @@
 
 
 
-                                                <button type=" submit" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
+                                                <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
 
                                             </form>
                                         </div>
@@ -144,7 +143,7 @@
                                                 </div>
                                                 <div class="form-group">
 
-                                                    <select class="select2-selection select2-selection--single form-select form-control language_search" name="language" id="language">
+                                                    <select class="select2-selection select2-selection--single form-select form-control language_search" name="language" id="language_search">
                                                         <option value="">Select a language</option>
                                                         <!-- <option value="en">English</option>
                                                                 <option value="de">German</option>
@@ -424,6 +423,86 @@
                 swal("{{__('messages.your_record_safe')}}");
             }
         });
+
+    });
+
+
+
+
+    $(document).ready(function() {
+        $('.progress .progress-bar').progressbar({
+            display_text: 'fill',
+            use_percentage: false
+        });
+    });
+
+    $(document).ready(function() {
+
+
+        $(document).on('click', '#sync_prduct_btn', function() {
+            // $('#sync_prduct_btn').click(function() {
+
+            // $('#sync_form').submit();
+
+            var shop_id = $('#shop').find(":selected").val();
+            var token = $('input[name="_token"]').attr('value');
+            var lang = $('#sync_language').find(":selected").val();
+
+            if (shop_id.length == '0') {
+                toastr.error("please select the shop");
+            } else {
+                $('#progress_div').show();
+                $(this).prop('disabled', true);
+                var data = {
+                    shop: shop_id,
+                    language: lang
+
+                };
+                var url = $(location).attr('href'),
+                    parts = url.split("/"),
+                    last_part = parts[parts.length - 1];
+
+                $.ajax({
+                    type: 'POST',
+                    url: base_url + '/etsy-list-data',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-Token': token
+                    },
+
+                    success: function(data) {
+                       
+                        if (data.status = "true") {
+                            var total = data.data.count
+
+                            for (var i = 0; i <= total; i++) {
+                                var width = parseInt(i) / parseInt(total) * 100;
+                                $('#progress_id').width(Math.round(width) + '%');
+                                $('#progress_id').attr('data-transitiongoal', width);
+                                $('#progress_id').text(Math.round(width) + '/100');
+                                $('#progress_input_hide').val(Math.round(width));
+
+                            }
+
+
+                        } else {
+                            toastr.error(data.message);
+                        }
+
+                    }
+                })
+            }
+
+        });
+
+        setInterval(function() {
+            var progress_input_hide = $('#progress_input_hide').val();
+            if (progress_input_hide == '100') {
+                window.location.reload();
+            }
+        }, 9000);
 
     });
 </script>
