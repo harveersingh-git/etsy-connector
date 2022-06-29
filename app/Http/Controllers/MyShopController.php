@@ -45,7 +45,7 @@ class MyShopController extends Controller
                 // 'key_string' => 'required',
                 // 'shared_secret' => 'required',
                 'shop_name' => 'required',
-                'user_name' => 'required',
+                // 'user_name' => 'required',
                 // 'app_url' => 'required|url',
 
             ]);
@@ -65,8 +65,8 @@ class MyShopController extends Controller
             ];
 
             $data = EtsyConfig::create($input);
-
-            return redirect('my-shop')->with('success', 'Shop added Successfully');
+        
+            return redirect('etsy-list-data')->with(['success' => "Your shop has been created successfully. We are syncing your products please wait for a while until it's done", 'new_shop_id' => $data->id]);
         }
         return view('my-shop.create', compact('url', 'country', 'id'));
     }
@@ -138,7 +138,7 @@ class MyShopController extends Controller
             // 'key_string' => 'required',
             // 'shared_secret' => 'required',
             'shop_name' => 'required',
-            'user_name' => 'required',
+            // 'user_name' => 'required',
             // 'app_url' => 'required|url',
 
         ]);

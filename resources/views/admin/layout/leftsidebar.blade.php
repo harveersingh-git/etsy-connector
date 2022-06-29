@@ -30,9 +30,12 @@
         </div>
         <nav id="left-sidebar-nav" class="sidebar-nav">
             <ul id="main-menu" class="metismenu">
-                <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('/') }}"><i class="icon-home"></i><span>{{__('messages.dashboard')}}</span></a></li>
+                
                 @hasanyrole('Admin')
+                <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('/') }}"><i class="icon-home"></i><span>{{__('messages.dashboard')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'subscriber' ? 'active' : null }}"><a href="{{ url('/subscriber') }}"><i class="icon-users"></i><span>{{__('messages.subscriber')}}</span></a></li>
+                <li class="{{ Request::segment(1) === 'shop-list' ? 'active' : null }}"><a href="{{ url('/shop-list') }}"><i class="fa fa-shopping-cart"></i><span>{{__('messages.shop-list')}}</span></a></li>
+
                 @endhasanyrole
                 @hasanyrole('Subscriber')
                 <li class="{{ Request::segment(1) === 'my-shop' ? 'active' : null }}"><a href="{{ url('/my-shop') }}"><i class="fa fa-shopping-cart"></i><span>{{__('messages.myshop')}}</span></a></li>

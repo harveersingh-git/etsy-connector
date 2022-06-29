@@ -30,7 +30,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'mobile',
         'profile_image',
         'active',
-        'country_code'
+        'country_code',
+        'business_account',
+        'tax_id',
+        'email_verified_at'
     ];
 
     /**
@@ -59,7 +62,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(subscriber::class, 'user_id', 'id');
     }
 
+    public function social_accounts()
 
+    {
+
+        return $this->hasOne('App\Models\SocialAccount', 'user_id');
+
+    }
 
     // public static function boot()
     // {

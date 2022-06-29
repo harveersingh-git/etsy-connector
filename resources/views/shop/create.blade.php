@@ -128,7 +128,7 @@
                                         <label for="first_name" class="control-label">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
                                         <span class="tooltips">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                            <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank"> click Here..</a> </span>
+                                            <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank">Click here to get your shop ID</a> </span>
 
                                         </span>
                                         <input type="text" class="form-control" placeholder="Ex:spgp4n98ejs58585" name="shop_name" value="{{isset($user->shop_name)?($user->shop_name):old('shop_name')}}" required>
@@ -141,7 +141,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.user_name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="user_name" placeholder="Ex:abc@yopmail.com" value="{{isset($user->user_name)?($user->user_name):old('user_name')}}" required>
@@ -152,8 +152,8 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                </div> -->
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.country')}}</label>
                                         <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country_id" value="" id="country">
@@ -173,8 +173,8 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                </div> -->
+                                <!-- <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.store')}}</label>
                                         <input type="text" class="form-control" name="store" placeholder="Ex:abcshop" value="{{isset($user->store_id)?($user->store_id):old('store')}}">
@@ -185,10 +185,10 @@
                                         </span>
                                         @endif
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <label for="first_name" class="control-label">{{__('messages.default_language')}}</label>
+                                    <label for="first_name" class="control-label">{{__('messages.default_language')}}<span style="color: red;">*</span></label>
                                     <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language">
 
                                         <option value="en" {{ isset($data->language) && ( $data->language== 'en' ) ? 'selected' : '' }}>English</option>

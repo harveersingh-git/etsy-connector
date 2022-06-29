@@ -10639,15 +10639,15 @@ span.span-box-styles.back-btn-style-new {
 .product-list-new .select2-container--default .select2-selection--single {
     border: 1px solid #ced4da;
 }
-.product-list-new .select2-container {
-    width: 100%!important;
-}
+
 .product-list-new .form-group {
     margin-bottom: 0;
 }
-.product-list-new button.btn.btn-sm.btn-primary.form-group {
+/* .product-list-new button.btn.btn-sm.btn-primary.form-group {
     margin-bottom: 17px;
-}
+} */
+
+@media screen and (max-width:767px) {
 	.product-list-new{
 		    display: block!important;
 	}

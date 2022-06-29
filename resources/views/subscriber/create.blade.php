@@ -119,16 +119,14 @@
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
                                 <div class="form-group">
-                                    @php
-                                    $countrycode = json_decode(file_get_contents(public_path() . '/' . 'countryCode/CountryCodes.json'));
-                                    @endphp
+
                                     <label for="code" class="control-label">{{__('messages.country_code')}}<span style="color: red;">*</span></label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="code" value="" id="code">
                                         <option value="">--Please Select--</option>
 
-                                        @forelse($countrycode as $nation)
+                                        @forelse($country as $nation)
 
-                                        <option value="{{$nation->dial_code}}" {{($nation->dial_code==old('code')?'selected':'')}}>{{$nation->name}}({{$nation->dial_code}})</option>
+                                        <option value="{{$nation->code}}" {{($nation->code==old('code')?'selected':'')}}>{{$nation->name}}({{$nation->code}})</option>
                                         @empty
                                         <option value="">No country found</option>
                                         @endforelse
@@ -248,6 +246,30 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group clearfix">
+                                                <label class="fancy-checkbox element-left">
+                                                    <input class="form-check-input" type="checkbox" name="business" id="business" {{ old('business') ? 'checked' : '' }}>
+                                                    <span> {{ __('messages.Business') }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col" id="tex_id_div" style="display: none;">
+                                            <label for="password-confirm" class="control-label sr-only">{{ __('Tax ID') }}</label>
+                                            <input type="text" id="tax_id" type="text" class="form-control @error('Tax ID') is-invalid @enderror" name="tax_id" placeholder="Tax ID  ">
+                                            @if ($errors->has('tax_id'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('tax_id') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
@@ -257,7 +279,10 @@
                                     </label>
                                 </div>
                             </div>
-
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group pull-right">
                                     <a href="{{url('/subscriber')}}" class="btn btn-light">
@@ -287,6 +312,22 @@
 
 @section('script')
 <script>
+    $(document).ready(function() {
+        if ($('#business').is(':checked')) {
+            $("#tex_id_div").show();
+        } else {
+            $('#tax_id').val('');
+            $("#tex_id_div").hide();
+        }
+    });
+    $('#business').click(function() {
+        if ($(this).is(':checked')) {
+            $("#tex_id_div").show();
+        } else {
+            $('#tax_id').val('');
+            $("#tex_id_div").hide();
+        }
+    });
     $("#code").select2({
         placeholder: "Select a country code",
         allowClear: true

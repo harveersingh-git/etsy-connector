@@ -6,15 +6,15 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>{{__('messages.myshop')}}</h2>
+                <h2>{{__('messages.shop_list')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
                     <!-- <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">{{__('messages.subscriber')}}</a></li> -->
-                    <li class="breadcrumb-item active">{{__('messages.myshop')}}</li>
+                    <li class="breadcrumb-item active">{{__('messages.shop_list')}}</li>
                 </ul>
-                <a href="{{ url('add-my-shop') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
+                <!-- <a href="{{ url('add-shoplist') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a> -->
             </div>
         </div>
     </div>
@@ -24,12 +24,7 @@
 
             <div class="col-lg-12">
                 <div class="card">
-                <div class="header" style=" display: flex; justify-content: space-between;">
-
-                        <!-- <h2> {{__('messages.myshop')}}</h2> -->
-                  
-                    </div>
-                    <div class="body tab-content">
+            <div class="body tab-content">
                         @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
@@ -40,21 +35,21 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <div class="fade show active" id="one">
-                            <table class="table-responsive table table-bordered table-striped table-hover dataTable js-exportable">
+                        <div class="table-responsive fade show active" id="one">
+                            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                    
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th class="text-center">{{__('messages.contact')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                   
-                                        <th>{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th  class="text-center">{{__('messages.contact')}}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -63,17 +58,9 @@
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->shop_name}}</td>
-                               
-
-                                        <td>
-                                            <a type="button" href="{{url('/my-shop/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
-                                            <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
-
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
-
-
-                                        </td>
-
+                                        <td class="text-center">{{isset($value->owner['email'])?$value->owner['email']:'N/A'}}</td>
+                                        <td class="text-center">{{isset($value->owner['email'])?$value->owner['country_code']:'N/A'}} - {{isset($value->owner['mobile'])?$value->owner['mobile']:'N/A'}}</td>
+                                     
                                     </tr>
                                     @endforeach
                                     @else
@@ -115,7 +102,7 @@
             if (willDelete) {
                 $.ajax({
                     type: "POST",
-                    url: "{{url('delete_myshoplist')}}",
+                    url: "{{url('delete_shoplist')}}",
                     data: {
                         _token: '{{csrf_token()}}',
                         id: id

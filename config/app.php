@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
 
 
         /*
@@ -233,6 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'GetCountry' => App\Http\Helper\getCountry::class,
         'Language' => App\Http\Helper\Language::class,
+        'CurrentLocation' => App\Http\Helper\currentLocation::class,
+        'Location' => 'Stevebauman\Location\Facades\Location',
 
     ],
 

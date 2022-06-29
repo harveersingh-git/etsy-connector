@@ -26,5 +26,9 @@ class EtsyConfig extends Model
         'language'
     ]; 
 
+    public function owner(){
+        return $this->belongsTo(User::class, 'user_id','id');
+    }
+
   
 }

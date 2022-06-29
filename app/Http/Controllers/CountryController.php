@@ -18,7 +18,7 @@ class CountryController extends Controller
         $data = Country::orderBy('id', 'DESC')->get();
 
         return view('country.index', compact('data'));
-        // ->with('i', ($request->input('page', 1) - 1) * 5);
+      
     }
 
     /**

@@ -49,7 +49,7 @@ Login
                         </div>
                         @endif
                         @if (session('success'))
-                        <div class="alert alert-success" >
+                        <div class="alert alert-success">
                             {{ session('success') }}
                         </div>
                         @endif
@@ -83,9 +83,18 @@ Login
                             <button type="button" class="btn btn-primary btn-lg btn-block" id="resened_btn"> {{ __('Resend Link') }}</button>
 
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Login') }}</button>
+                            <div class="text-center text-muted"> or continue with  </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12  text-center">
+                                    <div class="">
+                                        <a href="{{route('redirectToProvider', ['facebook'])}}" class="btn btn-primary btn-sm  " data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                                        <a href="{{route('redirectToProvider', ['google'])}}" class="btn btn-secondary btn-sm " data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>
-                                <span>Don't have an account? <a href="{{url('register')}}">{{ __('Login') }}</a></span>
+                                <span>Don't have an account? <a href="{{url('register')}}">{{ __('Register') }}</a></span>
                             </div>
                         </form>
                     </div>
