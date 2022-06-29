@@ -103,29 +103,28 @@
                                                     @endif
                                                     &nbsp&nbsp
                                                 </div>
+                                                <input type="text" name="sync_type" value="User" id="sync_type" style="display:none">
+
                                                 <div class="form-group">
 
-                                                    <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="sync_language">
+                                                    <select class="select2-selection select2-selection--single form-select form-control language" name="language" id="sync_language" style="display: none">
                                                         <option value="">Select a language</option>
 
                                                     </select>
 
                                                     &nbsp&nbsp
                                                 </div>
-
-
-
-
                                                 <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
 
                                             </form>
+                                            <input type="hidden" value="{{session()->get('new_shop_id')}}" id="new_shop_id">
                                         </div>
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="Get" class="form-inline" id="">
                                                 @csrf
                                                 <div class="form-group" style="    position: relative;">
 
-                                                    <select class="select2-selection select2-selection--single form-select form-control shop_search" name="shop" id="shop">
+                                                    <select class="select2-selection select2-selection--single form-select form-control shop_search" name="shop_name" id="shop_name">
                                                         <option value="">--Select shop--</option>
                                                         @forelse($shops as $shop)
 
@@ -177,9 +176,9 @@
 
                                             </div>
                                         </div>
-                                        <div class="">
+                                        <div class="table-responsive ">
                                             @if(count($data)>0)
-                                            <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
+                                            <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">{{__('messages.sr_no')}}</th>
@@ -187,6 +186,8 @@
                                                         <th class="text-center">{{__('messages.Date')}}</th>
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                                                         <th class="text-center">{{__('messages.language')}}</th>
+                                                        <th class="text-center">{{__('messages.sync_by')}}</th>
+                                                        <th class="text-center">{{__('messages.sync_type')}}</th>
                                                         <th class="text-center">{{__('messages.action')}}</th>
 
                                                     </tr>
@@ -197,7 +198,7 @@
                                                     @foreach($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
-                                                        <td>{{substr($value->file_name,0,50)}}</td>
+                                                        <td>{{substr($value->file_name,0,8)}}</td>
 
                                                         <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
                                                         <td>{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
@@ -209,6 +210,8 @@
 
                                                         @endphp
                                                         <td>{{ $current_language }}</td>
+                                                        <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
+                                                        <td> {{$value->sync_type}}</td>
                                                         <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}">
@@ -367,6 +370,11 @@
         placeholder: "Select a shop",
         allowClear: true
     });
+    $("#shop_name").select2({
+        placeholder: "Select a shop",
+        allowClear: true
+    });
+
     $("#language").select2({
         placeholder: "Select a language",
         allowClear: true
@@ -440,6 +448,7 @@
 
 
         $(document).on('click', '#sync_prduct_btn', function() {
+
             // $('#sync_prduct_btn').click(function() {
 
             // $('#sync_form').submit();
@@ -447,6 +456,7 @@
             var shop_id = $('#shop').find(":selected").val();
             var token = $('input[name="_token"]').attr('value');
             var lang = $('#sync_language').find(":selected").val();
+            var sync_type = $('#sync_type').val();
 
             if (shop_id.length == '0') {
                 toastr.error("please select the shop");
@@ -455,7 +465,8 @@
                 $(this).prop('disabled', true);
                 var data = {
                     shop: shop_id,
-                    language: lang
+                    language: lang,
+                    sync_type: sync_type
 
                 };
                 var url = $(location).attr('href'),
@@ -473,7 +484,7 @@
                     },
 
                     success: function(data) {
-                       
+
                         if (data.status = "true") {
                             var total = data.data.count
 
@@ -491,7 +502,13 @@
                             toastr.error(data.message);
                         }
 
-                    }
+                    },
+                    error: function(xhr, status, data) {
+                        toastr.error('Please check your shop id.');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 10000);
+                    },
                 })
             }
 
@@ -502,9 +519,34 @@
             if (progress_input_hide == '100') {
                 window.location.reload();
             }
-        }, 9000);
+        }, 10000);
 
     });
+
+
+    $(window).on("load", function() {
+        var new_shop_id = $('#new_shop_id').val()
+        // Executes when complete page is fully loaded, including
+        // all frames, objects and images
+        setTimeout(
+
+            clickSync(), 5000);
+    });
+
+
+    function clickSync() {
+        var new_shop_id = $('#new_shop_id').val()
+
+        if (new_shop_id) {
+
+            $('select[name^="shop"] option[value="' + new_shop_id + '"]').attr("selected", "selected").trigger('change')
+
+            setTimeout(() => {
+                $('#sync_prduct_btn').get(0).click();
+            }, 10000);
+
+        }
+    }
 </script>
 @endsection
 @endsection

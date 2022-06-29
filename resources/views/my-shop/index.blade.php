@@ -46,14 +46,14 @@
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.app_url')}}</th>
+                    
                                         <th>{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.app_url')}}</th>
+                   
                                         <th>{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
@@ -63,7 +63,7 @@
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->shop_name}}</td>
-                                        <td class="text-center">{{$value->app_url}} </td>
+                               
 
                                         <td>
                                             <a type="button" href="{{url('/my-shop/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>

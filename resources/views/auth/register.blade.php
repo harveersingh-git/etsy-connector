@@ -3,12 +3,17 @@
 Register
 @endsection
 @section('content')
+@php
+
+$location = \CurrentLocation::getLocation();
+
+@endphp
 <style>
     .select2-container--default .select2-selection--single {
         border: 0px solid #aaa !important;
     }
 
-    span#select2-code-container {
+    span#select2-code-container,span#select2-country-container {
         box-shadow: none;
         background-color: #fff;
         font-size: 14px;
@@ -133,7 +138,7 @@ $country = \GetCountry::getCountryCode();
 
                                             @forelse($country as $nation)
 
-                                            <option value="{{$nation->code}}" {{(old('country_code')==$nation->code)?'selected':''}}>{{$nation->name}}({{$nation->code}})</option>
+                                            <option value="{{$nation->code}}" {{(ucfirst($nation->name)== $location->countryName)?'selected':''}}>{{$nation->name}}({{$nation->code}})</option>
                                             @empty
                                             <option value="">No country found</option>
                                             @endforelse
@@ -171,7 +176,7 @@ $country = \GetCountry::getCountryCode();
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="city" class="control-label sr-only">{{ __('City') }}</label>
-                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required placeholder="city" autocomplete="some-unrecognised-value" autofocus>
+                                        <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{(isset($location->cityName)) ? $location->cityName:old('city') }}" required placeholder="city" autocomplete="some-unrecognised-value" autofocus>
 
                                         @error('city')
                                         <span class="invalid-feedback" role="alert">
@@ -184,7 +189,7 @@ $country = \GetCountry::getCountryCode();
                             
                                             <div class="form-group"> -->
                                         <label for="state" class="control-label sr-only">{{ __('state') }}</label>
-                                        <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{ old('state') }}" required placeholder="state" autocomplete="some-unrecognised-value" autofocus>
+                                        <input id="state" type="text" class="form-control @error('state') is-invalid @enderror" name="state" value="{{(isset($location->regionName)) ? $location->regionName:old('state') }}" required placeholder="state" autocomplete="some-unrecognised-value" autofocus>
 
                                         @error('state')
                                         <span class="invalid-feedback" role="alert">
@@ -198,7 +203,7 @@ $country = \GetCountry::getCountryCode();
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="zip" class="control-label sr-only">{{ __('Postal Code') }}</label>
-                                        <input type="number" min="1" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" value="{{ old('zip') }}" required autocomplete="some-unrecognised-value" placeholder="postal code" autofocus>
+                                        <input type="number" min="1" class="form-control @error('zip') is-invalid @enderror" id="zip" name="zip" value="{{(isset($location->zipCode)) ? $location->zipCode : old('zip') }}" required autocomplete="some-unrecognised-value" placeholder="postal code" autofocus>
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -208,12 +213,12 @@ $country = \GetCountry::getCountryCode();
                                     </div>
                                     <div class="col">
                                         <label for="signin-email" class="control-label sr-only">{{ __('Contry') }}</label>
-                                        <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="country" value="" id="country">
+                                        <select class="select2-selection form-select form-control" data-control="select2" data-placeholder="Please select" name="country" value="" id="country">
                                             <option value="">--country--</option>
 
                                             @forelse($country as $nation)
 
-                                            <option value="{{$nation->id}}" {{(old('country')==$nation->id)?'selected':''}}>{{$nation->name}}</option>
+                                            <option value="{{$nation->id}}" {{(ucfirst($nation->name)== $location->countryName)?'selected':''}}>{{$nation->name}}</option>
                                             @empty
                                             <option value="">No country found</option>
                                             @endforelse
@@ -305,6 +310,10 @@ $country = \GetCountry::getCountryCode();
 
     $("#code").select2({
         placeholder: "Select a country code",
+        allowClear: true
+    });
+    $("#country").select2({
+        placeholder: "Select a country",
         allowClear: true
     });
 

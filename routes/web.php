@@ -31,6 +31,10 @@ use App\Http\Controllers\EtsySettingController;
 Route::any('/', function () {
     return redirect('/login');
 });
+Route::get('/provider/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('redirectToProvider');
+
+Route::get('/provider/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
+
 
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['signed', 'throttle:6,1'])

@@ -119,7 +119,9 @@ return [
     'Business'=>'Business',
     'Tax ID'=>'Tax ID',
     'shop-list'=>'Shop List',
-    'contact'=>'Contact'
+    'contact'=>'Contact',
+    'sync_by'=>'Sync By',
+    'sync_type'=>'Sync Type'
 
 
 

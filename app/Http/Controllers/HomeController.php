@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 
+
 class HomeController extends Controller
 {
     /**
@@ -29,6 +30,7 @@ class HomeController extends Controller
     public function index()
     {
         $role =  Auth::user()->roles->pluck('name')[0];
+     
         if ($role == 'Admin') {
             $data['total_users'] = User::count();
             $data['active_users'] = User::where('active', '1')->count();
@@ -38,7 +40,14 @@ class HomeController extends Controller
 
             return view('home', compact('data'));
         } else {
-            return view('subscriber_home');
+
+            $exist =   EtsyConfig::where('user_id', auth()->user()->id)->first();
+            if ($exist) {
+                return redirect('/etsy-list-data');
+            } else {
+                return redirect('/add-my-shop');
+            }
+            // return view('subscriber_home');
         }
     }
 
@@ -150,7 +159,7 @@ class HomeController extends Controller
     function changeLang($langcode)
     {
 
-  
+
         App::setLocale($langcode);
         session()->put("lang_code", $langcode);
         return redirect()->back();

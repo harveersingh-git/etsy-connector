@@ -287,18 +287,19 @@ class EtsyController extends Controller
 
                 $shops = EtsyConfig::where('id', $etsy_id)->get();
 
-                $query = DownloadHistory::with('shops');
+                $query = DownloadHistory::with(['shops', 'user']);
                 if (isset($request['language']) && $request['language'] != null) {
 
                     $query->orWhere('language', $request['language']);
                 }
                 $data = $query->where('shop_id', $etsy_id)->get();
+                // dd(      $data->toArray());
             } else {
 
                 $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
                 $shops_ids = $shops->pluck('id');
 
-                $query =  DownloadHistory::with('shops');
+                $query =  DownloadHistory::with(['shops', 'user']);
                 if (isset($request['language']) && $request['language'] != null) {
 
                     $query->where('language', $request['language']);
@@ -316,9 +317,10 @@ class EtsyController extends Controller
             $request->validate([
                 'shop' => 'required',
             ]);
-
+      
             $input_shop_id = $request['shop'];
             $language = isset($request['language']) ? $request['language'] : 'en';
+            $sync_type = isset($request['sync_type']) ? $request['sync_type'] : 'Auto';
             $resultSetting = EtsySettings::first();
             $result = EtsyConfig::where('id', $request['shop'])->first();
             // dd($resultSetting->toArray());
@@ -442,7 +444,7 @@ class EtsyController extends Controller
                         }
                     }
 
-                    $download_history_id =   $this->exportCsv($input_shop_id, $language);
+                    $download_history_id =   $this->exportCsv($input_shop_id, $language, $sync_type);
 
                     if (count($final_array) > 0) {
                         foreach ($final_array as $value) {
@@ -606,7 +608,7 @@ class EtsyController extends Controller
 
 
 
-    public function exportCsv($shop_name = null,  $language)
+    public function exportCsv($shop_name = null,  $language, $sync_type)
     {
         $total_language = [
             'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
@@ -624,12 +626,15 @@ class EtsyController extends Controller
         $date = Carbon::now()->toDateString();
         $t = time();
         $click =  EtsyProduct::where('shop_id', $shop_name)->get();
+        $get_name = EtsyConfig::find($shop_name);
 
         if (count($click) > 0) {
 
             $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
-            $fileName = $date . '-' . $t . 'productlist.csv';
+            // $fileName = $language . '-' . 'productlist.csv';
+            $fileName = $get_name->shop_name . '-' . $language . '-' . 'productlist.csv';
+            // $fileName = $date . '-' . $t . 'productlist.csv';
             // $filepath = public_path('uploads/');
 
             $tasks = $click;
@@ -680,7 +685,8 @@ class EtsyController extends Controller
                 'file_name' => $fileName,
                 'date' =>  $date,
                 'shop_id' => $shop_name,
-                'language' =>  $language
+                'language' =>  $language,
+                'sync_type' => $sync_type
 
             ];
             $data =   DownloadHistory::create($array);

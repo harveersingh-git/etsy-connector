@@ -49,7 +49,7 @@ class ShopListController extends Controller
                 // 'key_string' => 'required',
                 // 'shared_secret' => 'required',
                 'shop_name' => 'required',
-                'user_name' => 'required',
+                // 'user_name' => 'required',
                 // 'app_url' => 'required|url',
             ]);
 
@@ -132,7 +132,7 @@ class ShopListController extends Controller
             // 'key_string' => 'required',
             // 'shared_secret' => 'required',
             'shop_name' => 'required',
-            'user_name' => 'required',
+            // 'user_name' => 'required',
             // 'app_url' => 'required|url',
             // 'language' => 'required'
 
