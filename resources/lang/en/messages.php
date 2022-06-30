@@ -121,7 +121,7 @@ return [
     'shop-list'=>'Shop List',
     'contact'=>'Contact',
     'sync_by'=>'Sync By',
-    'sync_type'=>'Sync Type'
+    'sync_type'=>'Type'
 
 
 

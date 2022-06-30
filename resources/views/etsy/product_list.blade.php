@@ -182,11 +182,11 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                      
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <th class="text-center">{{__('messages.Date')}}</th>
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                                                        <th class="text-center">{{__('messages.country')}}</th>
+                                                        <th class="text-center">{{__('messages.language')}}</th>
                                                         <th class="text-center">{{__('messages.sync_by')}}</th>
                                                         <th class="text-center">{{__('messages.sync_type')}}</th>
                                                         <th class="text-center">{{__('messages.action')}}</th>
@@ -198,7 +198,7 @@
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
                                                     <tr>
-                                                        <th>{{ $key+1 }}</th>
+                                                      
                                                         <td>{{substr($value->file_name,0,8)}}</td>
 
                                                         <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
