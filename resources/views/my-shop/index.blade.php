@@ -47,14 +47,14 @@
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                     
-                                        <th>{{__('messages.action')}}</th>
+                                        <th  class="text-center"> {{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                    
-                                        <th>{{__('messages.action')}}</th>
+                                        <th  class="text-center">{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
