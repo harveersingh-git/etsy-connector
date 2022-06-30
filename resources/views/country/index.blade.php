@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
                     <li class="breadcrumb-item active">{{__('messages.Country List')}}</li>
                 </ul>
-                <a href="{{ route('country.create') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
+                <a href="{{ route('country.create') }}" class="btn btn-sm btn-primary" title=""><i class="fa fa-plus" aria-hidden="true"></i>{{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -68,8 +68,8 @@
                                         <td class="text-center">{{$value->code}} </td>
 
                                         <td>
-                                            <a type="button" href="{{ route('country.edit',$value->id) }}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                            <a type="button" href="{{ route('country.edit',$value->id) }}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"></i></a>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
                                         </td>
 
                                     </tr>

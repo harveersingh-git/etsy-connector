@@ -218,13 +218,13 @@
                                         </button> -->
                                     </div> 
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url('shoplist') }}/{{$id}}" class="btn btn-light">
                                             {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            {{__('messages.update')}}
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.update')}}
                                         </button>
                                     </div>
                                 </div>

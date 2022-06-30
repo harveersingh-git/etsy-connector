@@ -115,7 +115,7 @@
 
                                                     &nbsp&nbsp
                                                 </div>
-                                                <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title="">Sync Product</button>
+                                                <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title=""><i class="fa fa-refresh" aria-hidden="true"></i>Sync Product</button>
 
                                             </form>
                                             <input type="hidden" value="{{session()->get('new_shop_id')}}" id="new_shop_id">
@@ -163,8 +163,8 @@
 
 
 
-                                                <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title="">Search</button>
-                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr">Clear</a>
+                                                <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title=""><i class="fa fa-search" aria-hidden="true"></i>Search</button>
+                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr"><i class="fa fa-times" aria-hidden="true"></i>Clear</a>
 
                                             </form>
                                         </div>
@@ -216,14 +216,17 @@
                                                         <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
                                                         <td> {{$value->sync_type}}</td>
                                                         <td>
-                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info" title="Download Muli language file">
+                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download Multi Lang">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                             </a>
+
+                                                            <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
-                                                            <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info" title="Download single language file">
-                                                                <i class="fa fa-download" aria-hidden="true"></i> </a>
-                                                            <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}">
+                                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
-                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary" id="#"><i class="fa fa-eye"></i> </a> <a href="javascript:void(0);" class="delete btn btn-danger" id="{{$value->id}}"><i class="fa fa-trash-o"></i> </a>
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="View" ><i class="fa fa-eye "></i> </a>
+                                                            <a href="javascript:void(0);" class="delete btn btn-danger  btn-gray" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                                                         </td>
 
 

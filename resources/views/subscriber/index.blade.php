@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
                     <li class="breadcrumb-item active">{{__('messages.subscriber')}}</li>
                 </ul>
-                <a href="{{ route('subscriber.create') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a>
+                <a href="{{ route('subscriber.create') }}" class="btn btn-sm btn-primary" title=""><i class="fa fa-plus" aria-hidden="true"></i>{{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -34,10 +34,10 @@
                         <ul class="header-dropdown dropdown dropdown-animated scale-left">
                             <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
                             <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-success js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}">{{__('messages.active')}}</a>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-success js-sweetalert text-white" id="" title="Active" href="{{url('subscriber')}}"><i class="fa fa-check-circle-o" aria-hidden="true"></i> {{__('messages.active')}}</a>
                             </li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}">{{__('messages.in_active')}}</a></li>
-                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}">{{__('messages.trash')}}</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{__('messages.in_active')}}</a></li>
+                            <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}"><i class="fa fa-trash-o" aria-hidden="true"></i> {{__('messages.trash')}}</a></li>
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -95,11 +95,11 @@
                                         <td class="text-center">{{$value->email}} </td>
                                         <td class="text-center">{{$value->country_code}}-{{$value->mobile}}</td>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <td class="text-center">
+                                        <td class="text-center" >
                                             @if($value->active=='0')
-                                            <i class="fa fa-eye-slash" id="{{$value->id}}"></i>
+                                            <i class="fa fa-eye-slash" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Status"></i>
                                             @else
-                                            <i class="fa fa-eye" id="{{$value->id}}"></i>
+                                            <i class="fa fa-eye" id="{{$value->id}}"  data-toggle="tooltip" data-placement="top" title="Status"></i>
                                             @endif
                                         </td>
                                         @endif
@@ -118,14 +118,14 @@
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert permanently_delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
 
                                             @else
-                                            <a type="button" href="{{ route('subscriber.edit',$value->id) }}" class="btn btn-info" title="Edit" style="color: #fff;"><i class="fa fa-edit"></i></a>
+                                            <a type="button" href="{{ route('subscriber.edit',$value->id) }}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
 
-                                            <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning" title="Etsy Shop" style="color: #fff;"><i class="fa fa-shopping-cart"></i></a>
-                                            <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary" title="Change password" style="color: #fff;"><i class="fa fa-lock"></i></a>
-                                            <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification" id="{{$value->id}}" title="Send Email Verification Link"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning btn-gray" title="Etsy Shop" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-shopping-cart"></i></a>
+                                            <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary btn-gray" title="Change password" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-lock"></i></a>
+                                            <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification btn-gray"  id="{{$value->id}}" title="Send Email Verification Link" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>
 
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete" id="{{$value->id}}" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
 
                                             @endif
                                         </td>

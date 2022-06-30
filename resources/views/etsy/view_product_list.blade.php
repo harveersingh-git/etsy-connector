@@ -63,9 +63,9 @@
                                         </h2>
 
                                         <span>
-                                            <a href="{{url('public/uploads/'.$records->file_name)}}" download="{{$records->file_name}}" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i>
+                                            <a href="{{url('public/uploads/'.$records->file_name)}}" download="{{$records->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download" aria-hidden="true"></i>
                                             </a>
-                                            <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$records->file_name)}}">
+                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$records->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                             </a>
 

@@ -140,27 +140,27 @@
                                         <option value="ru" {{ isset($data->language) && ( $data->language== 'ru' ) ? 'selected' : '' }}>Russian</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <!-- <div class="form-group">
+                                <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="access_code_url">
                                             Generate Token And Authorize
                                         </button>
-                                    </div> -->
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <!-- <div class="form-group">
+                                    </div> 
+                                </div>-->
+                                <!--<div class="col-lg-6 col-md-6 col-sm-12">
+                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary" id="access_code_url">
                                             Generate Token And Authorize
                                         </button>
-                                    </div> -->
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    </div> 
+                                </div>-->
+                                <div class="col-lg-12 col-md-12 col-sm-12 save-update-btn">
                                     <div class="form-group  pull-right">
                                         <a href="{{ url('my-shop') }}" class="btn btn-light">
                                             {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                            {{__('messages.save')}}
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.save')}}
                                         </button>
                                     </div>
                                 </div>
