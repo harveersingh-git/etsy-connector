@@ -1,4 +1,5 @@
 @extends('admin.layout.head')
+@inject('Etsy', 'App\Http\Controllers\EtsyController')
 
 @section('content')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-progressbar/0.9.0/bootstrap-progressbar.min.js"></script>
@@ -185,7 +186,7 @@
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <th class="text-center">{{__('messages.Date')}}</th>
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
-                                                        <th class="text-center">{{__('messages.language')}}</th>
+                                                        <th class="text-center">{{__('messages.country')}}</th>
                                                         <th class="text-center">{{__('messages.sync_by')}}</th>
                                                         <th class="text-center">{{__('messages.sync_type')}}</th>
                                                         <th class="text-center">{{__('messages.action')}}</th>
@@ -207,12 +208,17 @@
                                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                                         'pt'=>'Portuguese','ru'=>'Russian'];
                                                         $current_language = $language[ $lan];
-
+                                                        $flag = $Etsy::getFlag($current_language )
                                                         @endphp
-                                                        <td>{{ $current_language }}</td>
+                                                        <td>
+                                                            <img src="{{$flag}}">
+                                                        </td>
                                                         <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
                                                         <td> {{$value->sync_type}}</td>
-                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info">
+                                                        <td>
+                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info" title="Download Muli language file">
+                                                                <i class="fa fa-download" aria-hidden="true"></i> </a>
+                                                            <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info" title="Download single language file">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning" id="{{url('public/uploads/'.$value->file_name)}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
