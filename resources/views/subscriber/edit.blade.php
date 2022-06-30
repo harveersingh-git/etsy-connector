@@ -259,7 +259,7 @@
                                         {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        {{__('messages.update')}}
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.update')}}
                                     </button>
                                 </div>
                             </div>
