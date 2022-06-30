@@ -307,7 +307,7 @@ class EtsyController extends Controller
 
                     $query->where('language', $request['language']);
                 }
-                $data =   $query->whereIn('shop_id', $shops_ids)->get();
+                $data =   $query->where('user_id', auth()->user()->id)->whereIn('shop_id', $shops_ids)->get();
 
 
                 // $data =  EtsyProduct::with('shops')->whereIn('shop_id', $shops_ids)->get();
@@ -322,8 +322,7 @@ class EtsyController extends Controller
             ]);
 
             $input_shop_id = $request['shop'];
-            // 
-            // $language = 
+
 
             $sync_type = isset($request['sync_type']) ? $request['sync_type'] : 'Auto';
             $resultSetting = EtsySettings::first();
@@ -334,6 +333,7 @@ class EtsyController extends Controller
             if ($result) {
 
                 EtsyProduct::where('shop_id', $request['shop'])->delete();
+
                 $key_string = $resultSetting['key_string'];
                 $api_access_token = $resultSetting['api_access_token'];
                 $shop_id = $result['shop_name'];
@@ -637,7 +637,8 @@ class EtsyController extends Controller
         // if ($request->isMethod('post')) {
 
         $date = Carbon::now()->toDateString();
-        $t = time();
+        // $t = time();
+        $rand = rand(100, 999);
         $click =  EtsyProduct::where('shop_id', $shop_name)->get();
         $get_name = EtsyConfig::find($shop_name);
 
@@ -646,7 +647,7 @@ class EtsyController extends Controller
             $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
             // $fileName = $language . '-' . 'productlist.csv';
-            $fileName = $get_name->shop_name . '-' . $language . '-' . 'productlist.csv';
+            $fileName = $get_name->shop_name . '-' . $rand  . '-' . 'productlist.csv';
             // $fileName = $date . '-' . $t . 'productlist.csv';
             // $filepath = public_path('uploads/');
 
