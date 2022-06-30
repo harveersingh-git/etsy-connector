@@ -76,8 +76,8 @@
                                     </div>
 
 
-                                    <div class="progress progress-striped active" style="display:none;" id="progress_div">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="25" id="progress_id"></div>
+                                    <div class="progress progress-striped active" id="progress_div" style="display: none;">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="1" id="progress_id"></div>
                                         <input type="hidden" value="0" id="progress_input_hide">
                                     </div>
 
@@ -182,7 +182,7 @@
                                             <table class="table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                      
+
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <th class="text-center">{{__('messages.Date')}}</th>
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
@@ -198,7 +198,6 @@
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
                                                     <tr>
-                                                      
                                                         <td>{{substr($value->file_name,0,8)}}</td>
 
                                                         <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
@@ -218,14 +217,14 @@
                                                         <td>
                                                             <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download Multi Lang">
                                                                 <i class="fa fa-download" aria-hidden="true"></i>
-                                                             </a>
+                                                            </a>
 
                                                             <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
-                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="View" ><i class="fa fa-eye "></i> </a>
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-eye "></i> </a>
                                                             <a href="javascript:void(0);" class="delete btn btn-danger  btn-gray" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                                                         </td>
 
@@ -455,12 +454,69 @@
 
     $(document).ready(function() {
 
+        $(document).on('click', '#sync_prduct_btn', function() {
+            var shop_id = $('#shop').find(":selected").val();
+            var token = $('input[name="_token"]').attr('value');
+            // var lang = $('#sync_language').find(":selected").val();
+            var sync_type = $('#sync_type').val();
 
+
+            var data = {
+                shop: shop_id,
+                // language: lang,
+                sync_type: sync_type
+
+            };
+            var url = $(location).attr('href'),
+                parts = url.split("/"),
+                last_part = parts[parts.length - 1];
+
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/etsy-list-data-progress',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-Token': token
+                },
+
+                success: function(data) {
+
+                    if (data.status = "success") {
+                        console.log('sdfsdfsdfsdf', data.data.count);
+                        var total = data.data.count;
+                        $('#progress_id').width(Math.round(5) + '%');
+                        $('#progress_id').attr('data-transitiongoal', Math.round(5));
+                        $('#progress_id').text(parseInt(5) + '/' + parseInt(total));
+                        // var total = data.data.count
+
+                        // for (var i = 0; i <= total; i++) {
+                        //     var width = parseInt(i) / parseInt(total) * 100;
+                        //     // $('#progress_id').width(Math.round(width) + '%');
+                        //     // $('#progress_id').attr('data-transitiongoal', width);
+                        //     $('#progress_id').text(parseInt(1) + '/100');
+                        //     // $('#progress_input_hide').val(Math.round(width));
+
+                        // }
+
+
+                    } else {
+                        toastr.error(data.message);
+                    }
+
+                },
+                error: function(xhr, status, data) {
+                    toastr.error('Please check your shop id.');
+                    setTimeout(() => {
+                        // window.location.reload();
+                    }, 10000);
+                },
+            })
+        });
         $(document).on('click', '#sync_prduct_btn', function() {
 
             // $('#sync_prduct_btn').click(function() {
-
-            // $('#sync_form').submit();
 
             var shop_id = $('#shop').find(":selected").val();
             var token = $('input[name="_token"]').attr('value');

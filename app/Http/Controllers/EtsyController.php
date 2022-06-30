@@ -856,4 +856,75 @@ class EtsyController extends Controller
             return back()->withError($exception->getMessage())->withInput();
         }
     }
+
+
+
+
+    public function etsyListDataProgress(Request $request, $id = null)
+    {
+        $url = '';
+        $page = 1;
+        $limit = 100;
+        $data = [];
+        $etsy_id = '';
+
+
+
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'shop' => 'required',
+            ]);
+
+            $input_shop_id = $request['shop'];
+
+
+            $sync_type = isset($request['sync_type']) ? $request['sync_type'] : 'Auto';
+            $resultSetting = EtsySettings::first();
+            $result = EtsyConfig::where('id', $request['shop'])->first();
+
+            $language  =  isset($result['language']) ? $result['language'] : 'en';
+
+            if ($result) {
+
+                EtsyProduct::where('shop_id', $request['shop'])->delete();
+
+                $key_string = $resultSetting['key_string'];
+                $api_access_token = $resultSetting['api_access_token'];
+                $shop_id = $result['shop_name'];
+                $appurl = $resultSetting['app_url'];
+                ////ddsdd
+
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'GET',
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/x-www-form-urlencoded',
+                        'x-api-key:' . $key_string,
+                        'Authorization: Bearer ' . $api_access_token,
+                        'Cookie: fve=1643640618.0; uaid=JYYRIuVpd8k7JhiFS1kUcXLRgoxjZACCxO_ftWB0tVJpYmaKkpWSU4VlREBwmXOBj19QsXNFgW9gvnliYURAQHlagFItAwA.; user_prefs=CFmwDxv3XIPcLuHsJleib85a6epjZACCxO_ftWB0tJKnX5CSTl5pTo6OUmqerruTkg5QCCpiBKFwEbEMAA..'
+                    ),
+                ));
+
+                $response = curl_exec($curl);
+
+
+                curl_close($curl);
+                $totalProduct =  json_decode($response);
+
+                return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
+            } else {
+                return response()->json(['status' => 'error', 'data' =>  '']);
+            }
+        }
+
+        // return view('etsy.product_list', compact('url', 'data', 'page', 'limit', 'shops', 'etsy_id'));
+    }
 }

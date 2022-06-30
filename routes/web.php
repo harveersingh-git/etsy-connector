@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/etsy-config/{id}', [EtsyController::class, 'etsyConfig'])->name('etsy-config');
 
     Route::any('/country-list', [EtsyController::class, 'countryList'])->name('country-list');
+    Route::any('/etsy-list-data-progress', [EtsyController::class, 'etsyListDataProgress'])->name('etsy-list-data-progress');
     Route::any('/etsy-list-data', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
     Route::any('/etsy-list-data/{id}', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
     // Route::any('/shoplist-data/{id}', [EtsyController::class, 'show'])->name();
