@@ -466,7 +466,7 @@ class EtsyController extends Controller
                     return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
                     // return redirect()->back()->with("success", "Product Sync successfully!");
                 }
-                return redirect()->back()->with("success", "No product found for the given shop !");
+                return redirect()->back()->with("success", "Product sync successfully !");
             } else {
                 return redirect()->back()->with("success", "Please check ETSY configration!");
             }

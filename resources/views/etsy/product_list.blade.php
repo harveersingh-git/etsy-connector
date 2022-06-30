@@ -198,7 +198,7 @@
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
                                                     <tr>
-                                                        <th class="text-center">{{ $key+1 }}</th>
+                                                        <th>{{ $key+1 }}</th>
                                                         <td>{{substr($value->file_name,0,8)}}</td>
 
                                                         <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
