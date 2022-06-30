@@ -10648,6 +10648,9 @@ span.span-box-styles.back-btn-style-new {
 } */
 }
 @media screen and (max-width:767px) {
+    .card .header .header-dropdown li a {
+        padding: 5px 8px;
+    }
 	.product-list-new{
 		    display: block!important;
 	}
@@ -10722,3 +10725,24 @@ div.dataTables_wrapper div.dataTables_filter input {
 .fa-search, .fa-refresh, .fa-times, .fa-plus {
     margin-right: 5px;
 }
+
+.dt-buttons a {
+    position: relative;
+    padding-left: 30px!important;
+    padding-right: 10px!important;
+}
+.dt-buttons a:before {
+    position: absolute;
+    font-family: 'FontAwesome';
+    left: 17px;
+}
+.dt-buttons a.buttons-copy:before {
+    content: '\f0c5';
+}
+.dt-buttons a.buttons-csv:before {
+    content: '\f019';
+}
+.dt-buttons a.buttons-print:before {
+    content: '\f02f';
+}
+
