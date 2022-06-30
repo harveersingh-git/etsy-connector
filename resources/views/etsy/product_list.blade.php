@@ -557,7 +557,7 @@
                                 var width = parseInt(i) / parseInt(total) * 100;
                                 $('#progress_id').width(Math.round(width) + '%');
                                 $('#progress_id').attr('data-transitiongoal', width);
-                                $('#progress_id').text(Math.round(width) + '/100');
+                                $('#progress_id').text(Math.round(i) + '/'+total);
                                 $('#progress_input_hide').val(Math.round(width));
 
                             }
