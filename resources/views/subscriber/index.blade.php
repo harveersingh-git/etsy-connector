@@ -128,7 +128,7 @@
                                             </button>
                                             <a type="button" href="{{ route('license',base64_encode($value->id)) }}" class="btn btn-warning btn-gray" title="Etsy Shop" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-usd"></i></a>
 
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
 
                                             @endif
                                         </td>

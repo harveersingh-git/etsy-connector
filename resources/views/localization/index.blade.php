@@ -68,7 +68,7 @@
                                             <a type="button" href="{{url('/localization/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"></i></a>
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
 
 
                                         </td>
