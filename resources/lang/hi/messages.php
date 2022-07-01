@@ -1,9 +1,9 @@
 <?php
 
 return [
-   'dashboard' => 'डैशबोर्ड',
-    'subscriber_list' => 'सब्सक्राइबर लिस्ट',
-    'create_new' => 'नया बनाओ',
+   'dashboard' => 'Dashboard new',
+    'subscriber_list' => 'Subscriber List',
+    'create_new' => 'Create New',
     'active_subscriber_list' => 'Active Subscriber List',
     'inactive_subscriber_list' => 'In-Active Subscriber List',
     'trash_subscriber_list' => 'Trash Subscriber List',

@@ -42,6 +42,14 @@
                             </a></span>
 
                     </div>
+                    <span class="col-md-6">
+                        <a href="{{url('/')}}/resources/lang/{{$data->name}}/messages.txt" download="messages.txt" class="btn btn-success btn-sm">
+                            <i class="fa fa-download" aria-hidden="true"></i> {{__('messages.Click here to download previously saved language file to edit')}}</a>
+
+                            
+                    </span>
+
+
                     <div class="body">
                         @if (session('error'))
                         <div class="alert alert-danger">

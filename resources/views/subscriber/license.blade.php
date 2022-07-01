@@ -54,7 +54,7 @@
                                     </h5>
                                     <small>
                                         @if(isset($user['allow']->expire_date))
-                                        
+
                                         @php($valuee = \Carbon\Carbon::parse($user['allow']->expire_date)->diffInSeconds())
                                         @php($dt = \Carbon\Carbon::now())
                                         @php($days = $dt->diffInDays($dt->copy()->addSeconds($valuee)))
@@ -68,7 +68,7 @@
                                         @else
 
 
-                                        {{__('messages.licence will expire')}}  {{ $current_time }}
+                                        {{__('messages.licence will expire')}} {{ $current_time }}
                                         @endif
                                     </small>
                                 </div>
@@ -127,7 +127,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <input type="text" class="form-control datetime" data-provide="datepicker" data-date-autoclose="true" placeholder="Ex: 30/07/2016" name="expire_date">
+                                        <input type="text" class="form-control  datepicker" placeholder="Ex: 30/07/2016" name="expire_date" id="expire_date">
 
                                     </div>
                                     @if ($errors->has('expire_date'))
@@ -171,6 +171,11 @@
 
 @section('script')
 <script>
+    $('.datepicker').datepicker({
+        startDate: new Date(),
+        // endDate: '+2d'
+    });
+
     // $(document).ready(function() {
     //     if ($('#business').is(':checked')) {
     //         $("#tex_id_div").show();
