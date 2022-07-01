@@ -117,6 +117,7 @@ return [
     'Click here to download previously saved language file to edit'=>'Click here to download previously saved language file to edit',
     'licence has been expired'=>'Licence has been expired',
     'not_allowed'=>'Not allowed',
+    'allowed'=>'Allowed',
     'license'=>'License',
     'expire_date'=>'Expire Date',
     'no'=>'No',
@@ -129,7 +130,8 @@ return [
     'edit'=>'Edit',
     'search'=>'Search',
     'clear'=>'Clear',
-    'sync product'=>'Sync Product'
+    'sync product'=>'Sync Product',
+    'licence will expire'=>'licence will expire'
 
 
 
