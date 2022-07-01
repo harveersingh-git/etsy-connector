@@ -967,7 +967,7 @@
 }
 
 .theme-orange .sidebar-nav .metismenu>li.active>a {
-    background: #262a2b;
+    background: #3c3c3b;
     color: #fff
 }
 
@@ -976,11 +976,11 @@
 }
 
 .theme-orange .sidebar-nav .metismenu>li i {
-    color: #262a2b
+    color: #3c3c3b
 }
 
 .theme-orange .sidebar-nav .metismenu a {
-    color: #262a2b
+    color: #3c3c3b
 }
 
 .theme-orange .sidebar-nav .metismenu a:hover,
@@ -1011,7 +1011,7 @@
 }
 
 .theme-orange #left-sidebar .user-account {
-    color: #262a2b
+    color: #3c3c3b
 }
 
 .theme-orange #left-sidebar .user-account .user_div {
@@ -1023,7 +1023,7 @@
 }
 
 .theme-orange #left-sidebar .user-account .dropdown-menu {
-    background: #262a2b
+    background: #3c3c3b
 }
 
 .theme-orange #left-sidebar .user-account .dropdown-menu a {
@@ -1067,7 +1067,7 @@
 }
 
 .theme-orange .auth-main:before {
-    background: #262a2b
+    background: #3c3c3b
 }
 
 .theme-orange .wizard>.steps .current a {
@@ -1079,7 +1079,7 @@
 }
 
 .theme-orange .wizard .actions a {
-    background: #262a2b
+    background: #3c3c3b
 }
 
 .theme-orange .maintenance {
@@ -1101,14 +1101,14 @@
 .theme-orange .ct-series-a .ct-line,
 .theme-orange .ct-series-a .ct-bar,
 .theme-orange .ct-series-a .ct-point {
-    stroke: #262a2b
+    stroke: #3c3c3b
 }
 
 .theme-orange .ct-series-a .ct-area,
 .theme-orange .ct-series-a .ct-slice-donut-solid,
 .theme-orange .ct-series-a .ct-slice-pie,
 .theme-orange .ct-series-a .ct-bar {
-    fill: #262a2b
+    fill: #3c3c3b
 }
 
 .theme-orange .ct-series-b .ct-line,
@@ -1177,8 +1177,8 @@
 }
 
 .theme-orange .ct-legend .ct-series-0:before {
-    background-color: #262a2b;
-    border-color: #262a2b
+    background-color: #3c3c3b;
+    border-color: #3c3c3b
 }
 
 .theme-orange .ct-legend .ct-series-1:before {

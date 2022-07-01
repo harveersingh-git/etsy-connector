@@ -218,7 +218,7 @@
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
                                                             <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="View" ><i class="fa fa-eye "></i> </a>
-                                                            <a href="javascript:void(0);" class="delete btn btn-danger  btn-gray" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
+                                                            <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
                                                         </td>
 
 

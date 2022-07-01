@@ -125,7 +125,7 @@
                                             <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification btn-gray"  id="{{$value->id}}" title="Send Email Verification Link" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>
 
-                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
 
                                             @endif
                                         </td>

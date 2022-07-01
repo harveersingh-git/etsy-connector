@@ -3421,6 +3421,9 @@ html.fullscreen-bg #wrapper {
     .navbar-fixed-top .navbar-right #navbar-search {
         display: none
     }
+    .card .body.tab-content {
+        padding: 15px 15px;
+    }
 }
 
 .navbar-nav>li {
@@ -10649,7 +10652,7 @@ span.span-box-styles.back-btn-style-new {
 }
 @media screen and (max-width:767px) {
     .card .header .header-dropdown li a {
-        padding: 5px 8px;
+        padding: 5px 6px;
     }
 	.product-list-new{
 		    display: block!important;
@@ -10689,9 +10692,7 @@ div#yearly {
     list-style: none;
     left: -10px;
 }
-div.dataTables_wrapper div.dataTables_filter input {
-    width: -webkit-fill-available;
-}
+
 }
 
 
@@ -10712,14 +10713,18 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .btn-gray {
-    background-color: #262a2b!important;
-    border-color: #262a2b!important;
+    background-color: #3c3c3b!important;
+    border-color: #3c3c3b!important;
+    min-width: 40px;
+    text-align: center;
+}
+.btn-width-equ, ul.social-links.list-unstyled li a{
     min-width: 40px;
     text-align: center;
 }
 .btn-gray:hover {
-    background-color: #262a2b!important;
-    border-color:#262a2b!important;
+    background-color: #3c3c3b!important;
+    border-color:#3c3c3b!important;
 }
 
 .fa-search, .fa-refresh, .fa-times, .fa-plus {
@@ -10746,3 +10751,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     content: '\f02f';
 }
 
+ul.header-dropdown.dropdown.dropdown-animated.scale-left li a i {
+    font-size: 14px;
+}
