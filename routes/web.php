@@ -105,6 +105,9 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/subscriber-trash', [SubscriberController::class, 'subscriberTrash'])->name('subscriber-trash');
     Route::post('/update-password', [SubscriberController::class, 'changePassword'])->name('updatePassword');
     Route::any('/update-password/{id}', [SubscriberController::class, 'changePassword'])->name('update-password');
+    // Route::any('/license/{id}', [ShopListController::class, 'license'])->name('shoplist');
+
+    Route::any('/license/{id}', [SubscriberController::class, 'license'])->name('license');
 
     Route::any('/localization', [LocalizationController::class, 'index'])->name('localization');
     Route::any('/add-localization', [LocalizationController::class, 'create'])->name('add-localization');

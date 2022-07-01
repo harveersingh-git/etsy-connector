@@ -298,6 +298,10 @@ class EtsyController extends Controller
                 $data = $query->where('shop_id', $etsy_id)->get();
                 // dd(      $data->toArray());
             } else {
+                $allow =    \Helper::checkPermission();
+                if ($allow == '0') {
+                    return redirect('edit-profile');
+                }
 
                 $shops = EtsyConfig::where('status', 1)->where('user_id', auth()->user()->id)->get();
                 $shops_ids = $shops->pluck('id');

@@ -38,6 +38,7 @@
                             </li>
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{__('messages.in_active')}}</a></li>
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}"><i class="fa fa-trash-o" aria-hidden="true"></i> {{__('messages.trash')}}</a></li>
+                         
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -122,8 +123,10 @@
 
                                             <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning btn-gray" title="Etsy Shop" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-shopping-cart"></i></a>
                                             <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary btn-gray" title="Change password" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-lock"></i></a>
+                                         
                                             <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification btn-gray"  id="{{$value->id}}" title="Send Email Verification Link" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>
+                                            <a type="button" href="{{ route('license',base64_encode($value->id)) }}" class="btn btn-warning btn-gray" title="Etsy Shop" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-usd"></i></a>
 
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-gray" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></button>
 
