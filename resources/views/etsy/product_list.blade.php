@@ -10,6 +10,10 @@
         z-index: 1;
         position: absolute;
     }
+
+    .btn-gray {
+        color: #fff;
+    }
 </style>
 
 <div id="main-content">
