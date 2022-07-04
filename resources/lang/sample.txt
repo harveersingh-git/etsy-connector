@@ -102,7 +102,7 @@ return [
     'Download History List'=>'Download History List',
     'File Name'=>'File Name',
     'Date'=>'Date',
-    'language'=>'language',
+    'language'=>'Language',
     'Access Url'=>'Access Url',
     'Click the below link and provide the access code.'=>'Click the below link and provide the access code.',
     'Click Here'=>'Click Here',
@@ -134,7 +134,7 @@ return [
     'sync product'=>'Sync Product',
     'licence will expire'=>'licence will expire',
     'default_language'=>'Default language',
-    'sync_by'=>'Sync By',
+    'sync_by'=>'Sync Details',
     'sync_type'=>'Sync Type',
     'contact'=>'Contact',
     'Business'=>'Business'

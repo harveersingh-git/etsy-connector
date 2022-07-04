@@ -14,6 +14,10 @@
     .btn-gray {
         color: #fff;
     }
+
+    .btn-gray:hover {
+        color: #fff;
+    }
 </style>
 
 <div id="main-content">
@@ -108,7 +112,7 @@
                                                     @endif
                                                     &nbsp&nbsp
                                                 </div>
-                                                <input type="text" name="sync_type" value="User" id="sync_type" style="display:none">
+                                                <input type="hidden" name="sync_type" value="Manual" id="sync_type">
 
                                                 <div class="form-group">
 
@@ -188,7 +192,7 @@
                                                     <tr>
 
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
-                                                        <th class="text-center">{{__('messages.Date')}}</th>
+                                                        <!-- <th class="text-center">{{__('messages.Date')}}</th> -->
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                                                         <th class="text-center">{{__('messages.language')}}</th>
                                                         <th class="text-center">{{__('messages.sync_by')}}</th>
@@ -201,35 +205,86 @@
 
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
-                                                    <tr>
-                                                        <td>{{substr($value->file_name,0,8)}}</td>
+                                                    <tr style="font-size: 15px;">
+                                                        <td class="text-center">
+                                                             @if(isset($value->file_name))
+                                                            {{substr($value->file_name,0,25)}}
+                                                            @else
+                                                            {{substr($value->multi_lang_file_name,0,25)}}
+                                                            @endif
 
-                                                        <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
-                                                        <td>{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+                                                        </td>
+
+                                                        <!-- <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td> -->
+                                                        <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+
                                                         @php
                                                         $lan = isset($value->language)?$value->language:'en';
                                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                                         'pt'=>'Portuguese','ru'=>'Russian'];
+                                                        @endphp
+
+                                                        @if(isset($value->file_name))
+                                                        @php
                                                         $current_language = $language[ $lan];
-                                                        $flag = $Etsy::getFlag($current_language )
+                                                        $flag = $Etsy::getFlag($current_language );
                                                         @endphp
                                                         <td class="text-center">
                                                             <img src="{{$flag}}" width="40">
                                                         </td>
-                                                        <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
-                                                        <!-- <td> {{$value->sync_type}}</td> -->
-                                                        <td>
-                                                            <!-- <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.Download Multi Lang')}}">
-                                                                <i class="fa fa-download" aria-hidden="true"></i>
-                                                            </a> -->
+                                                        @else
+                                                        <td class="text-center">
+                                                            @php
+                                                            $languages= explode(',',$lan);
 
+                                                            foreach($languages as $k=>$val){
+
+                                                            $current_language = $language[ $val];
+                                                            $flag = $Etsy::getFlag($current_language);
+
+                                                            @endphp
+
+                                                            <img src="{{ $flag}}" width="35">
+                                                            @if($k==4)
+                                                            </br>
+                                                            @endif
+                                                            @php
+                                                            }
+                                                            @endphp
+                                                        </td>
+
+
+                                                        @endif
+
+                                                        <td class="text-center">{{isset($value->user['name'])?$value->user['name']:''}} {{isset($value->user['last_name'])?$value->user['last_name']:''}}
+                                                            </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span></td>
+                                                        <!-- <td> {{$value->sync_type}}</td> -->
+                                                        <td class="text-center">
+                                                            @if(isset($value->file_name))
                                                             <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.download')}}">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
+
+
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}/single" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
                                                           
-                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
+                                                            @else
+                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.Download Multi Lang')}}">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                            </a>
+
+
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->parent_id)}}/multi" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
+                                                           
+                                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->multi_lang_file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
+                                                                <i class="fa fa-copy" style="color: #fff;"></i>
+                                                            </a>
+                                                            @endif
+
+
+                                                            
                                                             @hasanyrole('Admin')
                                                             <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.delete')}}"><i class="fa fa-trash-o"></i> </a>
                                                             @endhasanyrole

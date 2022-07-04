@@ -9,7 +9,7 @@ class DownloadHistory extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date', 'file_name', 'user_id', 'shop_id', 'language','sync_type','multi_lang_file_name'
+        'date', 'file_name', 'user_id', 'shop_id', 'language','sync_type','multi_lang_file_name','parent_id'
     ];
     public function shops()
     {

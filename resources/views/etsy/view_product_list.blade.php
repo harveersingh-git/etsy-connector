@@ -4,9 +4,14 @@
 
 
 <style>
-    .dt-buttons {
-        z-index: 1;
-        position: absolute;
+
+
+    .btn-gray {
+        color: #fff;
+    }
+
+    .btn-gray:hover {
+        color: #fff;
     }
 </style>
 
@@ -50,6 +55,7 @@
                                 <div class="">
                                     <div class="header" style=" display: flex; justify-content: space-between;">
                                         @if(count($data)>0)
+                                        @if($type=='single')
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
@@ -57,17 +63,34 @@
                                         $current_language = $language[ $lan];
 
                                         @endphp
+                                        @endif
                                         <h2>
                                             {{__('messages.product_of')}} {{$records['shops']->shop_name}}
-                                            ({{ $current_language}})
+                                            @if($type=='multi')
+                                            (Multi-Language)
+                               
+                                            @else
+                                            ({{$current_language}})
+                                            @endif
+                                         
                                         </h2>
 
                                         <span>
+                                        @if($type!='multi')
+                                        dd('if');
                                             <a href="{{url('public/uploads/'.$records->file_name)}}" download="{{$records->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download" aria-hidden="true"></i>
                                             </a>
                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$records->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                             </a>
+                                            @else
+                                       
+                                            <a href="{{url('public/uploads/'.$records->multi_lang_file_name)}}" download="{{$records->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download"><i class="fa fa-download" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$records->multi_lang_file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
+                                                <i class="fa fa-copy" style="color: #fff;"></i>
+                                            </a>
+                                            @endif
 
                                             <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>
                                                 {{__('messages.back')}}
@@ -79,7 +102,7 @@
                                     <div class="body">
                                         <div class="" id="one">
                                             <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                               
+
                                             </div>
                                         </div>
                                         <div class="table-responsive">
@@ -96,7 +119,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                              
+
                                                     @forelse($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
@@ -108,7 +131,7 @@
                                                     @empty
                                                     <tr>No record found</tr>
                                                     @endforelse
-                                                 
+
                                                 </tbody>
                                             </table>
 
@@ -140,7 +163,6 @@
 <!--end model-->
 @section('script')
 <script>
-   
     $(document).ready(function() {
         var oTable = $('#product_table').DataTable({
             "pageLength": 100,
