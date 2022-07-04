@@ -31,9 +31,9 @@ Login
                     </h2>
                     <p>{{__('messages.it_is_a_long')}}</p>
                     <ul class="social-links list-unstyled">
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a class="btn btn-default fb-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="btn btn-default tw-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="btn btn-default ig-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -87,8 +87,8 @@ Login
                             <div class="row">
                                 <div class="col-sm-12 col-md-12  text-center">
                                     <div class="">
-                                        <a href="{{route('redirectToProvider', ['facebook'])}}" class="btn btn-primary btn-sm btn-width-equ" data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
-                                        <a href="{{route('redirectToProvider', ['google'])}}" class="btn btn-secondary btn-sm btn-width-equ" data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
+                                        <a href="{{route('redirectToProvider', ['facebook'])}}" class="btn btn-primary btn-sm btn-width-equ fb-btn-color" data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" class="fa fa-facebook"></i> </a>
+                                        <a href="{{route('redirectToProvider', ['google'])}}" class="btn btn-secondary btn-sm btn-width-equ gplus-btn-color" data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" class="fa fa-google-plus"></i> </a>
                                     </div>
                                 </div>
                             </div>

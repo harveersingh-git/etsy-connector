@@ -4514,7 +4514,7 @@ select.form-control:not([size]):not([multiple]) {
 
 .auth-main .auth_detail {
     padding: 40px 0;
-    max-width: 360px
+    max-width: 100%
 }
 
 @media screen and (max-width: 992px) {
@@ -10663,7 +10663,7 @@ span.span-box-styles.back-btn-style-new {
 a.btn.btn-danger.product-list-clr {
     padding: 5px 18px;
     position: relative;
-    top: -8px;
+    top: 0px;
 }
 	.table-responsive.table {
     display: block!important;
@@ -10697,9 +10697,9 @@ div#yearly {
 
 
 @media screen and (min-width:768px) and (max-width:991px) {
-   .table-responsive.table {
+   /* .table-responsive.table {
     display: block!important;
-} 
+}  */
 }
 
 
@@ -10753,4 +10753,68 @@ div#yearly {
 
 ul.header-dropdown.dropdown.dropdown-animated.scale-left li a i {
     font-size: 14px;
+}
+
+.fb-btn-color, .fb-btn-color:hover, .fb-btn-color:active{
+    background-color: #3c5897!important;
+    color: #fff!important;
+    border-color: #3c5897!important;
+}
+.gplus-btn-color, .gplus-btn-color:hover, .gplus-btn-color:active{
+    background-color: #ca492d;
+    color: #fff;
+    border-color: #ca492d;
+}
+
+.tw-btn-color, .tw-btn-color:hover, .tw-btn-color:active{
+    background-color: #00acee;
+    color: #fff;
+    border-color: #00acee;
+}
+
+.ig-btn-color, .ig-btn-color:hover, .ig-btn-color:active{
+    background-color: #bb298e;
+    color: #fff;
+    border-color: #bb298e;
+}
+.btn-gray, .btn-danger.delete {
+    margin: 0 5px;
+}
+button#sync_prduct_btn {
+    margin-left: -9px;
+}
+span#select2-shop-container, select#language_search, span.select2-selection__placeholder {
+    font-size: 15px!important;
+    color: #595f6b!important;
+}
+a.btn.btn-danger.product-list-clr.new-danger-btn {
+    padding: 5px 12px;
+}
+
+@media screen and (max-width: 767px) {
+    span#select2-shop-container, select#language_search, span.select2-selection__placeholder {
+        font-size: 15px!important;
+        color: #595f6b!important;
+        padding-left: 5px!important;
+    }
+    button#sync_prduct_btn {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+    .header.product-list-new {
+        padding-top: 0;
+    }
+}
+@media screen and (max-width: 768px) and (max-width: 991px) {
+.header.product-list-new {
+    padding: 0;
+}
+span.select2.select2-container.select2-container--default {
+    width: fit-content!important;
+}
+span#select2-shop-container, select#language_search, span.select2-selection__placeholder {
+    font-size: 13px!important;
+    color: #595f6b!important;
+}
+
 }

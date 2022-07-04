@@ -48,14 +48,14 @@
                                         <th class="text-center">{{__('messages.app_url')}}</th>
                                    
 
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
                                         <th class="text-center">{{__('messages.app_url')}}</th>
 
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -65,7 +65,7 @@
                                         <th class="text-center">{{ $key+1 }}</th>
                                         <td class="text-center">{{$value->app_url}} </td>
 
-                                        <td>
+                                        <td class="text-center">
                                             <a type="button" href="{{ route('etsy-setting.edit',$value->id) }}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
                                         </td>

@@ -86,7 +86,7 @@
                                         <div class="">
                                             <form role="form" action="{{$url}}" method="post" class="form-inline" id="sync_form">
                                                 @csrf
-                                                <div class="form-group" style="position: relative; height: 36px;margin-right: 7px;">
+                                                <div class="form-group" style="position: relative; height: 36px;">
 
                                                     <select class="select2-selection select2-selection--single form-select form-control shop" name="shop" id="shop">
                                                         <option value="">--Select shop--</option>
@@ -163,7 +163,7 @@
 
 
                                                 <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title=""><i class="fa fa-search" aria-hidden="true"></i>Search</button>
-                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr"><i class="fa fa-times" aria-hidden="true"></i>Clear</a>
+                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr new-danger-btn"><i class="fa fa-times" aria-hidden="true"></i>Clear</a>
 
                                             </form>
                                         </div>
@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="table-responsive ">
                                             @if(count($data)>0)
-                                            <table class="table table-striped table-bordered table-hover" id="product_table">
+                                            <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">{{__('messages.sr_no')}}</th>
@@ -198,10 +198,10 @@
                                                     @foreach($data as $key => $value)
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
-                                                        <td>{{substr($value->file_name,0,8)}}</td>
+                                                        <td class="text-center">{{substr($value->file_name,0,8)}}</td>
 
-                                                        <td>{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
-                                                        <td>{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+                                                        <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
+                                                        <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
                                                         @php
                                                         $lan = isset($value->language)?$value->language:'en';
                                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
@@ -209,10 +209,10 @@
                                                         $current_language = $language[ $lan];
 
                                                         @endphp
-                                                        <td>{{ $current_language }}</td>
-                                                        <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
-                                                        <td> {{$value->sync_type}}</td>
-                                                        <td><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
+                                                        <td class="text-center">{{ $current_language }}</td>
+                                                        <td class="text-center">{{$value->user['name']}} {{$value->user['last_name']}}</td>
+                                                        <td class="text-center"> {{$value->sync_type}}</td>
+                                                        <td class="text-center"><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
@@ -225,7 +225,7 @@
                                                     </tr>
                                                     @endforeach
                                                     @else
-                                                    <tr>
+                                                    <tr class="text-center">
                                                         <td colspan="13">There are no data.</td>
                                                     </tr>
                                                     @endif

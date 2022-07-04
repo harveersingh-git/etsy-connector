@@ -48,7 +48,7 @@
                                         <th class="text-center">{{__('messages.name')}}</th>
                                         <th class="text-center">{{__('messages.country_code')}}</th>
 
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
@@ -56,7 +56,7 @@
                                         <th class="text-center">{{__('messages.name')}}</th>
                                         <th class="text-center">{{__('messages.country_code')}}</th>
 
-                                        <th>Action</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -67,7 +67,7 @@
                                         <td class="text-center">{{$value->name}} {{$value->last_name}}</td>
                                         <td class="text-center">{{$value->code}} </td>
 
-                                        <td>
+                                        <td class="text-center">
                                             <a type="button" href="{{ route('country.edit',$value->id) }}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"></i></a>
                                             <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
                                         </td>
