@@ -31,32 +31,34 @@ class LocalizationController extends Controller
     {
 
         $url = '';
-        if ($request->isMethod('post')) {
-
+        if ($request->method() == 'POST') {
             $request->validate([
-                'name' => 'required',
-                'value' => 'required',
-                'file' => 'required',
+                'name' => 'required|string',
+                'value' => 'required|string',
+
             ]);
+            // File::copy(Input::file('file'), 'new/location/file.txt');
+            $file1 = $request->file;
+            $file2 = $request->file;
             $path = resource_path() . '/lang/' . $request['name'];
+            // dd($path);
+
             File::makeDirectory($path, $mode = 0777, true, true);
-            if (isset($request->file)) {
 
+            $fileName = 'messages.php';
+            $fileName1 = 'messages.txt';
 
-                $imageName = 'messages.php';
-                $request->file->move($path, $imageName);
-            }
-            $input = [
+            File::copy($request->file, $path . '/messages.php');
+            File::copy($request->file, $path . '/messages.txt');
+
+            Localization::create([
+                'name' => $request->name,
+                'value' => $request->value,
                 'user_id' => auth()->user()->id,
-                'name' => isset($request['name']) ? ($request['name']) : '',
-                'value' => isset($request['value']) ? ($request['value']) : '',
-                'file' => isset($request['file']) ? ($imageName) : '',
-            ];
-            // $obj = new Localization();
-            // $obj->create($request->all(), $imageName);
-            Localization::create($input);
+                'file' => $fileName
+            ]);
 
-            return redirect('localization')->with('success', 'Localization added Successfully');
+            return redirect('/localization')->with('success', 'Record updated successfully');
         }
         return view('localization.create', compact('url'));
     }
@@ -114,42 +116,43 @@ class LocalizationController extends Controller
      */
     public function update(Request $request)
     {
-        // if ($request->isMethod('post')) {
 
-        $request->validate([
-            'name' => 'required',
-            'value' => 'required',
-            // 'file' => 'required',
-        ]);
-        $input = $request->all();
+        // $language = Localization::find($id);
+        if ($request->method() == 'POST') {
+            $request->validate([
+                'name' => 'required|string',
+                'value' => 'required|string',
 
-        if (isset($request->file)) {
-
+            ]);
+         
+            Localization::find($request->id)->delete();
+            // File::copy(Input::file('file'), 'new/location/file.txt');
+            $file1 = $request->file;
+            $file2 = $request->file;
             $path = resource_path() . '/lang/' . $request['name'];
-            $imageName = 'messages.php';
-            $request->file->move($path, $imageName);
-            // $input->file->move($path, $imageName);
-        } else {
+            // dd($path);
+            if ($request->file) {
+                File::deleteDirectory(resource_path('/lang/' . $request->name));
+                $directory = File::makeDirectory($path, $mode = 0777, true, true);
+            }
+            $fileName = 'messages.php';
+            $fileName1 = 'messages.txt';
+            if ($request->file) {
+                File::copy($request->file, $path . '/messages.php');
+                File::copy($request->file, $path . '/messages.txt');
+            }
 
-            $input['file'] = '';
+
+            Localization::create([
+                'name' => $request->name,
+                'value' => $request->value,
+                'user_id' => auth()->user()->id,
+                'file' => $fileName
+            ]);
+
+            return redirect('/localization')->with('success', 'Record updated successfully');
         }
-        $result =   Localization::find($input['id']);
-
-        $path = resource_path() . '/lang/';
-        $replace_folder = $path . $input['name'];
-        $old_folder = $path . $result['name'];
-        rename($old_folder,  $replace_folder);
-        $array = [
-            'user_id' => auth()->user()->id,
-            'name' => isset($input['name']) ? ($input['name']) : '',
-            'value' => isset($input['value']) ? ($input['value']) : '',
-            'file' => isset($request['file']) ? ($imageName) : '',
-        ];
-
-        $data = Localization::updateOrCreate(['id' =>     $input['id']], $array);
-
-        return redirect('localization')->with('success', 'Localization added Successfully');
-        // }
+        // return view('localization.edit',compact('language'));
     }
 
     /**
@@ -162,7 +165,7 @@ class LocalizationController extends Controller
     {
         $id = $request['id'];
         $obj =  new Localization();
-
+        // File::deleteDirectory(resource_path('/lang/' . $obj->name));
         $obj->destory($request['id']);
 
         return response()->json(['status' => 'success']);

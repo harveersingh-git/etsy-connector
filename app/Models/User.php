@@ -33,7 +33,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'country_code',
         'business_account',
         'tax_id',
-        'email_verified_at'
+        'email_verified_at',
+        'license'
     ];
 
     /**
@@ -67,8 +68,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
 
         return $this->hasOne('App\Models\SocialAccount', 'user_id');
-
     }
+    public function allow()
+    {
+        return $this->hasOne(AllowLicense::class, 'user_id', 'id')->latest();
+    }
+
 
     // public static function boot()
     // {

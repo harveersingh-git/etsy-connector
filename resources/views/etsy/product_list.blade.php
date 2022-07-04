@@ -1,4 +1,5 @@
 @extends('admin.layout.head')
+@inject('Etsy', 'App\Http\Controllers\EtsyController')
 
 @section('content')
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-progressbar/0.9.0/bootstrap-progressbar.min.js"></script>
@@ -8,6 +9,14 @@
     .dt-buttons {
         z-index: 1;
         position: absolute;
+    }
+
+    .btn-gray {
+        color: #fff;
+    }
+
+    .btn-gray:hover {
+        color: #fff;
     }
 </style>
 
@@ -75,8 +84,8 @@
                                     </div>
 
 
-                                    <div class="progress progress-striped active" style="display:none;" id="progress_div">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="25" id="progress_id"></div>
+                                    <div class="progress progress-striped active" id="progress_div" style="display: none;">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="1" id="progress_id"></div>
                                         <input type="hidden" value="0" id="progress_input_hide">
                                     </div>
 
@@ -103,7 +112,7 @@
                                                     @endif
                                                     &nbsp&nbsp
                                                 </div>
-                                                <input type="text" name="sync_type" value="User" id="sync_type" style="display:none">
+                                                <input type="hidden" name="sync_type" value="Manual" id="sync_type">
 
                                                 <div class="form-group">
 
@@ -114,7 +123,7 @@
 
                                                     &nbsp&nbsp
                                                 </div>
-                                                <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title=""><i class="fa fa-refresh" aria-hidden="true"></i>Sync Product</button>
+                                                <button type="button" id="sync_prduct_btn" class="btn btn-sm btn-primary form-group" title=""><i class="fa fa-refresh" aria-hidden="true"></i>{{__('messages.sync product')}}</button>
 
                                             </form>
                                             <input type="hidden" value="{{session()->get('new_shop_id')}}" id="new_shop_id">
@@ -162,8 +171,8 @@
 
 
 
-                                                <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title=""><i class="fa fa-search" aria-hidden="true"></i>Search</button>
-                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr new-danger-btn"><i class="fa fa-times" aria-hidden="true"></i>Clear</a>
+                                                <button type=" submit" class="btn btn-sm btn-primary form-group mr-2" title=""><i class="fa fa-search" aria-hidden="true"></i>{{__('messages.search')}}</button>
+                                                <a type="button" href="{{url()->current()}}" class="btn btn-danger product-list-clr"><i class="fa fa-times" aria-hidden="true"></i>{{__('messages.clear')}}</a>
 
                                             </form>
                                         </div>
@@ -181,13 +190,13 @@
                                             <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
+
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
-                                                        <th class="text-center">{{__('messages.Date')}}</th>
+                                                        <!-- <th class="text-center">{{__('messages.Date')}}</th> -->
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                                                         <th class="text-center">{{__('messages.language')}}</th>
                                                         <th class="text-center">{{__('messages.sync_by')}}</th>
-                                                        <th class="text-center">{{__('messages.sync_type')}}</th>
+                                                        <!-- <th class="text-center">{{__('messages.sync_type')}}</th> -->
                                                         <th class="text-center">{{__('messages.action')}}</th>
 
                                                     </tr>
@@ -196,29 +205,105 @@
 
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
+<<<<<<< HEAD
                                                     <tr>
                                                         <th class="text-center">{{ $key+1 }}</th>
                                                         <td class="text-center">{{substr($value->file_name,0,8)}}</td>
 
                                                         <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
                                                         <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+=======
+                                                    <tr style="font-size: 15px;">
+                                                        <td class="text-center">
+                                                             @if(isset($value->file_name))
+                                                            {{substr($value->file_name,0,25)}}
+                                                            @else
+                                                            {{substr($value->multi_lang_file_name,0,25)}}
+                                                            @endif
+
+                                                        </td>
+
+                                                        <!-- <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td> -->
+                                                        <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+
+>>>>>>> main
                                                         @php
                                                         $lan = isset($value->language)?$value->language:'en';
                                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                                         'pt'=>'Portuguese','ru'=>'Russian'];
-                                                        $current_language = $language[ $lan];
-
                                                         @endphp
+<<<<<<< HEAD
                                                         <td class="text-center">{{ $current_language }}</td>
                                                         <td class="text-center">{{$value->user['name']}} {{$value->user['last_name']}}</td>
                                                         <td class="text-center"> {{$value->sync_type}}</td>
                                                         <td class="text-center"><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
+=======
+
+                                                        @if(isset($value->file_name))
+                                                        @php
+                                                        $current_language = $language[ $lan];
+                                                        $flag = $Etsy::getFlag($current_language );
+                                                        @endphp
+                                                        <td class="text-center">
+                                                            <img src="{{$flag}}" width="40">
+                                                        </td>
+                                                        @else
+                                                        <td class="text-center">
+                                                            @php
+                                                            $languages= explode(',',$lan);
+
+                                                            foreach($languages as $k=>$val){
+
+                                                            $current_language = $language[ $val];
+                                                            $flag = $Etsy::getFlag($current_language);
+
+                                                            @endphp
+
+                                                            <img src="{{ $flag}}" width="35">
+                                                            @if($k==4)
+                                                            </br>
+                                                            @endif
+                                                            @php
+                                                            }
+                                                            @endphp
+                                                        </td>
+
+
+                                                        @endif
+
+                                                        <td class="text-center">{{isset($value->user['name'])?$value->user['name']:''}} {{isset($value->user['last_name'])?$value->user['last_name']:''}}
+                                                            </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span></td>
+                                                        <!-- <td> {{$value->sync_type}}</td> -->
+                                                        <td class="text-center">
+                                                            @if(isset($value->file_name))
+                                                            <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.download')}}">
+>>>>>>> main
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
-                                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="Copy">
+
+
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}/single" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
+                                                          
+                                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
-                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="View" ><i class="fa fa-eye "></i> </a>
-                                                            <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i> </a>
+                                                            @else
+                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.Download Multi Lang')}}">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                            </a>
+
+
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->parent_id)}}/multi" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
+                                                           
+                                                            <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->multi_lang_file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
+                                                                <i class="fa fa-copy" style="color: #fff;"></i>
+                                                            </a>
+                                                            @endif
+
+
+                                                            
+                                                            @hasanyrole('Admin')
+                                                            <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.delete')}}"><i class="fa fa-trash-o"></i> </a>
+                                                            @endhasanyrole
                                                         </td>
 
 
@@ -447,12 +532,69 @@
 
     $(document).ready(function() {
 
+        $(document).on('click', '#sync_prduct_btn', function() {
+            var shop_id = $('#shop').find(":selected").val();
+            var token = $('input[name="_token"]').attr('value');
+            // var lang = $('#sync_language').find(":selected").val();
+            var sync_type = $('#sync_type').val();
 
+
+            var data = {
+                shop: shop_id,
+                // language: lang,
+                sync_type: sync_type
+
+            };
+            var url = $(location).attr('href'),
+                parts = url.split("/"),
+                last_part = parts[parts.length - 1];
+
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/etsy-list-data-progress',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-Token': token
+                },
+
+                success: function(data) {
+
+                    if (data.status = "success") {
+                        console.log('sdfsdfsdfsdf', data.data.count);
+                        var total = data.data.count;
+                        $('#progress_id').width(Math.round(5) + '%');
+                        $('#progress_id').attr('data-transitiongoal', Math.round(5));
+                        $('#progress_id').text(parseInt(5) + '/' + parseInt(total));
+                        // var total = data.data.count
+
+                        // for (var i = 0; i <= total; i++) {
+                        //     var width = parseInt(i) / parseInt(total) * 100;
+                        //     // $('#progress_id').width(Math.round(width) + '%');
+                        //     // $('#progress_id').attr('data-transitiongoal', width);
+                        //     $('#progress_id').text(parseInt(1) + '/100');
+                        //     // $('#progress_input_hide').val(Math.round(width));
+
+                        // }
+
+
+                    } else {
+                        toastr.error(data.message);
+                    }
+
+                },
+                error: function(xhr, status, data) {
+                    toastr.error('Please check your shop id.');
+                    setTimeout(() => {
+                        // window.location.reload();
+                    }, 10000);
+                },
+            })
+        });
         $(document).on('click', '#sync_prduct_btn', function() {
 
             // $('#sync_prduct_btn').click(function() {
-
-            // $('#sync_form').submit();
 
             var shop_id = $('#shop').find(":selected").val();
             var token = $('input[name="_token"]').attr('value');
@@ -493,7 +635,7 @@
                                 var width = parseInt(i) / parseInt(total) * 100;
                                 $('#progress_id').width(Math.round(width) + '%');
                                 $('#progress_id').attr('data-transitiongoal', width);
-                                $('#progress_id').text(Math.round(width) + '/100');
+                                $('#progress_id').text(Math.round(i) + '/' + total);
                                 $('#progress_input_hide').val(Math.round(width));
 
                             }

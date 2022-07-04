@@ -12,6 +12,9 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Mail;
 use Illuminate\Auth\Events\Registered;
+use Carbon\Carbon;
+use App\Models\AllowLicense;
+// use App\Modals\
 
 
 
@@ -334,5 +337,44 @@ class SubscriberController extends Controller
             return redirect()->route('subscriber.index')->with("success", "Password update successfully.");
         }
         return view('subscriber.change_password', compact('id'));
+    }
+
+
+
+    public function license(Request $request, $id)
+    {
+        // dd($id);
+        $url = '';
+
+        $id = base64_decode($id);
+
+        $user = User::with('allow')->find($id);
+        // dd( $user['allow']->expire_date);
+
+        if ($request->isMethod('post')) {
+            $input = $request->all();
+
+            $request->validate([
+                'expire_date' => 'required',
+                'license' => 'required',
+                'id' => 'required',
+            ]);
+
+            if ($input['license'] == '1') {
+                $user = User::find($id);
+                $user->update(['license' => '1']);
+
+                $input = [
+                    'user_id' => isset($id) ? ($id) : '',
+                    'license' => isset($input['license']) ? ('1') : '0',
+                    'expire_date' => isset($input['expire_date']) ? (Carbon::parse($input['expire_date'])->format('Y-m-d')) : '',
+                ];
+                $data = AllowLicense::create($input);
+                return redirect()->back()->with(['success' => "Your licence allow successfully."]);
+            } else {
+                return redirect()->back()->with(['error' => "Your licence not allow successfully."]);
+            }
+        }
+        return view('subscriber.license', compact('url', 'id','user'));
     }
 }

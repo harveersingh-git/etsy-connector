@@ -236,6 +236,7 @@ return [
         'Language' => App\Http\Helper\Language::class,
         'CurrentLocation' => App\Http\Helper\currentLocation::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        'Helper' => App\Http\Helper\checkPermission::class,
 
     ],
 

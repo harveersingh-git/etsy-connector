@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\EtsyConfig;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Country;
+use Gate;
 
 class MyShopController extends Controller
 {
@@ -20,6 +21,10 @@ class MyShopController extends Controller
      */
     public function index(Request $request)
     {
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
 
         $data = EtsyConfig::where('user_id', auth()->user()->id)->latest()->get();
 
@@ -33,6 +38,10 @@ class MyShopController extends Controller
      */
     public function create(Request $request)
     {
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
 
         $url = '';
 
@@ -65,7 +74,7 @@ class MyShopController extends Controller
             ];
 
             $data = EtsyConfig::create($input);
-        
+
             return redirect('etsy-list-data')->with(['success' => "Your shop has been created successfully. We are syncing your products please wait for a while until it's done", 'new_shop_id' => $data->id]);
         }
         return view('my-shop.create', compact('url', 'country', 'id'));
@@ -93,6 +102,11 @@ class MyShopController extends Controller
     {
 
         try {
+            $allow =    \Helper::checkPermission();
+            if ($allow == '0') {
+                return redirect('edit-profile');
+            }
+
             $country = Country::orderBy('name', 'ASC')->get();
             $data = EtsyConfig::find(base64_decode($id));
 
@@ -113,6 +127,10 @@ class MyShopController extends Controller
      */
     public function edit($id)
     {
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
 
         $data = EtsyConfig::find($id);
 
@@ -131,7 +149,10 @@ class MyShopController extends Controller
     public function update(Request $request)
     {
 
-
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
         $input = $request->all();
 
         $request->validate([
@@ -173,6 +194,11 @@ class MyShopController extends Controller
      */
     public function destroy(Request $request)
     {
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
+
         $id = $request['id'];
 
         EtsyConfig::find($id)->delete();

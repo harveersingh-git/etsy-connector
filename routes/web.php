@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/etsy-config/{id}', [EtsyController::class, 'etsyConfig'])->name('etsy-config');
 
     Route::any('/country-list', [EtsyController::class, 'countryList'])->name('country-list');
+    Route::any('/etsy-list-data-progress', [EtsyController::class, 'etsyListDataProgress'])->name('etsy-list-data-progress');
     Route::any('/etsy-list-data', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
     Route::any('/etsy-list-data/{id}', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
     // Route::any('/shoplist-data/{id}', [EtsyController::class, 'show'])->name();
@@ -70,7 +71,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/export-csv', [EtsyController::class, 'exportCsv'])->name('export-csv');
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');
     Route::any('/delete_download_history', [EtsyController::class, 'destroy'])->name('delete_download_history');
-    Route::any('/etsy-product-list/{id}', [EtsyController::class, 'view'])->name('etsy-product-list');
+    Route::any('/etsy-product-list/{id}/{type}', [EtsyController::class, 'view'])->name('etsy-product-list');
 
 
     Route::resource('roles', RoleController::class);
@@ -104,6 +105,9 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/subscriber-trash', [SubscriberController::class, 'subscriberTrash'])->name('subscriber-trash');
     Route::post('/update-password', [SubscriberController::class, 'changePassword'])->name('updatePassword');
     Route::any('/update-password/{id}', [SubscriberController::class, 'changePassword'])->name('update-password');
+    // Route::any('/license/{id}', [ShopListController::class, 'license'])->name('shoplist');
+
+    Route::any('/license/{id}', [SubscriberController::class, 'license'])->name('license');
 
     Route::any('/localization', [LocalizationController::class, 'index'])->name('localization');
     Route::any('/add-localization', [LocalizationController::class, 'create'])->name('add-localization');
