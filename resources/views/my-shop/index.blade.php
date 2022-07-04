@@ -65,7 +65,7 @@
                                         <td class="text-center">{{$value->shop_name}}</td>
                                
 
-                                        <td>
+                                        <td class="text-center">
                                             <a type="button" href="{{url('/my-shop/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top" title="{{__('messages.edit')}}"><i class="fa fa-edit"></i></a>
                                             <!-- <a type="button" href="{{url('/etsy-config')}}/{{$value->id}}" class="btn btn-warning btn-gray" title="Generate Token And Authorize" style="color: #fff;"><i class="fa fa-gear fa-spin"></i></a> -->
 
