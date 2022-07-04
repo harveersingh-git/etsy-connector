@@ -259,7 +259,7 @@
                                                         <td class="text-center">{{isset($value->user['name'])?$value->user['name']:''}} {{isset($value->user['last_name'])?$value->user['last_name']:''}}
                                                             </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span></td>
                                                         <!-- <td> {{$value->sync_type}}</td> -->
-                                                        <td class="text-center">
+                                                        <td class="text-center" style="padding: 10px 8px;">
                                                             @if(isset($value->file_name))
                                                             <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.download')}}">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
