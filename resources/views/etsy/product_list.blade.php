@@ -205,14 +205,6 @@
 
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
-<<<<<<< HEAD
-                                                    <tr>
-                                                        <th class="text-center">{{ $key+1 }}</th>
-                                                        <td class="text-center">{{substr($value->file_name,0,8)}}</td>
-
-                                                        <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td>
-                                                        <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
-=======
                                                     <tr style="font-size: 15px;">
                                                         <td class="text-center">
                                                              @if(isset($value->file_name))
@@ -226,18 +218,11 @@
                                                         <!-- <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td> -->
                                                         <td class="text-center">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
 
->>>>>>> main
                                                         @php
                                                         $lan = isset($value->language)?$value->language:'en';
                                                         $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                                         'pt'=>'Portuguese','ru'=>'Russian'];
                                                         @endphp
-<<<<<<< HEAD
-                                                        <td class="text-center">{{ $current_language }}</td>
-                                                        <td class="text-center">{{$value->user['name']}} {{$value->user['last_name']}}</td>
-                                                        <td class="text-center"> {{$value->sync_type}}</td>
-                                                        <td class="text-center"><a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="Download">
-=======
 
                                                         @if(isset($value->file_name))
                                                         @php
@@ -277,7 +262,6 @@
                                                         <td class="text-center">
                                                             @if(isset($value->file_name))
                                                             <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.download')}}">
->>>>>>> main
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
 
 
