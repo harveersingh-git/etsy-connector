@@ -77,8 +77,8 @@ return [
     'edit_localization' => 'Edit Localization',
     'documentation' => 'Documentation',
     'sign_up' => 'Sign Up',
-    'everything' => 'Everything',
-    'you_need_for' => 'you need for',
+    'everything' => 'Etsy Facebook Shop Connector',
+    'you_need_for' => '',
     'you_admin' => 'your Admin',
     'you_dashboard' => 'your Dashboard',
     'you_application' => 'your Application',
@@ -86,7 +86,8 @@ return [
     'you_project' => 'your Client',
     'login_to_your_account' => 'Login to your account',
     'register' => 'Register',
-    'it_is_a_long' => 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'it_is_a_long' => 'EASILY and QUICKLY connect your Etsy Store with Facebook Shopping. The entire article catalog of Etsy will be automatically synchronized with your Facebook Shop.
+    If your Facebook Shop is set up correctly, the items will also be synchronized to Instagram.',
     'create_an_account' => 'Create an account',
     'overview' => 'Overview',
     'monthly' => 'Monthly',
@@ -131,7 +132,11 @@ return [
     'search'=>'Search',
     'clear'=>'Clear',
     'sync product'=>'Sync Product',
-    'licence will expire'=>'licence will expire'
+    'licence will expire'=>'licence will expire',
+    'default_language'=>'Default language',
+    'sync_by'=>'Sync By',
+    'sync_type'=>'Sync Type',
+    'contact'=>'Contact'
 
 
 
