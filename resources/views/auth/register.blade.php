@@ -271,7 +271,7 @@ $country = \GetCountry::getCountryCode();
                                         <label for="password-confirm" class="control-label sr-only">{{ __('Tax ID') }}</label>
                                         <input type="text" id="tax_id" type="text" class="form-control @error('Tax ID') is-invalid @enderror" name="tax_id" placeholder="Tax ID  ">
                                         @if ($errors->has('tax_id'))
-                                        <span class="help-block">
+                                        <span class="help-block text-danger">
                                             <strong>{{ $errors->first('tax_id') }}</strong>
                                         </span>
                                         @endif

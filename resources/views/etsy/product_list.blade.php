@@ -192,7 +192,7 @@
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
                                                         <th class="text-center">{{__('messages.language')}}</th>
                                                         <th class="text-center">{{__('messages.sync_by')}}</th>
-                                                        <th class="text-center">{{__('messages.sync_type')}}</th>
+                                                        <!-- <th class="text-center">{{__('messages.sync_type')}}</th> -->
                                                         <th class="text-center">{{__('messages.action')}}</th>
 
                                                     </tr>
@@ -213,23 +213,26 @@
                                                         $current_language = $language[ $lan];
                                                         $flag = $Etsy::getFlag($current_language )
                                                         @endphp
-                                                        <td>
-                                                            <img src="{{$flag}}">
+                                                        <td class="text-center">
+                                                            <img src="{{$flag}}" width="40">
                                                         </td>
                                                         <td>{{$value->user['name']}} {{$value->user['last_name']}}</td>
-                                                        <td> {{$value->sync_type}}</td>
+                                                        <!-- <td> {{$value->sync_type}}</td> -->
                                                         <td>
-                                                            <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.Download Multi Lang')}}">
+                                                            <!-- <a href="{{url('public/uploads/'.$value->multi_lang_file_name)}}" download="{{$value->multi_lang_file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.Download Multi Lang')}}">
                                                                 <i class="fa fa-download" aria-hidden="true"></i>
-                                                            </a>
+                                                            </a> -->
 
                                                             <a href="{{url('public/uploads/'.$value->file_name)}}" download="{{$value->file_name}}" class="btn btn-info btn-gray" data-toggle="tooltip" data-placement="top" title="{{__('messages.download')}}">
                                                                 <i class="fa fa-download" aria-hidden="true"></i> </a>
+                                                          
+                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
-                                                            <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
+                                                            @hasanyrole('Admin')
                                                             <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.delete')}}"><i class="fa fa-trash-o"></i> </a>
+                                                            @endhasanyrole
                                                         </td>
 
 

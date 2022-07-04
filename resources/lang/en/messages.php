@@ -136,7 +136,8 @@ return [
     'default_language'=>'Default language',
     'sync_by'=>'Sync By',
     'sync_type'=>'Sync Type',
-    'contact'=>'Contact'
+    'contact'=>'Contact',
+    'Business'=>'Business'
 
 
 
