@@ -24,7 +24,7 @@
                     <!-- <li><a href="javascript:void(0);"><i class="icon-envelope-open"></i>Messages</a></li> -->
                     <!-- <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li> -->
                     <li class="divider"></li>
-                    <li><a href="javascript:void(0);"><i class="icon-power"></i>{{__('messages.logout')}}</a></li>
+                    <li><a href="javascript:void(0);"  data-toggle="modal" data-target="#kt_modal_strip"><i class="icon-power"></i>{{__('messages.logout')}}</a></li>
                 </ul>
             </div>
         </div>

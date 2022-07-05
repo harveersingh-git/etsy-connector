@@ -164,7 +164,7 @@ $language = \Language::getLanguage();
                     </li> -->
                     <!-- <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-settings"></i></a></li> -->
                     <li>
-                        <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language" onchange="changeLanguage(this.value)">
+                        <select class="select2-selection select2-selection--single form-select form-control " name="language" id="language" onchange="changeLanguage(this.value)">
                             <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">English</option>
 
                             @forelse($language as $lng)
@@ -177,13 +177,10 @@ $language = \Language::getLanguage();
 
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_modal_strip" href="#">
                             <i class="icon-power"></i>
                         </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                        
 
 
                     </li>

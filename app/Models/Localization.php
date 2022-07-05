@@ -9,7 +9,7 @@ use File;
 class Localization extends Model
 {
     use HasFactory;
-    protected $fillable = ['id', 'user_id', 'name', 'value', 'file', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'name', 'value', 'file', 'country_flag', 'created_at', 'updated_at'];
 
     public function destory($id)
     {

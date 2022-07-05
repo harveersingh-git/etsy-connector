@@ -137,7 +137,12 @@ return [
     'sync_by'=>'Sync Details',
     'sync_type'=>'Sync Type',
     'contact'=>'Contact',
-    'Business'=>'Business'
+    'Business'=>'Business',
+    'Are You sure you want to logout?'=>'Are You sure you want to logout?',
+    'Home'=>'Home',
+    'Connect Support'=>'Connect Support',
+    'country_flag'=>'County Flag',
+    
 
 
 

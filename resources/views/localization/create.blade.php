@@ -58,7 +58,7 @@
                             {{ csrf_field() }}
 
                             <div class="row clearfix">
-                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="name" placeholder="Ex:en" value="{{old('name')}}">
@@ -71,7 +71,7 @@
                                         <!-- <span class="help-block">(999) 999-9999</span> -->
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="first_name" class="control-label">{{__('messages.value')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="value" placeholder="Ex:english" value="{{old('value')}}" required>
@@ -83,7 +83,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="file" class="control-label">{{__('messages.file')}}<span style="color: red;">*</span></label>
                                         <input type="file" class="form-control" name="file" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->file)?($user->file):''}}" required>
@@ -95,6 +95,19 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="file" class="control-label">{{__('messages.country_flag')}}<span style="color: red;">*</span></label>
+                                        <input type="file" class="form-control" name="country_flag" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->country_flag)?($user->country_flag):''}}" required>
+
+                                        @if ($errors->has('country_flag'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('country_flag') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                
                                 <div class="col-lg-12 col-md-12 col-sm-12 ">
                                     <div class="form-group pull-right">
                                         <a href="{{ url('localization') }}" class="btn btn-light">

@@ -46,7 +46,7 @@
                         <a href="{{url('/')}}/resources/lang/{{$data->name}}/messages.txt" download="messages.txt" class="btn btn-success btn-sm">
                             <i class="fa fa-download" aria-hidden="true"></i> {{__('messages.Click here to download previously saved language file to edit')}}</a>
 
-                            
+
                     </span>
 
 
@@ -103,6 +103,18 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="county_flag" class="control-label">{{__('messages.county_flag')}}<span style="color: red;">*</span></label>
+                                        <input type="file" class="form-control" name="county_flag" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->county_flag)?($user->county_flag):''}}">
+
+                                        @if ($errors->has('key_string'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('key_string') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12 ">
 
@@ -113,7 +125,7 @@
                                             {{__('messages.back')}}
                                         </a>
                                         <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.save')}}
+                                            <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.save')}}
                                         </button>
                                     </div>
                                 </div>

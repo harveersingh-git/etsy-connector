@@ -35,8 +35,13 @@ class LocalizationController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'value' => 'required|string',
+                'country_flag' => 'required|image|mimes:jpeg,png,jpg|max:1000',
 
             ]);
+            if (isset($request->country_flag)) {
+                $country_flag = time() . '.' . $request->country_flag->extension();
+                $request->country_flag->move(public_path('flag'), $country_flag);
+            }
             // File::copy(Input::file('file'), 'new/location/file.txt');
             $file1 = $request->file;
             $file2 = $request->file;
@@ -55,7 +60,8 @@ class LocalizationController extends Controller
                 'name' => $request->name,
                 'value' => $request->value,
                 'user_id' => auth()->user()->id,
-                'file' => $fileName
+                'file' => $fileName,
+                'country_flag' => isset($country_flag) ? $country_flag : ''
             ]);
 
             return redirect('/localization')->with('success', 'Record updated successfully');
@@ -124,8 +130,13 @@ class LocalizationController extends Controller
                 'value' => 'required|string',
 
             ]);
-         
             Localization::find($request->id)->delete();
+            if (isset($request->country_flag)) {
+                $country_flag = time() . '.' . $request->country_flag->extension();
+                $request->country_flag->move(public_path('flag'), $country_flag);
+            }
+
+
             // File::copy(Input::file('file'), 'new/location/file.txt');
             $file1 = $request->file;
             $file2 = $request->file;
@@ -147,7 +158,8 @@ class LocalizationController extends Controller
                 'name' => $request->name,
                 'value' => $request->value,
                 'user_id' => auth()->user()->id,
-                'file' => $fileName
+                'file' => $fileName,
+                'country_flag' => isset($country_flag) ? $country_flag : ''
             ]);
 
             return redirect('/localization')->with('success', 'Record updated successfully');
@@ -165,6 +177,7 @@ class LocalizationController extends Controller
     {
         $id = $request['id'];
         $obj =  new Localization();
+
         // File::deleteDirectory(resource_path('/lang/' . $obj->name));
         $obj->destory($request['id']);
 

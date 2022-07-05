@@ -7,6 +7,7 @@ use Hash;
 use Auth;
 use App\Models\EtsyConfig;
 use App\Models\Country;
+use App\Models\DownloadHistory;
 
 class ShopListController extends Controller
 {
@@ -169,16 +170,33 @@ class ShopListController extends Controller
     {
         $id = $request['id'];
 
-        EtsyConfig::find($id)->delete();
+        $etsy_shop  = EtsyConfig::find($id);
+        if ($etsy_shop) {
+            $download_history = DownloadHistory::where('shop_id', $id)->get();
 
-        return redirect()->route('subscriber.index')
-            ->with('success', 'Record delete successfully');
+            foreach ($download_history as $key => $val) {
+
+                if (isset($val->file_name)) {
+                    unlink(public_path('uploads/' . $val->file_name));
+                } else {
+                    unlink(public_path('uploads/' . $val->multi_lang_file_name));
+                }
+                DownloadHistory::find($val->id)->delete();
+            }
+            $etsy_shop->delete();
+            return redirect()->route('subscriber.index')
+                ->with('error', 'Record delete successfully');
+        } else {
+            return redirect()->route('subscriber.index')
+                ->with('error', 'Record not delete successfully');
+            // }
+        }
     }
 
     public function shopList()
     {
         $data = EtsyConfig::with('owner')->get();
-     
+
         return view('shop.shop_list', compact('data'));
     }
 }

@@ -16,7 +16,7 @@ class Language
             "value" => "English"
         ];
 
-        $language =  Localization::select('name', 'value')->orderBy('name', 'ASC')->get();
+        $language =  Localization::select('name', 'value','country_flag')->orderBy('name', 'ASC')->get();
 
         // $language =  array_merge($language1, $language2);
     

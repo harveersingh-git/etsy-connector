@@ -465,7 +465,7 @@ class EtsyController extends Controller
                             ProductHistory::create($value);
                         }
 
-                        $this->exportMultiLangCsv($download_history_id->id);
+                        $this->exportMultiLangCsv($download_history_id->id, $sync_type);
                     }
                     return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
                     // return redirect()->back()->with("success", "Product Sync successfully!");
@@ -627,7 +627,7 @@ class EtsyController extends Controller
 
     public function exportCsv($shop_name = null,  $language, $sync_type)
     {
-        DownloadHistory::where('user_id', auth()->user()->id)->delete();
+        // DownloadHistory::where('user_id', auth()->user()->id)->delete();
         $total_language = [
             'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
             'pt' => 'pt_XX', 'ru' => 'ru_RU'
@@ -651,7 +651,7 @@ class EtsyController extends Controller
 
             $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
             // $fileName = $get_name->shop_name . '-' . $rand  . '-' . 'productlist.csv';
-            $fileName = $get_name->shop_name . '.csv';
+            $fileName = $get_name->shop_name . '-' . $shop_name . '.csv';
             $tasks = $click;
             $headers = array(
                 "Content-type"        => "text/csv",
@@ -719,7 +719,7 @@ class EtsyController extends Controller
 
 
 
-    public function exportMultiLangCsv($download_histories_id)
+    public function exportMultiLangCsv($download_histories_id, $sync_type)
     {
 
         $total_language = [
@@ -745,7 +745,7 @@ class EtsyController extends Controller
             $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
 
             // $fileName = $date . '-' . $t . 'productlist.csv';
-            $fileName = 'multi' . $dhistory['shops']->shop_name . '.csv';
+            $fileName = 'multi' . $dhistory['shops']->shop_name . '-' . $dhistory->shop_id .  '.csv';
 
 
             $tasks = $click;
@@ -837,20 +837,20 @@ class EtsyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function view(Request $reques, $id,$type=null)
+    public function view(Request $reques, $id, $type = null)
     {
-    
+
         try {
             $url = '';
-            
-            if($type=='multi'){
-             
+
+            if ($type == 'multi') {
+
                 $records = DownloadHistory::where('parent_id', base64_decode($id))->first();
                 // dd( );
 
-            }else{
+            } else {
                 $records = DownloadHistory::where('id', base64_decode($id))->first();
-                                // dd( $records );
+                // dd( $records );
             }
             // $records = DownloadHistory::where('id', base64_decode($id))->first();
             $query = ProductHistory::with('lang');
@@ -874,7 +874,7 @@ class EtsyController extends Controller
 
 
             if ($data) {
-                return view('etsy.view_product_list', compact('data', 'records', 'url', 'shops','type'));
+                return view('etsy.view_product_list', compact('data', 'records', 'url', 'shops', 'type'));
             }
             return redirect('etsy-list-data');
         } catch (ModelNotFoundException $exception) {

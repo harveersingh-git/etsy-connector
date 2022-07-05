@@ -127,28 +127,28 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Contact with admin</h5>
+                    <h5 class="modal-title">{{__('messages.Are You sure you want to logout?')}}</h5>
 
 
                 </div>
 
                 <div class="modal-body">
                     <div class="text-center">
-                        <a href="" id="url" class="btn btn-primary">Click Here</a>
+                        <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
                     </div>
 
 
                     <div class="row">
 
                         <div class="col-md-9 col-lg-9 col-xl-9 col-xxl-9 mb-md-3 mt-xl-5 flex-column">
-                            <a href="#" id="" class="">Connect Support</a>
+                            <a href="#" id="" class="">{{__('messages.Connect Support')}}</a>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 mb-md-3 mt-xl-5 flex-column text-right">
                             <a class="log_outs" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
                                 <span class="svg-icon svg-icon-1 me-2">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{__('messages.logout')}}
                                 </span>
                                 <!--end::Svg Icon-->
                                 <!--begin::Major-->
@@ -227,6 +227,63 @@
 
         }
         window.onload = checkStripConnect;
+
+
+        /////////////////
+
+        //test for getting url value from attr
+// var img1 = $('.test').attr("data-thumbnail");
+// console.log(img1);
+
+//test for iterating over child elements
+// var langArray = [];
+// $('.vodiapicker option').each(function(){
+//   var img = $(this).attr("data-thumbnail");
+//   var text = this.innerText;
+//   var value = $(this).val();
+//   var item = '<li><img src="'+ img +'" alt="" value="'+value+'"/><span>'+ text +'</span></li>';
+//   langArray.push(item);
+// })
+
+// $('#a').html(langArray);
+
+// //Set the button value to the first el of the array
+// $('.btn-select').html(langArray[0]);
+// $('.btn-select').attr('value', 'en');
+
+// //change button stuff on click
+// $('#a li').click(function(){
+//    var img = $(this).find('img').attr("src");
+//    var value = $(this).find('img').attr('value');
+//    var valuee = $(this).attr('value');
+//    var text = this.innerText;
+//    var item = '<li value="'+value+'"><img src="'+ img +'" alt="" /><span>'+ text +'</span></li>';
+//   $('.btn-select').html(item);
+//   $('.btn-select').attr('value', valuee);
+//   $(".b").toggle();
+//   //console.log(value);
+// });
+
+// $(".btn-select").click(function(){
+//         $(".b").toggle();
+//     });
+
+// //check local storage for the lang
+// var sessionLang = localStorage.getItem('lang');
+// if (sessionLang){
+//   //find an item with value of sessionLang
+//   var langIndex = langArray.indexOf(sessionLang);
+//   $('.btn-select').html(langArray[langIndex]);
+//   $('.btn-select').attr('value', sessionLang);
+// } else {
+//    var langIndex = langArray.indexOf('ch');
+//   console.log(langIndex);
+//   $('.btn-select').html(langArray[langIndex]);
+//   //$('.btn-select').attr('value', 'en');
+// }
+
+
+
     </script>
     @yield('script')
 </body>
