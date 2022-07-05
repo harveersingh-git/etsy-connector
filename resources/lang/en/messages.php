@@ -142,6 +142,8 @@ return [
     'Home'=>'Home',
     'Connect Support'=>'Connect Support',
     'country_flag'=>'County Flag',
+    'Licence has been expire'=>'Licence has been expire.',
+    'Your licence has been expire please contact with admin'=>'Your licence has been expire please contact with admin.'
     
 
 

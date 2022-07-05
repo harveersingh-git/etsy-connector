@@ -190,7 +190,7 @@
                                             <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-
+                                                    <th class="text-center">{{__('messages.sr_no')}}</th>
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <!-- <th class="text-center">{{__('messages.Date')}}</th> -->
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
@@ -205,7 +205,9 @@
 
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
-                                                    <tr style="font-size: 15px;">
+                                                    
+                                                    <tr style="font-size: 14px;">
+                                                    <th class="text-center" style="padding: 10px 8px;vertical-align: middle;">{{ $key+1 }}</th>
                                                         <td class="text-center"  style="padding: 10px 8px;">
                                                              @if(isset($value->file_name))
                                                             {{substr($value->file_name,0,25)}}

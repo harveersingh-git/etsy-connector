@@ -3,6 +3,11 @@
 $language = \Language::getLanguage();
 
 @endphp
+<style>
+    .drop-down-language span.select2.select2-container.select2-container--default {
+        display: none;
+    }
+</style>
 
 <nav class="navbar navbar-fixed-top">
     <div class="container-fluid">
