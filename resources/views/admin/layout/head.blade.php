@@ -228,6 +228,10 @@
         }
         window.onload = checkStripConnect;
     </script>
+
+    <script>
+        jQuery().ready(function() { /* Custom select design */ jQuery('.drop-down-language').append('<div class="button"></div>'); jQuery('.drop-down-language').append('<ul class="select-list"></ul>'); jQuery('.drop-down-language select option').each(function() { var bg = jQuery(this).css('background-image'); jQuery('.select-list').append('<li class="clsAnchor"><span value="' + jQuery(this).val() + '" class="' + jQuery(this).attr('class') + '" style=background-image:' + bg + '>' + jQuery(this).text() + '</span></li>'); }); jQuery('.drop-down-language .button').html('<span style=background-image:' + jQuery('.drop-down-language select').find(':selected').css('background-image') + '>' + jQuery('.drop-down-language select').find(':selected').text() + '</span>' + '<a href="javascript:void(0);" class="select-list-link"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>'); jQuery('.drop-down-language ul li').each(function() { if (jQuery(this).find('span').text() == jQuery('.drop-down-language select').find(':selected').text()) { jQuery(this).addClass('active'); } }); jQuery('.drop-down-language .select-list span').on('click', function() { var dd_text = jQuery(this).text(); var dd_img = jQuery(this).css('background-image'); var dd_val = jQuery(this).attr('value'); jQuery('.drop-down-language .button').html('<span style=background-image:' + dd_img + '>' + dd_text + '</span>' + '<a href="javascript:void(0);" class="select-list-link"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>'); jQuery('.drop-down-language .select-list span').parent().removeClass('active'); jQuery(this).parent().addClass('active'); $('.drop-down-language select[name=options]').val( dd_val ); $('.drop-down-language .select-list li').slideUp(); }); jQuery('.drop-down-language .button').on('click','a.select-list-link', function() { jQuery('.drop-down-language ul li').slideToggle(); }); /* End */ });
+    </script>
     @yield('script')
 </body>
 
