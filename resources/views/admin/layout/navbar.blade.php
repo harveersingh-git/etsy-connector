@@ -163,7 +163,7 @@ $language = \Language::getLanguage();
                         </ul>
                     </li> -->
                     <!-- <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-settings"></i></a></li> -->
-                    <li>
+                    <!-- <li>
                         <select class="select2-selection select2-selection--single form-select form-control " name="language" id="language" onchange="changeLanguage(this.value)">
                             <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">English</option>
 
@@ -175,12 +175,26 @@ $language = \Language::getLanguage();
                             @endforelse
                         </select>
 
+                    </li> -->
+                    <li>
+                        <div class="drop-down-language">
+                            <select class="" name="language" id="language">
+                                <!-- <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">English</option> -->
+
+                                <option class="en" {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en" style="background-image:url('{{asset('/flag/flag_of_the_united_kingdom.png')}}');"></option>
+                                @forelse($language as $lng)
+                                <option {{($lng->name==session()->get('lang_code'))?'selected':''}} class="{{$lng->name}}" value="{{$lng->name}}" style="background-image:url('{{asset('/flag/')}}/{{$lng->country_flag}}');"></option>
+                                @empty
+
+                                @endforelse
+                            </select>
+                        </div>
                     </li>
                     <li>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_modal_strip" href="#">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_modal_strip">
                             <i class="icon-power"></i>
                         </a>
-                        
+
 
 
                     </li>
