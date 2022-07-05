@@ -10988,6 +10988,7 @@ a.btn.btn-danger.product-list-clr.new-danger-btn {
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
+    left: 5px;
 }
 
 .drop-down-language .button {
