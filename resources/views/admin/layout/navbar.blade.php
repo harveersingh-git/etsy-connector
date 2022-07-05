@@ -177,6 +177,14 @@ $language = \Language::getLanguage();
 
                     </li>
                     <li>
+                    <div class="drop-down-language"> 
+                        <select name="options"> 
+                            <option class="en" value="en" style="background-image:url('https://cdn.britannica.com/33/4833-004-828A9A84/Flag-United-States-of-America.jpg');"></option> 
+                            <option class="fr" value="fr" style="background-image:url('https://cdn.britannica.com/97/1597-004-05816F4E/Flag-India.jpg');"></option> 
+                        </select> 
+                    </div>
+                    </li>
+                    <li>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="icon-power"></i>
