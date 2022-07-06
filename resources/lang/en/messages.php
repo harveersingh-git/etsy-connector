@@ -138,7 +138,7 @@ return [
     'sync_type' => 'Sync Type',
     'contact' => 'Contact',
     'Business' => 'Business',
-    'Are You sure you want to logout?' => 'Are You sure you want to logout?',
+    'Are You sure you want to logout?' => 'Are you sure you want to logout?',
     'Home' => 'Home',
     'Connect Support' => 'Connect Support',
     'country_flag' => 'Country Flag',
