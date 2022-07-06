@@ -38,7 +38,7 @@ Login
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card login-card-new">
                     <div class="header">
                         <p class="lead">{{__('messages.login_to_your_account')}}</p>
                     </div>

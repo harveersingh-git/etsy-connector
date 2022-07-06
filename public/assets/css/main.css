@@ -4471,12 +4471,13 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .auth-main {
-    margin-top: 100px
+    margin-top: 0px
 }
+
 
 @media screen and (max-width: 1200px) {
     .auth-main {
-        margin-top: 50px
+        margin-top: 0px
     }
 }
 
@@ -4531,10 +4532,10 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .auth-main .navbar {
-    margin-bottom: 80px;
-    padding: 0 0 15px 0;
+    margin-bottom: 20px;
+    padding: 10px 0 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 1200px) {
@@ -4560,12 +4561,24 @@ select.form-control:not([size]):not([multiple]) {
 
 .auth-main .auth_detail {
     padding: 40px 0;
-    max-width: 100%
+    max-width: 100%;
+    padding-top: 25%;
 }
-
+.card.login-card-new {
+    margin-top: 25%;
+}
+.card.forgot-card-new {
+    margin-top: 45%;
+}
 @media screen and (max-width: 992px) {
     .auth-main .auth_detail {
         padding: 20px 0
+    }
+    .card.login-card-new {
+        margin-top: 0%;
+    }
+    .card.forgot-card-new {
+        margin-top: 0%;
     }
 }
 
@@ -11070,3 +11083,23 @@ ul.select-list li {
 .drop-down-language li {
     list-style: none;
 }
+        .drop-down-language .select-list li span:hover,
+        .drop-down-language .select-list li span:focus {
+            opacity: 1;
+        }
+        .button a {
+            color: #000!important;
+            display: block;
+            z-index: 21;
+            font-size: 15px;
+            text-align: right;
+            position: relative;
+            top: -2px;
+        }
+        .drop-down-language li {
+            list-style: none;
+        }
+
+        .drop-down-language span.select2.select2-container.select2-container--default {
+            display: none;
+        }
