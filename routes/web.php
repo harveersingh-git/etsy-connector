@@ -42,7 +42,7 @@ Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 Route::post('resend', [VerifyEmailController::class, 'resend'])->name('resend');
-Route::get('contect-us', [ContactUsController::class, 'create'])->name('contect-us');
+Route::any('contect-us', [ContactUsController::class, 'create'])->name('contect-us');
 
 Auth::routes();
 

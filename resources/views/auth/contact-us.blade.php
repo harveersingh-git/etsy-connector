@@ -53,7 +53,7 @@ Login
                             {{ session('success') }}
                         </div>
                         @endif
-                        <form class="form-auth-small" action="#" method="POST">
+                        <form class="form-auth-small" action="{{$url}}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">{{ __('Email Address') }}</label>

@@ -21,9 +21,13 @@ class ContactUsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('auth.contact-us');
+        $url = '';
+        if ($request->method() == 'POST') {
+            return redirect()->back();
+        }
+        return view('auth.contact-us', compact('url'));
     }
 
     /**
