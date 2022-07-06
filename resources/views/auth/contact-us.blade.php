@@ -1,6 +1,10 @@
 @extends('admin.include.loginmain')
 @section('title')
-Login
+Login@php
+
+$country = \GetCountry::getCountryCode();
+$location = \CurrentLocation::getLocation();
+@endphp
 @endsection
 @section('content')
 <div id="wrapper" class="auth-main">
@@ -56,18 +60,87 @@ Login
                         <form class="form-auth-small" action="{{$url}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="signin-email" class="control-label sr-only">{{ __('Email Address') }}</label>
-                                <textarea class="form-control" rows="8" cols="30" required="" placeholder="Plese write your query here.."></textarea>
-                                <!-- <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="off" placeholder="email" autofocus> -->
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label for="name" class="control-label sr-only">{{ __('messages.name') }}</label>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="name" autocomplete="some-unrecognised-value" autofocus>
 
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                        @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="col">
+                                        <!-- </div>
+                            
+                                            <div class="form-group"> -->
+                                        <label for="email" class="control-label sr-only">{{ __('messages.email') }}</label>
+                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="email" autocomplete="off" autofocus>
+
+                                        @if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
-                        
-                        
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="col">
+
+                                        <label for="signin-email" class="control-label sr-only">{{ __('messags.country_code') }}</label>
+                                        <select class="select2-selection form-select form-control" data-placeholder="Please select" name="country_code" value="" id="code">
+                                            <option value="">-country code-</option>
+
+                                            @forelse($country as $nation)
+
+                                            <option value="{{$nation->code}}" {{(ucfirst($nation->name)== $location->countryName)?'selected':''}}>{{$nation->name}}({{$nation->code}})</option>
+                                            @empty
+                                            <option value="">No country found</option>
+                                            @endforelse
+
+                                        </select>
+                                        @if ($errors->has('country_code'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('country_code') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                    <div class="col">
+                                        <label for="mobile" class="control-label sr-only">{{ __('messages.mobile') }}</label>
+                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
+
+                                        @if ($errors->has('mobile'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('mobile') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signin-subject" class="control-label sr-only">{{ __('messages.subject') }}</label>
+                                <input type="subject" class="form-control @error('subject') is-invalid @enderror" id="subject" name="subject" value="{{ old('subject') }}" required autocomplete="some-unrecognised-value" placeholder="subject" autofocus>
+
+                                @if ($errors->has('subject'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('subject') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="signin-email" class="control-label sr-only">{{__('messages.message')}}</label>
+                                <textarea class="form-control" rows="6" cols="30" required="" placeholder="Plese write your query here.." name="message"></textarea>
+                                @if ($errors->has('message'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('message') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+
+
 
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('messages.send') }}</button>
                             <!-- <div class="text-center text-muted"> or continue with  </div> -->
@@ -92,7 +165,10 @@ Login
 </div>
 @section('script')
 <script>
-
+    $("#code").select2({
+        placeholder: "Select a country code",
+        allowClear: true
+    });
 </script>
 @endsection
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ContactUs;
 
 class ContactUsController extends Controller
 {
@@ -25,7 +26,25 @@ class ContactUsController extends Controller
     {
         $url = '';
         if ($request->method() == 'POST') {
-            return redirect()->back();
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'country_code' => 'required',
+                'mobile' => 'required',
+                'subject' => 'required',
+                'message' => 'required'
+
+            ]);
+            ContactUs::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'country_code' => $request->country_code,
+                'mobile' => $request->mobile,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ]);
+
+            return redirect('/contect-us')->with('success', 'Query has been send succesfully.');
         }
         return view('auth.contact-us', compact('url'));
     }

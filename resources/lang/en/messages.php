@@ -154,7 +154,9 @@ return [
     'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !',
     'contact_us'=>'Contact Us',
     'send'=>'Send',
-    'login'=>'Login'
+    'login'=>'Login',
+    'subject'=>'Subject',
+    'message'=>'message'
 
 
 
