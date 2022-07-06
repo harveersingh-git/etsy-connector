@@ -44,7 +44,8 @@ class ContactUsController extends Controller
                 'message' => $request->message,
             ]);
 
-            return redirect('/contect-us')->with('success', 'Query has been send succesfully.');
+            return redirect('/contect-us')->with('success', 'The query has been sent successfully.
+            ');
         }
         return view('auth.contact-us', compact('url'));
     }
