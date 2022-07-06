@@ -164,7 +164,7 @@ $language = \Language::getLanguage();
                     </li> -->
                     <!-- <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-settings"></i></a></li> -->
                     <!-- <li>
-                        <select class="select2-selection select2-selection--single form-select form-control " name="language" id="language" onchange="changeLanguage(this.value)">
+                        <select class="select2-selection select2-selection--single form-select form-control old-language-box" name="language" id="language" onchange="changeLanguage(this.value)">
                             <option {{session()->has('lang_code')?(session()->get('lang_code')=='en'?'selected':''):''}} value="en">English</option>
 
                             @forelse($language as $lng)

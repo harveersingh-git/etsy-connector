@@ -16,7 +16,7 @@
             <div class="col-lg-8">
                 <div class="auth_detail">
                     <h2 class="text-monospace">
-                        Everything<br> you need for
+                        Everything you need for
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">your Admin</div>
@@ -29,14 +29,14 @@
                     </h2>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                     <ul class="social-links list-unstyled">
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="btn btn-default" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a class="btn btn-default fb-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="btn btn-default tw-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="btn btn-default ig-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card login-card-new">
                     <div class="header">
                         <p class="lead">Recover my password</p>
                     </div>
