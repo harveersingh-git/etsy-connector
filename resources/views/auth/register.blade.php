@@ -152,7 +152,7 @@ $country = \GetCountry::getCountryCode();
                                     </div>
                                     <div class="col">
                                         <label for="mobile" class="control-label sr-only">{{ __('Mobile') }}</label>
-                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
+                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile"  min="0" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">
