@@ -10943,3 +10943,30 @@ ul.select-list li {
         .drop-down-language span.select2.select2-container.select2-container--default {
             display: none;
         }
+
+        .card.sign-up-page-card span.select2-selection__clear {
+            right: 10px;
+        }
+        .card.sign-up-page-card .select2-container--default .select2-selection--single .select2-selection__arrow {
+            top: 3px;
+        }        
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .card.sign-up-page-card .header {
+        padding: 10px 20px;
+    }
+    .card.sign-up-page-card .body {
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+    .card.sign-up-page-card .form-group {
+        margin-bottom: 12px;
+    }
+    .card.sign-up-page-card button.btn.btn-primary.btn-lg.btn-block {
+        margin-top: 0;
+    }
+    .card.sign-up-page-card {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}

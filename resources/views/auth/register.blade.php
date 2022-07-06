@@ -74,7 +74,7 @@ $country = \GetCountry::getCountryCode();
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card sign-up-page-card">
                     <div class="header">
                         <p class="lead">{{__('messages.create_an_account')}}</p>
                     </div>
