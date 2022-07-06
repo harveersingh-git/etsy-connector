@@ -46,7 +46,7 @@ $country = \GetCountry::getCountryCode();
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{ asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="javascript:void(0);">{{__('messages.login_to_your_account')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('contect-us')}}"> {{__('messages.contact_us')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('login')}}">Sign In</a></li>
                     </ul>
                 </nav>

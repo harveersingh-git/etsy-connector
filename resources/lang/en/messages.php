@@ -151,7 +151,10 @@ return [
     'county_flag'=>'Country Flag',
     'profile_image'=>'Profile Image',
     'Once you confirm, the User will we move to trash'=>'Once you confirm, the User will we move to trash.',
-    'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !'
+    'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !',
+    'contact_us'=>'Contact Us',
+    'send'=>'Send',
+    'login'=>'Login'
 
 
 

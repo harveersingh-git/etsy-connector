@@ -8,26 +8,26 @@
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="javascript:void(0);">Documentation</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="page-register.html">Sign Up</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="{{url('contect-us')}}"> {{__('messages.contact_us')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('login')}}">{{__('messages.login')}}</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-8">
                 <div class="auth_detail">
                     <h2 class="text-monospace">
-                        Everything you need for
+                    {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">your Admin</div>
-                                <div class="carousel-item">your Project</div>
-                                <div class="carousel-item">your Dashboard</div>
-                                <div class="carousel-item">your Application</div>
-                                <div class="carousel-item">your Client</div>
+                            <div class="carousel-item active">{{__('messages.you_admin')}}</div>
+                                <div class="carousel-item">{{__('messages.you_project')}}</div>
+                                <div class="carousel-item">{{__('messages.you_dashboard')}}</div>
+                                <div class="carousel-item">{{__('messages.you_application')}}</div>
+                                <div class="carousel-item">{{__('messages.you_client')}}</div>
                             </div>
                         </div>
                     </h2>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    <p>{{__('messages.it_is_a_long')}}</p>
                     <ul class="social-links list-unstyled">
                         <li><a class="btn btn-default fb-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
                         <li><a class="btn btn-default tw-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
