@@ -147,8 +147,10 @@ return [
     'Click here to get your shop ID'=>'Click here to get your shop ID',
     'verify_shop_id'=>'Verify Shop Id.',
     'add_etsy_setting'=>'Add Etsy Setting',
-      'profile_image'=>'Profile Image'
-
+    'profile_image'=>'Profile Image',
+    'Once you confirm, the User will we move to trash'=>'Once you confirm, the User will we move to trash.',
+    'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !'
+    
 
 
 

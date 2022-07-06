@@ -149,7 +149,9 @@ return [
     'add_etsy_setting' => 'Add Etsy Setting',
     'Download a sample file click here' => 'Download a sample file click here',
     'county_flag'=>'Country Flag',
-    'profile_image'=>'Profile Image'
+    'profile_image'=>'Profile Image',
+    'Once you confirm, the User will we move to trash'=>'Once you confirm, the User will we move to trash.',
+    'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !'
 
 
 
