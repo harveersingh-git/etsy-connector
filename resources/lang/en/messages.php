@@ -143,8 +143,10 @@ return [
     'Connect Support'=>'Connect Support',
     'country_flag'=>'County Flag',
     'Licence has been expire'=>'Licence has been expire.',
-    'Your licence has been expire please contact with admin'=>'Your licence has been expire please contact with admin.'
-    
+    'Your licence has been expire please contact with admin'=>'Your licence has been expire please contact with admin.',
+    'Click here to get your shop ID'=>'Click here to get your shop ID',
+    'verify_shop_id'=>'Verify Shop Id.',
+    'add_etsy_setting'=>'Add Etsy Setting'
 
 
 
