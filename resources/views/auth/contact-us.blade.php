@@ -7,6 +7,31 @@ $location = \CurrentLocation::getLocation();
 @endphp
 @endsection
 @section('content')
+<style>
+    .select2-container--default .select2-selection--single {
+        border: 0px solid #aaa !important;
+    }
+
+    span#select2-code-container,span#select2-country-container {
+        box-shadow: none;
+        background-color: #fff;
+        font-size: 14px;
+        height: auto;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        /* font-size: 1rem; */
+        font-weight: 400;
+        line-height: 1.5;
+        /* color: #495057; */
+        /* background-color: #fff; */
+        /* background-clip: padding-box; */
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+</style>
 <div id="wrapper" class="auth-main">
     <div class="container">
         <div class="row clearfix">
