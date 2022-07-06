@@ -59,7 +59,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Password<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">  {{__('messages.password')}}<span style="color: red;">*</span></label>
                                     <input type="password" class="form-control" name="password" placeholder="" value="{{old('password')}}" required>
 
                                     @if ($errors->has('password'))
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="last_name" class="control-label">Confirm Password<span style="color: red;">*</span></label>
+                                    <label for="last_name" class="control-label">  {{__('messages.c_password')}}<span style="color: red;">*</span></label>
                                     <input type="password" class="form-control" name="password_confirmation" placeholder="" value="{{old('password_confirmation')}}" required>
 
                                     @if ($errors->has('password_confirmation'))

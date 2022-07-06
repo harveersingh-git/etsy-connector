@@ -105,12 +105,12 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="county_flag" class="control-label">{{__('messages.county_flag')}}<span style="color: red;">*</span></label>
-                                        <input type="file" class="form-control" name="county_flag" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->county_flag)?($user->county_flag):''}}">
+                                        <label for="country_flag" class="control-label">{{__('messages.county_flag')}}<span style="color: red;">*</span></label>
+                                        <input type="file" class="form-control" name="country_flag" placeholder="Ex:4fd7vtsfmclj0q5cg3ot0eyj" value="{{isset($user->country_flag)?($user->country_flag):''}}">
 
-                                        @if ($errors->has('key_string'))
+                                        @if ($errors->has('country_flag'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('key_string') }}</strong>
+                                            <strong>{{ $errors->first('country_flag') }}</strong>
                                         </span>
                                         @endif
                                     </div>

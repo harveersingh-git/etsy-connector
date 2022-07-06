@@ -128,6 +128,8 @@ class LocalizationController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'value' => 'required|string',
+                'country_flag'=>'required',
+                'file'=>'required',
 
             ]);
             Localization::find($request->id)->delete();

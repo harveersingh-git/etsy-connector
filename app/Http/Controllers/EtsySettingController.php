@@ -47,6 +47,9 @@ class EtsySettingController extends Controller
             'shared_secret' => 'required'
 
         ]);
+
+        // EtsySettings::fisrt()->delete();
+
         $user = EtsySettings::create($input);
 
         return redirect()->route('etsy-setting.index')

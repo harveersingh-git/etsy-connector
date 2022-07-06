@@ -137,7 +137,7 @@ return [
     'sync_by'=>'Sync Details',
     'sync_type'=>'Sync Type',
     'contact'=>'Contact',
-    'Business'=>'Business'
+    'Business'=>'Business',
     'Are You sure you want to logout?'=>'Are You sure you want to logout?',
     'Home'=>'Home',
     'Connect Support'=>'Connect Support',
@@ -146,7 +146,8 @@ return [
     'Your licence has been expire please contact with admin'=>'Your licence has been expire please contact with admin.',
     'Click here to get your shop ID'=>'Click here to get your shop ID',
     'verify_shop_id'=>'Verify Shop Id.',
-    'add_etsy_setting'=>'Add Etsy Setting'
+    'add_etsy_setting'=>'Add Etsy Setting',
+      'profile_image'=>'Profile Image'
 
 
 
