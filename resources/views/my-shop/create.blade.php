@@ -62,7 +62,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="first_name" class="control-label mr-1">{{__('messages.shop_id')}}<span style="color: red;">*</span></label>
+                                        <label for="first_name" class="control-label mr-1">{{__('messages.shop_name')}}<span style="color: red;">*</span></label>
                                         <span class="tooltips">
                                             <i class="fa fa-question-circle" aria-hidden="true"></i>
                                             <span class="tooltiptext"><a href="https://app.cartrover.com/get_etsy_shop_id.php" style="color:#fff" target="blank">{{__('messages.Click here to get your shop ID')}}</a> </span>
