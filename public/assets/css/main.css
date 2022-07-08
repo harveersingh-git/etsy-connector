@@ -11129,9 +11129,19 @@ ul.select-list li {
         padding-bottom: 0;
         margin-bottom: 0;
     }
+    .btn-gray, .btn-danger.delete {
+        margin: 0 3px;
+    }
+    .licence-table-new th, .licence-table-new td {
+        padding: 10px 5px!important;
+        font-size: 14px;
+    }
 }
 
 
+.table-bordered td, .table-bordered th {
+    vertical-align: middle;
+}
 
 
 
