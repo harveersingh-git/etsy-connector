@@ -47,6 +47,7 @@ class SubscriberController extends Controller
         $trash_user = User::with('subscribe_details')->onlyTrashed()->whereHas('roles', function ($query) use ($request) {
             $query->where('name', 'Subscriber');
         })->latest()->get();
+        // dd($data->toarray());
 
         return view('subscriber.index', compact('data', 'trash_user'));
     }

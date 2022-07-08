@@ -107,8 +107,9 @@
                                         </td>
                                         @endif
                                         <td class="text-center">
-                                            @if(isset($value->allow['expire_date']))
-
+                                            @php $current_time='null';@endphp
+                                            @if(isset($value->allow) && ($value->allow !='null'))
+                                          
                                             @php($valuee = \Carbon\Carbon::parse($value['allow']->expire_date)->diffInSeconds())
                                             @php($dt = \Carbon\Carbon::now())
                                             @php($days = $dt->diffInDays($dt->copy()->addSeconds($valuee)))
@@ -117,7 +118,7 @@
                                             @php($current_time =\Carbon\CarbonInterval::days($days)->hours($hours)->minutes($minutes)->forHumans())
                                             @endif
 
-                                            @if(isset($current_time))
+                                            @if($current_time!='null')
                                             {{__('messages.licence will expire')}}</br> {{ $current_time }}
                                             @else
 
