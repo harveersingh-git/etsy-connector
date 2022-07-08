@@ -38,7 +38,7 @@
                             </li>
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{__('messages.in_active')}}</a></li>
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}"><i class="fa fa-trash-o" aria-hidden="true"></i> {{__('messages.trash')}}</a></li>
-                         
+
 
                             <!-- <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
@@ -62,8 +62,8 @@
                             {{ session('success') }}
                         </div>
                         @endif
-                        <div class="fade show active" id="one">
-                            <table class="table-responsive table table-bordered table-striped table-hover dataTable js-exportable">
+                        <div class="fade show active table-responsive" id="one">
+                            <table class=" table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
@@ -73,6 +73,7 @@
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
+                                        <th class="text-center">{{__('messages.license')}}</th>
                                         <th class="text-center">{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
@@ -84,6 +85,7 @@
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <th class="text-center">{{__('messages.status')}}</th>
                                         @endif
+                                        <th class="text-center">{{__('messages.license')}}</th>
                                         <th class="text-center">{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
@@ -96,14 +98,35 @@
                                         <td class="text-center">{{$value->email}} </td>
                                         <td class="text-center">{{$value->country_code}}-{{$value->mobile}}</td>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <td class="text-center" >
+                                        <td class="text-center">
                                             @if($value->active=='0')
                                             <i class="fa fa-eye-slash" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Status"></i>
                                             @else
-                                            <i class="fa fa-eye" id="{{$value->id}}"  data-toggle="tooltip" data-placement="top" title="Status"></i>
+                                            <i class="fa fa-eye" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="Status"></i>
                                             @endif
                                         </td>
                                         @endif
+                                        <td class="text-center">
+                                            @if(isset($value->allow['expire_date']))
+
+                                            @php($valuee = \Carbon\Carbon::parse($value['allow']->expire_date)->diffInSeconds())
+                                            @php($dt = \Carbon\Carbon::now())
+                                            @php($days = $dt->diffInDays($dt->copy()->addSeconds($valuee)))
+                                            @php($hours = $dt->diffInHours($dt->copy()->addSeconds($valuee)->subDays($days)))
+                                            @php($minutes = $dt->diffInMinutes($dt->copy()->addSeconds($valuee)->subDays($days)->subHours($hours)))
+                                            @php($current_time =\Carbon\CarbonInterval::days($days)->hours($hours)->minutes($minutes)->forHumans())
+                                            @endif
+
+                                            @if(isset($current_time))
+                                            {{__('messages.licence will expire')}}</br> {{ $current_time }}
+                                            @else
+
+                                            {{__('messages.licence has been expired')}}
+
+                                            @endif
+
+                                        </td>
+
                                         <td class="text-center">
                                             @if(Request::segment(1)=='subscriber-trash')
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
@@ -123,8 +146,8 @@
 
                                             <a type="button" href="{{ route('shoplist',$value->id) }}" class="btn btn-warning btn-gray" title="Etsy Shop" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-shopping-cart"></i></a>
                                             <a type="button" href="{{ route('update-password',$value->id) }}" class="btn btn-primary btn-gray" title="Change password" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-lock"></i></a>
-                                         
-                                            <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification btn-gray"  id="{{$value->id}}" title="Send Email Verification Link" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope" aria-hidden="true"></i>
+
+                                            <button type="button" data-type="confirm" class="btn btn-secondary js-sweetalert email_verification btn-gray" id="{{$value->id}}" title="Send Email Verification Link" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope" aria-hidden="true"></i>
                                             </button>
                                             <a type="button" href="{{ route('license',base64_encode($value->id)) }}" class="btn btn-warning btn-gray" title=" License Allowed" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-usd"></i></a>
 

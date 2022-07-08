@@ -73,7 +73,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(AllowLicense::class, 'user_id', 'id')->latest();
     }
-
+    
+    // public function license()
+    // {
+    //     return $this->hasOne(AllowLicense::class, 'user_id', 'id');
+    // }
 
     // public static function boot()
     // {

@@ -39,7 +39,7 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::with('subscribe_details')->whereHas('roles', function ($query) {
+        $data = User::with(['subscribe_details','allow'])->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
         })->where('active', '1')->orderBy('id', 'DESC')->get();
 
