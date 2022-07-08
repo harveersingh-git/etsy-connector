@@ -130,7 +130,7 @@
                     <!-- <h5 class="modal-title">{{__('messages.Are You sure you want to logout?')}}</h5> -->
                     <div class="qu-mark-modal"><i class="fa fa-question" aria-hidden="true"></i></div>
 
-                    <span class="close">&times;</span>
+                    <span class="close modal-close">&times;</span>
                 </div>
 
                 <div class="modal-body">
@@ -154,20 +154,14 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                            <a class="log_outs btn btn-sm btn-danger" href="#">
+                            <a class="log_outs btn btn-sm btn-danger modal-close" href="#">
                                 <span class="svg-icon svg-icon-1 me-2">
                                     <i class="fa fa-times " aria-hidden="true"></i> Cancel
                                 </span>
                             </a>
                         </div>
                     </div>
-                    <script type="text/javascript">
-                        $(function() {
-                            $(".close").click(function() {
-                                $(".log-out-modal").modal("hide");
-                            });
-                        });
-                    </script>
+                    
 
                     <!-- <div class="text-center">
                         <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
@@ -203,23 +197,49 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" tabindex="-1" id="kt_modal_licence">
+    <div class="modal fade log-out-modal" tabindex="-1" id="kt_modal_licence">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('messages.Licence has been expire')}}</h5>
+                    <!-- <h5 class="modal-title">{{__('messages.Licence has been expire')}}</h5> -->
 
+                    <div class="qu-mark-modal"><i class="fa fa-exclamation" aria-hidden="true"></i></div>
 
+                    <span class="close modal-close">&times;</span>
                 </div>
 
                 <div class="modal-body">
-                    <div class="text-center">
+                <div class="modal-body-content">
+                        <h3>{{__('messages.renew license')}}</h3>
+                        <p>{{__('messages.Please renew your licence or get a new licence to proceed further')}}</p>
+                        <div class="log-out-btns">
+                            <a class="log_outs btn btn-sm btn-primary" href="{{ route('contect-us') }}"  class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
+                                <span class="svg-icon svg-icon-1 me-2">
+                                <i class="fa fa-user" aria-hidden="true"></i> Contact Administrator
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--begin::Major-->
+
+                                <!--end::Major-->
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            <a class="log_outs btn btn-sm btn-danger modal-close" href="#">
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-times" aria-hidden="true"></i> Close
+                                </span>
+                            </a>
+                            </div>
+                    </div>
+                    <div class="text-center d-none">
                         <p>{{__('messages.Your licence has been expire please contact with admin')}}</p>
                         <!-- <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a> -->
                     </div>
 
 
-                    <div class="row">
+                    <div class="row d-none">
 
                         <div class="col-md-9 col-lg-9 col-xl-9 col-xxl-9 mb-md-3 mt-xl-5 flex-column">
                             <a href="#" id="" class="">{{__('messages.Connect Support')}}</a>
@@ -274,9 +294,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 
     <script>
-        var base_url = {
-            !!json_encode(url('/')) !!
-        }
+        var base_url = { !!json_encode(url('/')) !! }
 
         $("#select_language").select2({
             placeholder: "Select a language",
@@ -300,9 +318,9 @@
         }
         window.onload = checkStripConnect;
     </script>
-    <script type="text/javascript">
-        $(function() {
-            $(".close").click(function() {
+     <script type="text/javascript">
+        $(function () {
+            $(".modal-close").click(function () {
                 $(".log-out-modal").modal("hide");
             });
         });
