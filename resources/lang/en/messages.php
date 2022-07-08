@@ -159,7 +159,7 @@ return [
     'message'=>'message',
     'home'=>'Home',
     'Please renew your licence or get a new licence to proceed further' => 'Please renew your licence or get a new licence to proceed further',
-
+    'renew license'=>'Renew license'
 
 
 

@@ -11212,4 +11212,7 @@ ul.select-list li {
         padding: 10px 3px!important;
         font-size: 14px;
     }
+    .log-out-modal .modal-dialog {
+        padding-top: 9%;
+    }
 }
