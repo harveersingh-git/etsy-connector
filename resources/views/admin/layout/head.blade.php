@@ -161,13 +161,7 @@
                             </a>
                             </div>
                     </div>
-                    <script type="text/javascript">
-    $(function () {
-        $(".close").click(function () {
-            $(".log-out-modal").modal("hide");
-        });
-    });
-</script>
+                    
 
                     <!-- <div class="text-center">
                         <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
