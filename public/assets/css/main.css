@@ -11111,32 +11111,6 @@ ul.select-list li {
             top: 3px;
         }        
 
-@media only screen and (min-width: 1200px) and (max-width: 1400px) {
-    .card.sign-up-page-card .header {
-        padding: 10px 20px;
-    }
-    .card.sign-up-page-card .body {
-        padding-top: 5px;
-        padding-bottom: 10px;
-    }
-    .card.sign-up-page-card .form-group {
-        margin-bottom: 12px;
-    }
-    .card.sign-up-page-card button.btn.btn-primary.btn-lg.btn-block {
-        margin-top: 0;
-    }
-    .card.sign-up-page-card {
-        padding-bottom: 0;
-        margin-bottom: 0;
-    }
-    .btn-gray, .btn-danger.delete {
-        margin: 0 3px;
-    }
-    .licence-table-new th, .licence-table-new td {
-        padding: 10px 5px!important;
-        font-size: 14px;
-    }
-}
 
 
 .table-bordered td, .table-bordered th {
@@ -11211,4 +11185,31 @@ ul.select-list li {
 .licence-table-new th, .licence-table-new td {
     padding: 10px 7px!important;
     font-size: 15px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+    .card.sign-up-page-card .header {
+        padding: 10px 20px;
+    }
+    .card.sign-up-page-card .body {
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+    .card.sign-up-page-card .form-group {
+        margin-bottom: 12px;
+    }
+    .card.sign-up-page-card button.btn.btn-primary.btn-lg.btn-block {
+        margin-top: 0;
+    }
+    .card.sign-up-page-card {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    .btn-gray, .btn-danger.delete {
+        margin: 0 3px;
+    }
+    .licence-table-new th, .licence-table-new td {
+        padding: 10px 5px!important;
+        font-size: 14px;
+    }
 }
