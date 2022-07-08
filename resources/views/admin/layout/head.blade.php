@@ -123,28 +123,64 @@
         @yield('content')
 
     </div>
-    <div class="modal fade" tabindex="-1" id="kt_modal_strip">
+    <div class="modal fade log-out-modal" tabindex="-1" id="kt_modal_strip">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{__('messages.Are You sure you want to logout?')}}</h5>
+                    <!-- <h5 class="modal-title">{{__('messages.Are You sure you want to logout?')}}</h5> -->
+                    <div class="qu-mark-modal"><i class="fa fa-question" aria-hidden="true"></i></div>
 
-
+                    <span class="close">&times;</span>
                 </div>
 
                 <div class="modal-body">
-                    <div class="text-center">
-                        <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
+
+
+                    <div class="modal-body-content">
+                        <h3>Confirm title</h3>
+                        <p>Confirm Message</p>
+                        <div class="log-out-btns">
+                        <a class="log_outs btn btn-sm btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{__('messages.logout')}}
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--begin::Major-->
+
+                                <!--end::Major-->
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            <a class="log_outs btn btn-sm btn-danger" href="#">
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-times" aria-hidden="true"></i> Cancel
+                                </span>
+                            </a>
+                            </div>
                     </div>
+                    <script type="text/javascript">
+    $(function () {
+        $(".close").click(function () {
+            $(".log-out-modal").modal("hide");
+        });
+    });
+</script>
+
+                    <!-- <div class="text-center">
+                        <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
+                    </div> -->
 
 
-                    <div class="row">
+                    <div class="row d-none">
 
-                        <div class="col-md-9 col-lg-9 col-xl-9 col-xxl-9 mb-md-3 mt-xl-5 flex-column">
+                        <!-- <div class="col-md-9 col-lg-9 col-xl-9 col-xxl-9 mb-md-3 mt-xl-5 flex-column">
                             <a href="#" id="" class="">{{__('messages.Connect Support')}}</a>
-                        </div>
+                        </div> -->
                         <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 mb-md-3 mt-xl-5 flex-column text-right">
-                            <a class="log_outs" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <a class="log_outs btn btn-sm btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
                                 <span class="svg-icon svg-icon-1 me-2">
@@ -289,6 +325,13 @@
 
 
 
+    </script>
+     <script type="text/javascript">
+        $(function () {
+            $(".close").click(function () {
+                $(".log-out-modal").modal("hide");
+            });
+        });
     </script>
 
     <script>

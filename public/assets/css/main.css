@@ -10970,3 +10970,70 @@ ul.select-list li {
         margin-bottom: 0;
     }
 }
+
+
+
+
+
+
+
+
+
+.log-out-modal .modal-dialog {
+    max-width: 330px;
+    margin: auto;
+}
+.log-out-modal .modal-content {
+    border-radius: 10px!important;
+    border: none;
+}
+.log-out-modal .modal-header {
+    background-color: #5ba836;
+    text-align: center;
+    position: relative;
+    padding: 60px 0;
+    border-radius: 10px 10px 0 0;
+}
+.log-out-modal span.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    opacity: 1;
+    cursor: pointer;
+}
+.log-out-modal span.close:hover{
+    opacity: 1;
+}
+.log-out-modal .qu-mark-modal {
+    color: #fff;
+    font-size: 40px;
+    margin: 0 auto;
+    border: 3px solid #fff;
+    width: 70px;
+    height: 70px;
+    border-radius: 60px;
+    text-align: center;
+    line-height: 70px;
+}
+
+.log-out-modal .modal-body-content h3 {
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: .5px;
+}
+
+.log-out-modal .modal-body-content {
+    text-align: center;
+    padding: 15px;
+}
+.log-out-modal .modal-body-content p {
+    font-size: 17px;
+}
+.log-out-modal .log-out-btns {
+    margin-top: 50px;
+}
+.log-out-modal .modal-dialog {
+    padding-top: 12%;
+}
