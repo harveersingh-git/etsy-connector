@@ -9,6 +9,7 @@ use App\Models\EtsyProduct;
 use App\Models\DownloadHistory;
 use App\Models\EtsySettings;
 use App\Models\ProductHistory;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class SyncProductCron extends Command
@@ -51,8 +52,11 @@ class SyncProductCron extends Command
 
         // if ($request->isMethod('post')) {
         $shops = EtsyConfig::where('status', '1')->get();
+
+        $user = User::role('Admin')->first();
         if ($shops) {
             foreach ($shops as $shop) {
+                // echo $shop->id."</br>";
                 $input_shop_id = $shop->id;
                 $language = $shop->language;
                 $sync_type = 'Auto';
@@ -125,13 +129,14 @@ class SyncProductCron extends Command
                             $response = curl_exec($curl);
 
                             curl_close($curl);
-                            $response =  json_decode($response);
+                            $new_response =  json_decode($response);
+                            // _response ((int) $new_response->results);
+                            if ((int) count($new_response->results) > 0) {
 
-                            if (count($response->results) > 0) {
                                 $product_data = array();
 
+                                foreach ($new_response->results as $value) {
 
-                                foreach ($response->results as $key => $value) {
                                     if (isset($value->quantity) && $value->quantity > 0) {
                                         $product_data["availability"] = 'in stock';
                                     } else {
@@ -168,8 +173,8 @@ class SyncProductCron extends Command
                                     $product_data["style"] = isset($value->style) ? implode(',', $value->style) : '';
                                     $product_data["listing_id"] = isset($value->listing_id) ? $value->listing_id : '';
                                     $product_data["url"] = isset($value->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $value->url) : '';
-                                    $product_data["user_id"] = auth()->user()->id;
-                                    $product_data["shop_id"] = $input_shop_id ;
+                                    $product_data["user_id"] = $user->id;
+                                    $product_data["shop_id"] = $input_shop_id;
                                     EtsyProduct::updateOrCreate(['listing_id' => $value->listing_id], $product_data);
 
                                     $product_data["date"] = Carbon::now()->toDateString();
@@ -185,47 +190,33 @@ class SyncProductCron extends Command
                                 $value["download_histories_id"] = $download_history_id->id;
                                 ProductHistory::create($value);
                             }
+                            $this->exportMultiLangCsv($download_history_id->id, $sync_type);
                         }
-                        return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
-                        // return redirect()->back()->with("success", "Product Sync successfully!");
+
                     }
-                    return redirect()->back()->with("success", "No product found for the given shop !");
                 }
             }
-        };
-        // dd($resultSetting->toArray());
-
-        // }
-
-
+        }
     }
 
     public function exportCsv($shop_name = null,  $language, $sync_type)
     {
-        // DownloadHistory::where('user_id', auth()->user()->id)->delete();
+
         $total_language = [
             'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
             'pt' => 'pt_XX', 'ru' => 'ru_RU'
         ];
         $url = '';
-        // $roles = Auth::user()->getRoleNames();
-        // if ($roles[0] == 'Admin') {
-        //     $shops = EtsyConfig::get();
-        // } else {
-        //     $shops = EtsyConfig::where('user_id', auth()->user()->id)->get();
-        // }
-        // if ($request->isMethod('post')) {
-
         $date = Carbon::now()->toDateString();
-        // $t = time();
+
         $rand = rand(100, 999);
         $click =  EtsyProduct::where('shop_id', $shop_name)->get();
         $get_name = EtsyConfig::find($shop_name);
-
+        $user = User::role('Admin')->first();
         if (count($click) > 0) {
 
             $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
-            // $fileName = $get_name->shop_name . '-' . $rand  . '-' . 'productlist.csv';
+
             $fileName = $get_name->shop_name . '-' . $shop_name . '.csv';
             $tasks = $click;
             $headers = array(
@@ -237,13 +228,7 @@ class SyncProductCron extends Command
             );
 
 
-            // move_uploaded_file($fileName, $filepath.$fileName);
-
-            // $callback = function () use ($tasks, $columns, $fileName) {
-            // $file_current = fopen('php://output', 'w');
             $file = fopen("public/uploads/" . $fileName, 'w');
-
-            // fputcsv($file_current, $columns);
             fputcsv($file, $columns);
             foreach ($tasks as $data) {
 
@@ -258,22 +243,13 @@ class SyncProductCron extends Command
                 $row['link']  = isset($data->url) ? $data->url : 'N/A';
                 $row['image_link']  = isset($data->image_url) ? $data->image_url : 'N/A';
 
-                // fputcsv($file_current, $row);
+
                 fputcsv($file, $row);
             }
-
-
-            // fclose($file_current);
-
-            // fclose($file_current);
             fclose($file);
-            // };
-            // if ($callback) {
-            // DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
             $array = [
-                'user_id' => auth()->user()->id,
+                'user_id' =>    $user->id,
                 'file_name' => $fileName,
-                // 'multi_lang_file_name' => $fileName,
                 'date' =>  $date,
                 'shop_id' => $shop_name,
                 'language' =>  $language,
@@ -281,15 +257,9 @@ class SyncProductCron extends Command
 
             ];
             $data =   DownloadHistory::create($array);
-            // }
-            // return ob_get_clean();
-            // return response()->stream($callback, 200, $headers);
+
             return $data;
-        } else {
-            return redirect()->back()->with("success", "No product found for the given shop !");
         }
-        // }
-        // return view('etsy.csv', compact('url', 'shops'));
     }
 
 
@@ -373,11 +343,57 @@ class SyncProductCron extends Command
             ];
             DownloadHistory::create($multi_array);
             // $dhistory->update(['multi_lang_file_name' =>   $fileName]);
-            return $file;
-        } else {
-            return redirect()->back()->with("success", "No product found for the given shop !");
+            return true;
         }
-        // }
-        // return view('etsy.csv', compact('url', 'shops'));
+    }
+
+    public function productListImage($list_id)
+    {
+
+        // $list_id = "1197687199";
+
+        // $data =  EtsyProduct::get();
+        // if ($request->isMethod('post')) {
+        $user = User::role('Admin')->first();
+
+        $id = $user->id;
+        $resultSetting =  EtsySettings::first();
+        // $result = EtsyConfig::where('user_id', $id)->first();
+        // dd( $result);
+        if ($resultSetting) {
+            $appurl = $resultSetting['app_url'];
+            $key_string = $resultSetting['key_string'];
+            $api_access_token = $resultSetting['api_access_token'];
+
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $appurl . 'listings/' . $list_id . '/images?api_key=' . $key_string,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer ' . $api_access_token,
+                    'Cookie: fve=1643640618.0; uaid=JYYRIuVpd8k7JhiFS1kUcXLRgoxjZACCxO_ftWB0tVJpYmaKkpWSU4VlREBwmXOBj19QsXNFgW9gvnliYURAQHlagFItAwA.; user_prefs=CFmwDxv3XIPcLuHsJleib85a6epjZACCxO_ftWB0tJKnX5CSTl5pTo6OUmqerruTkg5QCCpiBKFwEbEMAA..'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+            $imageResponse =  json_decode($response);
+
+            if (isset($imageResponse->results[0]->url_fullxfull)) {
+                $image =  $imageResponse->results[0]->url_fullxfull;
+            } else {
+                $image = 'N/A';
+            }
+            return $image;
+        }
     }
 }

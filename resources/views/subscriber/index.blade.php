@@ -199,7 +199,7 @@
         // alert(id);
         swal({
             title: "{{__('messages.are_you_sure')}}",
-            text: "Once you confirm, the User will we move to trash.",
+            text: "{{__('messages.Once you confirm, the User will we move to trash')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,

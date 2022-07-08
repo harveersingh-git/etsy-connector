@@ -36,7 +36,7 @@
                             <h2>
                                 <!-- {{__('messages.add_localization')}} -->
                             </h2>
-                            <span>Download a sample file click here <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info download-btn-new btn-gray" title="Download"  data-toggle="tooltip" data-placement="top"><i class="fa fa-download" aria-hidden="true"></i> </a>
+                            <span> {{__('messages.Download a sample file click here')}} <a href="{{url('/')}}/resources/lang/sample.txt" download="sample.txt" class="btn btn-info download-btn-new btn-gray" title="Download"  data-toggle="tooltip" data-placement="top"><i class="fa fa-download" aria-hidden="true"></i> </a>
                             </span>
                         </span>
                         <span class="span-box-styles back-btn-style-new"> <a class="btn btn-primary" type="reset" href="{{url()->previous() }}"><i class="fa fa-arrow-left"></i>

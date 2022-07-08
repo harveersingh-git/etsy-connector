@@ -14,6 +14,8 @@ use App\Http\Controllers\ShopListController;
 use App\Http\Controllers\MyShopController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\EtsySettingController;
+use App\Http\Controllers\ContactUsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,12 +36,14 @@ Route::any('/', function () {
 Route::get('/provider/{provider}', 'App\Http\Controllers\Auth\LoginController@redirectToProvider')->name('redirectToProvider');
 
 Route::get('/provider/{provider}/callback', 'App\Http\Controllers\Auth\LoginController@handleProviderCallback');
-
+Route::any('/localization', [LocalizationController::class, 'index'])->name('localization');
 
 Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
     ->middleware(['signed', 'throttle:6,1'])
     ->name('verification.verify');
 Route::post('resend', [VerifyEmailController::class, 'resend'])->name('resend');
+Route::any('contect-us', [ContactUsController::class, 'create'])->name('contect-us');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function () {
@@ -72,7 +76,9 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/generate-csv', [EtsyController::class, 'genrateCsv'])->name('generate-csv');
     Route::any('/delete_download_history', [EtsyController::class, 'destroy'])->name('delete_download_history');
     Route::any('/etsy-product-list/{id}/{type}', [EtsyController::class, 'view'])->name('etsy-product-list');
+    Route::post('/verify_shop_id', [EtsyController::class, 'verifyShopId'])->name('verify_shop_id');
 
+    
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

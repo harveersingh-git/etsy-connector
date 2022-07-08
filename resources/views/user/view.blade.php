@@ -54,7 +54,7 @@
                             <div class="row clearfix">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>First Name<span style="color: red;">*</span></label>
+                                        <label>  {{__('messages.name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="name" placeholder="abc" value="{{$user->name}}" required>
 
                                         @if ($errors->has('email'))
@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Last Name<span style="color: red;">*</span></label>
+                                        <label>  {{__('messages.last_name')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="last_name" placeholder="xyx" value="{{$user->last_name}}" required>
 
                                         @if ($errors->has('last_name'))
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Email<span style="color: red;">*</span></label>
+                                        <label>  {{__('messages.email')}}<span style="color: red;">*</span></label>
                                         <input type="email" class="form-control" name="email" placeholder="abc@gmail.com" value="{{$user->email}}" required>
 
                                         @if ($errors->has('email'))
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Mobile<span style="color: red;">*</span></label>
+                                        <label>  {{__('messages.mobile')}}<span style="color: red;">*</span></label>
                                         <input type="text" class="form-control" name="mobile" placeholder="997487548" value="{{$user->mobile}}" required>
 
                                         @if ($errors->has('mobile'))
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label>Profile Image</label>
+                                        <label>  {{__('messages.profile_image')}}</label>
                                         <input type="file" class="form-control" name="profile_image" value="">
 
                                         @if ($errors->has('profile_image'))
