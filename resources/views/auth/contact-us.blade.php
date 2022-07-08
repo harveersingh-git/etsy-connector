@@ -12,7 +12,8 @@ $location = \CurrentLocation::getLocation();
         border: 0px solid #aaa !important;
     }
 
-    span#select2-code-container,span#select2-country-container {
+    span#select2-code-container,
+    span#select2-country-container {
         box-shadow: none;
         background-color: #fff;
         font-size: 14px;
@@ -39,8 +40,15 @@ $location = \CurrentLocation::getLocation();
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{ asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
+                        @auth
+                        <li class="nav-item"><a class="nav-link" href="{{url('home')}}"> {{__('messages.home')}}</a></li>
+                       
+                        @else
                         <li class="nav-item"><a class="nav-link" href="{{url('login')}}"> {{__('messages.login')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('register')}}">{{__('messages.sign_up')}}</a></li>
+
+
+                        @endauth
                     </ul>
                 </nav>
             </div>

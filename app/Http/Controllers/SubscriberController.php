@@ -309,10 +309,12 @@ class SubscriberController extends Controller
 
         $data = User::find($id);
         if ($data) {
+
             $status = ($data->active == '0' ? '1' : '0');
+            // dd(    $status);
             $data->update(['active' => $status]);
 
-            return response()->json(['status' => 'success']);
+            return response()->json(['status' => 'success', 'data' => $data]);
         }
     }
 
@@ -375,6 +377,6 @@ class SubscriberController extends Controller
                 return redirect()->back()->with(['error' => "Your licence not allow successfully."]);
             }
         }
-        return view('subscriber.license', compact('url', 'id','user'));
+        return view('subscriber.license', compact('url', 'id', 'user'));
     }
 }

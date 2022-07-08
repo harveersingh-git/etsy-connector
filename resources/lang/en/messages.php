@@ -156,7 +156,9 @@ return [
     'send'=>'Send',
     'login'=>'Login',
     'subject'=>'Subject',
-    'message'=>'message'
+    'message'=>'message',
+    'home'=>'Home'
+
 
 
 

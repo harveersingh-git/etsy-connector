@@ -107,7 +107,9 @@ Login
 <script>
     $(window).on('load', function() {
         var error = $('.invalid-feedback').find('strong').text();
-        if (error == "The selected email is invalid or the account has not been verified or enable.") {
+        var success = $('.alert.alert-success').text();
+        new_success= success.replace(/^\s+|\s+$/gm,'');
+        if (new_success =='You need to confirm your account. We have sent you an activation link, please check your email.' || error == "The selected email is invalid or the account has not been verified or enable.") {
             $('#resened_btn').show();
         } else {
             $('#resened_btn').hide();

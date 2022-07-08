@@ -190,7 +190,7 @@
                                             <table class="table-responsive table table-striped table-bordered table-hover" id="product_table">
                                                 <thead>
                                                     <tr>
-                                                    <th class="text-center">{{__('messages.sr_no')}}</th>
+                                                        <th class="text-center">{{__('messages.sr_no')}}</th>
                                                         <th class="text-center">{{__('messages.File Name')}}</th>
                                                         <!-- <th class="text-center">{{__('messages.Date')}}</th> -->
                                                         <th class="text-center">{{__('messages.shop_name')}}</th>
@@ -205,11 +205,11 @@
 
                                                     @if(!empty($data) && $data->count())
                                                     @foreach($data as $key => $value)
-                                                    
+
                                                     <tr style="font-size: 14px;">
-                                                    <th class="text-center" style="padding: 10px 8px;vertical-align: middle;">{{ $key+1 }}</th>
-                                                        <td class="text-center"  style="padding: 10px 5px;">
-                                                             @if(isset($value->file_name))
+                                                        <th class="text-center" style="padding: 10px 8px;vertical-align: middle;">{{ $key+1 }}</th>
+                                                        <td class="text-center" style="padding: 10px 5px;">
+                                                            @if(isset($value->file_name))
                                                             {{substr($value->file_name,0,25)}}
                                                             @else
                                                             {{substr($value->multi_lang_file_name,0,25)}}
@@ -218,7 +218,7 @@
                                                         </td>
 
                                                         <!-- <td class="text-center">{{ \Carbon\Carbon::parse($value->date)->format('d-M-Y') }}</td> -->
-                                                        <td class="text-center"  style="padding: 10px 5px;">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
+                                                        <td class="text-center" style="padding: 10px 5px;">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
 
                                                         @php
                                                         $lan = isset($value->language)?$value->language:'en';
@@ -231,11 +231,11 @@
                                                         $current_language = $language[ $lan];
                                                         $flag = $Etsy::getFlag($current_language );
                                                         @endphp
-                                                        <td class="text-center"  style="padding: 10px 5px;">
+                                                        <td class="text-center" style="padding: 10px 5px;">
                                                             <img src="{{$flag}}" width="40">
                                                         </td>
                                                         @else
-                                                        <td class="text-center"  style="padding: 10px 5px;">
+                                                        <td class="text-center" style="padding: 10px 5px;">
                                                             @php
                                                             $languages= explode(',',$lan);
 
@@ -258,8 +258,15 @@
 
                                                         @endif
 
-                                                        <td class="text-center"  style="padding: 10px 5px;">{{isset($value->user['name'])?$value->user['name']:''}} {{isset($value->user['last_name'])?$value->user['last_name']:''}}
-                                                            </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span></td>
+                                                        <td class="text-center" style="padding: 10px 5px;">
+                                                            @if($value->sync_type=='Manual')
+                                                            {{isset($value->user['name'])?$value->user['name']:''}}
+
+                                                            {{isset($value->user['last_name'])?$value->user['last_name']:''}}
+
+                                                            @endif
+                                                            </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span>
+                                                        </td>
                                                         <!-- <td> {{$value->sync_type}}</td> -->
                                                         <td class="text-center" style="padding: 10px 5px;">
                                                             @if(isset($value->file_name))
@@ -268,7 +275,7 @@
 
 
                                                             <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->id)}}/single" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
-                                                          
+
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
@@ -279,14 +286,14 @@
 
 
                                                             <a href="{{url('/etsy-product-list')}}/{{base64_encode($value->parent_id)}}/multi" class=" btn btn-primary btn-gray" id="#" data-toggle="tooltip" data-placement="top" title="{{__('messages.view')}}"><i class="fa fa-eye "></i> </a>
-                                                           
+
                                                             <a href="javascript:void(0)" class="copy btn btn-warning btn-gray" id="{{url('public/uploads/'.$value->multi_lang_file_name)}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.copy')}}">
                                                                 <i class="fa fa-copy" style="color: #fff;"></i>
                                                             </a>
                                                             @endif
 
 
-                                                            
+
                                                             @hasanyrole('Admin')
                                                             <a href="javascript:void(0);" class="delete btn btn-danger btn-width-equ" id="{{$value->id}}" data-toggle="tooltip" data-placement="top" title="{{__('messages.delete')}}"><i class="fa fa-trash-o"></i> </a>
                                                             @endhasanyrole
