@@ -63,7 +63,7 @@
                         </div>
                         @endif
                         <div class="fade show active table-responsive" id="one">
-                            <table class=" table table-bordered table-striped table-hover dataTable js-exportable">
+                            <table class=" table table-bordered table-striped table-hover dataTable js-exportable licence-table-new">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>

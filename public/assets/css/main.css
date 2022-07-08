@@ -11197,3 +11197,8 @@ ul.select-list li {
 .log-out-modal .modal-dialog {
     padding-top: 12%;
 }
+
+.licence-table-new th, .licence-table-new td {
+    padding: 10px 7px!important;
+    font-size: 15px;
+}
