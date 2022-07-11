@@ -132,7 +132,7 @@ return [
     'search' => 'Search',
     'clear' => 'Clear',
     'sync product' => 'Sync Product',
-    'licence will expire' => 'licence will expire',
+    'licence will expire' => 'Licence will expire',
     'default_language' => 'Default language',
     'sync_by' => 'Sync Details',
     'sync_type' => 'Sync Type',
