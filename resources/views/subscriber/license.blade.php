@@ -127,7 +127,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <input type="text" class="form-control  datepicker" placeholder="Ex: 30/07/2016" name="expire_date" id="expire_date">
+                                        <input type="text" class="form-control  datepicker" placeholder="Ex: 30/07/2016" name="expire_date" id="expire_date" autocomplete="off">
 
                                     </div>
                                     @if ($errors->has('expire_date'))
