@@ -157,7 +157,7 @@ return [
     'login'=>'Login',
     'subject'=>'Subject',
     'message'=>'message',
-    'home'=>'Dashboard',
+    'home'=>'My Dashboard',
     'Please renew your licence or get a new licence to proceed further' => 'Please renew your licence or get a new licence to proceed further',
     'renew license'=>'Renew license'
 
