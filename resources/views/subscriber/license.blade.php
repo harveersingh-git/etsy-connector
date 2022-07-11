@@ -43,7 +43,7 @@
                     </div>
                     <div class="header">
                         <div class="list-group">
-                            <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start active">
+                            <span class="list-group-item list-group-item-action flex-column align-items-start active">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"> License
                                         @if($user['license']=='1')
@@ -75,7 +75,7 @@
 
 
                                 </small>
-                            </a>
+                            </span>
 
 
                         </div>

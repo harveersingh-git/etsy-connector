@@ -294,7 +294,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 
     <script>
-        var base_url = {!!json_encode(url('/')) !!}
+        var base_url = {!! json_encode(url('/')) !!}
 
         $("#select_language").select2({
             placeholder: "Select a language",
@@ -309,8 +309,8 @@
     <script>
         function checkStripConnect() {
 
-            var license = {!!json_encode((array) auth()->user()->license) !!};
-            var role = {!!Auth::user()->roles->pluck('name') !!};
+            var license = {!! json_encode((array) auth()->user()->license) !!};
+            var role = {!! Auth::user()->roles->pluck('name') !!};
             if (role == 'Subscriber' && license == '0')
 
                 $("#kt_modal_licence").modal('show');
