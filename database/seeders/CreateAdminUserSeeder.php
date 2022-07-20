@@ -21,8 +21,8 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'super',
             'last_name' => 'admin',
             'mobile' =>'1234567898',
-            'email' => 'superadmin@yopmail.com',
-            'password' => bcrypt('12345678'),
+            'email' => 'info@beSIRIOus.net',
+            'password' => bcrypt('beSIRIOus@2021'),
             'email_verified_at'=>'2022-05-04 13:55:45'
         ]);
 

@@ -67,25 +67,29 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.name')}}</th>
-                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}/
+                                        {{__('messages.email')}}
+                                        </th>
+                                
                                         <th class="text-center">{{__('messages.mobile')}}</th>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <th class="text-center">{{__('messages.status')}}</th>
+                                        <th class="text-center">{{__('messages.active')}}</th>
                                         @endif
                                         <th class="text-center">{{__('messages.license')}}</th>
+                                        <th class="text-center">{{__('messages.status')}}</th>
                                         <th class="text-center">{{__('messages.action')}}</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.name')}}</th>
-                                        <th class="text-center">{{__('messages.email')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}/{{__('messages.email')}}</th>
+                                     
                                         <th class="text-center">{{__('messages.mobile')}}</th>
                                         @if(Request::segment(1)!='subscriber-trash')
-                                        <th class="text-center">{{__('messages.status')}}</th>
+                                        <th class="text-center">{{__('messages.active')}}</th>
                                         @endif
                                         <th class="text-center">{{__('messages.license')}}</th>
+                                        <th class="text-center">{{__('messages.status')}}</th>
                                         <th class="text-center">{{__('messages.action')}}</th>
                                     </tr>
                                 </tfoot>
@@ -94,8 +98,8 @@
                                     @foreach($data as $key => $value)
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
-                                        <td class="text-center">{{$value->name}} {{$value->last_name}}</td>
-                                        <td class="text-center">{{$value->email}} </td>
+                                        <td class="text-center">{{$value->name}} {{$value->last_name}}</br>{{$value->email}}</td>
+
                                         <td class="text-center">{{$value->country_code}}-{{$value->mobile}}</td>
                                         @if(Request::segment(1)!='subscriber-trash')
                                         <td class="text-center">
@@ -127,7 +131,7 @@
                                             @endif
 
                                         </td>
-
+                                        <td class="text-center">{{$value->current_status['name']}} </td>
                                         <td class="text-center">
                                             @if(Request::segment(1)=='subscriber-trash')
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">

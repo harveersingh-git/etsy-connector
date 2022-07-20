@@ -58,13 +58,14 @@
                 </li>
                 @endhasanyrole
                 @hasanyrole('Admin')
-                <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
+                <li class="{{ (Request::segment(1) === 'country') || (Request::segment(1) === 'localization') || (Request::segment(1) === 'etsy-setting') || (Request::segment(1) === 'status') ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
                         <li class="{{ Request::segment(1) === 'localization' ? 'active' : null }}"><a href="{{ url('localization') }}">{{__('messages.localization')}}</a></li>
 
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
                         <li class="{{ Request::segment(1) === 'etsy-setting' ? 'active' : null }}"><a href="{{ url('etsy-setting') }}">{{__('messages.etsy_setting')}}</a></li>
+                        <li class="{{ Request::segment(1) === 'status' ? 'active' : null }}"><a href="{{ url('status') }}">{{__('messages.status')}}</a></li>
 
 
                     </ul>

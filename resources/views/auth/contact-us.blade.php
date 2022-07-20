@@ -42,7 +42,7 @@ $location = \CurrentLocation::getLocation();
                     <ul class="navbar-nav">
                         @auth
                         <li class="nav-item"><a class="nav-link" href="{{url('home')}}"> {{__('messages.home')}}</a></li>
-                       
+
                         @else
                         <li class="nav-item"><a class="nav-link" href="{{url('login')}}"> {{__('messages.login')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('register')}}">{{__('messages.sign_up')}}</a></li>

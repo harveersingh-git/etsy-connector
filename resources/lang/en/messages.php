@@ -159,7 +159,13 @@ return [
     'message'=>'message',
     'home'=>'My Dashboard',
     'Please renew your licence or get a new licence to proceed further' => 'Please renew your licence or get a new licence to proceed further',
-    'renew license'=>'Renew license'
+    'renew license'=>'Renew license',
+    'status'=>'Status',
+    'add status'=>'Add Status',
+    'edit status'=>'Edit Status',
+    'login status'=>'Login Status',
+    'account status'=>'A/C Status',
+    'address'=>'Address'
 
 
 

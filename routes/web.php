@@ -15,7 +15,7 @@ use App\Http\Controllers\MyShopController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\EtsySettingController;
 use App\Http\Controllers\ContactUsController;
-
+use App\Http\Controllers\StatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,7 +43,7 @@ Route::get('/email/verify/{id}/{hash}', [VerifyEmailController::class, '__invoke
     ->name('verification.verify');
 Route::post('resend', [VerifyEmailController::class, 'resend'])->name('resend');
 Route::any('contect-us', [ContactUsController::class, 'create'])->name('contect-us');
-
+Route::any('php-info', [ContactUsController::class, 'phpinfo'])->name('php-info');
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function () {
@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     Route::any('/country-list', [EtsyController::class, 'countryList'])->name('country-list');
     Route::any('/etsy-list-data-progress', [EtsyController::class, 'etsyListDataProgress'])->name('etsy-list-data-progress');
     Route::any('/etsy-list-data', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
-    Route::any('/etsy-list-data/{id}', [EtsyController::class, 'etsyListData'])->name('etsy-list-data');
+    Route::any('/etsy-list-data/{id}', [EtsyController::class, 'etsyListData']);
     // Route::any('/shoplist-data/{id}', [EtsyController::class, 'show'])->name();
     Route::any('/etsy-download-history', [EtsyController::class, 'downloadHistory'])->name('etsy-download-history');
 
@@ -124,5 +124,7 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     // Route::any('/etsy-setting', [EtsySettingController::class, 'index'])->name('etsy-setting');
 
     Route::resource('etsy-setting', EtsySettingController::class);
+    Route::resource('status', StatusController::class);
+    Route::post('delete_status', [StatusController::class, 'destroy'])->name('delete_status');
     Route::post('delete_etsy_setting', [EtsySettingController::class, 'destroy'])->name('delete_etsy_setting');
 });
