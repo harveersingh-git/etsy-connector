@@ -14,6 +14,8 @@ use Mail;
 use Illuminate\Auth\Events\Registered;
 use Carbon\Carbon;
 use App\Models\AllowLicense;
+use App\Models\Status;
+
 // use App\Modals\
 
 
@@ -39,7 +41,7 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::with(['subscribe_details','allow'])->whereHas('roles', function ($query) {
+        $data = User::with(['current_status', 'subscribe_details', 'allow'])->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
         })->where('active', '1')->orderBy('id', 'DESC')->get();
 
@@ -173,12 +175,13 @@ class SubscriberController extends Controller
     {
 
         $user = User::with('subscribe_details')->find($id);
+        $status = Status::get();
         // dd( $user->toArray());
         $country = Country::orderBy('name', 'ASC')->get();
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('subscriber.edit', compact('user', 'roles', 'userRole', 'country'));
+        return view('subscriber.edit', compact('status', 'user', 'roles', 'userRole', 'country'));
     }
 
     /**
@@ -346,14 +349,10 @@ class SubscriberController extends Controller
 
     public function license(Request $request, $id)
     {
-        // dd($id);
+
         $url = '';
-
         $id = base64_decode($id);
-
         $user = User::with('allow')->find($id);
-        // dd( $user['allow']->expire_date);
-
         if ($request->isMethod('post')) {
             $input = $request->all();
 
@@ -361,6 +360,7 @@ class SubscriberController extends Controller
                 'expire_date' => 'required',
                 'license' => 'required',
                 'id' => 'required',
+                'allowed_shops' => 'required',
             ]);
 
             if ($input['license'] == '1') {
@@ -368,6 +368,7 @@ class SubscriberController extends Controller
                 $user->update(['license' => '1']);
 
                 $input = [
+                    'allowed_shops' =>isset($input['allowed_shops']) ? $input['allowed_shops'] : '0',
                     'user_id' => isset($id) ? ($id) : '',
                     'license' => isset($input['license']) ? ('1') : '0',
                     'expire_date' => isset($input['expire_date']) ? (Carbon::parse($input['expire_date'])->format('Y-m-d')) : '',

@@ -152,14 +152,24 @@ return [
     'profile_image'=>'Profile Image',
     'Once you confirm, the User will we move to trash'=>'Once you confirm, the User will we move to trash.',
     'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !',
-    'contact_us'=>'Contact Us',
+    'contact_us'=>'Support',
     'send'=>'Send',
     'login'=>'Login',
     'subject'=>'Subject',
     'message'=>'message',
     'home'=>'My Dashboard',
     'Please renew your licence or get a new licence to proceed further' => 'Please renew your licence or get a new licence to proceed further',
-    'renew license'=>'Renew license'
+    'renew license'=>'Renew license',
+    'status'=>'Status',
+    'add status'=>'Add Status',
+    'edit status'=>'Edit Status',
+    'login status'=>'Login Status',
+    'account status'=>'A/C Status',
+    'address'=>'Address',
+    'support'=>'Support',
+    'view status'=>'View Status',
+    'description'=>'Description',
+    'allow_shops'=>'Allowed Shops'
 
 
 

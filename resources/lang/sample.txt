@@ -150,7 +150,7 @@ return [
     'profile_image'=>'Profile Image',
     'Once you confirm, the User will we move to trash'=>'Once you confirm, the User will we move to trash.',
     'Once deleted, you will not be able to recover !'=>'Once deleted, you will not be able to recover !',
-      'contact_us'=>'Contact Us',
+    'contact_us'=>'Support',
     'send'=>'Send',
     'login'=>'Login',
     'subject'=>'Subject',

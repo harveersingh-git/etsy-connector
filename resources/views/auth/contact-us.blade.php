@@ -42,7 +42,7 @@ $location = \CurrentLocation::getLocation();
                     <ul class="navbar-nav">
                         @auth
                         <li class="nav-item"><a class="nav-link" href="{{url('home')}}"> {{__('messages.home')}}</a></li>
-                       
+
                         @else
                         <li class="nav-item"><a class="nav-link" href="{{url('login')}}"> {{__('messages.login')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('register')}}">{{__('messages.sign_up')}}</a></li>
@@ -58,7 +58,7 @@ $location = \CurrentLocation::getLocation();
                         {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">{{__('messages.you_admin')}}</div>
+                                <!-- <div class="carousel-item active">{{__('messages.you_admin')}}</div> -->
                                 <div class="carousel-item">{{__('messages.you_project')}}</div>
                                 <div class="carousel-item">{{__('messages.you_dashboard')}}</div>
                                 <div class="carousel-item">{{__('messages.you_application')}}</div>
@@ -68,9 +68,11 @@ $location = \CurrentLocation::getLocation();
                     </h2>
                     <p>{{__('messages.it_is_a_long')}}</p>
                     <ul class="social-links list-unstyled">
-                        <li><a class="btn btn-default fb-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="btn btn-default tw-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="btn btn-default ig-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                    <li><a class="btn btn-default ig-btn-color" target="blank" href="https://besirious.net/" data-toggle="tooltip" data-placement="top" title="website"><i class="fa fa-globe"></i></a></li>
+                        <li><a class="btn btn-default fb-btn-color" target="blank" href="https://www.facebook.com/beSIRIOus/" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="btn btn-default tw-btn-color" target="blank" href="https://www.linkedin.com/company/besirious" data-toggle="tooltip" data-placement="top" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a class="btn btn-default ig-btn-color" target="blank" href="https://www.youtube.com/channel/UCCw2Bcp7Yjn-66_0JqvStow" data-toggle="tooltip" data-placement="top" title="youtube"><i class="fa fa-youtube-play"></i></a></li>
+                   
                     </ul>
                 </div>
             </div>

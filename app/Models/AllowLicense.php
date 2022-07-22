@@ -9,6 +9,6 @@ class AllowLicense extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'expire_date'
+        'user_id', 'expire_date','allowed_shops'
     ];
 }

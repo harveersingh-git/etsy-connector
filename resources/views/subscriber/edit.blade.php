@@ -6,7 +6,7 @@
         border: 0px solid #aaa !important;
     }
 
-    span#select2-code-container {
+    span#select2-code-container,span#select2-status-container,span#select2-country-container {
         box-shadow: none;
         background-color: #fff;
         font-size: 14px;
@@ -219,6 +219,29 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
+                                    <label for="last_name" class="control-label">{{__('messages.status')}}<span style="color: red;">*</span></label>
+                                    <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="status" value="" id="status">
+                                        <option value="">--Please Select--</option>
+                                        @forelse($status as $status_val)
+
+                                        <option value="{{$status_val->id}}" {{ isset($user->status) && ( $user->status== $status_val->id ) ? 'selected' : '' }}>{{$status_val->name}}</option>
+                                        @empty
+                                        <option value="">No country found</option>
+                                        @endforelse
+
+                                    </select>
+                                    @if ($errors->has('country'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group clearfix">
@@ -229,9 +252,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col" id="tex_id_div" >
+                                        <div class="col" id="tex_id_div">
                                             <label for="password-confirm" class="control-label sr-only">{{ __('Tax ID') }}</label>
-                                            <input type="text" id="tax_id" type="text" class="form-control @error('Tax ID') is-invalid @enderror" name="tax_id" placeholder="Tax ID " value="{{ isset($user['tax_id']) ? $user['tax_id']:''}}"/>
+                                            <input type="text" id="tax_id" type="text" class="form-control @error('Tax ID') is-invalid @enderror" name="tax_id" placeholder="Tax ID " value="{{ isset($user['tax_id']) ? $user['tax_id']:''}}" />
                                             @if ($errors->has('tax_id'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('tax_id') }}</strong>
@@ -259,7 +282,7 @@
                                         {{__('messages.back')}}
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.update')}}
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i> {{__('messages.update')}}
                                     </button>
                                 </div>
                             </div>
@@ -300,6 +323,14 @@
     });
     $("#code").select2({
         placeholder: "Select a country code",
+        allowClear: true
+    });
+    $("#status").select2({
+        placeholder: "Select a status",
+        allowClear: true
+    });
+    $("#country").select2({
+        placeholder: "Select a status",
         allowClear: true
     });
 </script>

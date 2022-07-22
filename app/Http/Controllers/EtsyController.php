@@ -119,8 +119,6 @@ class EtsyController extends Controller
         $id = $request['id'];
 
         $result = EtsySettings::where('id', $id)->first();
-        // $result = EtsySettings::where('status', '1')->first();
-        // $result = EtsyConfig::where('user_id', $id)->first();
         if ($result) {
             $keystring = $result['key_string'];
             $shared_secret = $result['shared_secret'];

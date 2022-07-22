@@ -13,7 +13,8 @@ $location = \CurrentLocation::getLocation();
         border: 0px solid #aaa !important;
     }
 
-    span#select2-code-container,span#select2-country-container {
+    span#select2-code-container,
+    span#select2-country-container {
         box-shadow: none;
         background-color: #fff;
         font-size: 14px;
@@ -46,7 +47,7 @@ $country = \GetCountry::getCountryCode();
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="javascript:void(0);"><img src="{{ asset('assets/images/icon-light.svg')}}" width="30" height="30" class="d-inline-block align-top mr-2" alt="">Etsy Connector</a>
                     <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{url('contect-us')}}"> {{__('messages.contact_us')}}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url('contect-us')}}"> {{__('messages.contact_us')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{url('login')}}">Sign In</a></li>
                     </ul>
                 </nav>
@@ -57,7 +58,7 @@ $country = \GetCountry::getCountryCode();
                         {{__('messages.everything')}}<br>{{__('messages.you_need_for')}}
                         <div id="carouselExampleControls" class="carousel vert slide" data-ride="carousel" data-interval="1500">
                             <div class="carousel-inner">
-                                <div class="carousel-item active">{{__('messages.you_admin')}}</div>
+                                <!-- <div class="carousel-item active">{{__('messages.you_admin')}}</div> -->
                                 <div class="carousel-item">{{__('messages.you_project')}}</div>
                                 <div class="carousel-item">{{__('messages.you_dashboard')}}</div>
                                 <div class="carousel-item">{{__('messages.you_application')}}</div>
@@ -67,9 +68,11 @@ $country = \GetCountry::getCountryCode();
                     </h2>
                     <p>{{__('messages.it_is_a_long')}}</p>
                     <ul class="social-links list-unstyled">
-                        <li><a class="btn btn-default fb-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="btn btn-default tw-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="btn btn-default ig-btn-color" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="instagram"><i class="fa fa-instagram"></i></a></li>
+                        <li><a class="btn btn-default ig-btn-color" target="blank" href="https://besirious.net/" data-toggle="tooltip" data-placement="top" title="website"><i class="fa fa-globe"></i></a></li>
+                        <li><a class="btn btn-default fb-btn-color" target="blank" href="https://www.facebook.com/beSIRIOus/" data-toggle="tooltip" data-placement="top" title="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="btn btn-default tw-btn-color" target="blank" href="https://www.linkedin.com/company/besirious" data-toggle="tooltip" data-placement="top" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a class="btn btn-default ig-btn-color" target="blank" href="https://www.youtube.com/channel/UCCw2Bcp7Yjn-66_0JqvStow" data-toggle="tooltip" data-placement="top" title="youtube"><i class="fa fa-youtube-play"></i></a></li>
+
                     </ul>
                 </div>
             </div>
@@ -131,7 +134,7 @@ $country = \GetCountry::getCountryCode();
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col">
-                                     
+
                                         <label for="signin-email" class="control-label sr-only">{{ __('Contry Code') }}</label>
                                         <select class="select2-selection form-select form-control" data-placeholder="Please select" name="country_code" value="" id="code">
                                             <option value="">-country code-</option>
@@ -152,7 +155,7 @@ $country = \GetCountry::getCountryCode();
                                     </div>
                                     <div class="col">
                                         <label for="mobile" class="control-label sr-only">{{ __('Mobile') }}</label>
-                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile"  min="0" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
+                                        <input type="number" class="form-control @error('mobile') is-invalid @enderror" id="mobile" min="0" name="mobile" value="{{ old('mobile') }}" required autocomplete="some-unrecognised-value" placeholder="mobile" autofocus>
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -316,8 +319,6 @@ $country = \GetCountry::getCountryCode();
         placeholder: "Select a country",
         allowClear: true
     });
-
-
 </script>
 @endsection
 @endsection

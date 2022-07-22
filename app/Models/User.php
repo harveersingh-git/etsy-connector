@@ -34,7 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'business_account',
         'tax_id',
         'email_verified_at',
-        'license'
+        'license',
+        'status'
     ];
 
     /**
@@ -72,6 +73,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function allow()
     {
         return $this->hasOne(AllowLicense::class, 'user_id', 'id')->latest();
+    }
+
+    public function current_status()
+
+    {
+
+        return $this->hasOne(Status::class, 'id','status');
     }
     
     // public function license()

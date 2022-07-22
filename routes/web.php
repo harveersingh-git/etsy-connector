@@ -15,7 +15,7 @@ use App\Http\Controllers\MyShopController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\EtsySettingController;
 use App\Http\Controllers\ContactUsController;
-
+use App\Http\Controllers\StatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,5 +124,10 @@ Route::group(['middleware' => ['auth', 'is_verify_email', 'Language']], function
     // Route::any('/etsy-setting', [EtsySettingController::class, 'index'])->name('etsy-setting');
 
     Route::resource('etsy-setting', EtsySettingController::class);
+    Route::resource('status', StatusController::class);
+    Route::post('delete_status', [StatusController::class, 'destroy'])->name('delete_status');
     Route::post('delete_etsy_setting', [EtsySettingController::class, 'destroy'])->name('delete_etsy_setting');
+    Route::any('support', [ContactUsController::class, 'index'])->name('support');
+    Route::any('/support/edit/{id}', [ContactUsController::class, 'show']);
+    Route::any('/support-update', [ContactUsController::class, 'update'])->name('support-update');
 });

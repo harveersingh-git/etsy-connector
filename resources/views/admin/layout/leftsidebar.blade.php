@@ -35,6 +35,7 @@
                 <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('/') }}"><i class="icon-home"></i><span>{{__('messages.dashboard')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'subscriber' ? 'active' : null }}"><a href="{{ url('/subscriber') }}"><i class="icon-users"></i><span>{{__('messages.subscriber')}}</span></a></li>
                 <li class="{{ Request::segment(1) === 'shop-list' ? 'active' : null }}"><a href="{{ url('/shop-list') }}"><i class="fa fa-shopping-cart"></i><span>{{__('messages.shop-list')}}</span></a></li>
+                <li class="{{ Request::segment(1) === 'support' ? 'active' : null }}"><a href="{{ url('/support') }}"><i class="fa fa-phone"></i><span>{{__('messages.support')}}</span></a></li>
 
                 @endhasanyrole
                 @hasanyrole('Subscriber')
@@ -58,13 +59,14 @@
                 </li>
                 @endhasanyrole
                 @hasanyrole('Admin')
-                <li class="{{ (Request::segment(1) === 'country')  ? 'active' : null }}">
+                <li class="{{ (Request::segment(1) === 'country') || (Request::segment(1) === 'localization') || (Request::segment(1) === 'etsy-setting') || (Request::segment(1) === 'status') ? 'active' : null }}">
                     <a href="#uiElements" class="has-arrow"><i class="icon-settings"></i><span>{{__('messages.settings')}}</span></a>
                     <ul>
                         <li class="{{ Request::segment(1) === 'localization' ? 'active' : null }}"><a href="{{ url('localization') }}">{{__('messages.localization')}}</a></li>
 
                         <li class="{{ Request::segment(1) === 'country' ? 'active' : null }}"><a href="{{ url('country') }}">{{__('messages.country')}}</a></li>
                         <li class="{{ Request::segment(1) === 'etsy-setting' ? 'active' : null }}"><a href="{{ url('etsy-setting') }}">{{__('messages.etsy_setting')}}</a></li>
+                        <li class="{{ Request::segment(1) === 'status' ? 'active' : null }}"><a href="{{ url('status') }}">{{__('messages.status')}}</a></li>
 
 
                     </ul>

@@ -8,6 +8,8 @@ use Auth;
 use App\Models\EtsyConfig;
 use App\Models\Country;
 use App\Models\DownloadHistory;
+use App\Models\AllowLicense;
+use Spatie\Permission\Models\Role;
 
 class ShopListController extends Controller
 {
@@ -46,6 +48,7 @@ class ShopListController extends Controller
         $country = Country::orderBy('name', 'ASC')->get();
         if ($request->isMethod('post')) {
             $input = $request->all();
+            // dd();
             $request->validate([
                 // 'key_string' => 'required',
                 // 'shared_secret' => 'required',
@@ -53,6 +56,12 @@ class ShopListController extends Controller
                 // 'user_name' => 'required',
                 // 'app_url' => 'required|url',
             ]);
+            $allow_licenec = AllowLicense::where('user_id', $input['id'])->latest()->first();
+            $total_shop = EtsyConfig::where('user_id', $input['id'])->count();
+            if ($allow_licenec['allowed_shops'] <= $total_shop) {
+                return redirect('shoplist/' . $id)->with('error', 'Your shop add limit exceeded. So please upgrade your license.');
+            }
+
 
             $input = [
                 'user_id' => isset($input['id']) ? ($input['id']) : '',
@@ -103,13 +112,18 @@ class ShopListController extends Controller
      */
     public function show(Request $reques, $id)
     {
-
+        $roles = auth()->user()->getRoleNames()[0];
+        // dd(   $roles);
         try {
             $country = Country::orderBy('name', 'ASC')->get();
             $data = EtsyConfig::find(base64_decode($id));
 
             if ($data) {
-                return view('shop.edit', compact('id', 'data', 'country'));
+                if ($roles == 'Admin') {
+                    return view('shop.admin_edit', compact('id', 'data', 'country'));
+                } else {
+                    return view('shop.edit', compact('id', 'data', 'country'));
+                }
             }
             return redirect('subscriber');
         } catch (ModelNotFoundException $exception) {
@@ -155,9 +169,13 @@ class ShopListController extends Controller
         ];
 
         $data = EtsyConfig::updateOrCreate(['id' =>     $input['id']], $array);
+        $roles = auth()->user()->getRoleNames()[0];
+        if ($roles == 'Admin') {
+            return redirect('shop-list/')->with('success', 'Shop updated Successfully');
 
-
-        return redirect('shoplist/' . $data['user_id'])->with('success', 'Shop updated Successfully');
+        } else {
+            return redirect('shoplist/' . $data['user_id'])->with('success', 'Shop updated Successfully');
+        }
     }
 
     /**

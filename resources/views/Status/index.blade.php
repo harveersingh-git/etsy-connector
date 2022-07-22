@@ -6,15 +6,14 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>{{__('messages.shop_list')}}</h2>
+                <h2>{{__('messages.status')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <!-- <li class="breadcrumb-item active"><a href="{{url('/subscriber')}}">{{__('messages.subscriber')}}</a></li> -->
-                    <li class="breadcrumb-item active">{{__('messages.shop_list')}}</li>
+                    <li class="breadcrumb-item active">{{__('messages.status')}}</li>
                 </ul>
-                <!-- <a href="{{ url('add-shoplist') }}" class="btn btn-sm btn-primary" title="">{{__('messages.create_new')}}</a> -->
+                <a href="{{ route('status.create') }}" class="btn btn-sm btn-primary" title=""><i class="fa fa-plus" aria-hidden="true"></i> {{__('messages.create_new')}}</a>
             </div>
         </div>
     </div>
@@ -24,34 +23,39 @@
 
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="header">
+                        <!-- <h2>{{__('messages.etsy_setting')}}</h2> -->
+                        <ul class="header-dropdown dropdown dropdown-animated scale-left">
+                            <li> <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse"><i class="icon-refresh"></i></a></li>
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-size-fullscreen"></i></a></li>
+                            <!-- <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another Action</a></li>
+                                    <li><a href="javascript:void(0);">Something else</a></li>
+                                </ul>
+                            </li> -->
+
+                        </ul>
+                    </div>
                     <div class="body tab-content">
-                        @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                        @endif
-                        @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
                         <div class="fade show active" id="one">
                             <table class="table-responsive table table-bordered table-striped table-hover dataTable js-exportable">
                                 <thead>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.email')}}</th>
-                                        <th class="text-center">{{__('messages.contact')}}</th>
-                                        <th class="text-center">{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+                                   
+
+                                        <th class="text-center">Action</th>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th class="text-center">{{__('messages.sr_no')}}</th>
-                                        <th class="text-center">{{__('messages.shop_name')}}</th>
-                                        <th class="text-center">{{__('messages.email')}}</th>
-                                        <th class="text-center">{{__('messages.contact')}}</th>
-                                        <th class="text-center">{{__('messages.action')}}</th>
+                                        <th class="text-center">{{__('messages.name')}}</th>
+
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -59,12 +63,13 @@
                                     @foreach($data as $key => $value)
                                     <tr>
                                         <th class="text-center">{{ $key+1 }}</th>
-                                        <td class="text-center">{{$value->shop_name}}</td>
-                                        <td class="text-center">{{isset($value->owner['email'])?$value->owner['email']:'N/A'}}</td>
-                                        <td class="text-center">{{isset($value->owner['email'])?$value->owner['country_code']:'N/A'}} - {{isset($value->owner['mobile'])?$value->owner['mobile']:'N/A'}}</td>
+                                        <td class="text-center">{{$value->name}} </td>
+
                                         <td class="text-center">
-                                            <a type="button" href="{{url('/shoplist/edit')}}/{{base64_encode($value->id)}}" class="btn btn-info  btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top"><i class="fa fa-edit"></i></a>
+                                            <a type="button" href="{{ route('status.edit',$value->id) }}" class="btn btn-info btn-gray" title="Edit" style="color: #fff;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                                            <button type="button" data-type="confirm" class="btn btn-danger js-sweetalert delete btn-width-equ" id="{{$value->id}}" title="Delete" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></button>
                                         </td>
+
                                     </tr>
                                     @endforeach
                                     @else
@@ -106,7 +111,7 @@
             if (willDelete) {
                 $.ajax({
                     type: "POST",
-                    url: "{{url('delete_shoplist')}}",
+                    url: "{{url('delete_status')}}",
                     data: {
                         _token: '{{csrf_token()}}',
                         id: id
@@ -115,13 +120,13 @@
 
                     },
                     success: function(data) {
-                        toastr.success("User deactivate successfully");
+                        toastr.success("Record delete successfully");
                         window.location.reload();
                     }
                 });
 
             } else {
-                swal("Your Record safe now!");
+                swal("{{__('messages.your_record_safe')}}");
             }
         });
 

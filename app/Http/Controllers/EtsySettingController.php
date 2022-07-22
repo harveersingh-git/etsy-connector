@@ -17,7 +17,6 @@ class EtsySettingController extends Controller
         $data = EtsySettings::orderBy('id', 'DESC')->get();
 
         return view('EtsySettings.index', compact('data'));
-        // ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -92,12 +91,6 @@ class EtsySettingController extends Controller
     public function update(Request $request, $id)
     {
 
-        // $this->validate($request, [
-
-        //     'name' => 'required|unique:countries,name,' . $id . ',id',
-        //     'code' =>  'required|unique:countries,code,' . $id . ',id',
-
-        // ]);
         $this->validate($request, [
             'app_url' => 'required',
             'key_string' => 'required',
@@ -105,9 +98,6 @@ class EtsySettingController extends Controller
 
         ]);
         $input = $request->all();
-
-
-
         $user = EtsySettings::find($id);
         $user->update($input);
 
@@ -127,7 +117,6 @@ class EtsySettingController extends Controller
 
         $user = EtsySettings::find($id)->delete();
         return response()->json(['status' => 'success']);
-        // return redirect()->route('subscriber.index')
-        //     ->with('success', 'Record delete successfully');
+      
     }
 }

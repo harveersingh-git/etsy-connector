@@ -7,6 +7,7 @@ use App\Models\EtsyConfig;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Country;
 use Gate;
+use App\Models\AllowLicense;
 
 class MyShopController extends Controller
 {
@@ -39,6 +40,7 @@ class MyShopController extends Controller
     public function create(Request $request)
     {
         $allow =    \Helper::checkPermission();
+   
         if ($allow == '0') {
             return redirect('edit-profile');
         }
@@ -58,6 +60,12 @@ class MyShopController extends Controller
                 // 'app_url' => 'required|url',
 
             ]);
+            $allow_licenec = AllowLicense::where('user_id', $input['id'])->latest()->first();
+            $total_shop = EtsyConfig::where('user_id', $input['id'])->count();
+           
+            if ($allow_licenec['allowed_shops'] <= $total_shop) {
+                return redirect('my-shop')->with('error', 'Your shop add limit exceeded. So please upgrade your license.');
+            }
 
             $input = [
                 'user_id' => isset($input['id']) ? ($input['id']) : '',

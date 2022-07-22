@@ -12,9 +12,20 @@ class ContactUsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $url = "";
+        $query = ContactUs::latest();
+        if (isset($request['search'])) {
+            $query->where('name', 'like', '%' . $request['search'] . '%');
+            $query->orWhere('mobile', 'like', '%' . $request['search'] . '%');
+            $query->orWhere('email', 'like', '%' . $request['search'] . '%');
+            $query->orWhere('subject', 'like', '%' . $request['search'] . '%');
+            $query->orWhere('message', 'like', '%' . $request['search'] . '%');
+        }
+        $data = $query->orderBy('id', 'DESC')->get();
+
+        return view('support.index', compact('data', 'url'));
     }
 
     /**
@@ -69,7 +80,10 @@ class ContactUsController extends Controller
      */
     public function show($id)
     {
-        //
+        $id = base64_decode($id);
+        $data = ContactUs::find($id);
+
+        return view('support.edit', compact('data'));
     }
 
     /**
@@ -90,9 +104,20 @@ class ContactUsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request['id'];
+        $input = $request->all();
+        if (isset($input['status'])) {
+            $input['status'] = '1';
+        } else {
+            $input['status'] = '0';
+        }
+        $res = ContactUs::find($id);
+        $res->update($input);
+
+        return redirect()->route('support')
+            ->with('success', 'Record updated successfully');
     }
 
     /**

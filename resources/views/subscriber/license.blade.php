@@ -136,7 +136,23 @@
                                     </span>
                                     @endif
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <b>{{__('messages.allow_shops')}}</b>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-home"></i></span>
+                                        </div>
+                                        <input type="number" class="form-control" min="0" placeholder="Ex:2" name="allowed_shops" id="expire_date" autocomplete="off">
 
+                                    </div>
+                                    @if ($errors->has('allowed_shops'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('allowed_shops') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                </div>
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">

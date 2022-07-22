@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Models\Country;
+use App\Models\Status;
+use Illuminate\Support\Facades\Auth;
 
-class CountryController extends Controller
+
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data = Country::orderBy('id', 'DESC')->get();
-  
-        return view('country.index', compact('data'));
-      
+        $data = Status::where('name', '!=', 'New')->orderBy('id', 'DESC')->get();
+
+        return view('Status.index', compact('data'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CountryController extends Controller
     public function create()
     {
         $roles = '';
-        return view('country.create', compact('roles'));
+        return view('Status.create', compact('roles'));
     }
 
     /**
@@ -41,15 +41,14 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-      
         $this->validate($request, [
-            'name' => 'required|unique:countries,name',
-            'code' => 'required|unique:countries',
-
+            'name' => 'required',
         ]);
-        $user = Country::create($input);
 
-        return redirect()->route('country.index')
+        $input['user_id'] = Auth::user()->id;
+
+        Status::create($input);
+        return redirect()->route('status.index')
             ->with('success', 'Record created successfully');
     }
 
@@ -72,11 +71,10 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        // dd('sdf');
-        $user = Country::find($id);
+        $user = Status::find($id);
 
 
-        return view('country.edit', compact('user'));
+        return view('Status.edit', compact('user'));
     }
 
     /**
@@ -89,20 +87,17 @@ class CountryController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $this->validate($request, [
 
-            'name' => 'required|unique:countries,name,' . $id . ',id',
-            'code' =>  'required|unique:countries,code,' . $id . ',id',
+        $this->validate($request, [
+            'name' => 'required'
 
         ]);
 
 
-
-
-        $user = Country::find($id);
+        $user = Status::find($id);
         $user->update($input);
 
-        return redirect()->route('country.index')
+        return redirect()->route('status.index')
             ->with('success', 'Record updated successfully');
     }
 
@@ -116,9 +111,7 @@ class CountryController extends Controller
     {
         $id = $request['id'];
 
-        $user = Country::find($id)->delete();
+        $user = Status::find($id)->delete();
         return response()->json(['status' => 'success']);
-        // return redirect()->route('subscriber.index')
-        //     ->with('success', 'Record delete successfully');
     }
 }
