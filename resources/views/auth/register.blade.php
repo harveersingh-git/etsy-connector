@@ -80,7 +80,10 @@ $country = \GetCountry::getCountryCode();
                 <div class="card sign-up-page-card">
                     <div class="header">
                         <p class="lead">{{__('messages.create_an_account')}}</p>
+                      
+                  
                     </div>
+                    
                     <div class="body">
                         @if (session('error'))
                         <div class="alert alert-danger">
@@ -281,6 +284,8 @@ $country = \GetCountry::getCountryCode();
                                     </div>
                                 </div>
                             </div>
+                           
+                            <div class="bottom">  <small class="text-justify">  {{ __('messages.This information will be needed for the invoice') }}</small></div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block"> {{ __('Register') }}</button>
                             <div class="bottom">
                                 <span class="helper-text m-b-10"><i class="fa fa-lock"></i><a href="{{ route('password.request') }}"> {{ __('Forgot Your Password') }}</a></span>

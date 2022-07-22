@@ -7,7 +7,7 @@
         border: 0px solid #aaa !important;
     }
 
-    span#select2-code-container {
+    span#select2-code-container,span#select2-country-container {
         box-shadow: none;
         background-color: #fff;
         font-size: 14px;
@@ -332,6 +332,11 @@
         placeholder: "Select a country code",
         allowClear: true
     });
+    $("#country").select2({
+        placeholder: "Select a country",
+        allowClear: true
+    });
+
 </script>
 @endsection
 @endsection

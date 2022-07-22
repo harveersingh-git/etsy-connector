@@ -157,7 +157,18 @@ return [
     'message'=>'message',
     home'=>'Home',
     'Please renew your licence or get a new licence to proceed further' => 'Please renew your licence or get a new licence to proceed further',
-    'renew license'=>'Renew License'
+    'renew license'=>'Renew License',
+     'status'=>'Status',
+    'add status'=>'Add Status',
+    'edit status'=>'Edit Status',
+    'login status'=>'Login Status',
+    'account status'=>'A/C Status',
+    'address'=>'Address',
+    'support'=>'Support',
+    'view status'=>'View Status',
+    'description'=>'Description',
+    'allow_shops'=>'Allowed Shops',
+    'This information will be needed for the invoice'=>'This information will be needed for the invoice'
 
 
 

@@ -169,7 +169,8 @@ return [
     'support'=>'Support',
     'view status'=>'View Status',
     'description'=>'Description',
-    'allow_shops'=>'Allowed Shops'
+    'allow_shops'=>'Allowed Shops',
+    'This information will be needed for the invoice'=>'This information will be needed for the invoice'
 
 
 
