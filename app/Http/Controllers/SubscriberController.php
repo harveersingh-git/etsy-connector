@@ -41,7 +41,7 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::with(['current_status', 'subscribe_details', 'allow'])->whereHas('roles', function ($query) {
+        $data = User::with(['current_status','subscribe_details','allow'])->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
         })->where('active', '1')->orderBy('id', 'DESC')->get();
 
@@ -181,7 +181,7 @@ class SubscriberController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('subscriber.edit', compact('status', 'user', 'roles', 'userRole', 'country'));
+        return view('subscriber.edit', compact('status','user', 'roles', 'userRole', 'country'));
     }
 
     /**

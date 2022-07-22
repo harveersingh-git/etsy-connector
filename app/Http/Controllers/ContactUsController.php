@@ -130,4 +130,10 @@ class ContactUsController extends Controller
     {
         //
     }
+
+    public function phpinfo(){
+
+        echo phpinfo();
+        die;
+    }
 }
