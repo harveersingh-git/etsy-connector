@@ -111,7 +111,7 @@ $location = \CurrentLocation::getLocation();
                             
                                             <div class="form-group"> -->
                                         <label for="email" class="control-label sr-only">{{ __('messages.email') }}</label>
-                                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="email" autocomplete="off" autofocus>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="email" autocomplete="off" autofocus>
 
                                         @if ($errors->has('email'))
                                         <span class="help-block">
