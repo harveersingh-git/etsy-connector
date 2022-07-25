@@ -171,7 +171,8 @@ return [
     'description' => 'Description',
     'allow_shops' => 'Allowed Shops',
     'This information will be needed for the invoice' => 'This information will be needed for the invoice',
-    'edit support' => 'Edit Support'
+    'edit support' => 'Edit Support',
+    'view support' => 'View Support'
     
 
 

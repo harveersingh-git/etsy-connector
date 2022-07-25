@@ -9,7 +9,7 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-                <h2>{{__('messages.view status')}}</h2>
+                <h2>{{__('messages.view support')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
