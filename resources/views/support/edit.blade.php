@@ -14,8 +14,8 @@
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{url('/')}}"><i class="icon-home"></i></a></li>
-                    <li class="breadcrumb-item active"><a href="{{url('/status')}}">{{__('messages.status')}}</a></li>
-                    <li class="breadcrumb-item active">{{__('messages.edit status')}}</li>
+                    <li class="breadcrumb-item active"><a href="{{url('/support')}}">{{__('messages.support')}}</a></li>
+                    <li class="breadcrumb-item active">{{__('messages.edit support')}}</li>
                 </ul>
                 <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create New</a> -->
             </div>
