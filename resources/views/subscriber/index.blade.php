@@ -131,7 +131,7 @@
                                             @endif
 
                                         </td>
-                                        <td class="text-center">{{$value->current_status['name']}} </td>
+                                        <td class="text-center">{{isset($value->current_status['name'])?$value->current_status['name']:''}} </td>
                                         <td class="text-center">
                                             @if(Request::segment(1)=='subscriber-trash')
                                             <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
