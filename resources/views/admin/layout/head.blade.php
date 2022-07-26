@@ -9,7 +9,7 @@
     <meta name="description" content="Etsy Connector Bootstrap 4x Admin Template">
     <meta name="author" content="WrapTheme, www.thememakker.com">
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('/favicon/android-chrome-192x192.png') }}" type="image/x-icon">
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/vendor/font-awesome/css/font-awesome.min.css')}}">

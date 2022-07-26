@@ -26,13 +26,17 @@
                                     <tr>
                                         <td style="padding:0 0 20px 0;color:#fff;">
                                             <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: #fff;">Hello!</h1>
-                                            <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">Thank you for register as a subscriber on Etsy Connector.</p>
+                                            <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">We just need to verify your email address before you can access connector.besirious</p>
                                         </td>
                                     </tr>
-                                   
+                                    <tr style="text-align: center;">
+                                        <td style="padding:0;">
+                                            <a href="{{ $url }}" style="padding: 13px 28px; color: #fff; background-color: #5ba836; border: none;   font-size: 15px; cursor: pointer;">Verify Email Address</a>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td style="padding:20px 0 0px 0;color:#fff;">
-                                            <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">Thank you for choosing us</p>
+                                            <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">This link will verify your email address, and then you’ll officially be a part of the connector.besirious.</p>
                                         </td>
                                     </tr>
                                     <tr>

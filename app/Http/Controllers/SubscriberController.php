@@ -41,7 +41,7 @@ class SubscriberController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::with(['current_status','subscribe_details','allow'])->whereHas('roles', function ($query) {
+        $data = User::with(['current_status', 'subscribe_details', 'allow'])->whereHas('roles', function ($query) {
             $query->where('name', 'Subscriber');
         })->where('active', '1')->orderBy('id', 'DESC')->get();
 
@@ -104,12 +104,12 @@ class SubscriberController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
-            'mobile' => 'required|digits_between:5,13|unique:users',
+            'mobile' => 'unique:users',
             'state' => 'required',
             'city' => 'required',
             'zip' => 'required',
             'country' => 'required',
-            'code' => 'required',
+            // 'code' => 'required',
             'address' => 'required',
         ]);
         if (isset($request['business'])) {
@@ -120,8 +120,8 @@ class SubscriberController extends Controller
         $account_type = (isset($request['business'])) ? '1' : '0';
         $input['password'] = Hash::make($input['password']);
         $input['name'] = $input['first_name'];
-        $input['country_code'] = isset($input['code']) ? $input['code'] : '';
-
+        $input['country_code'] = isset($input['mobile']) ? $input['code'] : '';
+        $input['mobile'] = isset($input['mobile']) ? $input['mobile'] : '';
         $user = User::create($input);
 
         // $role =  Role::where('name', 'Subscriber')->first();
@@ -181,7 +181,7 @@ class SubscriberController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('subscriber.edit', compact('status','user', 'roles', 'userRole', 'country'));
+        return view('subscriber.edit', compact('status', 'user', 'roles', 'userRole', 'country'));
     }
 
     /**
@@ -199,7 +199,7 @@ class SubscriberController extends Controller
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id . ',id',
-            'mobile' =>  'required|digits_between:5,13|unique:users,mobile,' . $id . ',id',
+            'mobile' =>  'unique:users,mobile,' . $id . ',id',
             'state' => 'required',
             'city' => 'required',
             'zip' => 'required',
@@ -223,13 +223,16 @@ class SubscriberController extends Controller
             $input = Arr::except($input, array('password'));
         }
         $account_type = (isset($input['business'])) ? '1' : '0';
-        $input['country_code'] = isset($input['code']) ? $input['code'] : '';
-        $input['business_account'] = $account_type;
-        $input['tax_id'] =  isset($input['tax_id']) ? $input['tax_id'] : '';
+
 
 
         $user = User::find($id);
+        $input['country_code'] = isset($input['code']) ? $input['code'] : $user['country_code'];
+        $input['mobile'] = isset($input['mobile']) ? $input['mobile'] : $user['country_code'];
+        $input['business_account'] = $account_type;
+        $input['tax_id'] =  isset($input['tax_id']) ? $input['tax_id'] : '';
         $user->update($input);
+
         subscriber::where('user_id', $id)->delete();
         $fields = [
             'user_id' =>  $id,
@@ -368,7 +371,7 @@ class SubscriberController extends Controller
                 $user->update(['license' => '1']);
 
                 $input = [
-                    'allowed_shops' =>isset($input['allowed_shops']) ? $input['allowed_shops'] : '0',
+                    'allowed_shops' => isset($input['allowed_shops']) ? $input['allowed_shops'] : '0',
                     'user_id' => isset($id) ? ($id) : '',
                     'license' => isset($input['license']) ? ('1') : '0',
                     'expire_date' => isset($input['expire_date']) ? (Carbon::parse($input['expire_date'])->format('Y-m-d')) : '',

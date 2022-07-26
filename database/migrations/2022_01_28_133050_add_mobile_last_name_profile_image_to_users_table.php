@@ -15,7 +15,7 @@ class AddMobileLastNameProfileImageToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name')->after('name');
-            $table->string('mobile')->after('last_name')->unique();
+            $table->string('mobile')->after('last_name');
             $table->longText('profile_image')->after('mobile')->nullable();
         });
     }

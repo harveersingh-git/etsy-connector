@@ -121,7 +121,9 @@ Login
         current.text('Please wait..');
         current.prop('disabled', true);
         var email = $('#email').val();
-        if (typeof email !== 'undefined') {
+            console.log(' email', email);
+        if (email.trim()!== "") {
+ 
             $.ajax({
                 type: "POST",
                 url: "{{url('resend')}}",
@@ -141,6 +143,9 @@ Login
                 }
             });
         } else {
+  
+            current.text('Resend Link');
+            current.prop('disabled', false);
             toastr.error("Please provide a email id");
         }
 

@@ -330,6 +330,7 @@ class EtsyController extends Controller
             $resultSetting = EtsySettings::first();
             $result = EtsyConfig::where('id', $request['shop'])->first();
 
+
             $language  =  isset($result['language']) ? $result['language'] : 'en';
 
             if ($result) {
@@ -463,7 +464,7 @@ class EtsyController extends Controller
                             ProductHistory::create($value);
                         }
 
-                        $this->exportMultiLangCsv($download_history_id->id, $sync_type);
+                        $this->exportMultiLangCsv($download_history_id->id, $sync_type, $language);
                     }
                     return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
                     // return redirect()->back()->with("success", "Product Sync successfully!");
@@ -717,13 +718,14 @@ class EtsyController extends Controller
 
 
 
-    public function exportMultiLangCsv($download_histories_id, $sync_type)
+    public function exportMultiLangCsv($download_histories_id, $sync_type, $language)
     {
 
         $total_language = [
             'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
             'pt' => 'pt_XX', 'ru' => 'ru_RU'
         ];
+        unset($total_language[$language]);
         $url = '';
         // $roles = Auth::user()->getRoleNames();
         // if ($roles[0] == 'Admin') {

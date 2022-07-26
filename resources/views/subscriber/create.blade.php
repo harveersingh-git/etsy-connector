@@ -120,7 +120,7 @@
 
                                 <div class="form-group">
 
-                                    <label for="code" class="control-label">{{__('messages.country_code')}}<span style="color: red;">*</span></label>
+                                    <label for="code" class="control-label">{{__('messages.country_code')}}</label>
                                     <select class="form-select form-control" data-control="select2" data-placeholder="Please select" name="code" value="" id="code">
                                         <option value="">--Please Select--</option>
 
@@ -142,8 +142,8 @@
                             <div class="col-lg-3 col-md-3 col-sm-6">
 
                                 <div class="form-group">
-                                    <label for="mobile" class="control-label">{{__('messages.mobile')}}<span style="color: red;">*</span></label>
-                                    <input type="text" class="form-control" name="mobile" placeholder="Ex:9985740000" value="{{old('mobile')}}" autocomplete="some-unrecognised-value" required>
+                                    <label for="mobile" class="control-label">{{__('messages.mobile')}}</label>
+                                    <input type="text" class="form-control" name="mobile" placeholder="Ex:9985740000" value="{{old('mobile')}}" autocomplete="some-unrecognised-value" >
 
                                     @if ($errors->has('mobile'))
                                     <span class="help-block">
