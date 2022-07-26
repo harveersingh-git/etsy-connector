@@ -13,7 +13,7 @@
                     <tr>
                         <td align="center" style="padding:40px 0 40px 0;background:#5ba836;">
                             <a href="#" style="font-size: 35px; color: #fff; list-style: none; font-family:Arial,sans-serif;text-decoration:none !important; display: inline-block;">
-                            <img src="{{asset('img/icon_light_img.png')}}" alt="" width="80" style="height: auto; display: inline-block; vertical-align: middle;" /><span style="text-decoration:none !important;display: inline-block;">&nbsp;Etsy Connector</span>
+                            <img src="{{asset('img/icon_light_img.png')}}" alt="{{config('app.name')}}" width="80" style="height: auto; display: inline-block; vertical-align: middle;" /><span style="text-decoration:none !important;display: inline-block;">&nbsp;Etsy Connector</span>
                             </a>
                         </td>
                     </tr>
