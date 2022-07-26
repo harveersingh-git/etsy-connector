@@ -380,6 +380,7 @@ class EtsyController extends Controller
 
                     ////
                     for ($i = 1; $i <= $total_page; $i++) {
+
                         $curl = curl_init();
 
                         curl_setopt_array($curl, array(
@@ -464,7 +465,7 @@ class EtsyController extends Controller
                             ProductHistory::create($value);
                         }
 
-                        $this->exportMultiLangCsv($download_history_id->id, $sync_type, $language);
+                        $this->exportMultiLangCsv($download_history_id->id, $sync_type, $language, $input_shop_id, $totalProduct);
                     }
                     return response()->json(['status' => 'success', 'data' =>  $totalProduct]);
                     // return redirect()->back()->with("success", "Product Sync successfully!");
@@ -479,6 +480,139 @@ class EtsyController extends Controller
     }
 
 
+
+    public function exportMultiLangCsv($download_histories_id, $sync_type, $language, $input_shop_id, $totalProduct)
+    {
+        // dd($totalProduct->count);
+        $total_language = [
+            'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
+            'pt' => 'pt_XX', 'ru' => 'ru_RU'
+        ];
+
+        // $total_language = [
+        //     'de' => 'de_DE', 'en' => 'en_XX', 'fr' => 'fr_XX'
+        // ];
+        unset($total_language[$language]);
+        $url = '';
+        $resultSetting = EtsySettings::first();
+        $result = EtsyConfig::where('id', $input_shop_id)->first();
+        $key_string = $resultSetting['key_string'];
+        $api_access_token = $resultSetting['api_access_token'];
+
+        $shop_id = $result['shop_name'];
+        $appurl = $resultSetting['app_url'];
+
+        $limit = 100;
+        if ($totalProduct->count > 100) {
+            $total_page = intval(round($totalProduct->count / $limit));
+        } else {
+            $total_page = 1;
+        }
+        // $click =  ProductHistory::where('download_histories_id', $download_histories_id)->get();
+
+        if ($totalProduct->count > 0) {
+            for ($i = 1; $i <= $total_page; $i++) {
+
+                $dhistory = DownloadHistory::with('shops')->find($download_histories_id);
+                $columns = ['id', 'override', 'title', 'description', 'price', 'condition', 'availability', 'brand', 'link', 'image_link'];
+                $fileName = 'multi' . $dhistory['shops']->shop_name . '-' . $dhistory->shop_id .  '.csv';
+
+                $headers = array(
+                    "Content-type"        => "text/csv",
+                    "Content-Disposition" => "attachment; filename=$fileName",
+                    "Pragma"              => "no-cache",
+                    "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                    "Expires"             => "0"
+                );
+                $file = fopen("public/uploads/" . $fileName, 'w');
+
+                // fputcsv($file_current, $columns);
+                fputcsv($file, $columns);
+                foreach ($total_language  as $key => $language_owerWrite) {
+
+                    ////////////////////////////
+                    $curl = curl_init();
+
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&language=' . $key . '&page=' . $i . '&limit=' . $limit,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'GET',
+                        CURLOPT_HTTPHEADER => array(
+                            'Content-Type: application/x-www-form-urlencoded',
+                            'x-api-key:' . $key_string,
+                            'Authorization: Bearer ' . $api_access_token,
+                            'Cookie: fve=1643640618.0; uaid=JYYRIuVpd8k7JhiFS1kUcXLRgoxjZACCxO_ftWB0tVJpYmaKkpWSU4VlREBwmXOBj19QsXNFgW9gvnliYURAQHlagFItAwA.; user_prefs=CFmwDxv3XIPcLuHsJleib85a6epjZACCxO_ftWB0tJKnX5CSTl5pTo6OUmqerruTkg5QCCpiBKFwEbEMAA..'
+                        ),
+                    ));
+
+                    $response = curl_exec($curl);
+
+                    curl_close($curl);
+                    $response =  json_decode($response);
+                    $tasks = $response->results;
+
+                    ////////////////////
+
+                    $key_lan[] = $key;
+                    foreach ($tasks as $data) {
+                        $row['id']  = isset($data->listing_id) ? $data->listing_id : 'N/A';
+                        $row['override']  = $language_owerWrite;
+                        $row['title']  = isset($data->title) ? substr($data->title, 0, 150) : 'N/A';
+                        $row['description']  = isset($data->description) ? $data->description : 'N/A';
+                        $row['price']  = isset($data->price) ? $data->price . ' ' . $data->currency_code : 'N/A';
+                        $product_data["condition"] = 'new';
+                        if (isset($data->quantity) && $data->quantity > 0) {
+                            $product_data["availability"] = 'in stock';
+                        } else {
+                            $product_data["availability"] = 'out of stock';
+                        }
+
+                       
+                      
+                        // $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
+                        $row['brand']  =    $product_data["brand"] = url('/');
+                        $row['link']  = isset($data->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $data->url) : '';
+                        if (isset($data->listing_id)) {
+                            $row["image_link"] =   $this->productListImage($data->listing_id);
+                        }
+                        // fputcsv($file_current, $row);
+                        fputcsv($file, $row);
+                    }
+                }
+
+
+
+                // fclose($file);
+                // };
+
+                $multi_array = [
+                    'parent_id' => $dhistory->id,
+                    'user_id' => $dhistory->user_id,
+                    // 'file_name' => $fileName,
+                    'multi_lang_file_name' => $fileName,
+                    'date' => $dhistory->date,
+                    'shop_id' => $dhistory->shop_id,
+                    'language' =>  implode(",", $key_lan),
+                    'sync_type' => $dhistory->sync_type
+
+                ];
+                DownloadHistory::create($multi_array);
+                // $dhistory->update(['multi_lang_file_name' =>   $fileName]);
+
+                fclose($file);
+            }
+            return $file;
+        } else {
+            return redirect()->back()->with("success", "No product found for the given shop !");
+        }
+        // }
+        // return view('etsy.csv', compact('url', 'shops'));
+    }
 
     /**
      * 
@@ -659,8 +793,6 @@ class EtsyController extends Controller
                 "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
                 "Expires"             => "0"
             );
-
-
             // move_uploaded_file($fileName, $filepath.$fileName);
 
             // $callback = function () use ($tasks, $columns, $fileName) {
@@ -686,18 +818,10 @@ class EtsyController extends Controller
                 fputcsv($file, $row);
             }
 
-
-            // fclose($file_current);
-
-            // fclose($file_current);
             fclose($file);
-            // };
-            // if ($callback) {
-            // DownloadHistory::where('user_id', auth()->user()->id)->where('date', $date)->delete();
             $array = [
                 'user_id' => auth()->user()->id,
                 'file_name' => $fileName,
-                // 'multi_lang_file_name' => $fileName,
                 'date' =>  $date,
                 'shop_id' => $shop_name,
                 'language' =>  $language,
@@ -705,20 +829,16 @@ class EtsyController extends Controller
 
             ];
             $data =   DownloadHistory::create($array);
-            // }
-            // return ob_get_clean();
-            // return response()->stream($callback, 200, $headers);
+
             return $data;
         } else {
             return redirect()->back()->with("success", "No product found for the given shop !");
         }
-        // }
-        // return view('etsy.csv', compact('url', 'shops'));
     }
 
 
 
-    public function exportMultiLangCsv($download_histories_id, $sync_type, $language)
+    public function exportMultiLangCsv_old($download_histories_id, $sync_type, $language)
     {
 
         $total_language = [

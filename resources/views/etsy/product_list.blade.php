@@ -85,7 +85,7 @@
 
 
                                     <div class="progress progress-striped active" id="progress_div" style="display: none;">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="1" id="progress_id"></div>
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="5" id="progress_id"></div>
                                         <input type="hidden" value="0" id="progress_input_hide">
                                     </div>
 
@@ -526,6 +526,7 @@
     $(document).ready(function() {
 
         $(document).on('click', '#sync_prduct_btn', function() {
+            $('#progress_div').show();
             var shop_id = $('#shop').find(":selected").val();
             var token = $('input[name="_token"]').attr('value');
             // var lang = $('#sync_language').find(":selected").val();
@@ -555,7 +556,7 @@
                 success: function(data) {
 
                     if (data.status = "success") {
-                        console.log('sdfsdfsdfsdf', data.data.count);
+
                         var total = data.data.count;
                         $('#progress_id').width(Math.round(5) + '%');
                         $('#progress_id').attr('data-transitiongoal', Math.round(5));
@@ -579,6 +580,7 @@
                 },
                 error: function(xhr, status, data) {
                     toastr.error('Please check your shop id.');
+                    // $('#progress_div').hide();
                     setTimeout(() => {
                         // window.location.reload();
                     }, 10000);
@@ -664,9 +666,8 @@
         var new_shop_id = $('#new_shop_id').val()
         // Executes when complete page is fully loaded, including
         // all frames, objects and images
-        setTimeout(
-
-            clickSync(), 5000);
+        clickSync();
+        // setTimeout(clickSync(), 1000);
     });
 
 
@@ -679,7 +680,7 @@
 
             setTimeout(() => {
                 $('#sync_prduct_btn').get(0).click();
-            }, 10000);
+            }, 1000);
 
         }
     }

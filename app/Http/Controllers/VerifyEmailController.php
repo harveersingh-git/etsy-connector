@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class VerifyEmailController extends Controller
 {
@@ -27,7 +28,8 @@ class VerifyEmailController extends Controller
             $user->update(['active' => '1']);
             event(new Verified($user));
         }
-
+        $user_id =$user->id; 
+        Auth::loginUsingId($user_id);
         $message = __('Your email has been verified.');
 
         return redirect('login')->with('success', $message); //if user is already logged in it will redirect to the dashboard page

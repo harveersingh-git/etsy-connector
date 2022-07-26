@@ -127,7 +127,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <input type="text" class="form-control  datepicker" placeholder="Ex: 30/07/2016" name="expire_date" id="expire_date" autocomplete="off">
+                                        <input type="text" class="form-control  datepicker" placeholder="Ex: 30/07/2016" name="expire_date" value="{{old('expire_date')}}"  id="expire_date" autocomplete="off">
 
                                     </div>
                                     @if ($errors->has('expire_date'))
@@ -142,7 +142,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-home"></i></span>
                                         </div>
-                                        <input type="number" class="form-control" min="0" placeholder="Ex:2" name="allowed_shops" id="expire_date" autocomplete="off">
+                                        <input type="number" class="form-control" min="0" placeholder="Ex:2" name="allowed_shops" value="{{old('allowed_shops')}}" id="expire_date" autocomplete="off" >
 
                                     </div>
                                     @if ($errors->has('allowed_shops'))

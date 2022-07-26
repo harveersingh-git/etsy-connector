@@ -172,7 +172,9 @@ return [
     'allow_shops' => 'Allowed Shops',
     'This information will be needed for the invoice' => 'This information will be needed for the invoice',
     'edit support' => 'Edit Support',
-    'view support' => 'View Support'
+    'view support' => 'View Support',
+    'License not active'=>'License not active',
+    'Please check your emails for the invoice. After the payment was successful the license will be activated.'=>'Please check your emails for the invoice. After the payment was successful the license will be activated.'
     
 
 

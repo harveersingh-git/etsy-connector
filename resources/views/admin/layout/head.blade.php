@@ -161,7 +161,7 @@
                             </a>
                         </div>
                     </div>
-                    
+
 
                     <!-- <div class="text-center">
                         <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a>
@@ -197,26 +197,25 @@
             </div>
         </div>
     </div>
-    <div class="modal fade log-out-modal" tabindex="-1" id="kt_modal_licence">
+
+    <div class="modal fade log-out-modal" tabindex="-1" id="kt_modal_licence2">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title">{{__('messages.Licence has been expire')}}</h5> -->
-
                     <div class="qu-mark-modal"><i class="fa fa-exclamation" aria-hidden="true"></i></div>
 
                     <span class="close modal-close">&times;</span>
                 </div>
 
                 <div class="modal-body">
-                <div class="modal-body-content">
+                    <div class="modal-body-content">
                         <h3>{{__('messages.renew license')}}</h3>
                         <p>{{__('messages.Please renew your licence or get a new licence to proceed further')}}</p>
                         <div class="log-out-btns">
-                            <a class="log_outs btn btn-sm btn-primary" href="{{ route('contect-us') }}"  class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
+                            <a class="log_outs btn btn-sm btn-primary" href="{{ route('contect-us') }}" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
                                 <span class="svg-icon svg-icon-1 me-2">
-                                <i class="fa fa-user" aria-hidden="true"></i> Contact Administrator
+                                    <i class="fa fa-user" aria-hidden="true"></i> Contact Administrator
                                 </span>
                                 <!--end::Svg Icon-->
                                 <!--begin::Major-->
@@ -231,7 +230,76 @@
                                     <i class="fa fa-times" aria-hidden="true"></i> Close
                                 </span>
                             </a>
-                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center d-none">
+                        <p>{{__('messages.Your licence has been expire please contact with admin')}}</p>
+                        <!-- <a href="{{url('/')}}" id="url" class="btn btn-primary">{{__('messages.Home')}}</a> -->
+                    </div>
+
+
+                    <div class="row d-none">
+
+                        <div class="col-md-9 col-lg-9 col-xl-9 col-xxl-9 mb-md-3 mt-xl-5 flex-column">
+                            <a href="#" id="" class="">{{__('messages.Connect Support')}}</a>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3 col-xxl-3 mb-md-3 mt-xl-5 flex-column text-right">
+                            <a class="log_outs" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> {{__('messages.logout')}}
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--begin::Major-->
+
+                                <!--end::Major-->
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            </span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade log-out-modal" tabindex="-1" id="kt_modal_licence">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="qu-mark-modal"><i class="fa fa-exclamation" aria-hidden="true"></i></div>
+
+                    <span class="close modal-close">&times;</span>
+                </div>
+
+                <div class="modal-body">
+                    <div class="modal-body-content">
+                        <h3>{{__('messages.License not active')}}</h3>
+                        <p>{{__('messages.Please check your emails for the invoice. After the payment was successful the license will be activated.')}}</p>
+                        <div class="log-out-btns">
+                            <a class="log_outs btn btn-sm btn-primary" href="{{ route('contect-us') }}" class="btn btn-sm btn-icon btn-active-color-primary btn-icon-gray-600 btn-text-gray-600 pull-left">
+                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr076.svg-->
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Contact Administrator
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--begin::Major-->
+
+                                <!--end::Major-->
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            <a class="log_outs btn btn-sm btn-danger modal-close" href="#">
+                                <span class="svg-icon svg-icon-1 me-2">
+                                    <i class="fa fa-times" aria-hidden="true"></i> Close
+                                </span>
+                            </a>
+                        </div>
                     </div>
                     <div class="text-center d-none">
                         <p>{{__('messages.Your licence has been expire please contact with admin')}}</p>
@@ -294,7 +362,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
 
     <script>
-        var base_url = {!! json_encode(url('/')) !!}
+        var base_url = {!!json_encode(url('/')) !!}
 
         $("#select_language").select2({
             placeholder: "Select a language",
@@ -309,18 +377,24 @@
     <script>
         function checkStripConnect() {
 
-            var license = {!! json_encode((array) auth()->user()->license) !!};
-            var role = {!! Auth::user()->roles->pluck('name') !!};
-            if (role == 'Subscriber' && license == '0')
+            var license = {!!json_encode((array) auth()->user()->license)!!};
+            var role = {!!Auth::user()->roles->pluck('name')!!};
+            var status = {!!json_encode((array) auth()->user()->status) !!};
 
+            if (role == 'Subscriber' && license == '0' &&  status == '1'){
                 $("#kt_modal_licence").modal('show');
+            }
+            if (role == 'Subscriber' && license == '0' &&  status != '1'){
+                $("#kt_modal_licence2").modal('show');
+            }
+                
+            }
 
-        }
         window.onload = checkStripConnect;
     </script>
-     <script type="text/javascript">
-        $(function () {
-            $(".modal-close").click(function () {
+    <script type="text/javascript">
+        $(function() {
+            $(".modal-close").click(function() {
                 $(".log-out-modal").modal("hide");
             });
         });
