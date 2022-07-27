@@ -135,6 +135,7 @@
     $(document).on('click', '.delete', function() {
         id = $(this).attr('id');
         // alert(id);
+        
         swal({
             title: "{{__('messages.are_you_sure')}}",
             text: "{{__('messages.Once you confirm, the User will we move to trash')}}",
