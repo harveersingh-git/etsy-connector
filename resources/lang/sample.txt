@@ -172,8 +172,9 @@ return [
     'edit support' => 'Edit Support',
     'view support' => 'View Support',
     'License not active'=>'License not active',
-    'Please check your emails for the invoice. After the payment was successful the license will be activated.'=>'Please check your emails for the invoice. After the payment was successful the license will be activated.'
-    
+    'Please check your emails for the invoice. After the payment was successful the license will be activated.'=>'Please check your emails for the invoice. After the payment was successful the license will be activated.',
+    'Once you confirm, the User will we move to trash.'=>'Once you confirm, the User will we move to trash.'
+
 
 
 

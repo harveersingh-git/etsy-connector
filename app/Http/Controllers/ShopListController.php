@@ -172,7 +172,6 @@ class ShopListController extends Controller
         $roles = auth()->user()->getRoleNames()[0];
         if ($roles == 'Admin') {
             return redirect('shop-list/')->with('success', 'Shop updated Successfully');
-
         } else {
             return redirect('shoplist/' . $data['user_id'])->with('success', 'Shop updated Successfully');
         }
@@ -216,5 +215,39 @@ class ShopListController extends Controller
         $data = EtsyConfig::with('owner')->get();
 
         return view('shop.shop_list', compact('data'));
+    }
+
+
+    public function shopListTrash(Request $request, $id = null)
+    {
+        $data = EtsyConfig::where('user_id', $id)->onlyTrashed()->latest()->get();
+
+        return view('shop.index', compact('data', 'id'));
+
+        // ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
+    public function permanentlyDestroy(Request $request)
+    {
+
+        $id = $request['id'];
+
+        $data = EtsyConfig::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function myShopRestore(Request $request)
+    {
+
+        $id = $request['id'];
+        $shop = EtsyConfig::withTrashed()->find($id)->restore();
+
+        if ($shop) {
+            // subscriber::withTrashed()->where('user_id', $id)->restore();
+            return response()->json(['status' => 'success']);
+        }
     }
 }

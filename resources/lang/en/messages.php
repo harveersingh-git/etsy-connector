@@ -173,9 +173,19 @@ return [
     'This information will be needed for the invoice' => 'This information will be needed for the invoice',
     'edit support' => 'Edit Support',
     'view support' => 'View Support',
-    'License not active'=>'License not active',
-    'Please check your emails for the invoice. After the payment was successful the license will be activated.'=>'Please check your emails for the invoice. After the payment was successful the license will be activated.'
-    
+    'License not active' => 'License not active',
+    'Please check your emails for the invoice. After the payment was successful the license will be activated.' => 'Please check your emails for the invoice. After the payment was successful the license will be activated.',
+    'Once you confirm, the User will we move to trash' => 'Once you confirm, the User will we move to trash.',
+    'active_shop_list' => 'Active Shop List',
+    'trash_shop_list' => 'Trash Shop List',
+    'active_status' => 'Active Status',
+    'trash_status' => 'Trash Status',
+    'active_localization'=>'Active Localization',
+    'trash_localization'=>'Trash Localization',
+    'trash_country'=>'Trash Country',
+    'active_country'=>'Active Country',
+    'trash_etsy_setting'=>'Trash Etsy Setting',
+    'active_etsy_setting'=>'Active Etsy Setting'
 
 
 

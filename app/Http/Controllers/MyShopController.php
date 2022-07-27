@@ -40,7 +40,7 @@ class MyShopController extends Controller
     public function create(Request $request)
     {
         $allow =    \Helper::checkPermission();
-   
+
         if ($allow == '0') {
             return redirect('edit-profile');
         }
@@ -62,7 +62,7 @@ class MyShopController extends Controller
             ]);
             $allow_licenec = AllowLicense::where('user_id', $input['id'])->latest()->first();
             $total_shop = EtsyConfig::where('user_id', $input['id'])->count();
-           
+
             if ($allow_licenec['allowed_shops'] <= $total_shop) {
                 return redirect('my-shop')->with('error', 'Your shop add limit exceeded. So please upgrade your license.');
             }
@@ -213,5 +213,44 @@ class MyShopController extends Controller
         return response()->json(['status' => 'success']);
         // return redirect()->route('subscriber.index')
         //     ->with('success', 'Record delete successfully');
+    }
+
+
+    public function myShopRestore(Request $request)
+    {
+
+        $id = $request['id'];
+        $shop = EtsyConfig::withTrashed()->find($id)->restore();
+
+        if ($shop) {
+            // subscriber::withTrashed()->where('user_id', $id)->restore();
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    
+    public function permanentlyDestroy(Request $request)
+    {
+
+        $id = $request['id'];
+
+        $data = EtsyConfig::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+            // subscriber::onlyTrashed()->where('user_id', $id)->forceDelete();
+            // $data->forceDelete();
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function myShopTrash(Request $request)
+    {
+        $allow =    \Helper::checkPermission();
+        if ($allow == '0') {
+            return redirect('edit-profile');
+        }
+
+        $data = EtsyConfig::where('user_id', auth()->user()->id)->onlyTrashed()->latest()->get();
+
+        return view('my-shop.index', compact('data'));
     }
 }

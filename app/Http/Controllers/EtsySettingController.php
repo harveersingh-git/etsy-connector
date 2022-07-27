@@ -117,6 +117,32 @@ class EtsySettingController extends Controller
 
         $user = EtsySettings::find($id)->delete();
         return response()->json(['status' => 'success']);
-      
+    }
+
+    public function etsySettingTrash(Request $request)
+    {
+        $data = EtsySettings::orderBy('id', 'DESC')->onlyTrashed()->get();
+
+        return view('EtsySettings.index', compact('data'));
+    }
+
+
+    public function etsySettingRestore(Request $request)
+    {
+        $id = $request['id'];
+        $shop = EtsySettings::withTrashed()->find($id)->restore();
+        if ($shop) {
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function etsySettingDestroy(Request $request)
+    {
+        $id = $request['id'];
+        $data = EtsySettings::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+
+            return response()->json(['status' => 'success']);
+        }
     }
 }

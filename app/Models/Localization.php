@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use File;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Localization extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $fillable = ['id', 'user_id', 'name', 'value', 'file', 'country_flag', 'created_at', 'updated_at'];
 
     public function destory($id)

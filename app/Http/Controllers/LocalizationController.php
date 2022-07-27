@@ -187,4 +187,38 @@ class LocalizationController extends Controller
         // return redirect()->route('subscriber.index')
         //     ->with('success', 'Record delete successfully');
     }
+
+
+    public function localizationRestore(Request $request)
+    {
+
+        $id = $request['id'];
+        $shop = Localization::withTrashed()->find($id)->restore();
+
+        if ($shop) {
+
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+
+    public function localizationDestroy(Request $request)
+    {
+
+        $id = $request['id'];
+
+        $data = Localization::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+            // subscriber::onlyTrashed()->where('user_id', $id)->forceDelete();
+            // $data->forceDelete();
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function localizationTrash(Request $request)
+    {
+        $data = Localization::where('user_id', auth()->user()->id)->onlyTrashed()->latest()->get();
+        // $data = Localization::where('name', '!=', 'New')->onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('localization.index', compact('data'));
+    }
 }

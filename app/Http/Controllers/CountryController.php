@@ -16,9 +16,8 @@ class CountryController extends Controller
     public function index(Request $request)
     {
         $data = Country::orderBy('id', 'DESC')->get();
-  
+
         return view('country.index', compact('data'));
-      
     }
 
     /**
@@ -41,7 +40,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-      
+
         $this->validate($request, [
             'name' => 'required|unique:countries,name',
             'code' => 'required|unique:countries',
@@ -120,5 +119,35 @@ class CountryController extends Controller
         return response()->json(['status' => 'success']);
         // return redirect()->route('subscriber.index')
         //     ->with('success', 'Record delete successfully');
+    }
+
+
+
+    public function countryTrash(Request $request)
+    {
+        $data =  Country::orderBy('id', 'DESC')->onlyTrashed()->get();
+        // $data = Country::where('name', '!=', 'New')->onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('country.index', compact('data'));
+    }
+
+
+    public function countryRestore(Request $request)
+    {
+        $id = $request['id'];
+        $shop = Country::withTrashed()->find($id)->restore();
+        if ($shop) {
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+
+    public function countryDestroy(Request $request)
+    {
+        $id = $request['id'];
+        $data = Country::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+     
+            return response()->json(['status' => 'success']);
+        }
     }
 }

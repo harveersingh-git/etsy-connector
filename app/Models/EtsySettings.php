@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EtsySettings extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
-     
+
         'app_url',
         'key_string',
         'shared_secret',
@@ -24,5 +25,5 @@ class EtsySettings extends Model
         'status'
         // 'status',
         // 'language'
-    ]; 
+    ];
 }

@@ -114,4 +114,36 @@ class StatusController extends Controller
         $user = Status::find($id)->delete();
         return response()->json(['status' => 'success']);
     }
+
+    public function statusRestore(Request $request)
+    {
+
+        $id = $request['id'];
+        $shop = Status::withTrashed()->find($id)->restore();
+
+        if ($shop) {
+
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+
+    public function permanentlyDestroy(Request $request)
+    {
+
+        $id = $request['id'];
+
+        $data = Status::onlyTrashed()->find($id)->forceDelete();;
+        if ($data) {
+            // subscriber::onlyTrashed()->where('user_id', $id)->forceDelete();
+            // $data->forceDelete();
+            return response()->json(['status' => 'success']);
+        }
+    }
+
+    public function statusTrash(Request $request)
+    {
+        $data = Status::where('name', '!=', 'New')->onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('Status.index', compact('data'));
+    }
 }

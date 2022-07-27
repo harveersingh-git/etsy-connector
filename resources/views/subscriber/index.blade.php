@@ -39,16 +39,6 @@
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-warning js-sweetalert text-white" id="" title="In-Active" href="{{url('subscriber-in-active')}}"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{__('messages.in_active')}}</a></li>
                             <li> <a type="button" data-type="confirm" class="btn btn-sm btn-danger js-sweetalert text-white" id="" title="Trash" href="{{url('subscriber-trash')}}"><i class="fa fa-trash-o" aria-hidden="true"></i> {{__('messages.trash')}}</a></li>
 
-
-                            <!-- <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0);">Action</a></li>
-                                    <li><a href="javascript:void(0);">Another Action</a></li>
-                                    <li><a href="javascript:void(0);">Something else</a></li>
-                                </ul>
-                            </li> -->
-
                         </ul>
                     </div>
                     <div class="body tab-content">
@@ -134,12 +124,12 @@
                                         <td class="text-center">{{isset($value->current_status['name'])?$value->current_status['name']:''}} </td>
                                         <td class="text-center">
                                             @if(Request::segment(1)=='subscriber-trash')
-                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
+                                            <a href="#" class="btn btn-icon btn-bg-light btn btn-primary btn-sm restore" id="{{$value->id}}" title="Restore as Activate User" data-val="active">
                                                 <i class="fa fa-undo" aria-hidden="true"></i>
 
 
                                             </a>
-                                            <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm restore" id="{{$value->id}}" title="Restore as In-Activate User" data-val="in-active">
+                                            <a href="#" class="btn btn-icon btn-bg-light btn btn-info btn-sm restore" id="{{$value->id}}" title="Restore as In-Activate User" data-val="in-active">
                                                 <i class="fa fa-undo red-color" aria-hidden="true"></i>
 
 
