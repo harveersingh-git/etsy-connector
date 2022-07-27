@@ -6,7 +6,7 @@
     <div class="block-header">
         <div class="row clearfix">
             <div class="col-md-6 col-sm-12">
-            <h2>{{__('messages.shop_list')}}</h2>
+                <h2>{{__('messages.shop_list')}}</h2>
             </div>
             <div class="col-md-6 col-sm-12 text-right">
                 <ul class="breadcrumb">
@@ -137,7 +137,7 @@
         // alert(id);
         swal({
             title: "{{__('messages.are_you_sure')}}",
-            text: "{{__('messages.Once you confirm, you will not be able to recover !')}}",
+            text: "{{__('messages.Once you confirm, the User will we move to trash')}}",
             icon: "warning",
             buttons: true,
             dangerMode: true,
