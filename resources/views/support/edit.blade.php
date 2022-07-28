@@ -57,7 +57,11 @@
                                     <div class="form-group">
                                         <label for="name" class="control-label">{{__('messages.mobile')}}<span style="color: red;"></span></label>
 
-                                        <input type="text" class="form-control" name="email" placeholder="Ex:India" value="{{$data->country_code}}-{{$data->mobile}}" readonly required>
+                                        <input type="text" class="form-control"  placeholder="Ex:India" value="{{$data->country_code}}-{{$data->mobile}}" readonly required>
+                                      
+                                        <input type="hidden" name="mobile" class="form-control"  placeholder="Ex:India" value="{{$data->mobile}}"  >
+
+                                        
                                     </div>
                                 </div>
 
@@ -75,7 +79,7 @@
                                     <div class="form-group">
                                         <label for="name" class="control-label">{{__('messages.subject')}}<span style="color: red;"></span></label>
 
-                                        <input type="text" class="form-control" name="email" placeholder="Ex:India" value="{{$data->subject}}" readonly required>
+                                        <input type="text" class="form-control" name="subject" placeholder="Ex:India" value="{{$data->subject}}" readonly required>
                                     </div>
                                 </div>
 

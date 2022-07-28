@@ -108,6 +108,7 @@ class ContactUsController extends Controller
     {
         $id = $request['id'];
         $input = $request->all();
+    
         if (isset($input['status'])) {
             $input['status'] = '1';
         } else {

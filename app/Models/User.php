@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\PasswordReset;
 
 
 
@@ -79,9 +80,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     {
 
-        return $this->hasOne(Status::class, 'id','status');
+        return $this->hasOne(Status::class, 'id', 'status');
     }
-    
+
     // public function license()
     // {
     //     return $this->hasOne(AllowLicense::class, 'user_id', 'id');
@@ -97,6 +98,8 @@ class User extends Authenticatable implements MustVerifyEmail
     //     });
     // }
 
-
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
+    }
 }
