@@ -30,10 +30,14 @@ class HomeController extends Controller
     public function index()
     {
         $role =  Auth::user()->roles->pluck('name')[0];
-     
+
         if ($role == 'Admin') {
-            $data['total_users'] = User::count();
-            $data['active_users'] = User::where('active', '1')->count();
+            $data['total_users'] = User::whereHas('roles', function ($q) {
+                $q->whereNotIn("name", ["Admin"]);
+            })->count();
+            $data['active_users'] = User::where('active', '1')->whereHas('roles', function ($q) {
+                $q->whereNotIn("name", ["Admin"]);
+            })->count();
             $data['total_shops'] = EtsyConfig::count();
             $data['total_active_shop'] = EtsyConfig::where('status', '1')->count();
 
@@ -89,7 +93,9 @@ class HomeController extends Controller
             $days_shopmcount = [];
 
             $users = User::select('id', 'created_at')
-                ->get()
+                ->whereHas('roles', function ($q) {
+                    $q->whereNotIn("name", ["Admin"]);
+                })->get()
                 ->groupBy(function ($date) {
                     //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
                     return Carbon::parse($date->created_at)->format('m'); // grouping by months
@@ -118,6 +124,9 @@ class HomeController extends Controller
 
 
             $days_users = User::select('id', 'created_at')
+                ->whereHas('roles', function ($q) {
+                    $q->whereNotIn("name", ["Admin"]);
+                })
                 ->get()
                 ->groupBy(function ($date) {
                     //return Carbon::parse($date->created_at)->format('Y'); // grouping by years

@@ -183,7 +183,8 @@ return [
     'trash_country'=>'Trash Country',
     'active_country'=>'Active Country',
     'trash_etsy_setting'=>'Trash Etsy Setting',
-    'active_etsy_setting'=>'Active Etsy Setting'
+    'active_etsy_setting'=>'Active Etsy Setting',
+    'licence did not allotted'=>'Licence did not allotted'
 
 
 

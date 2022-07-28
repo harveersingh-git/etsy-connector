@@ -58,7 +58,11 @@ class ShopListController extends Controller
             ]);
             $allow_licenec = AllowLicense::where('user_id', $input['id'])->latest()->first();
             $total_shop = EtsyConfig::where('user_id', $input['id'])->count();
-            if ($allow_licenec['allowed_shops'] <= $total_shop) {
+            if (isset($allow_licenec['allowed_shops'])) {
+                if ($allow_licenec['allowed_shops'] <= $total_shop) {
+                    return redirect('shoplist/' . $id)->with('error', 'Your shop add limit exceeded. So please upgrade your license.');
+                }
+            } else {
                 return redirect('shoplist/' . $id)->with('error', 'Your shop add limit exceeded. So please upgrade your license.');
             }
 

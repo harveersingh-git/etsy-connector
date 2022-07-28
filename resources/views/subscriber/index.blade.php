@@ -115,8 +115,12 @@
                                             @if($current_time!='null')
                                             {{__('messages.licence will expire')}}</br> {{ $current_time }}
                                             @else
-
+                                            @if($value->current_status['name']=='New')
+                                            {{__('messages.licence did not allotted')}}
+                                            @else
                                             {{__('messages.licence has been expired')}}
+                                            @endif
+                                          
 
                                             @endif
 
