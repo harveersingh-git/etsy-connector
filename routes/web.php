@@ -30,6 +30,7 @@ use App\Http\Controllers\StatusController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::any('/test', [ContactUsController::class, 'test'])->name('test');
 Route::any('/', function () {
     return redirect('/login');
 });

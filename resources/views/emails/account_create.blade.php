@@ -16,7 +16,7 @@
                         <tr>
                             <td align="center" style="padding:20px 0 20px 0;background:#5ba836;">
                                 <a href="#" style="font-size: 24px; color: #fff; list-style: none; text-decoration: none;">
-                                    <img src="{{asset('/img/icon_light_img.png')}}" alt="" width="50" style="height: auto; display: inline-block; vertical-align: middle;" /> Etsy Connector
+                                    <img src="{{asset('/img/icon_light_img.png')}}" alt="" width="40" height="40" style="height: auto; display: inline-block; vertical-align: middle;" /> Etsy Connector
                                 </a>
                             </td>
                         </tr>
@@ -31,12 +31,12 @@
                                     </tr>
                                    
                                     <tr>
-                                        <td style="padding:20px 0 0px 0;color:#fff;">
+                                        <td style="padding:20px 0 0 20px;color:#fff;">
                                             <p style="margin:0 0 12px 0;font-size:14px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">Thank you for choosing us</p>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="padding:20px 0 0px 0;color:#fff;">
+                                        <td style="padding:20px 0 0 20px;color:#fff;">
                                             <p style="margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif; color: #fff;">Regards,<br>etsy-connector</p>
                                         </td>
                                     </tr>

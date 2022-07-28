@@ -7,6 +7,12 @@ use App\Models\ContactUs;
 
 class ContactUsController extends Controller
 {
+
+    public function test(Request $request)
+    {
+        $url= '';
+        return view('emails.verify',compact('url'));
+    }
     /**
      * Display a listing of the resource.
      *

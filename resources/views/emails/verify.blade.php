@@ -13,7 +13,7 @@
                     <tr>
                         <td align="center" style="padding:40px 0 40px 0;background:#5ba836;">
                             <a href="#" style="font-size: 35px; color: #fff; list-style: none; font-family:Arial,sans-serif;text-decoration:none !important; display: inline-block;">
-                            <img src="{{asset('/img/icon_light_img.png')}}" alt="" width="80" style="height: auto; display: inline-block; vertical-align: middle;" /><span style="text-decoration:none !important;display: inline-block;">&nbsp;Etsy Connector</span>
+                            <img src="{{asset('/img/icon_light_img.png')}}" alt="" width="40" height="40" style="height: auto; display: inline-block; vertical-align: middle;" /><span style="text-decoration:none !important;display: inline-block;">&nbsp;Etsy Connector</span>
                             </a>
                         </td>
                     </tr>
@@ -32,12 +32,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:20px 0 0px 0;color:#3c3c3b;">
+                                    <td style="padding:20px 0 0 0;color:#3c3c3b;">
                                         <p style="margin:0 0 12px 0;font-size:17px;line-height:24px;font-family:Arial,sans-serif; color: #3c3c3b;">If you did not create an account, no further action is required.</p>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding:20px 0 0px 0;color:#3c3c3b;">
+                                    <td style="padding:20px 0 0 20px;color:#3c3c3b;">
                                         <p style="margin:0 0 12px 0;font-size:17px;font-family:Arial,sans-serif; color: #3c3c3b;">Regards,<br>etsy-connector</p>
                                     </td>
                                 </tr>
