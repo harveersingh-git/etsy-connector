@@ -39,6 +39,7 @@ class DeactivateLicence extends Command
      */
     public function handle()
     {
+      
         $allowLicense = AllowLicense::whereDate('expire_date', '<', now())->latest()->get();
         if (count($allowLicense) > 0) {
             foreach ($allowLicense as $value) {
