@@ -16,8 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->command('syncproduct:cron')->dailyAt('06:00');
-        $schedule->command('syncproduct:cron');
+        $schedule->command('syncproduct:cron')->dailyAt('06:00');
+        // $schedule->command('syncproduct:cron');
 
         $schedule->command('deactivatelicence:cron')->dailyAt('00:00');
         // $schedule->command('deactivatelicence:cron');
