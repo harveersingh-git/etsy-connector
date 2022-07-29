@@ -169,9 +169,9 @@ $country = \GetCountry::getCountryCode();
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="address" class="control-label sr-only">{{ __('Address') }}</label>
+                                <label for="address" class="control-label sr-only">{{ __('Street') }}</label>
                                 <!-- <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="some-unrecognised-value" placeholder="email" autofocus> -->
-                                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" required autocomplete="some-unrecognised-value" placeholder="Address">{{old('address')}}</textarea>
+                                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address') }}" required autocomplete="some-unrecognised-value" placeholder="street">{{old('address')}}</textarea>
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

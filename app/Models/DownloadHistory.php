@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DownloadHistory extends Model
 {
     use HasFactory;
+    // public $timestamps = true;
     protected $fillable = [
-        'date', 'file_name', 'user_id', 'shop_id', 'language','sync_type','multi_lang_file_name','parent_id'
+        'id','date', 'file_name', 'user_id', 'shop_id', 'language','sync_type','multi_lang_file_name','parent_id','updated_at'
     ];
     public function shops()
     {

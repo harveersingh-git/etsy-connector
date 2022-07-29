@@ -253,6 +253,7 @@
                                                             @php
                                                             }
                                                             @endphp
+                                                          
                                                         </td>
 
 
@@ -265,7 +266,8 @@
                                                             {{isset($value->user['last_name'])?$value->user['last_name']:''}}
 
                                                             @endif
-                                                            </br>({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span>
+                                                            </br>Last Update :({{ \Carbon\Carbon::parse($value->updated_at)->toDayDateTimeString()}})</br><span style="color: red;font-size: 12px;">{{$value->sync_type}}</span>
+                                                         
                                                         </td>
                                                         <!-- <td> {{$value->sync_type}}</td> -->
                                                         <td class="text-center" style="padding: 10px 5px;">
@@ -673,6 +675,7 @@
 
     function clickSync() {
         var new_shop_id = $('#new_shop_id').val()
+        // alert(new_shop_id);
 
         if (new_shop_id) {
 

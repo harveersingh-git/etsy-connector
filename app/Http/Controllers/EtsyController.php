@@ -267,6 +267,7 @@ class EtsyController extends Controller
      */
     public function etsyListData(Request $request, $id = null)
     {
+
         $url = '';
         $page = 1;
         $limit = 100;
@@ -280,7 +281,7 @@ class EtsyController extends Controller
             if ($roles[0] == 'Admin') {
 
                 $etsy_id = base64_decode($id);
-
+                // dd(       $etsy_id );
                 if (empty($etsy_id)) {
 
                     return redirect()->back();
@@ -324,27 +325,18 @@ class EtsyController extends Controller
             ]);
 
             $input_shop_id = $request['shop'];
-
-
             $sync_type = isset($request['sync_type']) ? $request['sync_type'] : 'Auto';
             $resultSetting = EtsySettings::first();
             $result = EtsyConfig::where('id', $request['shop'])->first();
-
-
             $language  =  isset($result['language']) ? $result['language'] : 'en';
-
             if ($result) {
-
                 EtsyProduct::where('shop_id', $request['shop'])->delete();
-
                 $key_string = $resultSetting['key_string'];
                 $api_access_token = $resultSetting['api_access_token'];
                 $shop_id = $result['shop_name'];
                 $appurl = $resultSetting['app_url'];
                 ////ddsdd
-
                 $curl = curl_init();
-
                 curl_setopt_array($curl, array(
                     CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string,
                     CURLOPT_RETURNTRANSFER => true,
@@ -363,26 +355,18 @@ class EtsyController extends Controller
                 ));
 
                 $response = curl_exec($curl);
-
-
                 curl_close($curl);
                 $totalProduct =  json_decode($response);
-
                 if ($totalProduct->count) {
                     $limit = 100;
-                    // $total_page = intval(round(160 / $limit));
-
                     if ($totalProduct->count > 100) {
                         $total_page = intval(round($totalProduct->count / $limit));
                     } else {
                         $total_page = 1;
                     }
-
                     ////
                     for ($i = 1; $i <= $total_page; $i++) {
-
                         $curl = curl_init();
-
                         curl_setopt_array($curl, array(
                             CURLOPT_URL => $appurl . 'shops/' . $shop_id . '/listings/active?api_key=' . $key_string . '&language=' . $language . '&page=' . $i . '&limit=' . $limit,
                             CURLOPT_RETURNTRANSFER => true,
@@ -401,14 +385,10 @@ class EtsyController extends Controller
                         ));
 
                         $response = curl_exec($curl);
-
                         curl_close($curl);
                         $response =  json_decode($response);
-
                         if (count($response->results) > 0) {
                             $product_data = array();
-
-
                             foreach ($response->results as $key => $value) {
                                 if (isset($value->quantity) && $value->quantity > 0) {
                                     $product_data["availability"] = 'in stock';
@@ -498,7 +478,6 @@ class EtsyController extends Controller
         $result = EtsyConfig::where('id', $input_shop_id)->first();
         $key_string = $resultSetting['key_string'];
         $api_access_token = $resultSetting['api_access_token'];
-
         $shop_id = $result['shop_name'];
         $appurl = $resultSetting['app_url'];
 
@@ -572,8 +551,8 @@ class EtsyController extends Controller
                             $product_data["availability"] = 'out of stock';
                         }
 
-                       
-                      
+
+
                         // $row['availability']  = isset($data->availability) ? $data->availability : 'N/A';
                         $row['brand']  =    $product_data["brand"] = url('/');
                         $row['link']  = isset($data->url) ? str_replace('www.etsy.com', strtolower($shop_id) . '.etsy.com', $data->url) : '';
@@ -585,11 +564,6 @@ class EtsyController extends Controller
                     }
                 }
 
-
-
-                // fclose($file);
-                // };
-
                 $multi_array = [
                     'parent_id' => $dhistory->id,
                     'user_id' => $dhistory->user_id,
@@ -598,10 +572,20 @@ class EtsyController extends Controller
                     'date' => $dhistory->date,
                     'shop_id' => $dhistory->shop_id,
                     'language' =>  implode(",", $key_lan),
-                    'sync_type' => $dhistory->sync_type
+                    'sync_type' => $dhistory->sync_type,
+                    'updated_at' => Carbon::now()->toDateTimeString()
 
                 ];
-                DownloadHistory::create($multi_array);
+                $exist =  DownloadHistory::where('shop_id', '=', $input_shop_id)->whereNotNull('parent_id')->first();
+
+                if ($exist) {
+                    // $exist->update($multi_array);
+                    // $exist_dhistory = DownloadHistory::find($exist->id);
+                    // $exist_dhistory->update($multi_array);
+                    $data = DownloadHistory::updateOrCreate(['id' => $exist->id], $multi_array);
+                } else {
+                    $data =   DownloadHistory::create($multi_array);
+                }
                 // $dhistory->update(['multi_lang_file_name' =>   $fileName]);
 
                 fclose($file);
@@ -825,10 +809,24 @@ class EtsyController extends Controller
                 'date' =>  $date,
                 'shop_id' => $shop_name,
                 'language' =>  $language,
-                'sync_type' => $sync_type
+                'sync_type' => $sync_type,
+                'updated_at' => Carbon::now()->toDateTimeString()
+
 
             ];
-            $data =   DownloadHistory::create($array);
+            $exist =  DownloadHistory::where('shop_id', '=', $shop_name)->whereNull('parent_id')->first();
+            if ($exist) {
+                $data = DownloadHistory::updateOrCreate(['id' => $exist->id], $array);
+
+                // $exist_dhistory = DownloadHistory::find($exist->id);
+
+                // $exist_dhistory->update($array);
+
+            } else {
+                $data =   DownloadHistory::create($array);
+            }
+
+
 
             return $data;
         } else {
