@@ -221,14 +221,14 @@
                                                         <td class="text-center" style="padding: 10px 5px;">{{isset($value['shops']->shop_name)?$value['shops']->shop_name:'N/A'}}</td>
 
                                                         @php
-                                                        $lan = isset($value->language)?$value->language:'en';
-                                                        $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
+                                                        $lan = isset($value->language)?$value->language:'en-US';
+                                                        $language = ['de'=>'German','en-US'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                                         'pt'=>'Portuguese','ru'=>'Russian'];
                                                         @endphp
 
                                                         @if(isset($value->file_name))
                                                         @php
-                                                        $current_language = $language[ $lan];
+                                                        $current_language = $language[$lan];
                                                         $flag = $Etsy::getFlag($current_language );
                                                         @endphp
                                                         <td class="text-center" style="padding: 10px 5px;">

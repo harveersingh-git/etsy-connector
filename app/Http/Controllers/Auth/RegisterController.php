@@ -134,19 +134,19 @@ class RegisterController extends Controller
             ];
             subscriber::create($array);
         }
-        try {
-            $res = [
-                'subject' => 'Account Register Successfully',
-                'email' => $data['email'],
+        // try {
+        //     $res = [
+        //         'subject' => 'Account Register Successfully',
+        //         'email' => $data['email'],
 
-            ];
-            Mail::send('emails.account_create', $res, function ($message) use ($res) {
-                $message->to($res['email'])
-                    ->subject($res['subject']);
-            });
-        } catch (ModelNotFoundException $exception) {
-            return back()->withError($exception->getMessage())->withInput();
-        }
+        //     ];
+        //     Mail::send('emails.account_create', $res, function ($message) use ($res) {
+        //         $message->to($res['email'])
+        //             ->subject($res['subject']);
+        //     });
+        // } catch (ModelNotFoundException $exception) {
+        //     return back()->withError($exception->getMessage())->withInput();
+        // }
         return $user;
     }
 }

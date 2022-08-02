@@ -191,9 +191,7 @@ class SyncProductCron extends Command
                                 ProductHistory::create($value);
                             }
                             $this->exportMultiLangCsv($download_history_id->id, $sync_type, $language, $input_shop_id, $totalProduct);
-
                         }
-
                     }
                 }
             }
@@ -204,7 +202,7 @@ class SyncProductCron extends Command
     {
         // DownloadHistory::where('user_id', auth()->user()->id)->delete();
         $total_language = [
-            'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
+            'de' => 'de_DE', 'en-US' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
             'pt' => 'pt_XX', 'ru' => 'ru_RU'
         ];
         $url = '';
@@ -291,22 +289,63 @@ class SyncProductCron extends Command
     public function exportMultiLangCsv($download_histories_id, $sync_type, $language, $input_shop_id, $totalProduct)
     {
         // dd($totalProduct->count);
-        $total_language = [
-            'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
-            'pt' => 'pt_XX', 'ru' => 'ru_RU'
-        ];
-
         // $total_language = [
-        //     'de' => 'de_DE', 'en' => 'en_XX', 'fr' => 'fr_XX'
+        //     'de' => 'de_DE', 'en' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
+        //     'pt' => 'pt_XX', 'ru' => 'ru_RU'
         // ];
-        unset($total_language[$language]);
         $url = '';
         $resultSetting = EtsySettings::first();
         $result = EtsyConfig::where('id', $input_shop_id)->first();
+
         $key_string = $resultSetting['key_string'];
         $api_access_token = $resultSetting['api_access_token'];
         $shop_id = $result['shop_name'];
         $appurl = $resultSetting['app_url'];
+
+        //get the shop languages
+        $curl1 = curl_init();
+        curl_setopt_array($curl1, array(
+            CURLOPT_URL => $appurl . 'shops/' . $shop_id . '?api_key=' . $key_string,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/x-www-form-urlencoded',
+                'x-api-key:' . $key_string,
+                'Authorization: Bearer ' . $api_access_token,
+                'Cookie: fve=1643640618.0; uaid=JYYRIuVpd8k7JhiFS1kUcXLRgoxjZACCxO_ftWB0tVJpYmaKkpWSU4VlREBwmXOBj19QsXNFgW9gvnliYURAQHlagFItAwA.; user_prefs=CFmwDxv3XIPcLuHsJleib85a6epjZACCxO_ftWB0tJKnX5CSTl5pTo6OUmqerruTkg5QCCpiBKFwEbEMAA..'
+            ),
+        ));
+
+        $response_get = curl_exec($curl1);
+        curl_close($curl1);
+        $response1 =  json_decode($response_get);
+        $active_language = $response1->results[0]->languages;
+        $support_language = [
+            'de' => 'de_DE', 'en-US' => 'en_XX', 'es' => 'es_XX', 'fr' => 'fr_XX', 'it' => 'it_IT', 'ja' => 'ja_XX', 'nl' => 'nl_XX', 'pl' => 'pl_PL',
+            'pt' => 'pt_XX', 'ru' => 'ru_RU'
+        ];
+        $total_language = [];
+        foreach ($support_language as $key => $vall) {
+            if (in_array($key, $active_language)) {
+                $total_language[$key] = $vall;
+            }
+        }
+
+
+        // $total_language = [
+        //     'de' => 'de_DE', 'en-US' => 'en_XX', 'fr' => 'fr_XX'
+        // ];
+        unset($total_language[$language]);
+
+
+        if (count($total_language) == 0) {
+            return true;
+        }
 
         $limit = 100;
         if ($totalProduct->count > 100) {

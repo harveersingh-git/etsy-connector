@@ -89,7 +89,7 @@
                                     <label for="first_name" class="control-label">{{__('messages.default_language')}}<span style="color: red;">*</span></label>
                                     <select class="select2-selection select2-selection--single form-select form-control" name="language" id="language">
 
-                                        <option value="en" {{ isset($data->language) && ( $data->language== 'en' ) ? 'selected' : '' }}>English</option>
+                                        <option value="en-US" {{ isset($data->language) && ( $data->language== 'en-US' ) ? 'selected' : '' }}>English</option>
                                         <option value="de" {{ isset($data->language) && ( $data->language== 'de' ) ? 'selected' : '' }}>German</option>
                                         <option value="es" {{ isset($data->language) && ( $data->language== 'es' ) ? 'selected' : '' }}>Spanish</option>
                                         <option value="fr" {{ isset($data->language) && ( $data->language== 'fr' ) ? 'selected' : '' }}>French</option>

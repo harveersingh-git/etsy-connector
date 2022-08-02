@@ -107,7 +107,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label>  {{__('messages.profile_image')}}</label>
-                                        <input type="file" class="form-control" name="profile_image" value="">
+                                        <input type="file" class="form-control" name="profile_image" value="" accept="image/*">
 
                                         @if ($errors->has('profile_image'))
                                         <span class="help-block">

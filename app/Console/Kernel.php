@@ -17,12 +17,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('syncproduct:cron')->dailyAt('06:00');
-        // $schedule->command('syncproduct:cron');
+        // $schedule->command('syncproduct:cron')->everyTenMinutes();
 
         $schedule->command('deactivatelicence:cron')->dailyAt('00:00');
-        // $schedule->command('deactivatelicence:cron');
-
-        
+        // $schedule->command('deactivatelicence:cron')->everyTenMinutes();
     }
 
     /**
@@ -32,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

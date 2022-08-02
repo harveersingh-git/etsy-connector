@@ -23,7 +23,7 @@
                                 <tr>
                                     <td style="padding:0 0 20px 0;color:#3c3c3b;">
                                         <h1 style="font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif; color: #3c3c3b;">Hello!</h1>
-                                        <p style="margin:0 0 12px 0;font-size:17px;line-height:24px;font-family:Arial,sans-serif; color: #3c3c3b;">Please click the button below to verify your email address</p>
+                                        <p style="margin:0 0 12px 0;font-size:17px;line-height:24px;font-family:Arial,sans-serif; color: #3c3c3b;">Thank you for register as a subscriber on Etsy Connector. Please click the button below to verify your email address</p>
                                     </td>
                                 </tr>
                                 <tr style="text-align: center;">

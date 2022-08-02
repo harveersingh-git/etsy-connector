@@ -58,7 +58,7 @@
                                         @if($type=='single')
                                         @php
                                         $lan = isset($records->language)?$records->language:'en';
-                                        $language = ['de'=>'German','en'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
+                                        $language = ['de'=>'German','en-US'=>'English','es'=>'Spanish','fr'=>'French','it'=>'Italian','ja'=>'Japanese','nl'=>'Dutch','pl'=>'Polish',
                                         'pt'=>'Portuguese','ru'=>'Russian'];
                                         $current_language = $language[ $lan];
 
