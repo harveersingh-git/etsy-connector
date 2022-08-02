@@ -63,9 +63,7 @@ class SyncProductCron extends Command
                 $resultSetting = EtsySettings::first();
                 $result = EtsyConfig::where('id', $input_shop_id)->first();
                 if ($result) {
-
                     EtsyProduct::where('shop_id', $input_shop_id)->delete();
-
                     $key_string = $resultSetting['key_string'];
                     $api_access_token = $resultSetting['api_access_token'];
                     $shop_id = $result['shop_name'];
